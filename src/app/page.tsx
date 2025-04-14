@@ -47,9 +47,9 @@ export default function SchoolShowcase() {
   ];
 
   const mediaItems = [
-    { type: "image", src: "/img1.jpg" },
-    { type: "image", src: "/img2.jpg" },
-    { type: "image", src: "/img3.jpg" },
+    { type: "image", src: "/pic1.jpg" },
+    { type: "image", src: "/pic2.jpg" },
+    { type: "image", src: "/pic3.jpg" },
     { type: "video", src: "/pascalinfo-video.mp4" },
   ];
 
