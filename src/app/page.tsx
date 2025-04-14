@@ -31,15 +31,14 @@ import {
   Globe,
   Code,
   ChefHat,
-  X,
 } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Image from "next/image"; // Added Image import
 
 export default function SchoolShowcase() {
   const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState("FR");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
@@ -51,7 +50,7 @@ export default function SchoolShowcase() {
     { type: "image", src: "/img1.jpg" },
     { type: "image", src: "/img2.jpg" },
     { type: "image", src: "/img3.jpg" },
-    { type: "video", src: "/school-video.mp4" },
+    { type: "video", src: "/pascalinfo-video.mp4" },
   ];
 
   const toggleDark = () => {
@@ -65,12 +64,16 @@ export default function SchoolShowcase() {
       <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background/80 text-foreground shadow-sm backdrop-blur-md border-b border-muted">
         {/* Branding */}
         <div className="flex items-center gap-3">
+          {/* Navbar Logo */}
           <div className="relative rounded-full bg-gradient-to-r from-amber-400 to-yellow-600 p-1 group">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400 to-yellow-600 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300" />
-            <img
+            <Image
               src="/logo-pascal.png"
               alt="Pascal Info Logo"
+              width={56}
+              height={56}
               className="h-14 w-14 rounded-full object-cover border-2 border-background"
+              priority
             />
           </div>
           <span className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-yellow-600 bg-clip-text text-transparent">
@@ -189,15 +192,16 @@ export default function SchoolShowcase() {
           <CarouselContent>
             {mediaItems.map((item, index) => (
               <CarouselItem key={index} className="relative h-screen">
-                {item.type === "video" ? (
-                  <video
-                    autoPlay
-                    muted
-                    loop
-                    className="h-full w-full object-cover brightness-75"
-                  >
-                    <source src={item.src} type="video/mp4" />
-                  </video>
+                {item.type === "image" ? (
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={item.src}
+                      alt="Installations de Pascal Info"
+                      fill
+                      className="object-cover brightness-75"
+                      priority
+                    />
+                  </div>
                 ) : (
                   <img
                     src={item.src}
@@ -275,10 +279,11 @@ export default function SchoolShowcase() {
             </Dialog>
           </div>
           <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
-            <img
+            <Image
               src="/logo-pascal.png"
               alt="Centre Pascal Info"
-              className="h-full w-full object-cover"
+              fill
+              className="object-cover"
             />
           </div>
         </div>
@@ -365,9 +370,9 @@ export default function SchoolShowcase() {
                         <AvatarFallback>U{i}</AvatarFallback>
                       </Avatar>
                       <p className="text-lg text-muted-foreground italic">
-                        "Grâce à Pascal Info, j'ai pu acquérir des compétences
-                        pratiques qui m'ont permis de trouver rapidement un
-                        emploi dans mon domaine."
+                        &quot;Grâce à Pascal Info, j&apos;ai pu acquérir des
+                        compétences pratiques qui m&apos;ont permis de trouver
+                        rapidement un emploi dans mon domaine.&quot;
                       </p>
                       <div>
                         <p className="font-semibold">Mehdi Tazi</p>
