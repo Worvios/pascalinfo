@@ -185,7 +185,7 @@ export default function SchoolShowcase() {
       {/* Hero Section */}
       <section id="home" className="relative h-screen w-full">
         <Carousel
-          plugins={[Autoplay({ delay: 5000 })]}
+          plugins={[Autoplay({ delay: 3000 })]}
           className="h-full w-full"
           opts={{ loop: true }}
         >
@@ -203,7 +203,7 @@ export default function SchoolShowcase() {
                     />
                   </div>
                 ) : (
-                  <img
+                  <Image
                     src={item.src}
                     alt="Installations de Pascal Info"
                     className="h-full w-full object-cover brightness-75"
@@ -215,8 +215,8 @@ export default function SchoolShowcase() {
                       Façonnez Votre Avenir Professionnel
                     </h1>
                     <p className="text-lg md:text-xl text-muted-foreground font-light text-white/90">
-                      Centre de formation et de services éducatifs d'excellence
-                      au Maroc
+                      Centre de formation et de services éducatifs
+                      d&apos;excellence au Maroc
                     </p>
                     <Button
                       size="lg"
@@ -240,16 +240,18 @@ export default function SchoolShowcase() {
               À Propos de Pascal Info
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Établi en 1996, Pascal Info est devenu un centre d'excellence en
-              matière de formation professionnelle au Maroc. Notre approche
-              globale combine l'expertise technique et le développement
+              Établi en 1996, Pascal Info est devenu un centre d&apos;excellence
+              en matière de formation professionnelle au Maroc. Notre approche
+              globale combine l&apos;expertise technique et le développement
               personnel pour préparer nos étudiants aux défis du marché du
               travail moderne.
             </p>
             <div className="grid grid-cols-2 gap-4">
               <div className="p-4 rounded-xl bg-background border">
                 <h3 className="text-2xl font-bold text-primary">25+</h3>
-                <p className="text-muted-foreground">Années d'Expérience</p>
+                <p className="text-muted-foreground">
+                  Années d&apos;Expérience
+                </p>
               </div>
               <div className="p-4 rounded-xl bg-background border">
                 <h3 className="text-2xl font-bold text-primary">10+</h3>
