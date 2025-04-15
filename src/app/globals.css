@@ -122,3 +122,58 @@
     @apply bg-background text-foreground;
   }
 }
+video,
+button {
+  cursor: pointer !important;
+}
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+  transform: translateZ(0); /* Hardware acceleration */
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) translateZ(0);
+  }
+  50% {
+    transform: translateY(-20px) translateZ(0);
+  }
+}
+
+.program-card {
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.3s ease;
+  backface-visibility: hidden; /* Improve 3D rendering */
+}
+
+.program-card:hover {
+  z-index: 10; /* Prevent overlapping during animation */
+}
+
+.program-icon {
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Simplify mouse effect */
+.program-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    400px circle at var(--mouse-x) var(--mouse-y),
+    rgba(99, 102, 241, 0.1),
+    transparent 40%
+  );
+  pointer-events: none;
+}
+
+.program-card:hover::after {
+  opacity: 0.3;
+}

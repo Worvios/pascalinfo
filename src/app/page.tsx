@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -31,10 +30,14 @@ import {
   Globe,
   Code,
   ChefHat,
+  ArrowRight,
 } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image"; // Added Image import
+import { Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import screenfull from "screenfull";
 
 export default function SchoolShowcase() {
   const [darkMode, setDarkMode] = useState(false);
@@ -50,13 +53,144 @@ export default function SchoolShowcase() {
     { type: "image", src: "/pic1.jpg" },
     { type: "image", src: "/pic2.jpg" },
     { type: "image", src: "/pic3.jpg" },
-    { type: "video", src: "/pascalinfo-video.mp4" },
   ];
 
   const toggleDark = () => {
     setDarkMode(!darkMode);
     document.documentElement.classList.toggle("dark");
   };
+
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [progress, setProgress] = useState(0);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const toggleMute = () => setIsMuted(!isMuted);
+
+  const [programs, setPrograms] = useState([
+    {
+      icon: Code,
+      title: "Diplôme Bac+2 en Développement Informatique",
+      text: "Formation complète en programmation et développement de logiciels",
+      rotateX: 0,
+      rotateY: 0,
+    },
+    {
+      icon: ChefHat,
+      title: "Diplôme Bac+2 en Gestion d'Entreprise",
+      text: "Acquérez les compétences essentielles pour gérer et développer une entreprise",
+      rotateX: 0,
+      rotateY: 0,
+    },
+    {
+      icon: BookOpen,
+      title: "Cours de Soutien",
+      text: "Accompagnement personnalisé pour les élèves de tous niveaux",
+      rotateX: 0,
+      rotateY: 0,
+    },
+    {
+      icon: Globe,
+      title: "Cours de Langues",
+      text: "Apprenez les langues étrangères avec des méthodes modernes et efficaces",
+      rotateX: 0,
+      rotateY: 0,
+    },
+    {
+      icon: GraduationCap,
+      title: "Formation Professionnelle Continue",
+      text: "Perfectionnez vos compétences ou réorientez votre carrière",
+      rotateX: 0,
+      rotateY: 0,
+    },
+    {
+      icon: HeartHandshake,
+      title: "Traduction",
+      text: "Services de traduction professionnelle dans plusieurs langues",
+      rotateX: 0,
+      rotateY: 0,
+    },
+    {
+      icon: Microscope,
+      title: "Inscription aux Écoles Supérieures",
+      text: "Assistance pour les inscriptions au Maroc et à l'étranger",
+      rotateX: 0,
+      rotateY: 0,
+    },
+    {
+      icon: Trophy,
+      title: "Salles VIP et Équipées",
+      text: "Espaces modernes avec vidéoprojecteurs pour une expérience d'apprentissage optimale",
+      rotateX: 0,
+      rotateY: 0,
+    },
+  ]);
+
+  const handleCardMove = (
+    e: React.MouseEvent<HTMLDivElement>,
+    index: number
+  ) => {
+    const card = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - card.left;
+    const y = e.clientY - card.top;
+    const centerX = card.width / 2;
+    const centerY = card.height / 2;
+
+    setPrograms((prev) =>
+      prev.map((p, i) =>
+        i === index
+          ? {
+              ...p,
+              rotateX: -(y - centerY) / 20,
+              rotateY: (x - centerX) / 20,
+            }
+          : p
+      )
+    );
+  };
+
+  const handleCardLeave = (index: number) => {
+    setPrograms((prev) =>
+      prev.map((p, i) => (i === index ? { ...p, rotateX: 0, rotateY: 0 } : p))
+    );
+  };
+
+  const toggleFullscreen = () => {
+    if (screenfull.isEnabled && videoRef.current) {
+      screenfull.toggle(videoRef.current);
+    }
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const updateProgress = () => {
+      setProgress((video.currentTime / video.duration) * 100);
+    };
+
+    video.addEventListener("timeupdate", updateProgress);
+    return () => video.removeEventListener("timeupdate", updateProgress);
+  }, []);
+
+  // Add cursor style
+  useEffect(() => {
+    document.body.style.cursor = "default";
+    return () => {
+      document.body.style.cursor = "default";
+    };
+  }, []);
 
   return (
     <div className={`font-sans ${darkMode ? "dark" : ""}`}>
@@ -192,23 +326,15 @@ export default function SchoolShowcase() {
           <CarouselContent>
             {mediaItems.map((item, index) => (
               <CarouselItem key={index} className="relative h-screen">
-                {item.type === "image" ? (
-                  <div className="relative h-full w-full">
-                    <Image
-                      src={item.src}
-                      alt="Installations de Pascal Info"
-                      fill
-                      className="object-cover brightness-75"
-                      priority
-                    />
-                  </div>
-                ) : (
+                <div className="relative h-full w-full">
                   <Image
                     src={item.src}
                     alt="Installations de Pascal Info"
-                    className="h-full w-full object-cover brightness-75"
+                    fill
+                    className="object-cover brightness-75"
+                    priority
                   />
-                )}
+                </div>
                 <div className="absolute inset-0 flex items-center justify-center text-center">
                   <div className="max-w-4xl px-4 space-y-6">
                     <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-xl">
@@ -230,6 +356,117 @@ export default function SchoolShowcase() {
             ))}
           </CarouselContent>
         </Carousel>
+      </section>
+
+      {/* Video Showcase Section */}
+      <section className="relative py-20 px-4 md:px-8 bg-background">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          {/* Content Section */}
+          <div className="space-y-8 md:pr-12">
+            <h2 className="text-4xl md:text-5xl font-bold">
+              <span className="bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent">
+                Une Expérience Éducative
+              </span>
+              <br />
+              <span className="text-foreground">Immersive</span>
+            </h2>
+
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Découvrez notre campus à travers une visite virtuelle captivante.
+              Explorez nos installations modernes, nos laboratoires high-tech,
+              et notre environnement d&apos;apprentissage stimulant.
+            </p>
+
+            <ul className="space-y-4">
+              {[
+                "Salles de classe intelligentes",
+                "Laboratoires spécialisés",
+                "Espaces collaboratifs",
+                "Bibliothèque numérique",
+              ].map((item, index) => (
+                <li key={index} className="flex items-center gap-3">
+                  <div className="h-2 w-2 bg-primary rounded-full" />
+                  <span className="text-muted-foreground">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Video Container */}
+          <div className="relative group rounded-2xl overflow-hidden shadow-2xl border border-muted/20">
+            <video
+              ref={videoRef}
+              muted={isMuted}
+              className="w-full aspect-video object-cover cursor-pointer"
+              poster="/video-poster.png"
+              onClick={togglePlay}
+            >
+              <source src="/videopascal.mp4" type="video/mp4" />
+            </video>
+
+            {/* Video Controls */}
+            <div
+              className={`absolute bottom-4 left-4 right-4 flex items-center justify-between transition-opacity ${
+                isPlaying ? "opacity-0 group-hover:opacity-100" : ""
+              }`}
+            >
+              <div className="flex items-center gap-3 backdrop-blur-sm bg-background/30 p-2 rounded-full">
+                <Button
+                  size="icon"
+                  className="rounded-full hover:bg-muted/20"
+                  onClick={togglePlay}
+                >
+                  {isPlaying ? (
+                    <Pause className="h-5 w-5" />
+                  ) : (
+                    <Play className="h-5 w-5" />
+                  )}
+                </Button>
+
+                <Button
+                  size="icon"
+                  className="rounded-full hover:bg-muted/20"
+                  onClick={toggleMute}
+                >
+                  {isMuted ? (
+                    <VolumeX className="h-5 w-5" />
+                  ) : (
+                    <Volume2 className="h-5 w-5" />
+                  )}
+                </Button>
+
+                <div className="h-1 bg-muted/20 rounded-full flex-1 mx-2">
+                  <div
+                    className="h-full bg-primary rounded-full transition-all"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+              </div>
+
+              <Button
+                size="icon"
+                className="rounded-full backdrop-blur-sm bg-background/30 hover:bg-muted/20"
+                onClick={toggleFullscreen}
+              >
+                <Maximize className="h-5 w-5" />
+              </Button>
+            </div>
+
+            {/* Initial Play Button */}
+            {!isPlaying && (
+              <div className="absolute inset-0 flex items-center justify-center bg-background/10 backdrop-blur-sm">
+                <Button
+                  size="lg"
+                  className="rounded-full px-8 py-6 text-lg gap-2 hover:scale-105 transition-transform cursor-pointer"
+                  onClick={togglePlay}
+                >
+                  <Play className="h-6 w-6" />
+                  Démarrer la Visite
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
       </section>
 
       {/* About Us */}
@@ -292,69 +529,71 @@ export default function SchoolShowcase() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 px-4 md:px-8 bg-background">
+      <section
+        id="programs"
+        className="py-20 px-4 md:px-8 bg-background relative overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Nos Services
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+            <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+              Nos Programmes
+            </span>
+            <br />
+            <span className="text-foreground">D&apos;excellence</span>
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                icon: Code,
-                title: "Diplôme Bac+2 en Développement Informatique",
-                text: "Formation complète en programmation et développement de logiciels",
-              },
-              {
-                icon: ChefHat,
-                title: "Diplôme Bac+2 en Gestion d'Entreprise",
-                text: "Acquérez les compétences essentielles pour gérer et développer une entreprise",
-              },
-              {
-                icon: BookOpen,
-                title: "Cours de Soutien",
-                text: "Accompagnement personnalisé pour les élèves de tous niveaux",
-              },
-              {
-                icon: Globe,
-                title: "Cours de Langues",
-                text: "Apprenez les langues étrangères avec des méthodes modernes et efficaces",
-              },
-              {
-                icon: GraduationCap,
-                title: "Formation Professionnelle Continue",
-                text: "Perfectionnez vos compétences ou réorientez votre carrière",
-              },
-              {
-                icon: HeartHandshake,
-                title: "Traduction",
-                text: "Services de traduction professionnelle dans plusieurs langues",
-              },
-              {
-                icon: Microscope,
-                title: "Inscription aux Écoles Supérieures",
-                text: "Assistance pour les inscriptions au Maroc et à l'étranger",
-              },
-              {
-                icon: Trophy,
-                title: "Salles VIP et Équipées",
-                text: "Espaces modernes avec vidéoprojecteurs pour une expérience d'apprentissage optimale",
-              },
-            ].map((item, index) => (
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
+            {/* Optimized background element */}
+            <div className="absolute inset-0 opacity-10 pointer-events-none">
+              <div className="absolute w-[300px] h-[300px] bg-gradient-to-r from-primary/30 to-purple-600/30 blur-[80px] animate-float will-change-transform" />
+            </div>
+
+            {programs.map((program, index) => (
               <div
                 key={index}
-                className="group bg-muted/10 border rounded-xl p-6 hover:shadow-lg transition-all"
+                className="program-card relative bg-background border border-muted/20 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 will-change-transform"
+                onMouseMove={(e) => handleCardMove(e, index)}
+                onMouseLeave={() => handleCardLeave(index)}
               >
-                <div className="mb-4">
-                  <item.icon className="h-8 w-8 text-primary group-hover:animate-bounce" />
+                {/* Simplified hover effect layer */}
+                <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" />
+
+                {/* Card content */}
+                <div className="relative space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div className="program-icon bg-gradient-to-br from-primary to-purple-600 p-3 rounded-lg will-change-transform">
+                      <program.icon className="h-6 w-6 text-white" />
+                    </div>
+                    <span className="text-sm font-medium text-primary">
+                      Programme Certifié
+                    </span>
+                  </div>
+
+                  <h3 className="text-xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                    {program.title}
+                  </h3>
+
+                  <p className="text-muted-foreground leading-relaxed">
+                    {program.text}
+                  </p>
+
+                  {/* Button animation */}
+                  <div className="mt-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <Button
+                      variant="outline"
+                      className="rounded-full gap-2 w-full hover:bg-primary/10 border-muted/20"
+                    >
+                      <BookOpen className="h-4 w-4" />
+                      En savoir plus
+                      <ArrowRight className="h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Button>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
-
       {/* Testimonials */}
       <section className="py-20 px-4 md:px-8 bg-muted/10">
         <div className="max-w-7xl mx-auto">
@@ -438,30 +677,96 @@ export default function SchoolShowcase() {
       </section>
 
       {/* Map & Location */}
+      {/* Map & Location */}
       <section className="py-20 px-4 md:px-8 bg-muted/10">
-        <div className="max-w-7xl mx-auto space-y-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
             Visitez Notre Centre
           </h2>
-          <div className="aspect-video rounded-2xl overflow-hidden shadow-xl">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.678901234567!2d-0.12345678901234567!3d51.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDA3JzI0LjQiTiAwwrAwNyczNi4wIlc!5e0!3m2!1sen!2suk!4v1234567890123!5m2!1sen!2suk"
-              className="w-full h-full"
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
-          <div className="flex justify-center gap-4">
-            <Button variant="outline" className="rounded-full gap-2">
-              <Facebook className="h-4 w-4" /> Suivre
-            </Button>
-            <Button variant="outline" className="rounded-full gap-2">
-              <Linkedin className="h-4 w-4" /> Connecter
-            </Button>
-            <Button variant="outline" className="rounded-full gap-2">
-              <Instagram className="h-4 w-4" /> Suivre
-            </Button>
+
+          <div className="grid md:grid-cols-2 gap-12 items-stretch">
+            {/* Map Section */}
+            <div className="h-[400px] rounded-2xl overflow-hidden shadow-xl border border-muted/20">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3371.313075176366!2d-6.3628693880172005!3d32.33030380657073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda387b4f96b285d%3A0xc07927fdc2e9d3c4!2sINSTITUT%20PASCAL%20INFO!5e0!3m2!1sfr!2sma!4v1744722831065!5m2!1sfr!2sma"
+                width="600"
+                height="450"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+
+            {/* Info & Social Section */}
+            <div className="bg-background/95 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-muted/20 flex flex-col justify-center">
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-2xl font-bold mb-4">
+                    Connectez-vous avec Nous
+                  </h3>
+                  <p className="text-muted-foreground mb-6">
+                    Rejoignez notre communauté dynamique et restez informé des
+                    dernières actualités, événements spéciaux, et opportunités
+                    de formation.
+                  </p>
+                </div>
+
+                {/* Contact Info */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <GraduationCap className="h-5 w-5 text-primary" />
+                    <span className="text-sm">
+                      APPT 26 ET 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni
+                      Mellal 23000
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Microscope className="h-5 w-5 text-primary" />
+                    <span className="text-sm">Lun-Sam: 9h - 21h</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <HeartHandshake className="h-5 w-5 text-primary" />
+                    <span className="text-sm">contact@pascalinfo.ma</span>
+                  </div>
+                </div>
+
+                {/* Social Media Buttons */}
+                <div className="flex flex-wrap gap-4 mt-6">
+                  <Button
+                    variant="outline"
+                    className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
+                  >
+                    <Facebook className="h-5 w-5 text-blue-600" />
+                    <span>Suivez-nous</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
+                  >
+                    <Linkedin className="h-5 w-5 text-blue-500" />
+                    <span>Connectez</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
+                  >
+                    <Instagram className="h-5 w-5 text-pink-600" />
+                    <span>Explorez</span>
+                  </Button>
+                </div>
+
+                {/* Call to Action */}
+                <div className="mt-8 p-4 bg-primary/5 rounded-xl border border-primary/20">
+                  <p className="text-sm text-muted-foreground">
+                    🚀 Programmez une visite guidée de nos installations
+                    professionnelles!
+                  </p>
+                  <Button className="mt-4 w-full" variant="secondary">
+                    Prendre Rendez-vous
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -541,7 +846,7 @@ export default function SchoolShowcase() {
                     href="#"
                     className="text-sm text-muted-foreground hover:text-primary"
                   >
-                    Conditions d'Utilisation
+                    Conditions d&apos;Utilisation
                   </a>
                 </li>
                 <li>
