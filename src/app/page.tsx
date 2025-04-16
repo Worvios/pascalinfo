@@ -1,19 +1,15 @@
 "use client";
 
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Toggle } from "@/components/ui/toggle";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
+import Image from "next/image";
+import screenfull from "screenfull";
+
 import {
   Moon,
   Sun,
@@ -31,54 +27,105 @@ import {
   Code,
   ChefHat,
   ArrowRight,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Maximize,
+  Scale,
+  FileText,
+  Mail,
+  Phone,
+  Clock,
+  Send,
 } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Toggle } from "@/components/ui/toggle";
 import Autoplay from "embla-carousel-autoplay";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import Image from "next/image"; // Added Image import
-import { Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
-import screenfull from "screenfull";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+// Add these imports at the top
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function SchoolShowcase() {
+  // Dark mode toggle and language state
   const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState("FR");
-  const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Contact", href: "#contact" },
-  ];
 
-  const mediaItems = [
-    { type: "image", src: "/pic1.jpg" },
-    { type: "image", src: "/pic2.jpg" },
-    { type: "image", src: "/pic3.jpg" },
-  ];
+  // Memoized static navigation links
+  const navLinks = useMemo(
+    () => [
+      { name: "Home", href: "#home" },
+      { name: "About", href: "#about" },
+      { name: "Services", href: "#services" },
+      { name: "Contact", href: "#contact" },
+    ],
+    []
+  );
 
-  const toggleDark = () => {
-    setDarkMode(!darkMode);
+  // Memoized static media items
+  const mediaItems = useMemo(
+    () => [
+      { type: "image", src: "/pic1.jpg" },
+      { type: "image", src: "/pic2.jpg" },
+      { type: "image", src: "/pic3.jpg" },
+    ],
+    []
+  );
+
+  // Toggle dark mode with memoized callback
+  const toggleDark = useCallback(() => {
+    setDarkMode((prev) => !prev);
     document.documentElement.classList.toggle("dark");
-  };
+  }, []);
 
+  // Video handling state and ref
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
 
-  const togglePlay = () => {
+  // Toggle Play/Pause function
+  const togglePlay = useCallback(() => {
     if (videoRef.current) {
       if (isPlaying) {
         videoRef.current.pause();
       } else {
         videoRef.current.play();
       }
-      setIsPlaying(!isPlaying);
+      setIsPlaying((prev) => !prev);
     }
-  };
+  }, [isPlaying]);
 
-  const toggleMute = () => setIsMuted(!isMuted);
+  // Toggle Mute function
+  const toggleMute = useCallback(() => {
+    setIsMuted((prev) => !prev);
+  }, []);
 
-  const [programs, setPrograms] = useState([
+  // Memoized programs array
+  const [programs, setPrograms] = useState(() => [
     {
       icon: Code,
       title: "Diplôme Bac+2 en Développement Informatique",
@@ -137,54 +184,55 @@ export default function SchoolShowcase() {
     },
   ]);
 
-  const handleCardMove = (
-    e: React.MouseEvent<HTMLDivElement>,
-    index: number
-  ) => {
-    const card = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - card.left;
-    const y = e.clientY - card.top;
-    const centerX = card.width / 2;
-    const centerY = card.height / 2;
+  // Handle card movement for 3D effect
+  const handleCardMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+      const card = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - card.left;
+      const y = e.clientY - card.top;
+      const centerX = card.width / 2;
+      const centerY = card.height / 2;
 
-    setPrograms((prev) =>
-      prev.map((p, i) =>
-        i === index
-          ? {
-              ...p,
-              rotateX: -(y - centerY) / 20,
-              rotateY: (x - centerX) / 20,
-            }
-          : p
-      )
-    );
-  };
+      setPrograms((prev) =>
+        prev.map((p, i) =>
+          i === index
+            ? {
+                ...p,
+                rotateX: -(y - centerY) / 20,
+                rotateY: (x - centerX) / 20,
+              }
+            : p
+        )
+      );
+    },
+    []
+  );
 
-  const handleCardLeave = (index: number) => {
+  const handleCardLeave = useCallback((index: number) => {
     setPrograms((prev) =>
       prev.map((p, i) => (i === index ? { ...p, rotateX: 0, rotateY: 0 } : p))
     );
-  };
+  }, []);
 
-  const toggleFullscreen = () => {
+  // Toggle full-screen mode
+  const toggleFullscreen = useCallback(() => {
     if (screenfull.isEnabled && videoRef.current) {
       screenfull.toggle(videoRef.current);
     }
-  };
+  }, []);
 
+  // Update video progress
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
     const updateProgress = () => {
       setProgress((video.currentTime / video.duration) * 100);
     };
-
     video.addEventListener("timeupdate", updateProgress);
     return () => video.removeEventListener("timeupdate", updateProgress);
   }, []);
 
-  // Add cursor style
+  // Set cursor style on mount
   useEffect(() => {
     document.body.style.cursor = "default";
     return () => {
@@ -192,13 +240,32 @@ export default function SchoolShowcase() {
     };
   }, []);
 
+  // Define validation schema
+  const FormSchema = z.object({
+    email: z.string().email({
+      message: "Veuillez entrer une adresse email valide",
+    }),
+  });
+
+  // Update form initialization
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  // Update submit handler
+  async function onSubmit(values: z.infer<typeof FormSchema>) {
+    // Handle form submission
+    console.log(values);
+  }
   return (
     <div className={`font-sans ${darkMode ? "dark" : ""}`}>
       {/* Navbar */}
       <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background/80 text-foreground shadow-sm backdrop-blur-md border-b border-muted">
         {/* Branding */}
         <div className="flex items-center gap-3">
-          {/* Navbar Logo */}
           <div className="relative rounded-full bg-gradient-to-r from-amber-400 to-yellow-600 p-1 group">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400 to-yellow-600 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300" />
             <Image
@@ -283,7 +350,6 @@ export default function SchoolShowcase() {
                     </li>
                   ))}
                 </ul>
-
                 <div className="flex flex-col gap-6 border-t border-muted pt-6">
                   <div className="relative flex items-center">
                     <Languages className="absolute left-3 h-4 w-4 text-muted-foreground" />
@@ -297,7 +363,6 @@ export default function SchoolShowcase() {
                       <option value="AR">العربية</option>
                     </select>
                   </div>
-
                   <Toggle
                     pressed={darkMode}
                     onPressedChange={toggleDark}
@@ -316,6 +381,7 @@ export default function SchoolShowcase() {
           </SheetContent>
         </Sheet>
       </nav>
+
       {/* Hero Section */}
       <section id="home" className="relative h-screen w-full">
         <Carousel
@@ -347,6 +413,12 @@ export default function SchoolShowcase() {
                     <Button
                       size="lg"
                       className="rounded-full px-8 py-6 text-lg"
+                      onClick={() => {
+                        const target = document.getElementById("programs");
+                        if (target) {
+                          target.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }}
                     >
                       Découvrir Nos Programmes
                     </Button>
@@ -370,13 +442,11 @@ export default function SchoolShowcase() {
               <br />
               <span className="text-foreground">Immersive</span>
             </h2>
-
             <p className="text-lg text-muted-foreground leading-relaxed">
               Découvrez notre campus à travers une visite virtuelle captivante.
               Explorez nos installations modernes, nos laboratoires high-tech,
               et notre environnement d&apos;apprentissage stimulant.
             </p>
-
             <ul className="space-y-4">
               {[
                 "Salles de classe intelligentes",
@@ -391,7 +461,6 @@ export default function SchoolShowcase() {
               ))}
             </ul>
           </div>
-
           {/* Video Container */}
           <div className="relative group rounded-2xl overflow-hidden shadow-2xl border border-muted/20">
             <video
@@ -403,7 +472,6 @@ export default function SchoolShowcase() {
             >
               <source src="/videopascal.mp4" type="video/mp4" />
             </video>
-
             {/* Video Controls */}
             <div
               className={`absolute bottom-4 left-4 right-4 flex items-center justify-between transition-opacity ${
@@ -422,7 +490,6 @@ export default function SchoolShowcase() {
                     <Play className="h-5 w-5" />
                   )}
                 </Button>
-
                 <Button
                   size="icon"
                   className="rounded-full hover:bg-muted/20"
@@ -434,7 +501,6 @@ export default function SchoolShowcase() {
                     <Volume2 className="h-5 w-5" />
                   )}
                 </Button>
-
                 <div className="h-1 bg-muted/20 rounded-full flex-1 mx-2">
                   <div
                     className="h-full bg-primary rounded-full transition-all"
@@ -442,7 +508,6 @@ export default function SchoolShowcase() {
                   />
                 </div>
               </div>
-
               <Button
                 size="icon"
                 className="rounded-full backdrop-blur-sm bg-background/30 hover:bg-muted/20"
@@ -451,7 +516,6 @@ export default function SchoolShowcase() {
                 <Maximize className="h-5 w-5" />
               </Button>
             </div>
-
             {/* Initial Play Button */}
             {!isPlaying && (
               <div className="absolute inset-0 flex items-center justify-center bg-background/10 backdrop-blur-sm">
@@ -541,13 +605,11 @@ export default function SchoolShowcase() {
             <br />
             <span className="text-foreground">D&apos;excellence</span>
           </h2>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
             {/* Optimized background element */}
             <div className="absolute inset-0 opacity-10 pointer-events-none">
               <div className="absolute w-[300px] h-[300px] bg-gradient-to-r from-primary/30 to-purple-600/30 blur-[80px] animate-float will-change-transform" />
             </div>
-
             {programs.map((program, index) => (
               <div
                 key={index}
@@ -557,7 +619,6 @@ export default function SchoolShowcase() {
               >
                 {/* Simplified hover effect layer */}
                 <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" />
-
                 {/* Card content */}
                 <div className="relative space-y-6">
                   <div className="flex items-center gap-4">
@@ -568,15 +629,12 @@ export default function SchoolShowcase() {
                       Programme Certifié
                     </span>
                   </div>
-
                   <h3 className="text-xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
                     {program.title}
                   </h3>
-
                   <p className="text-muted-foreground leading-relaxed">
                     {program.text}
                   </p>
-
                   {/* Button animation */}
                   <div className="mt-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <Button
@@ -594,6 +652,7 @@ export default function SchoolShowcase() {
           </div>
         </div>
       </section>
+
       {/* Testimonials */}
       <section className="py-20 px-4 md:px-8 bg-muted/10">
         <div className="max-w-7xl mx-auto">
@@ -677,13 +736,11 @@ export default function SchoolShowcase() {
       </section>
 
       {/* Map & Location */}
-      {/* Map & Location */}
       <section className="py-20 px-4 md:px-8 bg-muted/10">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
             Visitez Notre Centre
           </h2>
-
           <div className="grid md:grid-cols-2 gap-12 items-stretch">
             {/* Map Section */}
             <div className="h-[400px] rounded-2xl overflow-hidden shadow-xl border border-muted/20">
@@ -696,7 +753,6 @@ export default function SchoolShowcase() {
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
-
             {/* Info & Social Section */}
             <div className="bg-background/95 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-muted/20 flex flex-col justify-center">
               <div className="space-y-8">
@@ -710,7 +766,6 @@ export default function SchoolShowcase() {
                     de formation.
                   </p>
                 </div>
-
                 {/* Contact Info */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
@@ -729,30 +784,47 @@ export default function SchoolShowcase() {
                     <span className="text-sm">contact@pascalinfo.ma</span>
                   </div>
                 </div>
-
                 {/* Social Media Buttons */}
                 <div className="flex flex-wrap gap-4 mt-6">
-                  <Button
-                    variant="outline"
-                    className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
+                  <a
+                    href="https://facebook.com/centrepascalinfo"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <Facebook className="h-5 w-5 text-blue-600" />
-                    <span>Suivez-nous</span>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
+                    <Button
+                      variant="outline"
+                      className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
+                    >
+                      <Facebook className="h-5 w-5 text-blue-600" />
+                      <span>Suivez-nous</span>
+                    </Button>
+                  </a>
+                  <a
+                    href="https://linkedin.com/company/pascal-info"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <Linkedin className="h-5 w-5 text-blue-500" />
-                    <span>Connectez</span>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
+                    <Button
+                      variant="outline"
+                      className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
+                    >
+                      <Linkedin className="h-5 w-5 text-blue-500" />
+                      <span>Connectez</span>
+                    </Button>
+                  </a>
+                  <a
+                    href="https://instagram.com/pascal.centre"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <Instagram className="h-5 w-5 text-pink-600" />
-                    <span>Explorez</span>
-                  </Button>
+                    <Button
+                      variant="outline"
+                      className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
+                    >
+                      <Instagram className="h-5 w-5 text-pink-600" />
+                      <span>Explorez</span>
+                    </Button>
+                  </a>
                 </div>
 
                 {/* Call to Action */}
@@ -770,99 +842,212 @@ export default function SchoolShowcase() {
           </div>
         </div>
       </section>
-
       {/* Footer */}
-      <footer className="bg-background border-t">
+      <footer className="bg-background border-t mt-24 relative">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary opacity-20" />
+
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <GraduationCap className="h-8 w-8 text-primary" />
-                <span className="text-xl font-bold">Pascal Info</span>
+          <div className="grid md:grid-cols-5 gap-8 mb-12">
+            {/* Branding Column */}
+            <div className="space-y-6 md:col-span-2">
+              <div className="flex items-center gap-3 group">
+                <div className="p-2 bg-primary/10 rounded-xl border border-primary/20">
+                  <GraduationCap className="h-8 w-8 text-primary" />
+                </div>
+                <span className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  Pascal Info
+                </span>
               </div>
-              <p className="text-sm text-muted-foreground">
-                Votre partenaire de confiance en formation depuis 1996.
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Votre passerelle vers l'excellence professionnelle depuis 1996.
+                <br />
+                Agréé par le Ministère de l'Éducation Nationale et de la
+                Formation Professionnelle.
               </p>
-            </div>
 
-            <div className="space-y-4">
-              <h3 className="font-semibold">Liens Rapides</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-muted-foreground hover:text-primary"
-                  >
-                    Admissions
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-muted-foreground hover:text-primary"
-                  >
-                    Calendrier des Formations
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-muted-foreground hover:text-primary"
-                  >
-                    Carrières
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="font-semibold">Contact</h3>
-              <div className="space-y-2">
-                <Input
-                  placeholder="Entrez votre email"
-                  className="bg-muted/10"
-                />
-                <Textarea
-                  placeholder="Votre message"
-                  className="bg-muted/10 h-24"
-                />
-                <Button className="w-full">Envoyer</Button>
+              {/* Social Proof */}
+              <div className="flex items-center gap-4">
+                <div className="flex -space-x-2">
+                  <Avatar className="h-8 w-8 border-2 border-background">
+                    <AvatarImage src="/certifications/iso.png" />
+                    <AvatarFallback>ISO</AvatarFallback>
+                  </Avatar>
+                  <Avatar className="h-8 w-8 border-2 border-background">
+                    <AvatarImage src="/certifications/ministry.png" />
+                    <AvatarFallback>MEN</AvatarFallback>
+                  </Avatar>
+                </div>
+                <span className="text-xs text-muted-foreground">
+                  Accréditations et partenariats
+                </span>
               </div>
             </div>
 
+            {/* Quick Links */}
             <div className="space-y-4">
-              <h3 className="font-semibold">Mentions Légales</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-muted-foreground hover:text-primary"
-                  >
-                    Politique de Confidentialité
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-muted-foreground hover:text-primary"
-                  >
-                    Conditions d&apos;Utilisation
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="text-sm text-muted-foreground hover:text-primary"
-                  >
-                    Accessibilité
-                  </a>
-                </li>
+              <h3 className="text-lg font-semibold flex items-center gap-2">
+                <BookOpen className="h-5 w-5 text-primary" />
+                Formations
+              </h3>
+              <ul className="space-y-3">
+                {[
+                  "Développement Informatique",
+                  "Gestion d'Entreprise",
+                  "Cours de Langues",
+                  "Formation Continue",
+                ].map((link) => (
+                  <li key={link}>
+                    <a
+                      href="#"
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
+                    >
+                      <ArrowRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      {link}
+                    </a>
+                  </li>
+                ))}
               </ul>
+            </div>
+
+            {/* Legal & Resources */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold flex items-center gap-2">
+                <Scale className="h-5 w-5 text-primary" />
+                Ressources
+              </h3>
+              <ul className="space-y-3">
+                {[
+                  "Politique de Confidentialité",
+                  "Conditions d'Utilisation",
+                  "FAQ",
+                  "Blog Éducatif",
+                ].map((link) => (
+                  <li key={link}>
+                    <a
+                      href="#"
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
+                    >
+                      <FileText className="h-4 w-4 text-muted-foreground/50" />
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Newsletter Subscription */}
+            <div className="space-y-4 md:col-span-2">
+              <h3 className="text-lg font-semibold flex items-center gap-2">
+                <Mail className="h-5 w-5 text-primary" />
+                Restez Informé
+              </h3>
+
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-4"
+                >
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            placeholder="Votre email professionnel"
+                            className="bg-muted/10 rounded-full px-6 h-12"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full rounded-full h-12 bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity gap-2"
+                  >
+                    <Send className="h-4 w-4" />
+                    S'abonner à la Newsletter
+                  </Button>
+                </form>
+              </Form>
+              {/* Contact Info */}
+              <div className="pt-6 mt-6 border-t border-muted/20">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Phone className="h-4 w-4" />
+                    +212 5XX XXX XXX
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Mail className="h-4 w-4" />
+                    contact@pascalinfo.ma
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Clock className="h-4 w-4" />
+                    Lun-Ven: 8h - 20h
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-            © 2025 Pascal Info. Tous droits réservés.
+          {/* Bottom Footer */}
+          <div className="border-t border-muted/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-sm text-muted-foreground text-center">
+              © 2025 Pascal Info. Tous droits réservés.
+            </div>
+
+            <div className="flex items-center gap-4">
+              <span className="text-sm text-muted-foreground">
+                Développé par
+              </span>
+              <a
+                href="https://coderabbit.de"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              >
+                <img
+                  src="/coderabbit-logo.svg"
+                  alt="Coderabbit Digital Solutions"
+                  className="h-6 w-auto"
+                />
+                <span className="font-medium bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  Coderabbit Digital Solutions
+                </span>
+              </a>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <Facebook className="h-5 w-5 text-[#1877F2]" />
+                </Button>
+              </a>
+              <a
+                href="https://linkedin.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <Linkedin className="h-5 w-5 text-[#0A66C2]" />
+                </Button>
+              </a>
+              <a
+                href="https://instagram.com/pascal.centre"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <Instagram className="h-5 w-5 text-[#E4405F]" />
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </footer>
