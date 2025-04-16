@@ -51,17 +51,14 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Toggle } from "@/components/ui/toggle";
 import Autoplay from "embla-carousel-autoplay";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
@@ -859,10 +856,10 @@ export default function SchoolShowcase() {
                 </span>
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Votre passerelle vers l'excellence professionnelle depuis 1996.
+                Votre passerelle vers l&apos;excellence professionnelle depuis
+                1996.
                 <br />
-                Agréé par le Ministère de l'Éducation Nationale et de la
-                Formation Professionnelle.
+                Agréé par
               </p>
 
               {/* Social Proof */}
@@ -968,7 +965,7 @@ export default function SchoolShowcase() {
                     className="w-full rounded-full h-12 bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity gap-2"
                   >
                     <Send className="h-4 w-4" />
-                    S'abonner à la Newsletter
+                    S&apos;abonner à la Newsletter
                   </Button>
                 </form>
               </Form>
@@ -985,7 +982,7 @@ export default function SchoolShowcase() {
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Clock className="h-4 w-4" />
-                    Lun-Ven: 8h - 20h
+                    Lun-Ven: 8h - 21h
                   </div>
                 </div>
               </div>
@@ -1008,7 +1005,7 @@ export default function SchoolShowcase() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:opacity-80 transition-opacity"
               >
-                <img
+                <Image
                   src="/coderabbit-logo.svg"
                   alt="Coderabbit Digital Solutions"
                   className="h-6 w-auto"
