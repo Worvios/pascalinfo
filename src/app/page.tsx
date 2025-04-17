@@ -307,6 +307,9 @@ export default function SchoolShowcase() {
                 <option value="FR">Français</option>
                 <option value="EN">English</option>
                 <option value="AR">العربية</option>
+                <option value="ES">Español</option>
+                <option value="IT">Italia</option>
+                <option value="DE">Deutsch</option>
               </select>
             </div>
 
@@ -360,6 +363,9 @@ export default function SchoolShowcase() {
                       <option value="FR">Français</option>
                       <option value="EN">English</option>
                       <option value="AR">العربية</option>
+                      <option value="ES">Español</option>
+                      <option value="IT">Italia</option>
+                      <option value="DE">Deutsch</option>
                     </select>
                   </div>
                   <Toggle
@@ -1008,10 +1014,18 @@ export default function SchoolShowcase() {
                 className="flex items-center gap-2 hover:opacity-80 transition-opacity"
               >
                 <Image
-                  src="/coderabbit-logo.svg"
+                  src="/coderabbit-logo.svg" // Default logo
                   alt="Coderabbit Digital Solutions"
                   width={40}
                   height={40}
+                  className="block dark:hidden" // Show in light mode
+                />
+                <Image
+                  src="/coderabbit-logo-dark.svg" // Dark mode logo
+                  alt="Coderabbit Digital Solutions"
+                  width={40}
+                  height={40}
+                  className="hidden dark:block" // Show in dark mode
                 />
                 <span className="font-medium bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                   Coderabbit Digital Solutions

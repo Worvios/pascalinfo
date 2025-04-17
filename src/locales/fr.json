@@ -1,0 +1,176 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "about": "À propos",
+    "programs": "Programmes",
+    "contact": "Contact"
+  },
+  "languages": {
+    "fr": "Français",
+    "en": "English",
+    "ar": "العربية",
+    "es": "Español",
+    "it": "Italia",
+    "de": "Deutsch"
+  },
+  "theme": {
+    "light": "Mode Clair",
+    "dark": "Mode Sombre"
+  },
+  "hero": {
+    "title": "Façonnez Votre Avenir Professionnel",
+    "subtitle": "Centre de formation et de services éducatifs d'excellence au Maroc",
+    "cta": "Découvrir Nos Programmes"
+  },
+  "video": {
+    "title": "Une Expérience Éducative",
+    "subtitle": "Immersive",
+    "description": "Découvrez notre campus à travers une visite virtuelle captivante. Explorez nos installations modernes, nos laboratoires high-tech, et notre environnement d'apprentissage stimulant.",
+    "features": [
+      "Salles de classe intelligentes",
+      "Laboratoires spécialisés",
+      "Espaces collaboratifs",
+      "Bibliothèque numérique"
+    ],
+    "controls": {
+      "start": "Démarrer la Visite"
+    }
+  },
+  "about": {
+    "title": "À Propos de Pascal Info",
+    "description": "Établi en 1996, Pascal Info est devenu un centre d'excellence en matière de formation professionnelle au Maroc. Notre approche globale combine l'expertise technique et le développement personnel pour préparer nos étudiants aux défis du marché du travail moderne.",
+    "stats": {
+      "experience": "Années d'Expérience",
+      "services": "Services Éducatifs"
+    },
+    "cta": "En Savoir Plus",
+    "modal": {
+      "title": "Nos Distinctions",
+      "items": [
+        "Partenariats avec des entreprises leaders au Maroc",
+        "Installations modernes et équipement de pointe",
+        "Corps enseignant composé de professionnels expérimentés",
+        "Taux de réussite exceptionnel parmi nos diplômés"
+      ]
+    }
+  },
+  "programs": {
+    "title": "Nos Programmes",
+    "subtitle": "D'excellence",
+    "tag": "Programme Certifié",
+    "cta": "En savoir plus",
+    "items": [
+      {
+        "title": "Diplôme Bac+2 en Développement Informatique",
+        "text": "Formation complète en programmation et développement de logiciels"
+      },
+      {
+        "title": "Diplôme Bac+2 en Gestion d'Entreprise",
+        "text": "Acquérez les compétences essentielles pour gérer et développer une entreprise"
+      },
+      {
+        "title": "Cours de Soutien",
+        "text": "Accompagnement personnalisé pour les élèves de tous niveaux"
+      },
+      {
+        "title": "Cours de Langues",
+        "text": "Apprenez les langues étrangères avec des méthodes modernes et efficaces"
+      },
+      {
+        "title": "Formation Professionnelle Continue",
+        "text": "Perfectionnez vos compétences ou réorientez votre carrière"
+      },
+      {
+        "title": "Traduction",
+        "text": "Services de traduction professionnelle dans plusieurs langues"
+      },
+      {
+        "title": "Inscription aux Écoles Supérieures",
+        "text": "Assistance pour les inscriptions au Maroc et à l'étranger"
+      },
+      {
+        "title": "Salles VIP et Équipées",
+        "text": "Espaces modernes avec vidéoprojecteurs pour une expérience d'apprentissage optimale"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Témoignages",
+    "quote": "\"Grâce à Pascal Info, j'ai pu acquérir des compétences pratiques qui m'ont permis de trouver rapidement un emploi dans mon domaine.\"",
+    "name": "Mehdi Tazi",
+    "role": "Diplomé 2023"
+  },
+  "why_choose": {
+    "title": "Pourquoi Choisir Pascal Info?",
+    "items": [
+      {
+        "title": "Formateurs Experts",
+        "text": "Professionnels expérimentés et pédagogues qualifiés"
+      },
+      {
+        "title": "Équipements Modernes",
+        "text": "Salles informatiques et ressources pédagogiques à jour"
+      },
+      {
+        "title": "Accompagnement Personnalisé",
+        "text": "Suivi individuel pour la réussite de chaque étudiant"
+      },
+      {
+        "title": "Résultats Prouvés",
+        "text": "Excellents taux de placement professionnel pour nos diplômés"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Visitez Notre Centre",
+    "connect": {
+      "title": "Connectez-vous avec Nous",
+      "description": "Rejoignez notre communauté dynamique et restez informé des dernières actualités, événements spéciaux, et opportunités de formation."
+    },
+    "info": {
+      "address": "APPT 26 ET 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
+      "hours": "Lun-Sam: 9h - 21h",
+      "email": "contact@pascalinfo.ma"
+    },
+    "social": {
+      "facebook": "Suivez-nous",
+      "linkedin": "Connectez",
+      "instagram": "Explorez"
+    },
+    "cta": {
+      "text": "🚀 Programmez une visite guidée de nos installations professionnelles!",
+      "button": "Prendre Rendez-vous"
+    }
+  },
+  "footer": {
+    "tagline": "Votre passerelle vers l'excellence professionnelle depuis 1996.",
+    "accreditation": "Agréé par",
+    "social_proof": "Accréditations et partenariats",
+    "sections": {
+      "formations": "Formations",
+      "formation_links": [
+        "Développement Informatique",
+        "Gestion d'Entreprise",
+        "Cours de Langues",
+        "Formation Continue"
+      ],
+      "resources": "Ressources",
+      "resource_links": [
+        "Politique de Confidentialité",
+        "Conditions d'Utilisation",
+        "FAQ",
+        "Blog Éducatif"
+      ],
+      "newsletter": "Restez Informé",
+      "newsletter_placeholder": "Votre email professionnel",
+      "newsletter_button": "S'abonner à la Newsletter"
+    },
+    "contact_info": {
+      "phone": "+212 5XX XXX XXX",
+      "email": "contact@pascalinfo.ma",
+      "hours": "Lun-Ven: 8h - 21h"
+    },
+    "copyright": "© 2025 Pascal Info. Tous droits réservés.",
+    "developed_by": "Développé par"
+  }
+}
