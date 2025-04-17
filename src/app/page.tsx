@@ -74,9 +74,9 @@ export default function SchoolShowcase() {
   // Memoized static navigation links
   const navLinks = useMemo(
     () => [
-      { name: "Home", href: "#home" },
-      { name: "About", href: "#about" },
-      { name: "Services", href: "#services" },
+      { name: "Acceuil", href: "#home" },
+      { name: "à propos", href: "#about" },
+      { name: "Programmes", href: "#programs" },
       { name: "Contact", href: "#contact" },
     ],
     []
@@ -262,22 +262,24 @@ export default function SchoolShowcase() {
       {/* Navbar */}
       <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background/80 text-foreground shadow-sm backdrop-blur-md border-b border-muted">
         {/* Branding */}
-        <div className="flex items-center gap-3">
-          <div className="relative rounded-full bg-gradient-to-r from-amber-400 to-yellow-600 p-1 group">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400 to-yellow-600 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300" />
-            <Image
-              src="/logo-pascal.png"
-              alt="Pascal Info Logo"
-              width={56}
-              height={56}
-              className="h-14 w-14 rounded-full object-cover border-2 border-background"
-              priority
-            />
+        <a href="#home">
+          <div className="flex items-center gap-3">
+            <div className="relative rounded-full bg-gradient-to-r from-amber-400 to-yellow-600 p-1 group">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400 to-yellow-600 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300" />
+              <Image
+                src="/logo-pascal.png"
+                alt="Pascal Info Logo"
+                width={56}
+                height={56}
+                className="h-14 w-14 rounded-full object-cover border-2 border-background"
+                priority
+              />
+            </div>
+            <span className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-yellow-600 bg-clip-text text-transparent">
+              Pascal Info
+            </span>
           </div>
-          <span className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-yellow-600 bg-clip-text text-transparent">
-            Pascal Info
-          </span>
-        </div>
+        </a>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
@@ -733,7 +735,7 @@ export default function SchoolShowcase() {
       </section>
 
       {/* Map & Location */}
-      <section className="py-20 px-4 md:px-8 bg-muted/10">
+      <section id="contact" className="py-20 px-4 md:px-8 bg-muted/10">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
             Visitez Notre Centre
@@ -1008,7 +1010,8 @@ export default function SchoolShowcase() {
                 <Image
                   src="/coderabbit-logo.svg"
                   alt="Coderabbit Digital Solutions"
-                  className="h-6 w-auto"
+                  width={40}
+                  height={40}
                 />
                 <span className="font-medium bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                   Coderabbit Digital Solutions
@@ -1018,7 +1021,7 @@ export default function SchoolShowcase() {
 
             <div className="flex items-center gap-4">
               <a
-                href="https://facebook.com"
+                href="https://facebook.com/coderabbitDS"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -1027,7 +1030,7 @@ export default function SchoolShowcase() {
                 </Button>
               </a>
               <a
-                href="https://linkedin.com/"
+                href="https://www.linkedin.com/in/rabichbibi/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -1036,7 +1039,7 @@ export default function SchoolShowcase() {
                 </Button>
               </a>
               <a
-                href="https://instagram.com/pascal.centre"
+                href="https://instagram.com/coderabbit_digital"
                 target="_blank"
                 rel="noopener noreferrer"
               >
