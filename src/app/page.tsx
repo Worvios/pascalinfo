@@ -53,10 +53,7 @@ import {
 import { Toggle } from "@/components/ui/toggle";
 import Autoplay from "embla-carousel-autoplay";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useForm } from "react-hook-form";
 // Add these imports at the top
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function SchoolShowcase() {
   // Dark mode toggle and language state
@@ -229,12 +226,7 @@ export default function SchoolShowcase() {
     };
   }, []);
 
-  // Define validation schema
-  const FormSchema = z.object({
-    email: z.string().email({
-      message: "Veuillez entrer une adresse email valide",
-    }),
-  });
+ 
 
   
 
