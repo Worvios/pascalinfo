@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import Image from "next/image";
 import screenfull from "screenfull";
+import NewsletterSubscription from "@/components/NewsletterSubscription";
 
 import {
   Moon,
@@ -942,41 +943,13 @@ export default function SchoolShowcase() {
 
             {/* Newsletter Subscription */}
             <div className="space-y-4 md:col-span-2">
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Mail className="h-5 w-5 text-primary" />
-                Restez Informé
-              </h3>
-
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="space-y-4"
-                >
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            placeholder="Votre email professionnel"
-                            className="bg-muted/10 rounded-full px-6 h-12"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button
-                    type="submit"
-                    className="w-full rounded-full h-12 bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity gap-2"
-                  >
-                    <Send className="h-4 w-4" />
-                    S&apos;abonner à la Newsletter
-                  </Button>
-                </form>
-              </Form>
+              <NewsletterSubscription
+                title="Restez Informé"
+                description="Recevez nos dernières actualités et offres exclusives"
+                buttonText="S'abonner"
+                placeholder="Votre email professionnel"
+                className="space-y-4"
+              />
               {/* Contact Info */}
               <div className="pt-6 mt-6 border-t border-muted/20">
                 <div className="space-y-2">
