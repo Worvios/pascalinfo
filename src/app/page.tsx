@@ -38,7 +38,6 @@ import {
   Mail,
   Phone,
   Clock,
-  Send,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -51,17 +50,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Input } from "@/components/ui/input";
 import { Toggle } from "@/components/ui/toggle";
 import Autoplay from "embla-carousel-autoplay";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 // Add these imports at the top
 import * as z from "zod";
@@ -245,19 +236,9 @@ export default function SchoolShowcase() {
     }),
   });
 
-  // Update form initialization
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      email: "",
-    },
-  });
+  
 
-  // Update submit handler
-  async function onSubmit(values: z.infer<typeof FormSchema>) {
-    // Handle form submission
-    console.log(values);
-  }
+  
   return (
     <div className={`font-sans ${darkMode ? "dark" : ""}`}>
       {/* Navbar */}
