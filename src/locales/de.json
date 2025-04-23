@@ -1,0 +1,181 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "about": "Über uns",
+    "programs": "Programme",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Gestalten Sie Ihre berufliche Zukunft",
+    "subtitle": "Exzellenzzentrum für Ausbildungs- und Bildungsdienstleistungen in Marokko",
+    "cta": "Entdecken Sie unsere Programme"
+  },
+  "video": {
+    "title": "Ein immersives",
+    "subtitle": "Bildungserlebnis",
+    "description": "Entdecken Sie unseren Campus durch eine fesselnde virtuelle Tour. Erkunden Sie unsere modernen Einrichtungen, Hightech-Labore und anregende Lernumgebung.",
+    "features": [
+      "Smarte Klassenzimmer",
+      "Spezialisierte Labore",
+      "Kollaborative Räume",
+      "Digitale Bibliothek"
+    ],
+    "playButton": "Tour starten"
+  },
+  "about": {
+    "title": "Über Pascal Info",
+    "description": "Seit 1996 hat sich Pascal Info zu einem Exzellenzzentrum für berufliche Ausbildung in Marokko entwickelt. Unser umfassender Ansatz kombiniert technische Expertise und persönliche Entwicklung, um unsere Studierenden auf die Herausforderungen des modernen Arbeitsmarktes vorzubereiten.",
+    "stats": {
+      "experience": "Jahre Erfahrung",
+      "services": "Bildungsdienstleistungen"
+    },
+    "learnMore": "Mehr erfahren",
+    "distinctions": {
+      "title": "Unsere Auszeichnungen",
+      "items": [
+        "Partnerschaften mit führenden Unternehmen in Marokko",
+        "Moderne Einrichtungen und modernste Ausstattung",
+        "Lehrpersonal bestehend aus erfahrenen Fachleuten",
+        "Außergewöhnliche Erfolgsquote unter unseren Absolventen"
+      ]
+    }
+  },
+  "programs": {
+    "title": "Unsere Programme",
+    "subtitle": "Der Exzellenz",
+    "certified": "Zertifiziertes Programm",
+    "learnMore": "Mehr erfahren",
+    "items": [
+      {
+        "title": "Bac+2 Diplom in Informatik",
+        "description": "Umfassende Ausbildung in Programmierung und Softwareentwicklung"
+      },
+      {
+        "title": "Bac+2 Diplom in Unternehmensführung",
+        "description": "Erwerben Sie wesentliche Fähigkeiten zur Führung und Entwicklung eines Unternehmens"
+      },
+      {
+        "title": "Nachhilfekurse",
+        "description": "Individuelle Betreuung für Studierende aller Niveaus"
+      },
+      {
+        "title": "Sprachkurse",
+        "description": "Lernen Sie Fremdsprachen mit modernen und effektiven Methoden"
+      },
+      {
+        "title": "Berufliche Weiterbildung",
+        "description": "Perfektionieren Sie Ihre Fähigkeiten oder ändern Sie Ihre Karriererichtung"
+      },
+      {
+        "title": "Übersetzung",
+        "description": "Professionelle Übersetzungsdienstleistungen in mehreren Sprachen"
+      },
+      {
+        "title": "Immatrikulation im Hochschulbereich",
+        "description": "Unterstützung bei der Immatrikulation in Marokko und im Ausland"
+      },
+      {
+        "title": "VIP und ausgestattete Räume",
+        "description": "Moderne Räume mit Videoprojektoren für ein optimales Lernerlebnis"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Erfahrungsberichte",
+    "quote": "Dank Pascal Info konnte ich praktische Fähigkeiten erwerben, die mir ermöglichten, schnell einen Job in meinem Bereich zu finden.",
+    "graduate": "Absolvent 2023"
+  },
+  "whyChooseUs": {
+    "title": "Warum Pascal Info wählen?",
+    "items": [
+      {
+        "title": "Experten-Trainer",
+        "description": "Erfahrene Fachleute und qualifizierte Pädagogen"
+      },
+      {
+        "title": "Moderne Ausstattung",
+        "description": "Computerräume und aktuelle Bildungsressourcen"
+      },
+      {
+        "title": "Individuelle Betreuung",
+        "description": "Einzelbetreuung für den Erfolg jedes Studierenden"
+      },
+      {
+        "title": "Bewährte Ergebnisse",
+        "description": "Ausgezeichnete berufliche Vermittlungsquoten für unsere Absolventen"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Besuchen Sie unser Zentrum",
+    "connect": "Kontaktieren Sie uns",
+    "description": "Treten Sie unserer dynamischen Gemeinschaft bei und bleiben Sie über die neuesten Nachrichten, besondere Veranstaltungen und Ausbildungsmöglichkeiten informiert.",
+    "address": "APPT 26 UND 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
+    "hours": "Mo-Sa: 9-21 Uhr",
+    "email": "contact@pascalinfo.ma",
+    "social": {
+      "follow": "Folgen Sie uns",
+      "connect": "Verbinden",
+      "explore": "Entdecken"
+    },
+    "cta": {
+      "title": "🚀 Vereinbaren Sie eine geführte Tour durch unsere professionellen Einrichtungen!",
+      "button": "Besuch vereinbaren"
+    }
+  },
+  "footer": {
+    "description": "Ihr Tor zur beruflichen Exzellenz seit 1996.",
+    "accredited": "Akkreditiert von",
+    "accreditations": "Akkreditierungen und Partnerschaften",
+    "quickLinks": {
+      "title": "Ausbildung",
+      "items": [
+        "Informatik",
+        "Unternehmensführung",
+        "Sprachkurse",
+        "Weiterbildung"
+      ]
+    },
+    "resources": {
+      "title": "Ressourcen",
+      "items": ["Datenschutzrichtlinie", "Nutzungsbedingungen", "FAQ", "Bildungsblog"]
+    },
+    "newsletter": {
+      "title": "Bleiben Sie informiert",
+      "description": "Erhalten Sie unsere neuesten Nachrichten und exklusive Angebote",
+      "button": "Abonnieren",
+      "placeholder": "Ihre berufliche E-Mail"
+    },
+    "contact": {
+      "phone": "+212 5XX XXX XXX",
+      "email": "contact@pascalinfo.ma",
+      "hours": "Mo-Fr: 8-21 Uhr"
+    },
+    "copyright": "© 2025 Pascal Info. Alle Rechte vorbehalten.",
+    "developed": "Entwickelt von"
+  },
+  "forms": {
+    "contact": {
+      "title": "Kontaktieren Sie Pascal Info",
+      "description": "Unser Team steht Ihnen zur Verfügung, um alle Ihre Fragen zu beantworten",
+      "name": "Ihr Name",
+      "email": "Ihre E-Mail",
+      "message": "Ihre Nachricht",
+      "send": "Nachricht senden",
+      "success": "Nachricht erfolgreich gesendet!",
+      "error": "Fehler beim Senden der Nachricht. Bitte versuchen Sie es erneut."
+    }
+  },
+  "floatingContactButton": {
+    "title": "Kontaktieren Sie uns",
+    "description": "Unser Team steht Ihnen für alle Fragen oder Unterstützung zur Verfügung.",
+    "button": "Kontakt aufnehmen"
+  },
+  "appointment": {
+    "formTitle": "Terminformular",
+    "scheduleButton": "Besuch vereinbaren",
+    "title": "Besuch vereinbaren",
+    "description": "Wählen Sie ein Datum und eine Uhrzeit für Ihren Besuch in unserem Zentrum",
+    "accessForm": "Zum Formular"
+  }
+}
