@@ -177,3 +177,26 @@ button {
 .program-card:hover::after {
   opacity: 0.3;
 }
+
+/* RTL support */
+[dir="rtl"] {
+  /* Basic direction changes */
+  direction: rtl;
+  text-align: right;
+}
+
+/* Specific fixes for your UI components */
+[dir="rtl"] .carousel-prev {
+  right: auto;
+  left: 2;
+}
+
+[dir="rtl"] .carousel-next {
+  left: auto;
+  right: 2;
+}
+
+/* Fix icon directions in RTL mode */
+[dir="rtl"] .icon-direction-sensitive {
+  transform: scaleX(-1);
+}
