@@ -3,6 +3,9 @@ import i18n from "i18next";
 import enTranslations from "../locales/en.json";
 import frTranslations from "../locales/fr.json";
 import arTranslations from "../locales/ar.json";
+import esTranslations from "../locales/es.json";
+import deTranslations from "../locales/de.json";
+import itTranslations from "../locales/it.json";
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -14,6 +17,15 @@ i18n.use(initReactI18next).init({
     },
     ar: {
       translation: arTranslations,
+    },
+    es: {
+      translation: esTranslations,
+    },
+    de: {
+      translation: deTranslations,
+    },
+    it: {
+      translation: itTranslations,
     },
   },
   lng: "fr", // default language
