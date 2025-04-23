@@ -5,36 +5,22 @@
     "programs": "Programs",
     "contact": "Contact"
   },
-  "languages": {
-    "fr": "Français",
-    "en": "English",
-    "ar": "العربية",
-    "es": "Español",
-    "it": "Italia",
-    "de": "Deutsch"
-  },
-  "theme": {
-    "light": "Light Mode",
-    "dark": "Dark Mode"
-  },
   "hero": {
     "title": "Shape Your Professional Future",
-    "subtitle": "Center of excellence in education and training services in Morocco",
+    "subtitle": "Center of excellence for training and educational services in Morocco",
     "cta": "Discover Our Programs"
   },
   "video": {
-    "title": "An Educational Experience",
-    "subtitle": "Immersive",
-    "description": "Discover our campus through a captivating virtual tour. Explore our modern facilities, high-tech laboratories, and stimulating learning environment.",
+    "title": "An Immersive",
+    "subtitle": "Educational Experience",
+    "description": "Discover our campus through an engaging virtual tour. Explore our modern facilities, high-tech laboratories, and stimulating learning environment.",
     "features": [
       "Smart classrooms",
       "Specialized laboratories",
       "Collaborative spaces",
       "Digital library"
     ],
-    "controls": {
-      "start": "Start Tour"
-    }
+    "playButton": "Start Tour"
   },
   "about": {
     "title": "About Pascal Info",
@@ -43,13 +29,13 @@
       "experience": "Years of Experience",
       "services": "Educational Services"
     },
-    "cta": "Learn More",
-    "modal": {
+    "learnMore": "Learn More",
+    "distinctions": {
       "title": "Our Distinctions",
       "items": [
         "Partnerships with leading companies in Morocco",
-        "Modern facilities and state-of-the-art equipment",
-        "Faculty composed of experienced professionals",
+        "Modern facilities and cutting-edge equipment",
+        "Teaching staff composed of experienced professionals",
         "Exceptional success rate among our graduates"
       ]
     }
@@ -57,120 +43,127 @@
   "programs": {
     "title": "Our Programs",
     "subtitle": "Of Excellence",
-    "tag": "Certified Program",
-    "cta": "Learn more",
+    "certified": "Certified Program",
+    "learnMore": "Learn More",
     "items": [
       {
-        "title": "Associate Degree in IT Development",
-        "text": "Comprehensive training in programming and software development"
+        "title": "Bac+2 Diploma in Computer Development",
+        "description": "Complete training in programming and software development"
       },
       {
-        "title": "Associate Degree in Business Management",
-        "text": "Acquire essential skills to manage and develop a business"
+        "title": "Bac+2 Diploma in Business Management",
+        "description": "Acquire essential skills to manage and develop a business"
       },
       {
         "title": "Support Courses",
-        "text": "Personalized support for students of all levels"
+        "description": "Personalized support for students of all levels"
       },
       {
         "title": "Language Courses",
-        "text": "Learn foreign languages with modern and effective methods"
+        "description": "Learn foreign languages with modern and effective methods"
       },
       {
-        "title": "Continuing Professional Education",
-        "text": "Improve your skills or reorient your career"
+        "title": "Professional Continuing Education",
+        "description": "Perfect your skills or redirect your career"
       },
       {
         "title": "Translation",
-        "text": "Professional translation services in multiple languages"
+        "description": "Professional translation services in multiple languages"
       },
       {
         "title": "Higher Education Registration",
-        "text": "Assistance with registrations in Morocco and abroad"
+        "description": "Assistance for registrations in Morocco and abroad"
       },
       {
         "title": "VIP and Equipped Rooms",
-        "text": "Modern spaces with video projectors for an optimal learning experience"
+        "description": "Modern spaces with video projectors for an optimal learning experience"
       }
     ]
   },
   "testimonials": {
     "title": "Testimonials",
-    "quote": "\"Thanks to Pascal Info, I was able to acquire practical skills that allowed me to quickly find employment in my field.\"",
-    "name": "Mehdi Tazi",
-    "role": "Graduate 2023"
+    "quote": "Thanks to Pascal Info, I was able to acquire practical skills that allowed me to quickly find a job in my field.",
+    "graduate": "Graduate 2023"
   },
-  "why_choose": {
+  "whyChooseUs": {
     "title": "Why Choose Pascal Info?",
     "items": [
       {
         "title": "Expert Trainers",
-        "text": "Experienced professionals and qualified educators"
+        "description": "Experienced professionals and qualified educators"
       },
       {
         "title": "Modern Equipment",
-        "text": "Computer rooms and up-to-date educational resources"
+        "description": "Computer rooms and up-to-date educational resources"
       },
       {
         "title": "Personalized Support",
-        "text": "Individual follow-up for the success of each student"
+        "description": "Individual follow-up for each student's success"
       },
       {
         "title": "Proven Results",
-        "text": "Excellent professional placement rates for our graduates"
+        "description": "Excellent professional placement rates for our graduates"
       }
     ]
   },
   "contact": {
     "title": "Visit Our Center",
-    "connect": {
-      "title": "Connect with Us",
-      "description": "Join our dynamic community and stay informed about the latest news, special events, and training opportunities."
-    },
-    "info": {
-      "address": "APPT 26 AND 28, IMM ASSALAM BLVD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
-      "hours": "Mon-Sat: 9am - 9pm",
-      "email": "contact@pascalinfo.ma"
-    },
+    "connect": "Connect with Us",
+    "description": "Join our dynamic community and stay informed about the latest news, special events, and training opportunities.",
+    "address": "APPT 26 AND 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
+    "hours": "Mon-Sat: 9am - 9pm",
+    "email": "contact@pascalinfo.ma",
     "social": {
-      "facebook": "Follow us",
-      "linkedin": "Connect",
-      "instagram": "Explore"
+      "follow": "Follow us",
+      "connect": "Connect",
+      "explore": "Explore"
     },
     "cta": {
-      "text": "🚀 Schedule a guided tour of our professional facilities!",
-      "button": "Book an Appointment"
+      "title": "🚀 Schedule a guided tour of our professional facilities!",
+      "button": "Schedule a Visit"
     }
   },
   "footer": {
-    "tagline": "Your gateway to professional excellence since 1996.",
-    "accreditation": "Accredited by",
-    "social_proof": "Accreditations and partnerships",
-    "sections": {
-      "formations": "Training",
-      "formation_links": [
-        "IT Development",
+    "description": "Your gateway to professional excellence since 1996.",
+    "accredited": "Accredited by",
+    "accreditations": "Accreditations and partnerships",
+    "quickLinks": {
+      "title": "Training",
+      "items": [
+        "Computer Development",
         "Business Management",
         "Language Courses",
         "Continuing Education"
-      ],
-      "resources": "Resources",
-      "resource_links": [
-        "Privacy Policy",
-        "Terms of Use",
-        "FAQ",
-        "Educational Blog"
-      ],
-      "newsletter": "Stay Informed",
-      "newsletter_placeholder": "Your professional email",
-      "newsletter_button": "Subscribe to Newsletter"
+      ]
     },
-    "contact_info": {
+    "resources": {
+      "title": "Resources",
+      "items": ["Privacy Policy", "Terms of Use", "FAQ", "Educational Blog"]
+    },
+    "newsletter": {
+      "title": "Stay Informed",
+      "description": "Receive our latest news and exclusive offers",
+      "button": "Subscribe",
+      "placeholder": "Your professional email"
+    },
+    "contact": {
       "phone": "+212 5XX XXX XXX",
       "email": "contact@pascalinfo.ma",
       "hours": "Mon-Fri: 8am - 9pm"
     },
     "copyright": "© 2025 Pascal Info. All rights reserved.",
-    "developed_by": "Developed by"
+    "developed": "Developed by"
+  },
+  "forms": {
+    "contact": {
+      "title": "Contact Pascal Info",
+      "description": "Our team is at your disposal to answer all your questions",
+      "name": "Your Name",
+      "email": "Your Email",
+      "message": "Your Message",
+      "send": "Send Message",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message. Please try again."
+    }
   }
 }

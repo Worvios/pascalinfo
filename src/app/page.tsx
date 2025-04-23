@@ -53,9 +53,16 @@ import {
 import { Toggle } from "@/components/ui/toggle";
 import Autoplay from "embla-carousel-autoplay";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import ContactForm from "@/components/ContactForm";
+import FloatingContactButton from "@/components/FloatingContactForm";
+import AppointmentDialog from "@/components/AppointmentDialog";
+import { useTranslation } from "react-i18next";
+import i18n from "@/utils/i18n";
 // Add these imports at the top
 
 export default function SchoolShowcase() {
+  const { t } = useTranslation();
+
   // Dark mode toggle and language state
   const [darkMode, setDarkMode] = useState(false);
   const [language, setLanguage] = useState("FR");
@@ -63,12 +70,12 @@ export default function SchoolShowcase() {
   // Memoized static navigation links
   const navLinks = useMemo(
     () => [
-      { name: "Acceuil", href: "#home" },
-      { name: "à propos", href: "#about" },
-      { name: "Programmes", href: "#programs" },
-      { name: "Contact", href: "#contact" },
+      { name: t("navigation.home"), href: "#home" },
+      { name: t("navigation.about"), href: "#about" },
+      { name: t("navigation.programs"), href: "#programs" },
+      { name: t("navigation.contact"), href: "#contact" },
     ],
-    []
+    [t]
   );
 
   // Memoized static media items
@@ -114,57 +121,57 @@ export default function SchoolShowcase() {
   const [programs, setPrograms] = useState(() => [
     {
       icon: Code,
-      title: "Diplôme Bac+2 en Développement Informatique",
-      text: "Formation complète en programmation et développement de logiciels",
+      title: t("programs.items.0.title"),
+      text: t("programs.items.0.description"),
       rotateX: 0,
       rotateY: 0,
     },
     {
       icon: ChefHat,
-      title: "Diplôme Bac+2 en Gestion d'Entreprise",
-      text: "Acquérez les compétences essentielles pour gérer et développer une entreprise",
+      title: t("programs.items.1.title"),
+      text: t("programs.items.1.description"),
       rotateX: 0,
       rotateY: 0,
     },
     {
       icon: BookOpen,
-      title: "Cours de Soutien",
-      text: "Accompagnement personnalisé pour les élèves de tous niveaux",
+      title: t("programs.items.2.title"),
+      text: t("programs.items.2.description"),
       rotateX: 0,
       rotateY: 0,
     },
     {
       icon: Globe,
-      title: "Cours de Langues",
-      text: "Apprenez les langues étrangères avec des méthodes modernes et efficaces",
+      title: t("programs.items.3.title"),
+      text: t("programs.items.3.description"),
       rotateX: 0,
       rotateY: 0,
     },
     {
       icon: GraduationCap,
-      title: "Formation Professionnelle Continue",
-      text: "Perfectionnez vos compétences ou réorientez votre carrière",
+      title: t("programs.items.4.title"),
+      text: t("programs.items.4.description"),
       rotateX: 0,
       rotateY: 0,
     },
     {
       icon: HeartHandshake,
-      title: "Traduction",
-      text: "Services de traduction professionnelle dans plusieurs langues",
+      title: t("programs.items.5.title"),
+      text: t("programs.items.5.description"),
       rotateX: 0,
       rotateY: 0,
     },
     {
       icon: Microscope,
-      title: "Inscription aux Écoles Supérieures",
-      text: "Assistance pour les inscriptions au Maroc et à l'étranger",
+      title: t("programs.items.6.title"),
+      text: t("programs.items.6.description"),
       rotateX: 0,
       rotateY: 0,
     },
     {
       icon: Trophy,
-      title: "Salles VIP et Équipées",
-      text: "Espaces modernes avec vidéoprojecteurs pour une expérience d'apprentissage optimale",
+      title: t("programs.items.7.title"),
+      text: t("programs.items.7.description"),
       rotateX: 0,
       rotateY: 0,
     },
@@ -218,6 +225,13 @@ export default function SchoolShowcase() {
     return () => video.removeEventListener("timeupdate", updateProgress);
   }, []);
 
+  // Initialize video state
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
+
   // Set cursor style on mount
   useEffect(() => {
     document.body.style.cursor = "default";
@@ -226,13 +240,11 @@ export default function SchoolShowcase() {
     };
   }, []);
 
- 
-
-  
-
-  
   return (
     <div className={`font-sans ${darkMode ? "dark" : ""}`}>
+      <div className="fixed bottom-4 right-4 z-50">
+        <NewsletterSubscription />
+      </div>
       {/* Navbar */}
       <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background/80 text-foreground shadow-sm backdrop-blur-md border-b border-muted">
         {/* Branding */}
@@ -275,7 +287,10 @@ export default function SchoolShowcase() {
               <Languages className="absolute left-3 h-4 w-4 text-muted-foreground" />
               <select
                 value={language}
-                onChange={(e) => setLanguage(e.target.value)}
+                onChange={(e) => {
+                  setLanguage(e.target.value);
+                  i18n.changeLanguage(e.target.value.toLowerCase());
+                }}
                 className="pl-10 pr-4 py-2 rounded-lg bg-background border text-sm appearance-none focus:ring-2 focus:ring-primary focus:border-transparent"
               >
                 <option value="FR">Français</option>
@@ -362,6 +377,7 @@ export default function SchoolShowcase() {
       </nav>
 
       {/* Hero Section */}
+      {/* Hero Section */}
       <section id="home" className="relative h-screen w-full">
         <Carousel
           plugins={[Autoplay({ delay: 3000 })]}
@@ -374,7 +390,7 @@ export default function SchoolShowcase() {
                 <div className="relative h-full w-full">
                   <Image
                     src={item.src}
-                    alt="Installations de Pascal Info"
+                    alt={t("hero.title")}
                     fill
                     className="object-cover brightness-75"
                     priority
@@ -383,11 +399,10 @@ export default function SchoolShowcase() {
                 <div className="absolute inset-0 flex items-center justify-center text-center">
                   <div className="max-w-4xl px-4 space-y-6">
                     <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-xl">
-                      Façonnez Votre Avenir Professionnel
+                      {t("hero.title")}
                     </h1>
                     <p className="text-lg md:text-xl text-muted-foreground font-light text-white/90">
-                      Centre de formation et de services éducatifs
-                      d&apos;excellence au Maroc
+                      {t("hero.subtitle")}
                     </p>
                     <Button
                       size="lg"
@@ -399,7 +414,7 @@ export default function SchoolShowcase() {
                         }
                       }}
                     >
-                      Découvrir Nos Programmes
+                      {t("hero.cta")}
                     </Button>
                   </div>
                 </div>
@@ -412,27 +427,26 @@ export default function SchoolShowcase() {
       {/* Video Showcase Section */}
       <section className="relative py-20 px-4 md:px-8 bg-background">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          {/* Content Section */}
           <div className="space-y-8 md:pr-12">
             <h2 className="text-4xl md:text-5xl font-bold">
               <span className="bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent">
-                Une Expérience Éducative
+                {t("video.title")}
               </span>
               <br />
-              <span className="text-foreground">Immersive</span>
+              <span className="text-foreground">{t("video.subtitle")}</span>
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Découvrez notre campus à travers une visite virtuelle captivante.
-              Explorez nos installations modernes, nos laboratoires high-tech,
-              et notre environnement d&apos;apprentissage stimulant.
+              {t("video.description")}
             </p>
             <ul className="space-y-4">
-              {[
-                "Salles de classe intelligentes",
-                "Laboratoires spécialisés",
-                "Espaces collaboratifs",
-                "Bibliothèque numérique",
-              ].map((item, index) => (
+              {(Array.isArray(
+                t("video.features", { returnObjects: true }) as unknown
+              )
+                ? (t("video.features", {
+                    returnObjects: true,
+                  }) as unknown as string[])
+                : []
+              ).map((item: string, index: number) => (
                 <li key={index} className="flex items-center gap-3">
                   <div className="h-2 w-2 bg-primary rounded-full" />
                   <span className="text-muted-foreground">{item}</span>
@@ -448,8 +462,11 @@ export default function SchoolShowcase() {
               className="w-full aspect-video object-cover cursor-pointer"
               poster="/video-poster.png"
               onClick={togglePlay}
+              playsInline // Add this
+              preload="metadata" // Add this
             >
               <source src="/videopascal.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
             </video>
             {/* Video Controls */}
             <div
@@ -496,6 +513,7 @@ export default function SchoolShowcase() {
               </Button>
             </div>
             {/* Initial Play Button */}
+            {/* Initial Play Button */}
             {!isPlaying && (
               <div className="absolute inset-0 flex items-center justify-center bg-background/10 backdrop-blur-sm">
                 <Button
@@ -504,7 +522,7 @@ export default function SchoolShowcase() {
                   onClick={togglePlay}
                 >
                   <Play className="h-6 w-6" />
-                  Démarrer la Visite
+                  {t("video.playButton")}
                 </Button>
               </div>
             )}
@@ -517,44 +535,42 @@ export default function SchoolShowcase() {
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-              À Propos de Pascal Info
+              {t("about.title")}
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Établi en 1996, Pascal Info est devenu un centre d&apos;excellence
-              en matière de formation professionnelle au Maroc. Notre approche
-              globale combine l&apos;expertise technique et le développement
-              personnel pour préparer nos étudiants aux défis du marché du
-              travail moderne.
+              {t("about.description")}
             </p>
             <div className="grid grid-cols-2 gap-4">
               <div className="p-4 rounded-xl bg-background border">
                 <h3 className="text-2xl font-bold text-primary">25+</h3>
                 <p className="text-muted-foreground">
-                  Années d&apos;Expérience
+                  {t("about.stats.experience")}
                 </p>
               </div>
               <div className="p-4 rounded-xl bg-background border">
                 <h3 className="text-2xl font-bold text-primary">10+</h3>
-                <p className="text-muted-foreground">Services Éducatifs</p>
+                <p className="text-muted-foreground">
+                  {t("about.stats.services")}
+                </p>
               </div>
             </div>
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="outline" className="rounded-full px-8">
-                  En Savoir Plus
+                  {t("about.learnMore")}
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-2xl p-8">
                 <div className="space-y-4">
                   <Trophy className="h-12 w-12 text-primary" />
-                  <h3 className="text-2xl font-bold">Nos Distinctions</h3>
+                  <h3 className="text-2xl font-bold">
+                    {t("about.distinctions.title")}
+                  </h3>
                   <ul className="space-y-2 list-disc pl-6 text-muted-foreground">
-                    <li>Partenariats avec des entreprises leaders au Maroc</li>
-                    <li>Installations modernes et équipement de pointe</li>
-                    <li>
-                      Corps enseignant composé de professionnels expérimentés
-                    </li>
-                    <li>Taux de réussite exceptionnel parmi nos diplômés</li>
+                    <li>{t("about.distinctions.items.0")}</li>
+                    <li>{t("about.distinctions.items.1")}</li>
+                    <li>{t("about.distinctions.items.2")}</li>
+                    <li>{t("about.distinctions.items.3")}</li>
                   </ul>
                 </div>
               </DialogContent>
@@ -579,16 +595,18 @@ export default function SchoolShowcase() {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
             <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-              Nos Programmes
+              {t("programs.title")}
             </span>
             <br />
-            <span className="text-foreground">D&apos;excellence</span>
+            <span className="text-foreground">{t("programs.subtitle")}</span>
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
-            {/* Optimized background element */}
+            {/* Fond optimisé */}
             <div className="absolute inset-0 opacity-10 pointer-events-none">
               <div className="absolute w-[300px] h-[300px] bg-gradient-to-r from-primary/30 to-purple-600/30 blur-[80px] animate-float will-change-transform" />
             </div>
+
+            {/* Cartes des programmes */}
             {programs.map((program, index) => (
               <div
                 key={index}
@@ -596,16 +614,17 @@ export default function SchoolShowcase() {
                 onMouseMove={(e) => handleCardMove(e, index)}
                 onMouseLeave={() => handleCardLeave(index)}
               >
-                {/* Simplified hover effect layer */}
+                {/* Couche d'effet au survol */}
                 <div className="absolute inset-0 rounded-2xl bg-primary/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none" />
-                {/* Card content */}
+
+                {/* Contenu de la carte */}
                 <div className="relative space-y-6">
                   <div className="flex items-center gap-4">
                     <div className="program-icon bg-gradient-to-br from-primary to-purple-600 p-3 rounded-lg will-change-transform">
                       <program.icon className="h-6 w-6 text-white" />
                     </div>
                     <span className="text-sm font-medium text-primary">
-                      Programme Certifié
+                      {t("programs.certified")}
                     </span>
                   </div>
                   <h3 className="text-xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
@@ -614,14 +633,15 @@ export default function SchoolShowcase() {
                   <p className="text-muted-foreground leading-relaxed">
                     {program.text}
                   </p>
-                  {/* Button animation */}
+
+                  {/* Bouton avec animation */}
                   <div className="mt-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <Button
                       variant="outline"
                       className="rounded-full gap-2 w-full hover:bg-primary/10 border-muted/20"
                     >
                       <BookOpen className="h-4 w-4" />
-                      En savoir plus
+                      {t("programs.learnMore")}
                       <ArrowRight className="h-4 w-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                     </Button>
                   </div>
@@ -631,12 +651,11 @@ export default function SchoolShowcase() {
           </div>
         </div>
       </section>
-
       {/* Testimonials */}
       <section className="py-20 px-4 md:px-8 bg-muted/10">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Témoignages
+            {t("testimonials.title")}
           </h2>
           <Carousel className="w-full">
             <CarouselContent>
@@ -649,14 +668,12 @@ export default function SchoolShowcase() {
                         <AvatarFallback>U{i}</AvatarFallback>
                       </Avatar>
                       <p className="text-lg text-muted-foreground italic">
-                        &quot;Grâce à Pascal Info, j&apos;ai pu acquérir des
-                        compétences pratiques qui m&apos;ont permis de trouver
-                        rapidement un emploi dans mon domaine.&quot;
+                        {t("testimonials.quote")}
                       </p>
                       <div>
                         <p className="font-semibold">Mehdi Tazi</p>
                         <p className="text-sm text-muted-foreground">
-                          Diplomé 2023
+                          {t("testimonials.graduate")}
                         </p>
                       </div>
                     </div>
@@ -674,7 +691,7 @@ export default function SchoolShowcase() {
       <section className="py-20 px-4 md:px-8 bg-background">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Pourquoi Choisir Pascal Info?
+            {t("whyChooseUs.title")}
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
@@ -711,6 +728,9 @@ export default function SchoolShowcase() {
               </div>
             ))}
           </div>
+          {/*<div className="mt-12 text-center">
+            <ContactForm />
+          </div> */}
         </div>
       </section>
 
@@ -718,7 +738,7 @@ export default function SchoolShowcase() {
       <section id="contact" className="py-20 px-4 md:px-8 bg-muted/10">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            Visitez Notre Centre
+            {t("contact.title")}
           </h2>
           <div className="grid md:grid-cols-2 gap-12 items-stretch">
             {/* Map Section */}
@@ -737,30 +757,25 @@ export default function SchoolShowcase() {
               <div className="space-y-8">
                 <div>
                   <h3 className="text-2xl font-bold mb-4">
-                    Connectez-vous avec Nous
+                    {t("contact.connect")}
                   </h3>
                   <p className="text-muted-foreground mb-6">
-                    Rejoignez notre communauté dynamique et restez informé des
-                    dernières actualités, événements spéciaux, et opportunités
-                    de formation.
+                    {t("contact.description")}
                   </p>
                 </div>
                 {/* Contact Info */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <GraduationCap className="h-5 w-5 text-primary" />
-                    <span className="text-sm">
-                      APPT 26 ET 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni
-                      Mellal 23000
-                    </span>
+                    <span className="text-sm">{t("contact.address")}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Microscope className="h-5 w-5 text-primary" />
-                    <span className="text-sm">Lun-Sam: 9h - 21h</span>
+                    <span className="text-sm"> {t("contact.hours")}</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <HeartHandshake className="h-5 w-5 text-primary" />
-                    <span className="text-sm">contact@pascalinfo.ma</span>
+                    <span className="text-sm"> {t("contact.email")}</span>
                   </div>
                 </div>
                 {/* Social Media Buttons */}
@@ -775,7 +790,7 @@ export default function SchoolShowcase() {
                       className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
                     >
                       <Facebook className="h-5 w-5 text-blue-600" />
-                      <span>Suivez-nous</span>
+                      <span> {t("contact.social.follow")}</span>
                     </Button>
                   </a>
                   <a
@@ -788,11 +803,11 @@ export default function SchoolShowcase() {
                       className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
                     >
                       <Linkedin className="h-5 w-5 text-blue-500" />
-                      <span>Connectez</span>
+                      <span>{t("contact.social.connect")}</span>
                     </Button>
                   </a>
                   <a
-                    href="https://instagram.com/pascal.centre"
+                    href="https://instagram.com/centre_pascal_info"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -801,7 +816,7 @@ export default function SchoolShowcase() {
                       className="rounded-full gap-2 px-6 hover:bg-primary/10 transition-all hover:scale-105"
                     >
                       <Instagram className="h-5 w-5 text-pink-600" />
-                      <span>Explorez</span>
+                      <span>{t("contact.social.explore")}</span>
                     </Button>
                   </a>
                 </div>
@@ -809,18 +824,18 @@ export default function SchoolShowcase() {
                 {/* Call to Action */}
                 <div className="mt-8 p-4 bg-primary/5 rounded-xl border border-primary/20">
                   <p className="text-sm text-muted-foreground">
-                    🚀 Programmez une visite guidée de nos installations
-                    professionnelles!
+                    {t("contact.cta.title")}
                   </p>
-                  <Button className="mt-4 w-full" variant="secondary">
-                    Prendre Rendez-vous
-                  </Button>
+
+                  <AppointmentDialog />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+      <FloatingContactButton />
+
       {/* Footer */}
       <footer className="bg-background border-t mt-24 relative">
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary opacity-20" />
@@ -838,10 +853,9 @@ export default function SchoolShowcase() {
                 </span>
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Votre passerelle vers l&apos;excellence professionnelle depuis
-                1996.
+                {t("footer.description")}
                 <br />
-                Agréé par
+                {t("footer.accredited")}{" "}
               </p>
 
               {/* Social Proof */}
@@ -857,7 +871,7 @@ export default function SchoolShowcase() {
                   </Avatar>
                 </div>
                 <span className="text-xs text-muted-foreground">
-                  Accréditations et partenariats
+                  {t("footer.accreditations")}{" "}
                 </span>
               </div>
             </div>
@@ -866,15 +880,17 @@ export default function SchoolShowcase() {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold flex items-center gap-2">
                 <BookOpen className="h-5 w-5 text-primary" />
-                Formations
+                {t("footer.quickLinks.title")}
               </h3>
               <ul className="space-y-3">
-                {[
-                  "Développement Informatique",
-                  "Gestion d'Entreprise",
-                  "Cours de Langues",
-                  "Formation Continue",
-                ].map((link) => (
+                {(Array.isArray(
+                  t("footer.quickLinks.items", { returnObjects: true })
+                )
+                  ? (t("footer.quickLinks.items", {
+                      returnObjects: true,
+                    }) as string[])
+                  : []
+                ).map((link: string) => (
                   <li key={link}>
                     <a
                       href="#"
@@ -892,15 +908,17 @@ export default function SchoolShowcase() {
             <div className="space-y-4">
               <h3 className="text-lg font-semibold flex items-center gap-2">
                 <Scale className="h-5 w-5 text-primary" />
-                Ressources
+                {t("footer.resources.title")}
               </h3>
               <ul className="space-y-3">
-                {[
-                  "Politique de Confidentialité",
-                  "Conditions d'Utilisation",
-                  "FAQ",
-                  "Blog Éducatif",
-                ].map((link) => (
+                {(Array.isArray(
+                  t("footer.resources.items", { returnObjects: true })
+                )
+                  ? (t("footer.resources.items", {
+                      returnObjects: true,
+                    }) as string[])
+                  : []
+                ).map((link: string) => (
                   <li key={link}>
                     <a
                       href="#"
@@ -916,27 +934,27 @@ export default function SchoolShowcase() {
 
             {/* Newsletter Subscription */}
             <div className="space-y-4 md:col-span-2">
-              <NewsletterSubscription
-                title="Restez Informé"
-                description="Recevez nos dernières actualités et offres exclusives"
-                buttonText="S'abonner"
-                placeholder="Votre email professionnel"
-                className="space-y-4"
-              />
+              {/*<NewsletterSubscription
+          title={t("footer.newsletter.title")}
+          description={t("footer.newsletter.description")}
+          buttonText={t("footer.newsletter.button")}
+          placeholder={t("footer.newsletter.placeholder")}
+          className="space-y-4"
+        />*/}
               {/* Contact Info */}
               <div className="pt-6 mt-6 border-t border-muted/20">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Phone className="h-4 w-4" />
-                    +212 5XX XXX XXX
+                    {t("footer.contact.phone")}
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Mail className="h-4 w-4" />
-                    contact@pascalinfo.ma
+                    {t("footer.contact.email")}
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Clock className="h-4 w-4" />
-                    Lun-Ven: 8h - 21h
+                    {t("footer.contact.hours")}
                   </div>
                 </div>
               </div>
@@ -946,12 +964,12 @@ export default function SchoolShowcase() {
           {/* Bottom Footer */}
           <div className="border-t border-muted/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-sm text-muted-foreground text-center">
-              © 2025 Pascal Info. Tous droits réservés.
+              {t("footer.copyright")}
             </div>
 
             <div className="flex items-center gap-4">
               <span className="text-sm text-muted-foreground">
-                Développé par
+                {t("footer.developed")}
               </span>
               <a
                 href="https://coderabbit.de"
