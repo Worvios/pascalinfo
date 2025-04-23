@@ -56,7 +56,6 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import FloatingContactButton from "@/components/FloatingContactForm";
 import AppointmentDialog from "@/components/AppointmentDialog";
 import { useTranslation } from "react-i18next";
-import i18n from "@/utils/i18n";
 // Add these imports at the top
 
 export default function SchoolShowcase() {
