@@ -1,0 +1,181 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "Chi Siamo",
+    "programs": "Programmi",
+    "contact": "Contatti"
+  },
+  "hero": {
+    "title": "Plasma il Tuo Futuro Professionale",
+    "subtitle": "Centro di eccellenza per servizi di formazione e istruzione in Marocco",
+    "cta": "Scopri i Nostri Programmi"
+  },
+  "video": {
+    "title": "Un'Esperienza",
+    "subtitle": "Educativa Immersiva",
+    "description": "Scopri il nostro campus attraverso un tour virtuale coinvolgente. Esplora le nostre strutture moderne, laboratori high-tech e ambiente di apprendimento stimolante.",
+    "features": [
+      "Aule intelligenti",
+      "Laboratori specializzati",
+      "Spazi collaborativi",
+      "Biblioteca digitale"
+    ],
+    "playButton": "Inizia il Tour"
+  },
+  "about": {
+    "title": "Su Pascal Info",
+    "description": "Fondato nel 1996, Pascal Info è diventato un centro di eccellenza nella formazione professionale in Marocco. Il nostro approccio completo combina competenza tecnica e sviluppo personale per preparare i nostri studenti alle sfide del moderno mercato del lavoro.",
+    "stats": {
+      "experience": "Anni di Esperienza",
+      "services": "Servizi Educativi"
+    },
+    "learnMore": "Scopri di Più",
+    "distinctions": {
+      "title": "Le Nostre Distinzioni",
+      "items": [
+        "Partnership con aziende leader in Marocco",
+        "Strutture moderne e attrezzature all'avanguardia",
+        "Corpo docente composto da professionisti esperti",
+        "Tasso di successo eccezionale tra i nostri laureati"
+      ]
+    }
+  },
+  "programs": {
+    "title": "I Nostri Programmi",
+    "subtitle": "Di Eccellenza",
+    "certified": "Programma Certificato",
+    "learnMore": "Scopri di Più",
+    "items": [
+      {
+        "title": "Diploma Bac+2 in Sviluppo Informatico",
+        "description": "Formazione completa in programmazione e sviluppo software"
+      },
+      {
+        "title": "Diploma Bac+2 in Gestione Aziendale",
+        "description": "Acquisisci competenze essenziali per gestire e sviluppare un'azienda"
+      },
+      {
+        "title": "Corsi di Sostegno",
+        "description": "Supporto personalizzato per studenti di tutti i livelli"
+      },
+      {
+        "title": "Corsi di Lingue",
+        "description": "Impara lingue straniere con metodi moderni ed efficaci"
+      },
+      {
+        "title": "Formazione Continua Professionale",
+        "description": "Perfeziona le tue competenze o reindirizza la tua carriera"
+      },
+      {
+        "title": "Traduzione",
+        "description": "Servizi di traduzione professionale in più lingue"
+      },
+      {
+        "title": "Iscrizione all'Istruzione Superiore",
+        "description": "Assistenza per iscrizioni in Marocco e all'estero"
+      },
+      {
+        "title": "Sale VIP e Attrezzate",
+        "description": "Spazi moderni con videoproiettori per un'esperienza di apprendimento ottimale"
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Testimonianze",
+    "quote": "Grazie a Pascal Info, ho potuto acquisire competenze pratiche che mi hanno permesso di trovare rapidamente un lavoro nel mio settore.",
+    "graduate": "Laureato 2023"
+  },
+  "whyChooseUs": {
+    "title": "Perché Scegliere Pascal Info?",
+    "items": [
+      {
+        "title": "Formatori Esperti",
+        "description": "Professionisti esperti ed educatori qualificati"
+      },
+      {
+        "title": "Attrezzature Moderne",
+        "description": "Aule informatiche e risorse educative aggiornate"
+      },
+      {
+        "title": "Supporto Personalizzato",
+        "description": "Monitoraggio individuale per il successo di ogni studente"
+      },
+      {
+        "title": "Risultati Comprovati",
+        "description": "Eccellenti tassi di collocamento professionale per i nostri laureati"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Visita il Nostro Centro",
+    "connect": "Connettiti con Noi",
+    "description": "Unisciti alla nostra comunità dinamica e rimani informato sulle ultime novità, eventi speciali e opportunità di formazione.",
+    "address": "APPT 26 E 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
+    "hours": "Lun-Sab: 9-21",
+    "email": "contact@pascalinfo.ma",
+    "social": {
+      "follow": "Seguici",
+      "connect": "Connetti",
+      "explore": "Esplora"
+    },
+    "cta": {
+      "title": "🚀 Prenota un tour guidato delle nostre strutture professionali!",
+      "button": "Prenota una Visita"
+    }
+  },
+  "footer": {
+    "description": "La tua porta d'accesso all'eccellenza professionale dal 1996.",
+    "accredited": "Accreditato da",
+    "accreditations": "Accreditamenti e partnership",
+    "quickLinks": {
+      "title": "Formazione",
+      "items": [
+        "Sviluppo Informatico",
+        "Gestione Aziendale",
+        "Corsi di Lingue",
+        "Formazione Continua"
+      ]
+    },
+    "resources": {
+      "title": "Risorse",
+      "items": ["Privacy Policy", "Termini di Utilizzo", "FAQ", "Blog Educativo"]
+    },
+    "newsletter": {
+      "title": "Resta Aggiornato",
+      "description": "Ricevi le nostre ultime novità e offerte esclusive",
+      "button": "Iscriviti",
+      "placeholder": "La tua email professionale"
+    },
+    "contact": {
+      "phone": "+212 5XX XXX XXX",
+      "email": "contact@pascalinfo.ma",
+      "hours": "Lun-Ven: 8-21"
+    },
+    "copyright": "© 2025 Pascal Info. Tutti i diritti riservati.",
+    "developed": "Sviluppato da"
+  },
+  "forms": {
+    "contact": {
+      "title": "Contatta Pascal Info",
+      "description": "Il nostro team è a tua disposizione per rispondere a tutte le tue domande",
+      "name": "Il Tuo Nome",
+      "email": "La Tua Email",
+      "message": "Il Tuo Messaggio",
+      "send": "Invia Messaggio",
+      "success": "Messaggio inviato con successo!",
+      "error": "Errore nell'invio del messaggio. Per favore riprova."
+    }
+  },
+  "floatingContactButton": {
+    "title": "Contattaci",
+    "description": "Il nostro team è qui per assisterti con qualsiasi domanda o supporto di cui potresti aver bisogno.",
+    "button": "Mettiti in Contatto"
+  },
+  "appointment": {
+    "formTitle": "Modulo di Appuntamento",
+    "scheduleButton": "Prenota una Visita",
+    "title": "Prenota una Visita",
+    "description": "Scegli una data e un orario per visitare il nostro centro",
+    "accessForm": "Accedi al Modulo"
+  }
+}
