@@ -165,5 +165,17 @@
       "success": "Message sent successfully!",
       "error": "Failed to send message. Please try again."
     }
+  },
+  "floatingContactButton": {
+    "title": "Contact Us",
+    "description": "Our team is here to assist you with any inquiries or support you may need.",
+    "button": "Get in Touch"
+  },
+  "appointment": {
+    "formTitle": "Appointment Form",
+    "scheduleButton": "Schedule a Visit",
+    "title": "Schedule a Visit",
+    "description": "Choose a date and time to visit our center",
+    "accessForm": "Access the Form"
   }
 }

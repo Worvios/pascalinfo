@@ -11,7 +11,6 @@ import { useTranslation } from "react-i18next";
 
 const AppointmentDialog = () => {
   const { t } = useTranslation();
-
   const [isOpen, setIsOpen] = useState(false);
 
   const openFormInPopup = () => {
@@ -22,10 +21,10 @@ const AppointmentDialog = () => {
 
     window.open(
       "https://forms.gle/s4SpBYoR5NycTCTv7",
-      "Appointment Form",
+      t("appointment.formTitle"),
       `width=${width},height=${height},left=${left},top=${top},scrollbars=yes`
     );
-    setIsOpen(false); // Close the dialog after opening the form
+    setIsOpen(false);
   };
 
   return (
@@ -33,25 +32,25 @@ const AppointmentDialog = () => {
       <DialogTrigger asChild>
         <Button className="mt-4 w-full" variant="secondary">
           <Calendar className="h-5 w-5 mr-2" />
-          {t("contact.cta.button")}
+          {t("appointment.scheduleButton")}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-md p-6">
         <DialogTitle className="text-xl font-bold text-center mb-2">
           <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            {t("contact.cta.button")}
+            {t("appointment.title")}
           </span>
         </DialogTitle>
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground text-center">
-            Choisissez une date et une heure pour visiter notre centre
+            {t("appointment.description")}
           </p>
           <Button
             onClick={openFormInPopup}
             className="w-full rounded-full bg-gradient-to-r from-primary to-secondary hover:opacity-90"
           >
             <ExternalLink className="h-5 w-5 mr-2" />
-            Accéder au Formulaire
+            {t("appointment.accessForm")}
           </Button>
         </div>
       </DialogContent>

@@ -23,18 +23,17 @@ const ContactForm = () => {
 
     try {
       await emailjs.send(
-        "service_hx411ig", // Replace with your EmailJS service ID
-        "template_4fls68f", // Replace with your EmailJS template ID
+        "service_hx411ig",
+        "template_4fls68f",
         formData,
-        "_UctoYFHrnLllowxl" // Replace with your EmailJS public key
+        "_UctoYFHrnLllowxl"
       );
 
-      setStatus("Message sent successfully!");
+      setStatus(t("forms.contact.success"));
       setFormData({ name: "", email: "", message: "" });
     } catch (err) {
-      // Changed 'error' to 'err' and use it in the error message
-      setStatus("Failed to send message. Please try again.");
-      console.error("Email send error:", err);
+      setStatus(t("forms.contact.error"));
+      console.error(t("forms.contact.errorLog"), err);
     } finally {
       setLoading(false);
     }
@@ -97,12 +96,12 @@ const ContactForm = () => {
       {status && (
         <p
           className={`text-sm text-center ${
-            status.includes("success") ? "text-green-500" : "text-red-500"
+            status === t("forms.contact.success")
+              ? "text-green-500"
+              : "text-red-500"
           }`}
         >
-          {status === "Message sent successfully!"
-            ? t("forms.contact.success")
-            : t("forms.contact.error")}
+          {status}
         </p>
       )}
     </form>

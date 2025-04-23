@@ -606,7 +606,12 @@ export default function SchoolShowcase() {
             </div>
 
             {/* Cartes des programmes */}
-            {programs.map((program, index) => (
+            {(
+              t("programs.items", { returnObjects: true }) as {
+                title: string;
+                description: string;
+              }[]
+            ).map((program, index) => (
               <div
                 key={index}
                 className="program-card relative bg-background border border-muted/20 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 will-change-transform"
@@ -620,7 +625,10 @@ export default function SchoolShowcase() {
                 <div className="relative space-y-6">
                   <div className="flex items-center gap-4">
                     <div className="program-icon bg-gradient-to-br from-primary to-purple-600 p-3 rounded-lg will-change-transform">
-                      <program.icon className="h-6 w-6 text-white" />
+                      {programs[index]?.icon &&
+                        React.createElement(programs[index].icon, {
+                          className: "h-6 w-6 text-white",
+                        })}
                     </div>
                     <span className="text-sm font-medium text-primary">
                       {t("programs.certified")}
@@ -630,7 +638,7 @@ export default function SchoolShowcase() {
                     {program.title}
                   </h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    {program.text}
+                    {program.description}
                   </p>
 
                   {/* Bouton avec animation */}
@@ -693,43 +701,35 @@ export default function SchoolShowcase() {
             {t("whyChooseUs.title")}
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: GraduationCap,
-                title: "Formateurs Experts",
-                text: "Professionnels expérimentés et pédagogues qualifiés",
-              },
-              {
-                icon: Microscope,
-                title: "Équipements Modernes",
-                text: "Salles informatiques et ressources pédagogiques à jour",
-              },
-              {
-                icon: HeartHandshake,
-                title: "Accompagnement Personnalisé",
-                text: "Suivi individuel pour la réussite de chaque étudiant",
-              },
-              {
-                icon: Trophy,
-                title: "Résultats Prouvés",
-                text: "Excellents taux de placement professionnel pour nos diplômés",
-              },
-            ].map((item, index) => (
+            {(Array.isArray(t("whyChooseUs.items", { returnObjects: true }))
+              ? (t("whyChooseUs.items", {
+                  returnObjects: true,
+                }) as { title: string; description: string }[])
+              : []
+            ).map((item, index) => (
               <div
                 key={index}
                 className="group bg-muted/10 border rounded-xl p-6 hover:shadow-lg transition-all"
               >
                 <div className="mb-4">
-                  <item.icon className="h-8 w-8 text-primary group-hover:animate-bounce" />
+                  {index === 0 && (
+                    <GraduationCap className="h-8 w-8 text-primary group-hover:animate-bounce" />
+                  )}
+                  {index === 1 && (
+                    <Microscope className="h-8 w-8 text-primary group-hover:animate-bounce" />
+                  )}
+                  {index === 2 && (
+                    <HeartHandshake className="h-8 w-8 text-primary group-hover:animate-bounce" />
+                  )}
+                  {index === 3 && (
+                    <Trophy className="h-8 w-8 text-primary group-hover:animate-bounce" />
+                  )}
                 </div>
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.text}</p>
+                <p className="text-muted-foreground">{item.description}</p>
               </div>
             ))}
           </div>
-          {/*<div className="mt-12 text-center">
-            <ContactForm />
-          </div> */}
         </div>
       </section>
 

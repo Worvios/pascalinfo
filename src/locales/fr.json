@@ -1,30 +1,30 @@
 {
   "navigation": {
     "home": "Accueil",
-    "about": "À propos",
+    "about": "À Propos",
     "programs": "Programmes",
     "contact": "Contact"
   },
   "hero": {
     "title": "Façonnez Votre Avenir Professionnel",
     "subtitle": "Centre d'excellence pour la formation et les services éducatifs au Maroc",
-    "cta": "Découvrir Nos Programmes"
+    "cta": "Découvrez Nos Programmes"
   },
   "video": {
     "title": "Une Expérience",
     "subtitle": "Éducative Immersive",
-    "description": "Découvrez notre campus à travers une visite virtuelle captivante. Explorez nos installations modernes, nos laboratoires de haute technologie et notre environnement d'apprentissage stimulant.",
+    "description": "Découvrez notre campus à travers une visite virtuelle captivante. Explorez nos installations modernes, nos laboratoires high-tech et notre environnement d'apprentissage stimulant.",
     "features": [
       "Salles de classe intelligentes",
       "Laboratoires spécialisés",
       "Espaces collaboratifs",
       "Bibliothèque numérique"
     ],
-    "playButton": "Démarrer la Visite"
+    "playButton": "Commencer la Visite"
   },
   "about": {
     "title": "À Propos de Pascal Info",
-    "description": "Établi en 1996, Pascal Info est devenu un centre d'excellence en formation professionnelle au Maroc. Notre approche globale combine expertise technique et développement personnel pour préparer nos étudiants aux défis du marché du travail moderne.",
+    "description": "Fondé en 1996, Pascal Info est devenu un centre d'excellence en formation professionnelle au Maroc. Notre approche complète combine expertise technique et développement personnel pour préparer nos étudiants aux défis du marché du travail moderne.",
     "stats": {
       "experience": "Années d'Expérience",
       "services": "Services Éducatifs"
@@ -33,7 +33,7 @@
     "distinctions": {
       "title": "Nos Distinctions",
       "items": [
-        "Partenariats avec des entreprises leaders au Maroc",
+        "Partenariats avec les entreprises leaders au Maroc",
         "Installations modernes et équipements de pointe",
         "Corps enseignant composé de professionnels expérimentés",
         "Taux de réussite exceptionnel parmi nos diplômés"
@@ -60,7 +60,7 @@
       },
       {
         "title": "Cours de Langues",
-        "description": "Apprenez des langues étrangères avec des méthodes modernes et efficaces"
+        "description": "Apprenez les langues étrangères avec des méthodes modernes et efficaces"
       },
       {
         "title": "Formation Continue Professionnelle",
@@ -71,7 +71,7 @@
         "description": "Services de traduction professionnelle en plusieurs langues"
       },
       {
-        "title": "Inscription à l'Enseignement Supérieur",
+        "title": "Inscription Enseignement Supérieur",
         "description": "Assistance pour les inscriptions au Maroc et à l'étranger"
       },
       {
@@ -102,7 +102,7 @@
       },
       {
         "title": "Résultats Prouvés",
-        "description": "Excellents taux d'insertion professionnelle pour nos diplômés"
+        "description": "Excellent taux de placement professionnel pour nos diplômés"
       }
     ]
   },
@@ -115,8 +115,8 @@
     "email": "contact@pascalinfo.ma",
     "social": {
       "follow": "Suivez-nous",
-      "connect": "Se connecter",
-      "explore": "Explorer"
+      "connect": "Connectez-vous",
+      "explore": "Explorez"
     },
     "cta": {
       "title": "🚀 Planifiez une visite guidée de nos installations professionnelles !",
@@ -170,5 +170,17 @@
       "success": "Message envoyé avec succès !",
       "error": "Échec de l'envoi du message. Veuillez réessayer."
     }
+  },
+  "floatingContactButton": {
+    "title": "Contactez-nous",
+    "description": "Notre équipe est là pour vous aider avec toutes vos questions ou besoins de support.",
+    "button": "Nous Contacter"
+  },
+  "appointment": {
+    "formTitle": "Formulaire de Rendez-vous",
+    "scheduleButton": "Planifier une Visite",
+    "title": "Planifier une Visite",
+    "description": "Choisissez une date et une heure pour visiter notre centre",
+    "accessForm": "Accéder au Formulaire"
   }
 }
