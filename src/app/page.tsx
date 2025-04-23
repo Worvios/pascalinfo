@@ -53,7 +53,6 @@ import {
 import { Toggle } from "@/components/ui/toggle";
 import Autoplay from "embla-carousel-autoplay";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import ContactForm from "@/components/ContactForm";
 import FloatingContactButton from "@/components/FloatingContactForm";
 import AppointmentDialog from "@/components/AppointmentDialog";
 import { useTranslation } from "react-i18next";

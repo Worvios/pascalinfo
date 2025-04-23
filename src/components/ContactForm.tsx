@@ -31,8 +31,10 @@ const ContactForm = () => {
 
       setStatus("Message sent successfully!");
       setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
+    } catch (err) {
+      // Changed 'error' to 'err' and use it in the error message
       setStatus("Failed to send message. Please try again.");
+      console.error("Email send error:", err);
     } finally {
       setLoading(false);
     }
