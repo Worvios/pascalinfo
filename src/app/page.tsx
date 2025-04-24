@@ -56,12 +56,11 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import FloatingContactButton from "@/components/FloatingContactForm";
 import AppointmentDialog from "@/components/AppointmentDialog";
 import { useTranslation } from "react-i18next";
+import i18n from "@/utils/i18n";
 // Add these imports at the top
 
 export default function SchoolShowcase() {
-  const { t, i18n  } = useTranslation();
-  const isRTL = i18n.language === 'ar';
-
+  const { t } = useTranslation();
 
   // Dark mode toggle and language state
   const [darkMode, setDarkMode] = useState(false);
@@ -239,21 +238,9 @@ export default function SchoolShowcase() {
       document.body.style.cursor = "default";
     };
   }, []);
-  // Add this in useEffect in your page.tsx
-useEffect(() => {
-  // Set initial direction based on language
-  document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
-}, [i18n.language]);
-const handleLanguageChange = useCallback((e) => {
-    const langCode = e.target.value.toLowerCase();
-    setLanguage(e.target.value);
-    i18n.changeLanguage(langCode);
-    
-    // Set the dir attribute on the root element based on language
-    document.documentElement.dir = langCode === 'ar' ? 'rtl' : 'ltr';
-  }, [i18n]);
+
   return (
-    <div className={`font-sans ${darkMode ? "dark" : ""} ${isRTL ? "rtl-layout" : ""}`}>
+    <div className={`font-sans ${darkMode ? "dark" : ""}`}>
       <div className="fixed bottom-4 right-4 z-50">
         <NewsletterSubscription />
       </div>
@@ -297,18 +284,21 @@ const handleLanguageChange = useCallback((e) => {
           <div className="flex items-center gap-4 border-l border-muted pl-6">
             <div className="relative flex items-center">
               <Languages className="absolute left-3 h-4 w-4 text-muted-foreground" />
-             <select
-        value={language}
-        onChange={handleLanguageChange}
-        className="pl-10 pr-4 py-2 rounded-lg bg-background border text-sm appearance-none focus:ring-2 focus:ring-primary focus:border-transparent"
-      >
-        <option value="FR">Français</option>
-        <option value="EN">English</option>
-        <option value="AR">العربية</option>
-        <option value="ES">Español</option>
-        <option value="IT">Italia</option>
-        <option value="DE">Deutsch</option>
-      </select>
+              <select
+                value={language}
+                onChange={(e) => {
+                  setLanguage(e.target.value);
+                  i18n.changeLanguage(e.target.value.toLowerCase());
+                }}
+                className="pl-10 pr-4 py-2 rounded-lg bg-background border text-sm appearance-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                <option value="FR">Français</option>
+                <option value="EN">English</option>
+                <option value="AR">العربية</option>
+                <option value="ES">Español</option>
+                <option value="IT">Italia</option>
+                <option value="DE">Deutsch</option>
+              </select>
             </div>
 
             <Toggle
@@ -353,11 +343,11 @@ const handleLanguageChange = useCallback((e) => {
                 <div className="flex flex-col gap-6 border-t border-muted pt-6">
                   <div className="relative flex items-center">
                     <Languages className="absolute left-3 h-4 w-4 text-muted-foreground" />
-                     <select
-        value={language}
-        onChange={handleLanguageChange}
-        className="pl-10 pr-4 py-2 rounded-lg bg-background border text-sm w-full appearance-none focus:ring-2 focus:ring-primary"
-      >
+                    <select
+                      value={language}
+                      onChange={(e) => setLanguage(e.target.value)}
+                      className="pl-10 pr-4 py-2 rounded-lg bg-background border text-sm w-full appearance-none focus:ring-2 focus:ring-primary"
+                    >
                       <option value="FR">Français</option>
                       <option value="EN">English</option>
                       <option value="AR">العربية</option>
