@@ -1,6 +1,10 @@
 @import "tailwindcss";
 /*@import "tw-animate-css";*/
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -178,25 +182,66 @@ button {
   opacity: 0.3;
 }
 
-/* RTL support */
+/* RTL Support */
 [dir="rtl"] {
-  /* Basic direction changes */
   direction: rtl;
   text-align: right;
 }
 
-/* Specific fixes for your UI components */
+/* RTL-specific adjustments */
 [dir="rtl"] .carousel-prev {
   right: auto;
-  left: 2;
+  left: 0.5rem;
 }
 
 [dir="rtl"] .carousel-next {
   left: auto;
-  right: 2;
+  right: 0.5rem;
 }
 
 /* Fix icon directions in RTL mode */
 [dir="rtl"] .icon-direction-sensitive {
   transform: scaleX(-1);
+}
+
+/* Fix padding/margins for RTL layout */
+[dir="rtl"] .nav-item-with-padding-left {
+  padding-left: 0;
+  padding-right: 1.5rem;
+}
+
+/* Fix flex layouts in RTL */
+[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Fix text alignment in RTL */
+[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+/* Fix margins in RTL */
+[dir="rtl"] .ml-4 {
+  margin-left: 0;
+  margin-right: 1rem;
+}
+
+[dir="rtl"] .mr-4 {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+/* Fix padding in RTL */
+[dir="rtl"] .pl-4 {
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+[dir="rtl"] .pr-4 {
+  padding-right: 0;
+  padding-left: 1rem;
 }
