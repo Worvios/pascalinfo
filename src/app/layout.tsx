@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import FloatingForm from '@/components/FloatingForm';
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,15 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" dir="ltr">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <script
-          async
-          data-uid="dc4673f8de"
-          src="https://pascal-info.kit.com/dc4673f8de/index.js"
-        ></script>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
+        <FloatingForm />
       </body>
     </html>
   );
