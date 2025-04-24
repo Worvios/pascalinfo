@@ -400,7 +400,7 @@ export default function SchoolShowcase() {
                     <h1 className="text-4xl md:text-6xl font-bold text-white drop-shadow-xl">
                       {t("hero.title")}
                     </h1>
-                    <p className="text-lg md:text-xl text-muted-foreground font-light text-white/90">
+                    <p className="text-lg md:text-xl text-muted-foreground font-light">
                       {t("hero.subtitle")}
                     </p>
                     <Button
