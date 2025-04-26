@@ -344,10 +344,13 @@ export default function SchoolShowcase() {
                   <div className="relative flex items-center">
                     <Languages className="absolute left-3 h-4 w-4 text-muted-foreground" />
                     <select
-                      value={language}
-                      onChange={(e) => setLanguage(e.target.value)}
-                      className="pl-10 pr-4 py-2 rounded-lg bg-background border text-sm w-full appearance-none focus:ring-2 focus:ring-primary"
-                    >
+  value={language}
+  onChange={(e) => {
+    setLanguage(e.target.value);
+    i18n.changeLanguage(e.target.value.toLowerCase());
+  }}
+  className="pl-10 pr-4 py-2 rounded-lg bg-background border text-sm w-full appearance-none focus:ring-2 focus:ring-primary"
+>
                       <option value="FR">Français</option>
                       <option value="EN">English</option>
                       <option value="AR">العربية</option>
