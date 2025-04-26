@@ -10,10 +10,14 @@ import React, {
 import Image from "next/image";
 import screenfull from "screenfull";
 import NewsletterSubscription from "@/components/NewsletterSubscription";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 import {
   Moon,
   Sun,
+  Smartphone,
+  MapPin,
+  AlertCircle,
   Menu,
   Languages,
   Facebook,
@@ -41,7 +45,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger,   DialogTitle } from "@/components/ui/dialog";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   Carousel,
@@ -58,6 +62,8 @@ import AppointmentDialog from "@/components/AppointmentDialog";
 import { useTranslation } from "react-i18next";
 import i18n from "@/utils/i18n";
 // Add these imports at the top
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SchoolShowcase() {
   const { t } = useTranslation();
@@ -347,17 +353,17 @@ export default function SchoolShowcase() {
   value={language}
   onChange={(e) => {
     setLanguage(e.target.value);
-    i18n.changeLanguage(e.target.value.toLowerCase());
+    i18n.changeLanguage(e.target.value.toLowerCase()); // Add this line
   }}
   className="pl-10 pr-4 py-2 rounded-lg bg-background border text-sm w-full appearance-none focus:ring-2 focus:ring-primary"
 >
-                      <option value="FR">Français</option>
-                      <option value="EN">English</option>
-                      <option value="AR">العربية</option>
-                      <option value="ES">Español</option>
-                      <option value="IT">Italia</option>
-                      <option value="DE">Deutsch</option>
-                    </select>
+  <option value="FR">Français</option>
+  <option value="EN">English</option>
+  <option value="AR">العربية</option>
+  <option value="ES">Español</option>
+  <option value="IT">Italia</option>
+  <option value="DE">Deutsch</option>
+</select>
                   </div>
                   <Toggle
                     pressed={darkMode}
@@ -563,19 +569,24 @@ export default function SchoolShowcase() {
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-2xl p-8">
-                <div className="space-y-4">
-                  <Trophy className="h-12 w-12 text-primary" />
-                  <h3 className="text-2xl font-bold">
-                    {t("about.distinctions.title")}
-                  </h3>
-                  <ul className="space-y-2 list-disc pl-6 text-muted-foreground">
-                    <li>{t("about.distinctions.items.0")}</li>
-                    <li>{t("about.distinctions.items.1")}</li>
-                    <li>{t("about.distinctions.items.2")}</li>
-                    <li>{t("about.distinctions.items.3")}</li>
-                  </ul>
-                </div>
-              </DialogContent>
+  <VisuallyHidden>
+    <DialogTitle>
+      {t("about.distinctions.title")}
+    </DialogTitle>
+  </VisuallyHidden>
+  <div className="space-y-4">
+    <Trophy className="h-12 w-12 text-primary" />
+    <h3 className="text-2xl font-bold">
+      {t("about.distinctions.title")}
+    </h3>
+    <ul className="space-y-2 list-disc pl-6 text-muted-foreground">
+      <li>{t("about.distinctions.items.0")}</li>
+      <li>{t("about.distinctions.items.1")}</li>
+      <li>{t("about.distinctions.items.2")}</li>
+      <li>{t("about.distinctions.items.3")}</li>
+    </ul>
+  </div>
+</DialogContent>
             </Dialog>
           </div>
           <div className="relative aspect-square rounded-2xl overflow-hidden shadow-xl">
@@ -838,7 +849,8 @@ export default function SchoolShowcase() {
       </section>
       <FloatingContactButton />
 
-      {/* Footer */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary opacity-20" />
+        <ToastContainer />
       <footer className="bg-background border-t mt-24 relative">
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary opacity-20" />
 
@@ -943,23 +955,115 @@ export default function SchoolShowcase() {
           placeholder={t("footer.newsletter.placeholder")}
           className="space-y-4"
         />*/}
-              {/* Contact Info */}
               <div className="pt-6 mt-6 border-t border-muted/20">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Phone className="h-4 w-4" />
-                    {t("footer.contact.phone")}
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Mail className="h-4 w-4" />
-                    {t("footer.contact.email")}
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Clock className="h-4 w-4" />
-                    {t("footer.contact.hours")}
-                  </div>
-                </div>
-              </div>
+  <div className="space-y-2">
+    {/* Phone */}
+    <div 
+      className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors"
+      onClick={() => {
+        navigator.clipboard.writeText(t("footer.contact.phone"));
+        toast.success(t("footer.toast.copy"));
+      }}
+      role="button"
+      tabIndex={0}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter') {
+          navigator.clipboard.writeText(t("footer.contact.phone"));
+          toast.success(t("footer.toast.copy"));
+        }
+      }}
+    >
+      <Phone className="h-4 w-4" aria-label={t("footer.aria.phone")} />
+      <span>{t("footer.contact.phone")}</span>
+    </div>
+
+    {/* Mobile */}
+    <div 
+      className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors"
+      onClick={() => {
+        navigator.clipboard.writeText(t("footer.contact.mobile"));
+        toast.success(t("footer.toast.copy"));
+      }}
+      role="button"
+      tabIndex={0}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter') {
+          navigator.clipboard.writeText(t("footer.contact.mobile"));
+          toast.success(t("footer.toast.copy"));
+        }
+      }}
+    >
+      <Smartphone className="h-4 w-4" aria-label={t("footer.aria.phone")} />
+      <span>{t("footer.contact.mobile")}</span>
+    </div>
+
+    {/* Email */}
+    <div 
+      className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors"
+      onClick={() => {
+        navigator.clipboard.writeText(t("footer.contact.email"));
+        toast.success(t("footer.toast.copy"));
+      }}
+      role="button"
+      tabIndex={0}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter') {
+          navigator.clipboard.writeText(t("footer.contact.email"));
+          toast.success(t("footer.toast.copy"));
+        }
+      }}
+    >
+      <Mail className="h-4 w-4" aria-label={t("footer.aria.email")} />
+      <span>{t("footer.contact.email")}</span>
+    </div>
+
+    {/* Address */}
+    <div 
+      className="flex items-center gap-2 text-sm text-muted-foreground cursor-pointer hover:text-primary transition-colors"
+      onClick={() => {
+        navigator.clipboard.writeText(t("footer.contact.address"));
+        toast.success(t("footer.toast.copy"));
+      }}
+      role="button"
+      tabIndex={0}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter') {
+          navigator.clipboard.writeText(t("footer.contact.address"));
+          toast.success(t("footer.toast.copy"));
+        }
+      }}
+    >
+      <MapPin className="h-4 w-4" aria-label={t("footer.aria.address")} />
+      <span>{t("footer.contact.address")}</span>
+    </div>
+
+    {/* Hours */}
+    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+      <Clock className="h-4 w-4" aria-label={t("footer.aria.hours")} />
+      <span>{t("footer.contact.hours")}</span>
+    </div>
+
+    {/* Emergency Contact */}
+    <div 
+      className="flex items-center gap-2 text-sm text-red-500 cursor-pointer hover:text-red-600 transition-colors mt-4"
+      onClick={() => {
+        navigator.clipboard.writeText(t("footer.contact.emergency"));
+        toast.success(t("footer.toast.copy"));
+      }}
+      role="button"
+      tabIndex={0}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter') {
+          navigator.clipboard.writeText(t("footer.contact.emergency"));
+          toast.success(t("footer.toast.copy"));
+        }
+      }}
+    >
+      <AlertCircle className="h-4 w-4" />
+      <span>{t("footer.contact.emergency")}</span>
+    </div>
+  </div>
+</div>
             </div>
           </div>
 

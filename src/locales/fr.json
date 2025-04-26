@@ -124,6 +124,15 @@
     }
   },
   "footer": {
+    "toast": {
+    "copy": "Copié dans le presse-papiers"
+  },
+    "aria": {
+  "phone": "Icône de téléphone",
+  "email": "Icône d'email",
+  "address": "Icône d'adresse",
+  "hours": "Icône d'horloge"
+},
     "description": "Votre passerelle vers l'excellence professionnelle depuis 1996.",
     "accredited": "Accrédité par",
     "accreditations": "Accréditations et partenariats",
@@ -152,9 +161,12 @@
       "placeholder": "Votre email professionnel"
     },
     "contact": {
-      "phone": "+212 5XX XXX XXX",
+      "phone": "+212 5234-87877",
       "email": "contact@pascalinfo.ma",
-      "hours": "Lun-Ven: 8h - 21h"
+      "hours": "Lun-Ven: 9h - 21h",
+      "mobile": "+212 660-360938",
+      "address": "APPT 26 ET 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
+      "emergency": "24/7 Emergency Support"
     },
     "copyright": "© 2025 Pascal Info. Tous droits réservés.",
     "developed": "Développé par"

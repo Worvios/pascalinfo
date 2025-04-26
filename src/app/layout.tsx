@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import FloatingForm from '@/components/FloatingForm';
+import { Toaster } from 'sonner';
 
 
 const geistSans = Geist({
@@ -14,6 +15,7 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
 
 export const metadata: Metadata = {
   title: "Pascal info",
@@ -28,6 +30,8 @@ export default function RootLayout({
   return (
     <html lang="fr" dir="ltr">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <Toaster position="top-center" />
+
         {children}
         <FloatingForm />
       </body>
