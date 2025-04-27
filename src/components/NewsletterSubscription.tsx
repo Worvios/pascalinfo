@@ -17,7 +17,6 @@ import Script from "next/script";
 
 const NewsletterSubscription = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scriptLoaded, setScriptLoaded] = useState(false);
   const { t } = useTranslation();
 
   // Reset form when opened to ensure ConvertKit renders properly
@@ -34,21 +33,9 @@ const NewsletterSubscription = () => {
     }
   }, [isOpen]);
 
-  const handleScriptLoad = () => {
-    setScriptLoaded(true);
-    if (typeof window !== "undefined" && window.formkit) {
-      window.formkit.init();
-    }
-  };
-
   return (
     <div className="fixed bottom-4 right-4 z-50">
       {/* ConvertKit Script */}
-      <Script
-        src="https://f.convertkit.com/ckjs/ck.5.js"
-        strategy="lazyOnload"
-        onLoad={handleScriptLoad}
-      />
 
       {/* Button to toggle the newsletter form */}
       {!isOpen && (

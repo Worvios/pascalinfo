@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
@@ -35,7 +35,6 @@ import {
   ArrowUp,
   Globe,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import {
@@ -216,7 +215,7 @@ export default function Footer() {
                         <div></div>
                         <div></div>
                       </div>
-                      <span>S'abonner</span>
+                      <span>S&apos;abonner</span>
                     </button>
                   </div>
                 </div>

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import FloatingForm from "@/components/FloatingForm";
 import { Toaster } from "sonner";
 import { LanguageProvider } from "@/utils/LanguageProvider";
 import WelcomeAssistant from "@/components/WelcomeAssistant";

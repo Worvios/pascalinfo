@@ -8,14 +8,12 @@ import { toast } from "react-toastify";
 import {
   Moon,
   Sun,
-  Languages,
   Menu,
   GraduationCap,
   ChevronDown,
   Globe,
   Phone,
   X,
-  Copy,
   Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
