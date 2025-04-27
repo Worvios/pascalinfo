@@ -372,7 +372,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
           </div>
         </div>
 
-                  {/* Mobile Navigation */}
+        {/* Mobile Navigation */}
         <div className="md:hidden flex items-center gap-4">
           {/* Mobile Language Switcher Dropdown */}
           <DropdownMenu>
@@ -531,44 +531,6 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                       </>
                     )}
                   </Button>
-                </div>
-
-                {/* Mobile Language Dropdown - REDESIGNED */}
-                <div className="pt-4 border-t">
-                  <div className="text-sm font-medium mb-3 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Globe className="h-4 w-4 text-primary" />
-                      {t("navigation.language")}
-                    </div>
-                    
-                    {/* Current selected language */}
-                    <div className="flex items-center gap-2">
-                      <Flag
-                        code={languageOptions.find(l => l.code === language)?.flagCode || "fr"}
-                        size="sm"
-                        className={`language-${language.toLowerCase()}`}
-                      />
-                      <span className="text-sm font-medium">{language}</span>
-                    </div>
-                  </div>
-                  
-                  {/* Language Select Dropdown */}
-                  <div className="relative mt-2 rounded-md border border-input">
-                    <select 
-                      value={language}
-                      onChange={(e) => handleLanguageChange(e.target.value)}
-                      className="w-full h-10 pl-3 pr-10 py-2 text-sm rounded-md bg-background focus:ring-primary focus:border-primary"
-                    >
-                      {languageOptions.map((option) => (
-                        <option key={option.code} value={option.code}>
-                          {option.label} ({option.code})
-                        </option>
-                      ))}
-                    </select>
-                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                      <ChevronDown className="h-4 w-4 text-muted-foreground" />
-                    </div>
-                  </div>
                 </div>
               </div>
             </SheetContent>
