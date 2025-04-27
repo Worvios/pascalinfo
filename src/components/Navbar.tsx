@@ -140,7 +140,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
       if (code === language) return;
 
       // Find the language elements to animate
-      const languageIndicators = document.querySelectorAll(`.language-${code}`);
+      const languageIndicators = document.querySelectorAll(`.language-${code.toLowerCase()}`);
       languageIndicators.forEach((el) => {
         el.classList.add("language-change-indicator");
         setTimeout(() => {
@@ -490,7 +490,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                   </Button>
                 </div>
 
-                {/* Enhanced Mobile Language Selector with Flag Component */}
+                {/* Enhanced Mobile Language Selector with Flag Component - FIXED */}
                 <div className="pt-4 border-t">
                   <div className="text-sm font-medium mb-3 flex items-center gap-2">
                     <Globe className="h-4 w-4 text-primary" />
@@ -501,17 +501,22 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                     {languageOptions.map((option) => (
                       <button
                         key={option.code}
+                        type="button"
                         className={cn(
-                          "relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200",
+                          "relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-200",
                           language === option.code
                             ? "bg-primary/10 text-primary border border-primary/20"
                             : "bg-muted/50 hover:bg-muted border border-transparent"
                         )}
-                        onClick={() => handleLanguageChange(option.code)}
+                        onClick={() => {
+                          // Close sheet after language change with a slight delay
+                          handleLanguageChange(option.code);
+                          // No need to close Sheet here - let user manually close
+                        }}
                       >
                         <Flag
                           code={option.flagCode}
-                          size="lg"
+                          size="sm"
                           className={`language-${option.code.toLowerCase()}`}
                         />
 
@@ -519,7 +524,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                           <span className="text-sm font-medium">
                             {option.code}
                           </span>
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-xs text-muted-foreground truncate max-w-[80px]">
                             {option.label}
                           </span>
                         </div>
