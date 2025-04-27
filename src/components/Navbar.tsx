@@ -372,8 +372,51 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+                  {/* Mobile Navigation */}
         <div className="md:hidden flex items-center gap-4">
+          {/* Mobile Language Switcher Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full w-9 h-9 p-0 relative"
+              >
+                <Flag
+                  code={languageOptions.find((l) => l.code === language)?.flagCode || "fr"}
+                  size="sm"
+                  className={`language-${language.toLowerCase()}`}
+                />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48 p-2">
+              <div className="flex items-center gap-2 px-2 py-1.5 mb-1 border-b border-muted/60">
+                <Globe className="h-4 w-4 text-primary/70" />
+                <span className="text-xs font-medium">{t("navigation.language")}</span>
+              </div>
+              {languageOptions.map((option) => (
+                <DropdownMenuItem
+                  key={option.code}
+                  className={cn(
+                    "flex items-center gap-2 px-2 py-1.5 cursor-pointer hover:bg-muted transition-colors",
+                    language === option.code && "bg-primary/10 text-primary"
+                  )}
+                  onClick={() => handleLanguageChange(option.code)}
+                >
+                  <Flag
+                    code={option.flagCode}
+                    size="sm"
+                    className={`language-${option.code.toLowerCase()}`}
+                  />
+                  <span className="text-sm">{option.label}</span>
+                  {language === option.code && (
+                    <Check className="h-3.5 w-3.5 ml-auto text-primary" />
+                  )}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           {/* Mobile Call Button */}
           <Button
             size="icon"
@@ -415,7 +458,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
             </SheetTrigger>
             <SheetContent
               side={direction === "rtl" ? "left" : "right"}
-              className="w-[85%] border-l-amber-500/20 bg-background/95 backdrop-blur-lg pt-12"
+              className="w-[85%] border-l-amber-500/20 bg-background/95 backdrop-blur-lg pt-12 overflow-y-auto max-h-screen"
             >
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
@@ -490,52 +533,41 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                   </Button>
                 </div>
 
-                {/* Enhanced Mobile Language Selector with Flag Component - FIXED */}
+                {/* Mobile Language Dropdown - REDESIGNED */}
                 <div className="pt-4 border-t">
-                  <div className="text-sm font-medium mb-3 flex items-center gap-2">
-                    <Globe className="h-4 w-4 text-primary" />
-                    {t("navigation.language")}
+                  <div className="text-sm font-medium mb-3 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Globe className="h-4 w-4 text-primary" />
+                      {t("navigation.language")}
+                    </div>
+                    
+                    {/* Current selected language */}
+                    <div className="flex items-center gap-2">
+                      <Flag
+                        code={languageOptions.find(l => l.code === language)?.flagCode || "fr"}
+                        size="sm"
+                        className={`language-${language.toLowerCase()}`}
+                      />
+                      <span className="text-sm font-medium">{language}</span>
+                    </div>
                   </div>
-
-                  <div className="grid grid-cols-2 gap-2">
-                    {languageOptions.map((option) => (
-                      <button
-                        key={option.code}
-                        type="button"
-                        className={cn(
-                          "relative flex items-center gap-2 px-3 py-2.5 rounded-xl transition-all duration-200",
-                          language === option.code
-                            ? "bg-primary/10 text-primary border border-primary/20"
-                            : "bg-muted/50 hover:bg-muted border border-transparent"
-                        )}
-                        onClick={() => {
-                          // Close sheet after language change with a slight delay
-                          handleLanguageChange(option.code);
-                          // No need to close Sheet here - let user manually close
-                        }}
-                      >
-                        <Flag
-                          code={option.flagCode}
-                          size="sm"
-                          className={`language-${option.code.toLowerCase()}`}
-                        />
-
-                        <div className="flex flex-col items-start">
-                          <span className="text-sm font-medium">
-                            {option.code}
-                          </span>
-                          <span className="text-xs text-muted-foreground truncate max-w-[80px]">
-                            {option.label}
-                          </span>
-                        </div>
-
-                        {language === option.code && (
-                          <span className="absolute top-2 right-2">
-                            <Check className="h-3.5 w-3.5 text-primary" />
-                          </span>
-                        )}
-                      </button>
-                    ))}
+                  
+                  {/* Language Select Dropdown */}
+                  <div className="relative mt-2 rounded-md border border-input">
+                    <select 
+                      value={language}
+                      onChange={(e) => handleLanguageChange(e.target.value)}
+                      className="w-full h-10 pl-3 pr-10 py-2 text-sm rounded-md bg-background focus:ring-primary focus:border-primary"
+                    >
+                      {languageOptions.map((option) => (
+                        <option key={option.code} value={option.code}>
+                          {option.label} ({option.code})
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                      <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                    </div>
                   </div>
                 </div>
               </div>
