@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import FloatingForm from '@/components/FloatingForm';
-import { Toaster } from 'sonner';
-
+import FloatingForm from "@/components/FloatingForm";
+import { Toaster } from "sonner";
+import { LanguageProvider } from "@/utils/LanguageProvider";
+import WelcomeAssistant from "@/components/WelcomeAssistant";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,10 +17,30 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
 export const metadata: Metadata = {
-  title: "Pascal info",
-  description: "Site web officiel de Pascal info",
+  title: "Centre Pascal Info",
+  description: "Centre de formation informatique au Maroc",
+  openGraph: {
+    title: "Centre Pascal Info",
+    description: "Centre de formation informatique au Maroc",
+    url: "https://pascal-info.ma",
+    siteName: "Centre Pascal Info",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Centre Pascal Info",
+    description: "Centre de formation informatique au Maroc",
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({
@@ -28,12 +49,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" dir="ltr">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <Toaster position="top-center" />
-
-        {children}
-        <FloatingForm />
+    <html lang="fr" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <LanguageProvider>
+          <Toaster position="top-center" />
+          {children}
+          <WelcomeAssistant />
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -11,6 +11,17 @@
     "cta": "Découvrez Nos Programmes"
   },
   "video": {
+    "tag": "Expérience Virtuelle",
+    "highQuality": "Haute Qualité",
+    "featureDescriptions": [
+      "Des salles de classe modernes équipées des dernières technologies éducatives.",
+      "Nos laboratoires spécialisés permettent une formation pratique et professionnelle.",
+      "Espaces collaboratifs conçus pour encourager le travail d'équipe et la créativité.",
+      "Notre bibliothèque numérique offre un accès à des milliers de ressources et documents."
+    ],
+    "shareButton": "Partager",
+    "shareCopied": "Lien copié !",
+    "playInstructions": "Cliquez pour commencer votre visite virtuelle interactive",
     "title": "Une Expérience",
     "subtitle": "Éducative Immersive",
     "description": "Découvrez notre campus à travers une visite virtuelle captivante. Explorez nos installations modernes, nos laboratoires high-tech et notre environnement d'apprentissage stimulant.",
@@ -27,24 +38,33 @@
     "description": "Fondé en 1996, Pascal Info est devenu un centre d'excellence en formation professionnelle au Maroc. Notre approche complète combine expertise technique et développement personnel pour préparer nos étudiants aux défis du marché du travail moderne.",
     "stats": {
       "experience": "Années d'Expérience",
-      "services": "Services Éducatifs"
+      "services": "Services Éducatifs",
+      "students": "Étudiants Formés",
+      "satisfaction": "Satisfaction Client"
     },
     "learnMore": "En Savoir Plus",
     "distinctions": {
       "title": "Nos Distinctions",
+      "subtitle": "Nos réalisations et reconnaissances",
       "items": [
         "Partenariats avec les entreprises leaders au Maroc",
         "Installations modernes et équipements de pointe",
         "Corps enseignant composé de professionnels expérimentés",
         "Taux de réussite exceptionnel parmi nos diplômés"
       ]
-    }
+    },
+    "years": "ans",
+    "established": "d'expérience",
+    "tagline": "Centre de Formation d'Excellence",
+    "close": "Fermer"
   },
   "programs": {
     "title": "Nos Programmes",
     "subtitle": "D'Excellence",
     "certified": "Programme Certifié",
     "learnMore": "En Savoir Plus",
+    "showMore": "Afficher plus de programmes",
+    "showLess": "Afficher moins de programmes",
     "items": [
       {
         "title": "Diplôme Bac+2 en Développement Informatique",
@@ -123,16 +143,87 @@
       "button": "Planifier une Visite"
     }
   },
+  "assistant": {
+    "aria": {
+      "open": "Ouvrir l'assistant d'aide",
+      "close": "Fermer l'assistant"
+    },
+    "button": "Comment pouvons-nous vous aider ?",
+    "title": "Pascal Info",
+    "tabs": {
+      "welcome": "Bienvenue",
+      "help": "Aide",
+      "contact": "Contact"
+    },
+    "welcome": {
+      "avatar": {
+        "alt": "Directeur"
+      },
+      "heading": "Bienvenue chez Pascal Info",
+      "subheading": "Centre de formation professionnelle",
+      "description": "Nous sommes ravis de vous accueillir sur notre site. Notre centre de formation propose des cursus adaptés aux besoins des professionnels et des entreprises.",
+      "courses": {
+        "title": "Découvrez nos formations :",
+        "items": [
+          { "name": "Développement Web" },
+          { "name": "Commerce Digital" },
+          { "name": "Langues Étrangères" },
+          { "name": "Management" }
+        ]
+      },
+      "viewAllCourses": "Voir toutes nos formations"
+    },
+    "help": {
+      "faq": {
+        "title": "Questions fréquentes",
+        "items": [
+          "Comment s'inscrire à une formation ?",
+          "Quelles sont les méthodes de paiement acceptées ?",
+          "Comment obtenir un financement pour ma formation ?",
+          "Quels sont les prérequis pour les cours avancés ?"
+        ]
+      },
+      "support": {
+        "title": "Besoin d'aide supplémentaire ?",
+        "description": "Notre équipe est à votre disposition pour répondre à toutes vos questions.",
+        "button": "Contacter le support"
+      }
+    },
+    "contact": {
+      "phone": {
+        "title": "Téléphone",
+        "number": "+212 522 123 456",
+        "hours": "Lun-Ven: 9h-18h"
+      },
+      "email": {
+        "title": "Email",
+        "address": "contact@pascalinfo.ma",
+        "response": "Nous répondons sous 24h"
+      },
+      "social": {
+        "title": "Nos réseaux sociaux",
+        "platforms": [
+          { "name": "Facebook", "url": "https://facebook.com/pascalinfo" },
+          { "name": "Instagram", "url": "https://instagram.com/pascalinfo" },
+          {
+            "name": "LinkedIn",
+            "url": "https://linkedin.com/company/pascalinfo"
+          }
+        ]
+      }
+    },
+    "footer": "© {{year}} Pascal Info - Centre de Formation Professionnelle"
+  },
   "footer": {
     "toast": {
-    "copy": "Copié dans le presse-papiers"
-  },
+      "copy": "Copié dans le presse-papiers"
+    },
     "aria": {
-  "phone": "Icône de téléphone",
-  "email": "Icône d'email",
-  "address": "Icône d'adresse",
-  "hours": "Icône d'horloge"
-},
+      "phone": "Icône de téléphone",
+      "email": "Icône d'email",
+      "address": "Icône d'adresse",
+      "hours": "Icône d'horloge"
+    },
     "description": "Votre passerelle vers l'excellence professionnelle depuis 1996.",
     "accredited": "Accrédité par",
     "accreditations": "Accréditations et partenariats",

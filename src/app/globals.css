@@ -1,8 +1,6 @@
 @import "tailwindcss";
-/*@import "tw-animate-css";*/
 
 @tailwind base;
-@tailwind utilities;
 @tailwind utilities;
 
 @custom-variant dark (&:is(.dark *));
@@ -49,6 +47,7 @@
 
 :root {
   --radius: 0.625rem;
+  --ring-opacity: 0.2;
   /* Retro Light Theme Colors */
   --background: oklch(0.98 0.01 100); /* Soft off-white */
   --foreground: oklch(0.2 0.05 270); /* Deep slate blue */
@@ -126,10 +125,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Fix horizontal overflow */
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 video,
 button {
   cursor: pointer !important;
 }
+
+/* Animations */
 .animate-float {
   animation: float 8s ease-in-out infinite;
   transform: translateZ(0); /* Hardware acceleration */
@@ -145,21 +154,341 @@ button {
   }
 }
 
-.program-card {
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    box-shadow 0.3s ease;
-  backface-visibility: hidden; /* Improve 3D rendering */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
-.program-card:hover {
-  z-index: 10; /* Prevent overlapping during animation */
+@keyframes popInCentered {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -40%) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
-.program-icon {
-  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
-/* Simplify mouse effect */
+@keyframes formkit-spinner {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(30deg) !important;
+  }
+  100% {
+    transform: translateX(100%) rotate(30deg) !important;
+  }
+}
+
+/* Animation Classes */
+.animation-pop-in {
+  animation: popInCentered 0.3s ease-out forwards;
+}
+
+.animation-slide-up {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+/* Fix overlap issues */
+.newsletter-button {
+  z-index: 100;
+}
+
+/* Enhanced ConvertKit form styling for footer */
+.convertkit-form-container .formkit-form {
+  max-width: 100% !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.convertkit-form-container .formkit-fields {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.convertkit-form-container .formkit-field {
+  flex: 1 !important;
+  min-width: 200px !important;
+  margin: 0 !important;
+}
+
+/* Improved input styling with better contrast */
+.convertkit-form-container .formkit-input {
+  background-color: white !important;
+  color: oklch(0.3 0.05 270) !important; /* Darker text for better contrast */
+  border: 1px solid oklch(0.7 0.05 100) !important; /* Slightly darker border */
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  padding: 12px 16px !important;
+  height: 44px !important;
+  width: 100% !important;
+  border-radius: 0.5rem !important;
+  transition: all 0.2s ease !important;
+  margin: 0 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important; /* Subtle shadow */
+}
+
+.convertkit-form-container .formkit-input::placeholder {
+  color: oklch(0.5 0.05 270) !important; /* Darker placeholder text */
+  opacity: 0.8 !important;
+}
+
+.convertkit-form-container .formkit-input:focus {
+  border-color: oklch(0.55 0.15 160) !important; /* Using your primary color */
+  box-shadow: 0 0 0 3px rgba(85, 166, 173, 0.15) !important; /* Custom focus ring */
+  outline: none !important;
+}
+
+/* Enhanced button styling with better visibility */
+.convertkit-form-container .formkit-button {
+  position: relative !important;
+  padding: 0 !important;
+  height: 44px !important;
+  font-weight: 600 !important; /* Make text bolder */
+  font-size: 14px !important;
+  transition: all 0.2s ease !important;
+  border-radius: 0.5rem !important;
+  background: linear-gradient(
+    to right,
+    #f59e0b,
+    #d97706
+  ) !important; /* Amber gradient */
+  color: white !important;
+  margin: 0 !important;
+  min-width: 120px !important;
+  border: none !important;
+  overflow: hidden !important; /* For the shine effect */
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3) !important; /* Button shadow */
+}
+
+/* Button content styling */
+.convertkit-form-container .formkit-button > span {
+  padding: 0 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  gap: 8px !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Button hover effect with shine */
+.convertkit-form-container .formkit-button:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4) !important;
+}
+
+.convertkit-form-container .formkit-button:hover::after {
+  content: "" !important;
+  position: absolute !important;
+  top: -50% !important;
+  left: -50% !important;
+  width: 200% !important;
+  height: 200% !important;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  ) !important;
+  transform: rotate(30deg) !important;
+  animation: shine 1.5s ease-in-out !important;
+}
+
+/* Active button state */
+.convertkit-form-container .formkit-button:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 1px 3px rgba(245, 158, 11, 0.3) !important;
+}
+
+.convertkit-form-container .formkit-alert {
+  margin-bottom: 10px !important;
+  padding: 10px 12px !important;
+  border-radius: 5px !important;
+  list-style: none !important;
+  font-size: 14px !important;
+}
+
+.convertkit-form-container .formkit-alert-error {
+  background-color: rgba(220, 38, 38, 0.1) !important;
+  color: rgb(220, 38, 38) !important;
+  border: 1px solid rgba(220, 38, 38, 0.2) !important;
+}
+
+.convertkit-form-container .formkit-spinner {
+  display: inline-block !important;
+  position: relative !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.convertkit-form-container .formkit-spinner > div {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 4px !important;
+  height: 4px !important;
+  background-color: white !important;
+  border-radius: 50% !important;
+  animation: formkit-spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite !important;
+  opacity: 0.8 !important;
+}
+
+.convertkit-form-container .formkit-spinner > div:nth-child(1) {
+  animation-delay: 0s !important;
+  transform: translate(7px, 0) !important;
+}
+
+.convertkit-form-container .formkit-spinner > div:nth-child(2) {
+  animation-delay: -0.4s !important;
+  transform: translate(0, 7px) !important;
+}
+
+.convertkit-form-container .formkit-spinner > div:nth-child(3) {
+  animation-delay: -0.8s !important;
+  transform: translate(-7px, 0) !important;
+}
+
+/* Remove ConvertKit branding */
+.convertkit-form-container .formkit-powered-by-convertkit-container {
+  display: none !important;
+}
+
+/* Dark mode adjustments */
+.dark .convertkit-form-container .formkit-input {
+  background-color: oklch(0.22 0.06 260) !important; /* Dark input bg */
+  color: oklch(0.95 0.01 120) !important;
+  border-color: oklch(0.3 0.06 260) !important;
+}
+
+.dark .convertkit-form-container .formkit-input::placeholder {
+  color: oklch(0.7 0.04 260) !important;
+}
+
+.dark .convertkit-form-container .formkit-input:focus {
+  border-color: oklch(0.85 0.18 145) !important; /* Using dark mode primary */
+  box-shadow: 0 0 0 3px rgba(133, 204, 173, 0.2) !important;
+}
+
+/* ConvertKit compatibility for older code */
+[data-formkit-form] input[type="text"],
+[data-formkit-form] input[type="email"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem !important;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+}
+
+[data-formkit-form] button {
+  border-radius: 0.75rem !important;
+  background: linear-gradient(to right, #f59e0b, #d97706) !important;
+  transition: all 0.2s ease;
+}
+
+[data-formkit-form] button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Newsletter form styles */
+.newsletter-form {
+  width: 100%;
+  display: block;
+}
+
+.convertkit-form {
+  width: 100%;
+  display: block;
+}
+
+/* Mobile optimization */
+@media (max-width: 640px) {
+  .convertkit-form-container .formkit-fields {
+    flex-direction: column !important;
+  }
+
+  .convertkit-form-container .formkit-field {
+    width: 100% !important;
+  }
+
+  .convertkit-form-container .formkit-button {
+    width: 100% !important;
+  }
+}
+
+/* Improve form layout on larger screens */
+@media (min-width: 768px) {
+  .convertkit-form-container .formkit-fields {
+    align-items: flex-end !important;
+  }
+
+  .convertkit-form-container .formkit-field {
+    max-width: 300px !important;
+  }
+}
+
+/* Mobile optimizations for footer */
+@media (max-width: 768px) {
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Newsletter section wrapper enhancement */
+.newsletter-enhanced {
+  position: relative !important;
+}
+
+.newsletter-enhanced::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: -4px !important;
+  border-radius: 12px !important;
+  background: linear-gradient(
+    to right,
+    rgba(245, 158, 11, 0.1),
+    rgba(245, 158, 11, 0.05)
+  ) !important;
+  z-index: -1 !important;
+  opacity: 0.5 !important;
+}
+
+/* Program Card Effect */
 .program-card::after {
   content: "";
   position: absolute;
@@ -180,6 +509,44 @@ button {
 
 .program-card:hover::after {
   opacity: 0.3;
+}
+
+/* Footer specific styles */
+.footer-link-hover {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.footer-link-hover:hover {
+  transform: translateX(4px);
+}
+
+.footer-social-icon {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.footer-social-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Contact card animations */
+.contact-card {
+  transition: all 0.2s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-2px);
+}
+
+.copy-icon {
+  transition: opacity 0.2s ease;
+}
+
+.back-to-top {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.back-to-top:hover .icon {
+  transform: translateY(-4px);
 }
 
 /* RTL Support */
@@ -244,4 +611,208 @@ button {
 [dir="rtl"] .pr-4 {
   padding-right: 0;
   padding-left: 1rem;
+}
+
+/* RTL Support for footer */
+[dir="rtl"] .footer-chevron {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .footer-link-hover:hover {
+  transform: translateX(-4px);
+}
+
+/* RTL Support for ConvertKit form */
+[dir="rtl"] .convertkit-form-container .formkit-fields {
+  flex-direction: row-reverse !important;
+}
+
+[dir="rtl"] .convertkit-form-container .formkit-button > span {
+  flex-direction: row-reverse !important;
+}
+/* Theme-aware newsletter styling */
+.newsletter-container {
+  width: 100%;
+}
+
+.newsletter-theme-aware {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 10px !important;
+  width: 100% !important;
+}
+
+.newsletter-theme-aware .formkit-fields {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.newsletter-theme-aware .formkit-field {
+  flex: 1 !important;
+  min-width: 200px !important;
+  margin: 0 !important;
+}
+
+/* Theme-adaptive input that works with both light and dark mode */
+.theme-adaptive-input {
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+  border: 1px solid var(--border) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  padding: 12px 16px !important;
+  height: 44px !important;
+  width: 100% !important;
+  border-radius: 0.5rem !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.theme-adaptive-input::placeholder {
+  color: var(--muted-foreground) !important;
+  opacity: 0.8 !important;
+}
+
+.theme-adaptive-input:focus {
+  border-color: var(--ring) !important;
+  box-shadow: 0 0 0 3px var(--ring) !important;
+  opacity: 0.15 !important;
+  outline: none !important;
+}
+
+/* Button that works well in both themes */
+.theme-adaptive-button {
+  position: relative !important;
+  padding: 0 !important;
+  height: 44px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  transition: all 0.2s ease !important;
+  border-radius: 0.5rem !important;
+  background: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  margin: 0 !important;
+  min-width: 120px !important;
+  border: none !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.theme-adaptive-button > span {
+  padding: 0 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  gap: 8px !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.theme-adaptive-button:hover {
+  transform: translateY(-1px) !important;
+  opacity: 0.9 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Custom spinner for dark mode compatibility */
+.theme-adaptive-button .formkit-spinner > div {
+  background-color: var(--primary-foreground) !important;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .newsletter-theme-aware .formkit-fields {
+    flex-direction: column !important;
+  }
+
+  .newsletter-theme-aware .formkit-field {
+    width: 100% !important;
+  }
+
+  .theme-adaptive-button {
+    width: 100% !important;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .newsletter-theme-aware .formkit-fields {
+  flex-direction: row-reverse !important;
+}
+
+[dir="rtl"] .theme-adaptive-button > span {
+  flex-direction: row-reverse !important;
+}
+@keyframes scalePulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.language-change-indicator {
+  animation: scalePulse 0.5s ease-in-out;
+}
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) rotate(20deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(20deg);
+  }
+}
+
+@keyframes rotate-gradient {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.perspective-card {
+  perspective: 1000px;
+}
+
+/* For Safari compatibility */
+.transform-gpu {
+  transform: translateZ(0);
+}
+
+/* Float animation - if you don't already have it */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-rotate-gradient {
+  animation: rotate-gradient 6s linear infinite;
+}
+@keyframes shineEffect {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
