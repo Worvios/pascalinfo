@@ -16,6 +16,21 @@ import { useTranslation } from "react-i18next";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+// Define types for the translations
+interface Course {
+  name: string;
+  // Add other properties that might be present in your course objects
+}
+
+interface SocialPlatform {
+  name: string;
+  url: string;
+  // Add other properties that might be present in your social platform objects
+}
+
+// Union type for different possible translated items
+type TranslatedItem = string | Course | SocialPlatform;
+
 const WelcomeAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
@@ -48,10 +63,10 @@ const WelcomeAssistant = () => {
     }
   }, []);
 
-  // Function to get array from translation object
-  const getTranslatedArray = (key: string): any[] => {
+  // Function to get array from translation object - now with proper typing
+  const getTranslatedArray = <T extends TranslatedItem>(key: string): T[] => {
     const translatedData = t(key, { returnObjects: true });
-    return Array.isArray(translatedData) ? translatedData : [];
+    return Array.isArray(translatedData) ? (translatedData as T[]) : [];
   };
 
   return (
@@ -144,17 +159,17 @@ const WelcomeAssistant = () => {
                   </h5>
 
                   <div className="grid grid-cols-2 gap-2">
-                    {getTranslatedArray("assistant.welcome.courses.items").map(
-                      (course, i) => (
-                        <div
-                          key={i}
-                          className="flex items-center gap-2 p-2 bg-muted/30 rounded-md hover:bg-primary/5 transition-colors cursor-pointer"
-                        >
-                          <FileText className="h-4 w-4 text-primary" />
-                          <span className="text-xs">{course.name}</span>
-                        </div>
-                      )
-                    )}
+                    {getTranslatedArray<Course>(
+                      "assistant.welcome.courses.items"
+                    ).map((course, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-2 p-2 bg-muted/30 rounded-md hover:bg-primary/5 transition-colors cursor-pointer"
+                      >
+                        <FileText className="h-4 w-4 text-primary" />
+                        <span className="text-xs">{course.name}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -175,7 +190,7 @@ const WelcomeAssistant = () => {
                 </h4>
 
                 <div className="space-y-3 mb-4">
-                  {getTranslatedArray("assistant.help.faq.items").map(
+                  {getTranslatedArray<string>("assistant.help.faq.items").map(
                     (question, i) => (
                       <div key={i} className="group cursor-pointer">
                         <div className="flex items-center gap-2 p-3 rounded-md bg-muted/20 hover:bg-primary/5 transition-colors">
@@ -247,7 +262,7 @@ const WelcomeAssistant = () => {
                     {t("assistant.contact.social.title")}
                   </h4>
                   <div className="flex items-center gap-2">
-                    {getTranslatedArray(
+                    {getTranslatedArray<SocialPlatform>(
                       "assistant.contact.social.platforms"
                     ).map((social, i) => (
                       <Button

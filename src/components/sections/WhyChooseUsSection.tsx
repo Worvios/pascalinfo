@@ -21,6 +21,12 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+// Define the feature item interface
+interface FeatureItem {
+  title: string;
+  description: string;
+}
+
 // Feature icon mapping with more options
 const featureIcons = {
   experts: GraduationCap,
@@ -79,9 +85,33 @@ export default function WhyChooseUsSection() {
   }, []);
 
   // Function to safely get translated items
-  const getFeatures = () => {
-    const features = t("whyChooseUs.items", { returnObjects: true });
-    return Array.isArray(features) ? features : [];
+  const getFeatures = (): FeatureItem[] => {
+    try {
+      const features = t("whyChooseUs.items", { returnObjects: true });
+
+      if (Array.isArray(features)) {
+        return features.map((item) => {
+          if (typeof item === "object" && item !== null) {
+            return {
+              title:
+                typeof (item as Record<string, unknown>).title === "string"
+                  ? ((item as Record<string, unknown>).title as string)
+                  : "",
+              description:
+                typeof (item as Record<string, unknown>).description ===
+                "string"
+                  ? ((item as Record<string, unknown>).description as string)
+                  : "",
+            };
+          }
+          return { title: String(item), description: "" };
+        });
+      }
+      return [];
+    } catch (error) {
+      console.error("Error parsing features:", error);
+      return [];
+    }
   };
 
   // Keys for the feature icons - ensure they exist in the featureIcons object
@@ -96,7 +126,7 @@ export default function WhyChooseUsSection() {
             {t("whyChooseUs.title")}
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {getFeatures().map((item: any, index: number) => (
+            {getFeatures().map((item: FeatureItem, index: number) => (
               <div key={index} className="bg-muted/10 border rounded-xl p-6">
                 <div className="mb-4 h-8 w-8 bg-primary/20 rounded-full"></div>
                 <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
@@ -158,7 +188,7 @@ export default function WhyChooseUsSection() {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {features.map((item: any, index: number) => {
+          {features.map((item: FeatureItem, index: number) => {
             const IconComponent =
               featureIcons[
                 iconKeys[index % iconKeys.length] as keyof typeof featureIcons

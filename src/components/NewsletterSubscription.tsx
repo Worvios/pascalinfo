@@ -13,7 +13,6 @@ declare global {
 import { Button } from "@/components/ui/button";
 import { Mail, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import Script from "next/script";
 
 const NewsletterSubscription = () => {
   const [isOpen, setIsOpen] = useState(false);

@@ -50,11 +50,9 @@ export default function Footer() {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   const [copiedField, setCopiedField] = useState<string | null>(null);
-  const [scriptLoaded, setScriptLoaded] = useState(false);
 
   // Initialize ConvertKit when the script loads
   const handleScriptLoad = () => {
-    setScriptLoaded(true);
     if (typeof window !== "undefined" && window.formkit) {
       try {
         window.formkit.init();

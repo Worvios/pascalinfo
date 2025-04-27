@@ -19,6 +19,23 @@ import {
 } from "lucide-react";
 import use3DCardEffect from "../hooks/use3DCardEffect";
 import { cn } from "@/lib/utils";
+import { LucideIcon } from "lucide-react";
+
+// Define interfaces based on the JSON structure
+interface TranslatedProgram {
+  title: string;
+  description: string;
+}
+
+// Define the Program interface with all necessary properties
+interface Program {
+  icon: LucideIcon;
+  title: string;
+  text: string;
+  rotateX: number;
+  rotateY: number;
+  url: string; // Add url as a required property
+}
 
 // Define colors for cards
 const cardColors = [
@@ -54,91 +71,64 @@ export default function ProgramsSection() {
     };
   }, []);
 
+  // Function to safely get translated programs
+  const getTranslatedPrograms = () => {
+    try {
+      // Here we handle the translation typing more carefully
+      const items = t("programs.items", { returnObjects: true }) as unknown;
+
+      // Make sure items is an array
+      if (Array.isArray(items)) {
+        // Convert each item to a TranslatedProgram
+        return items.map((item) => {
+          if (typeof item === "object" && item !== null) {
+            return {
+              title: (item as any).title || "",
+              description: (item as any).description || "",
+            } as TranslatedProgram;
+          }
+          return { title: String(item), description: "" } as TranslatedProgram;
+        });
+      }
+      return [] as TranslatedProgram[];
+    } catch (error) {
+      console.error("Error parsing programs:", error);
+      return [] as TranslatedProgram[];
+    }
+  };
+
+  // Get all programs data from translations
+  const allPrograms = getTranslatedPrograms();
+
+  // Map icons to program indices - explicitly typed as LucideIcon[]
+  const programIcons = [
+    Code,
+    ChefHat,
+    BookOpen,
+    Globe,
+    GraduationCap,
+    HeartHandshake,
+    Microscope,
+    Trophy,
+  ] as LucideIcon[];
+
   // Initialize programs with icons and translated content
   const initialPrograms = useMemo(
-    () => [
-      {
-        icon: Code,
-        title: t("programs.items.0.title"),
-        text: t("programs.items.0.description"),
+    () =>
+      allPrograms.map((program, index) => ({
+        icon: programIcons[index % programIcons.length],
+        title: program.title,
+        text: program.description,
         rotateX: 0,
         rotateY: 0,
-        url: "#dev", // Placeholder URL
-      },
-      {
-        icon: ChefHat,
-        title: t("programs.items.1.title"),
-        text: t("programs.items.1.description"),
-        rotateX: 0,
-        rotateY: 0,
-        url: "#cooking", // Placeholder URL
-      },
-      {
-        icon: BookOpen,
-        title: t("programs.items.2.title"),
-        text: t("programs.items.2.description"),
-        rotateX: 0,
-        rotateY: 0,
-        url: "#edu", // Placeholder URL
-      },
-      {
-        icon: Globe,
-        title: t("programs.items.3.title"),
-        text: t("programs.items.3.description"),
-        rotateX: 0,
-        rotateY: 0,
-        url: "#global", // Placeholder URL
-      },
-      {
-        icon: GraduationCap,
-        title: t("programs.items.4.title"),
-        text: t("programs.items.4.description"),
-        rotateX: 0,
-        rotateY: 0,
-        url: "#grad", // Placeholder URL
-      },
-      {
-        icon: HeartHandshake,
-        title: t("programs.items.5.title"),
-        text: t("programs.items.5.description"),
-        rotateX: 0,
-        rotateY: 0,
-        url: "#volunteer", // Placeholder URL
-      },
-      {
-        icon: Microscope,
-        title: t("programs.items.6.title"),
-        text: t("programs.items.6.description"),
-        rotateX: 0,
-        rotateY: 0,
-        url: "#science", // Placeholder URL
-      },
-      {
-        icon: Trophy,
-        title: t("programs.items.7.title"),
-        text: t("programs.items.7.description"),
-        rotateX: 0,
-        rotateY: 0,
-        url: "#achievement", // Placeholder URL
-      },
-    ],
-    [t]
+        url: `#program-${index}`, // Placeholder URL
+      })) as Program[],
+    [allPrograms]
   );
 
   // Use the custom 3D card effect hook
   const { programs, handleCardMove, handleCardLeave } =
     use3DCardEffect(initialPrograms);
-
-  // Function to safely get translated objects
-  const getTranslatedPrograms = () => {
-    const items = t("programs.items", { returnObjects: true });
-    return Array.isArray(items)
-      ? items
-      : Object.values(items as Record<string, any>);
-  };
-
-  // Get all programs
-  const allPrograms = getTranslatedPrograms();
 
   // For mobile: Show only first 4 by default, all if expanded
   const visiblePrograms =
@@ -147,7 +137,13 @@ export default function ProgramsSection() {
       : allPrograms;
 
   // Program Card component
-  const ProgramCard = ({ program, index }: { program: any; index: number }) => (
+  const ProgramCard = ({
+    program,
+    index,
+  }: {
+    program: TranslatedProgram;
+    index: number;
+  }) => (
     <div
       className="group relative bg-background border border-border/30 hover:border-primary/20 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
       onMouseMove={(e) => handleCardMove(e, index)}
@@ -193,7 +189,7 @@ export default function ProgramsSection() {
           )}
         >
           {programs[index]?.icon &&
-            React.createElement(programs[index].icon, {
+            React.createElement(programs[index].icon as LucideIcon, {
               className:
                 isMounted && isMobile
                   ? "h-6 w-6 text-white"
@@ -236,11 +232,13 @@ export default function ProgramsSection() {
           "shadow-sm hover:shadow",
           isMounted && isMobile && "text-xs"
         )}
-        data-url={programs[index]?.url || "#program"}
+      >
+        {/* data-url={programs[index]?.url || "#program"}
         onClick={() =>
           (window.location.href = programs[index]?.url || "#program")
-        }
-      >
+        } 
+          */}
+
         <BookOpen className={isMounted && isMobile ? "h-3 w-3" : "h-4 w-4"} />
         {t("programs.learnMore")}
         <ArrowRight
@@ -289,7 +287,7 @@ export default function ProgramsSection() {
         {!isMounted ? (
           // Server-side and initial client render: simplified grid that works everywhere
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {allPrograms.map((program: any, index: number) => (
+            {allPrograms.map((program, index) => (
               <ProgramCard key={index} program={program} index={index} />
             ))}
           </div>
@@ -297,7 +295,7 @@ export default function ProgramsSection() {
           // Mobile layout (client-side only)
           <>
             <div className="grid grid-cols-1 gap-4">
-              {visiblePrograms.map((program: any, index: number) => (
+              {visiblePrograms.map((program, index) => (
                 <ProgramCard key={index} program={program} index={index} />
               ))}
             </div>
@@ -328,14 +326,14 @@ export default function ProgramsSection() {
           <>
             {/* First row - 3 cards */}
             <div className="grid grid-cols-3 gap-6 md:gap-8 mb-8">
-              {allPrograms.slice(0, 3).map((program: any, index: number) => (
+              {allPrograms.slice(0, 3).map((program, index) => (
                 <ProgramCard key={index} program={program} index={index} />
               ))}
             </div>
 
             {/* Second row - 3 cards */}
             <div className="grid grid-cols-3 gap-6 md:gap-8 mb-8">
-              {allPrograms.slice(3, 6).map((program: any, index: number) => (
+              {allPrograms.slice(3, 6).map((program, index) => (
                 <ProgramCard
                   key={index + 3}
                   program={program}
@@ -346,7 +344,7 @@ export default function ProgramsSection() {
 
             {/* Third row - 2 cards centered */}
             <div className="grid grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto">
-              {allPrograms.slice(6, 8).map((program: any, index: number) => (
+              {allPrograms.slice(6, 8).map((program, index) => (
                 <ProgramCard
                   key={index + 6}
                   program={program}

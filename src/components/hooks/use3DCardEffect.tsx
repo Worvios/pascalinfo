@@ -1,14 +1,28 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { ReactNode } from "react";
 
+// Define a more specific type for the icon
+// You can adjust this based on what your icon actually is
+type IconType = ReactNode | React.ComponentType<{ className?: string }>;
+
+// Define the Program interface without any 'any' types
 interface Program {
-  icon: any;
+  icon: IconType;
   title: string;
   text: string;
   rotateX: number;
   rotateY: number;
-  [key: string]: any;
+  // Replace [key: string]: any with more specific optional properties
+  // that you might need for your programs
+  link?: string;
+  color?: string;
+  description?: string;
+  difficulty?: string;
+  duration?: string;
+  category?: string;
+  tags?: string[];
 }
 
 export default function use3DCardEffect(initialPrograms: Program[]) {

@@ -7,7 +7,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { RTLImage } from "@/utils/RTLImage";
+// Remove this import: import { RTLImage } from "@/utils/RTLImage";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import Autoplay from "embla-carousel-autoplay";
 import { useLanguage } from "@/utils/LanguageProvider";
