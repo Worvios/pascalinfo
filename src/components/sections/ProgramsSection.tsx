@@ -1,3 +1,4 @@
+// src/components/sections/ProgramsSection.tsx
 "use client";
 
 import React, { useMemo, useState, useEffect } from "react";
@@ -27,6 +28,13 @@ interface TranslatedProgram {
   description: string;
 }
 
+// Define interface for translation item object
+interface TranslationItem {
+  title?: string;
+  description?: string;
+  [key: string]: unknown;
+}
+
 // Define the Program interface with all necessary properties
 interface Program {
   icon: LucideIcon;
@@ -34,7 +42,7 @@ interface Program {
   text: string;
   rotateX: number;
   rotateY: number;
-  url: string; // Add url as a required property
+  url: string;
 }
 
 // Define colors for cards
@@ -82,9 +90,13 @@ export default function ProgramsSection() {
         // Convert each item to a TranslatedProgram
         return items.map((item) => {
           if (typeof item === "object" && item !== null) {
+            const typedItem = item as TranslationItem;
             return {
-              title: (item as any).title || "",
-              description: (item as any).description || "",
+              title: typeof typedItem.title === "string" ? typedItem.title : "",
+              description:
+                typeof typedItem.description === "string"
+                  ? typedItem.description
+                  : "",
             } as TranslatedProgram;
           }
           return { title: String(item), description: "" } as TranslatedProgram;
@@ -123,7 +135,7 @@ export default function ProgramsSection() {
         rotateY: 0,
         url: `#program-${index}`, // Placeholder URL
       })) as Program[],
-    [allPrograms]
+    [allPrograms, programIcons] // Added programIcons as a dependency
   );
 
   // Use the custom 3D card effect hook
