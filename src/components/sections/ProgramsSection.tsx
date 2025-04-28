@@ -1,4 +1,3 @@
-// src/components/sections/ProgramsSection.tsx
 "use client";
 
 import React, { useMemo, useState, useEffect } from "react";
@@ -82,12 +81,9 @@ export default function ProgramsSection() {
   // Function to safely get translated programs
   const getTranslatedPrograms = () => {
     try {
-      // Here we handle the translation typing more carefully
       const items = t("programs.items", { returnObjects: true }) as unknown;
 
-      // Make sure items is an array
       if (Array.isArray(items)) {
-        // Convert each item to a TranslatedProgram
         return items.map((item) => {
           if (typeof item === "object" && item !== null) {
             const typedItem = item as TranslationItem;
@@ -112,17 +108,21 @@ export default function ProgramsSection() {
   // Get all programs data from translations
   const allPrograms = getTranslatedPrograms();
 
-  // Map icons to program indices - explicitly typed as LucideIcon[]
-  const programIcons = [
-    Code,
-    ChefHat,
-    BookOpen,
-    Globe,
-    GraduationCap,
-    HeartHandshake,
-    Microscope,
-    Trophy,
-  ] as LucideIcon[];
+  // Map icons to program indices - memoized to prevent recreation on every render
+  const programIcons = useMemo(
+    () =>
+      [
+        Code,
+        ChefHat,
+        BookOpen,
+        Globe,
+        GraduationCap,
+        HeartHandshake,
+        Microscope,
+        Trophy,
+      ] as LucideIcon[],
+    []
+  );
 
   // Initialize programs with icons and translated content
   const initialPrograms = useMemo(
@@ -135,7 +135,7 @@ export default function ProgramsSection() {
         rotateY: 0,
         url: `#program-${index}`, // Placeholder URL
       })) as Program[],
-    [allPrograms, programIcons] // Added programIcons as a dependency
+    [allPrograms, programIcons]
   );
 
   // Use the custom 3D card effect hook
@@ -245,12 +245,6 @@ export default function ProgramsSection() {
           isMounted && isMobile && "text-xs"
         )}
       >
-        {/* data-url={programs[index]?.url || "#program"}
-        onClick={() =>
-          (window.location.href = programs[index]?.url || "#program")
-        } 
-          */}
-
         <BookOpen className={isMounted && isMobile ? "h-3 w-3" : "h-4 w-4"} />
         {t("programs.learnMore")}
         <ArrowRight
@@ -297,14 +291,12 @@ export default function ProgramsSection() {
 
         {/* Client-side only: render different layouts based on screen size after mounting */}
         {!isMounted ? (
-          // Server-side and initial client render: simplified grid that works everywhere
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {allPrograms.map((program, index) => (
               <ProgramCard key={index} program={program} index={index} />
             ))}
           </div>
         ) : isMobile ? (
-          // Mobile layout (client-side only)
           <>
             <div className="grid grid-cols-1 gap-4">
               {visiblePrograms.map((program, index) => (
@@ -312,7 +304,6 @@ export default function ProgramsSection() {
               ))}
             </div>
 
-            {/* Show More/Less toggle button */}
             {allPrograms.length > 4 && (
               <Button
                 variant="ghost"
@@ -334,16 +325,13 @@ export default function ProgramsSection() {
             )}
           </>
         ) : (
-          // Desktop layout (client-side only)
           <>
-            {/* First row - 3 cards */}
             <div className="grid grid-cols-3 gap-6 md:gap-8 mb-8">
               {allPrograms.slice(0, 3).map((program, index) => (
                 <ProgramCard key={index} program={program} index={index} />
               ))}
             </div>
 
-            {/* Second row - 3 cards */}
             <div className="grid grid-cols-3 gap-6 md:gap-8 mb-8">
               {allPrograms.slice(3, 6).map((program, index) => (
                 <ProgramCard
@@ -354,7 +342,6 @@ export default function ProgramsSection() {
               ))}
             </div>
 
-            {/* Third row - 2 cards centered */}
             <div className="grid grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto">
               {allPrograms.slice(6, 8).map((program, index) => (
                 <ProgramCard
