@@ -20,7 +20,6 @@ export default function TestimonialsSection() {
   const [emblaRef, setEmblaRef] = useState<EmblaCarouselType | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(0);
-  const [setAnimationDirection] = useState<"left" | "right" | null>(null);
   const isRtl = direction === "rtl";
 
   const testimonials = [
@@ -63,12 +62,6 @@ export default function TestimonialsSection() {
 
   useEffect(() => {
     if (prevIndex === activeIndex) return;
-
-    const totalItems = testimonials.length;
-    const isMovingRight =
-      (activeIndex === 0 && prevIndex === totalItems - 1) ||
-      (activeIndex > prevIndex &&
-        !(prevIndex === 0 && activeIndex === totalItems - 1));
 
     setPrevIndex(activeIndex);
   }, [activeIndex, prevIndex, testimonials.length]);
