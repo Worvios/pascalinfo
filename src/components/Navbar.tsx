@@ -2,6 +2,8 @@
 
 import React, { useCallback, useMemo, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link"; // Import Link for navigation
+import { usePathname } from "next/navigation"; // Import usePathname to get current path
 import { useTranslation } from "react-i18next";
 import i18n from "i18next";
 import { toast } from "react-toastify";
@@ -38,7 +40,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import Flag from "./ui/Flag"; // Import the new Flag component
+import Flag from "./ui/Flag";
 
 interface NavbarProps {
   darkMode: boolean;
@@ -49,8 +51,9 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
   const { t } = useTranslation();
   const { language, setLanguage, direction } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const pathname = usePathname(); // Get current pathname
 
   // Phone number to copy
   const phoneNumber = t("footer.contact.phone");
@@ -67,11 +70,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
       pauseOnHover: true,
       draggable: true,
     });
-
-    // Reset copied state after 2 seconds
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   // Language options with flag codes
@@ -84,21 +83,19 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
     { code: "DE", label: "Deutsch", flagCode: "de" },
   ];
 
-  // Detect scroll for navbar styling
+  // Detect scroll for navbar styling and active section
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
 
-    // Detect active section based on scroll position
     const handleScrollForActiveSection = () => {
+      if (pathname !== "/") {
+        setActiveSection(null);
+        return;
+      }
       const sections = ["home", "about", "programs", "contact"];
       const scrollPosition = window.scrollY + 100;
-
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -120,15 +117,15 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("scroll", handleScrollForActiveSection);
     };
-  }, []);
+  }, [pathname]);
 
-  // Memoized static navigation links
+  // Memoized navigation links with absolute paths
   const navLinks = useMemo(
     () => [
-      { name: t("navigation.home"), href: "#home" },
-      { name: t("navigation.about"), href: "#about" },
-      { name: t("navigation.programs"), href: "#programs" },
-      { name: t("navigation.contact"), href: "#contact" },
+      { name: t("navigation.home"), href: "/#home" },
+      { name: t("navigation.about"), href: "/#about" },
+      { name: t("navigation.programs"), href: "/#programs" },
+      { name: t("navigation.contact"), href: "/#contact" },
     ],
     [t]
   );
@@ -136,19 +133,12 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
   // Handle language change
   const handleLanguageChange = useCallback(
     (code: string) => {
-      // Skip if already selected
       if (code === language) return;
-
-      // Find the language elements to animate
       const languageIndicators = document.querySelectorAll(`.language-${code.toLowerCase()}`);
       languageIndicators.forEach((el) => {
         el.classList.add("language-change-indicator");
-        setTimeout(() => {
-          el.classList.remove("language-change-indicator");
-        }, 500);
+        setTimeout(() => el.classList.remove("language-change-indicator"), 500);
       });
-
-      // Change the language
       setLanguage(code);
       i18n.changeLanguage(code.toLowerCase());
     },
@@ -166,7 +156,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-8">
         {/* Branding */}
-        <a href="#home" className="flex items-center gap-3 group">
+        <Link href="/" className="flex items-center gap-3 group">
           <div className="relative">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-amber-400 to-yellow-600 opacity-0 group-hover:opacity-70 blur-md transition-opacity duration-300" />
             <div className="relative h-10 w-10 md:h-12 md:w-12 rounded-full bg-gradient-to-r from-amber-400 to-yellow-600 p-0.5 overflow-hidden">
@@ -188,30 +178,34 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
               Centre de Formation
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
           <div className="px-1 flex">
             <ul className="flex items-center gap-1">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className={cn(
-                      "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 relative",
-                      activeSection === link.href.substring(1)
-                        ? "text-primary"
-                        : "text-foreground/80 hover:text-foreground"
-                    )}
-                  >
-                    {activeSection === link.href.substring(1) && (
-                      <span className="absolute inset-0 rounded-full bg-primary/10 animate-pulse-slow" />
-                    )}
-                    {link.name}
-                  </a>
-                </li>
-              ))}
+              {navLinks.map((link) => {
+                const sectionId = link.href.split("#")[1];
+                const isActive = pathname === "/" && activeSection === sectionId;
+                return (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 relative",
+                        isActive
+                          ? "text-primary"
+                          : "text-foreground/80 hover:text-foreground"
+                      )}
+                    >
+                      {isActive && (
+                        <span className="absolute inset-0 rounded-full bg-primary/10 animate-pulse-slow" />
+                      )}
+                      {link.name}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
@@ -255,52 +249,40 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                 className="rounded-full gap-2 px-3 hover:bg-muted group relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Current language flag */}
                 <Flag
                   code={
-                    languageOptions.find((l) => l.code === language)
-                      ?.flagCode || "fr"
+                    languageOptions.find((l) => l.code === language)?.flagCode || "fr"
                   }
                   size="sm"
                   className={`language-${language.toLowerCase()} transition-transform duration-200`}
                 />
-
                 <span className="text-sm font-medium hidden sm:inline-block">
                   {languageOptions.find((l) => l.code === language)?.code}
                 </span>
                 <ChevronDown className="h-3 w-3 text-muted-foreground transition-transform duration-300 group-data-[state=open]:rotate-180" />
               </Button>
             </DropdownMenuTrigger>
-
-            <DropdownMenuContent
-              align="end"
-              className="w-[240px] p-2 rounded-xl"
-            >
+            <DropdownMenuContent align="end" className="w-[240px] p-2 rounded-xl">
               <div className="flex items-center gap-2 px-3 py-2 mb-1 border-b border-muted/60">
                 <Globe className="h-4 w-4 text-primary/70" />
                 <span className="text-sm font-medium text-muted-foreground">
                   {t("navigation.language")}
                 </span>
               </div>
-
               <div className="grid grid-cols-2 gap-1 pt-1">
                 {languageOptions.map((option) => (
                   <DropdownMenuItem
                     key={option.code}
                     className={cn(
                       "flex items-center gap-2 px-3 py-2.5 cursor-pointer rounded-lg hover:bg-muted transition-colors group",
-                      language === option.code &&
-                        "bg-primary/10 hover:bg-primary/15"
+                      language === option.code && "bg-primary/10 hover:bg-primary/15"
                     )}
                     onClick={() => handleLanguageChange(option.code)}
                   >
                     <div
                       className={cn(
                         "flex items-center justify-center transition-transform duration-300 group-hover:scale-110",
-                        language === option.code
-                          ? "ring-2 ring-primary/30 rounded-full"
-                          : ""
+                        language === option.code ? "ring-2 ring-primary/30 rounded-full" : ""
                       )}
                     >
                       <Flag
@@ -308,7 +290,6 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                         className={`language-${option.code.toLowerCase()}`}
                       />
                     </div>
-
                     <div className="flex flex-col">
                       <span
                         className={cn(
@@ -318,11 +299,8 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                       >
                         {option.code}
                       </span>
-                      <span className="text-xs text-muted-foreground">
-                        {option.label}
-                      </span>
+                      <span className="text-xs text-muted-foreground">{option.label}</span>
                     </div>
-
                     {language === option.code && (
                       <span className="ml-auto">
                         <Check className="h-3.5 w-3.5 text-primary" />
@@ -354,17 +332,13 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                 <Sun
                   className={cn(
                     "absolute transition-all duration-300 ease-spring h-5 w-5",
-                    darkMode
-                      ? "rotate-0 opacity-100 scale-100"
-                      : "rotate-90 opacity-0 scale-0"
+                    darkMode ? "rotate-0 opacity-100 scale-100" : "rotate-90 opacity-0 scale-0"
                   )}
                 />
                 <Moon
                   className={cn(
                     "absolute transition-all duration-300 ease-spring h-5 w-5",
-                    !darkMode
-                      ? "rotate-0 opacity-100 scale-100"
-                      : "rotate-90 opacity-0 scale-0"
+                    !darkMode ? "rotate-0 opacity-100 scale-100" : "rotate-90 opacity-0 scale-0"
                   )}
                 />
               </div>
@@ -377,11 +351,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
           {/* Mobile Language Switcher Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="rounded-full w-9 h-9 p-0 relative"
-              >
+              <Button variant="ghost" size="icon" className="rounded-full w-9 h-9 p-0 relative">
                 <Flag
                   code={languageOptions.find((l) => l.code === language)?.flagCode || "fr"}
                   size="sm"
@@ -429,11 +399,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
             )}
             onClick={copyPhoneNumber}
           >
-            {copied ? (
-              <Check className="h-4 w-4" />
-            ) : (
-              <Phone className="h-4 w-4" />
-            )}
+            {copied ? <Check className="h-4 w-4" /> : <Phone className="h-4 w-4" />}
           </Button>
 
           {/* Dark Mode Toggle (Mobile) */}
@@ -475,9 +441,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                     <span className="text-xl font-bold bg-gradient-to-r from-amber-400 to-yellow-600 bg-clip-text text-transparent">
                       Pascal Info
                     </span>
-                    <span className="text-xs text-muted-foreground">
-                      Centre de Formation
-                    </span>
+                    <span className="text-xs text-muted-foreground">Centre de Formation</span>
                   </div>
                 </div>
                 <SheetClose className="rounded-full h-8 w-8 flex items-center justify-center hover:bg-muted">
@@ -488,32 +452,33 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
               <div className="flex flex-col space-y-8">
                 {/* Navigation Links */}
                 <div className="space-y-1.5">
-                  {navLinks.map((link, i) => (
-                    <SheetClose key={link.name} asChild>
-                      <a
-                        href={link.href}
-                        className={cn(
-                          "flex items-center gap-3 px-4 py-3 rounded-lg transition-all hover:bg-muted",
-                          activeSection === link.href.substring(1) &&
-                            "bg-primary/10 text-primary"
-                        )}
-                        style={{ animationDelay: `${i * 100}ms` }}
-                      >
-                        {i === 0 && <GraduationCap className="h-4 w-4" />}
-                        {i === 1 && <GraduationCap className="h-4 w-4" />}
-                        {i === 2 && <GraduationCap className="h-4 w-4" />}
-                        {i === 3 && <GraduationCap className="h-4 w-4" />}
-                        <span>{link.name}</span>
-                      </a>
-                    </SheetClose>
-                  ))}
+                  {navLinks.map((link, i) => {
+                    const sectionId = link.href.split("#")[1];
+                    const isActive = pathname === "/" && activeSection === sectionId;
+                    return (
+                      <SheetClose key={link.name} asChild>
+                        <Link
+                          href={link.href}
+                          className={cn(
+                            "flex items-center gap-3 px-4 py-3 rounded-lg transition-all hover:bg-muted",
+                            isActive && "bg-primary/10 text-primary"
+                          )}
+                          style={{ animationDelay: `${i * 100}ms` }}
+                        >
+                          {i === 0 && <GraduationCap className="h-4 w-4" />}
+                          {i === 1 && <GraduationCap className="h-4 w-4" />}
+                          {i === 2 && <GraduationCap className="h-4 w-4" />}
+                          {i === 3 && <GraduationCap className="h-4 w-4" />}
+                          <span>{link.name}</span>
+                        </Link>
+                      </SheetClose>
+                    );
+                  })}
                 </div>
 
-                {/* Call to action */}
+                {/* Call to Action */}
                 <div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {t("contact.cta.title")}
-                  </p>
+                  <p className="text-sm text-muted-foreground mb-3">{t("contact.cta.title")}</p>
                   <Button
                     className="w-full rounded-lg gap-2"
                     onClick={copyPhoneNumber}

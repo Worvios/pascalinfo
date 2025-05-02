@@ -24,6 +24,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import Link from "next/link"; // Import Link for navigation
 
 export default function AboutSection() {
   const { t } = useTranslation();
@@ -129,16 +130,13 @@ export default function AboutSection() {
                     fill
                     className="object-cover z-0"
                   />
-
                   {/* Overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10"></div>
                 </div>
-
                 {/* Decorative elements */}
                 <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/30 rounded-full blur-xl z-0"></div>
                 <div className="absolute -top-4 -left-4 w-24 h-24 bg-amber-500/20 rounded-full blur-lg z-0"></div>
               </div>
-
               {/* Floating achievement badge */}
               <div className="absolute top-6 -right-4 md:-right-10 z-20">
                 <motion.div
@@ -154,7 +152,6 @@ export default function AboutSection() {
                   <Trophy className="h-6 w-6" />
                 </motion.div>
               </div>
-
               {/* Experience highlight badge */}
               <div className="absolute -bottom-8 left-4 md:left-10 z-20">
                 <motion.div
@@ -213,7 +210,6 @@ export default function AboutSection() {
                         stat.bgClass
                       )}
                     />
-
                     <div className="flex items-start justify-between">
                       <div>
                         <h3
@@ -242,58 +238,73 @@ export default function AboutSection() {
                 ))}
               </div>
 
-              {/* Dialog for "Learn More" */}
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button
-                    variant="default"
-                    className="rounded-full px-8 group hover:shadow-lg transition-all duration-300"
-                  >
-                    {t("about.learnMore")}
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="max-w-2xl p-0 overflow-hidden">
-                  <VisuallyHidden>
-                    <DialogTitle>{t("about.distinctions.title")}</DialogTitle>
-                  </VisuallyHidden>
-
-                  {/* Dialog header with gradient background */}
-                  <div className="bg-gradient-to-r from-primary to-purple-600 p-6 text-white relative">
-                    <DialogClose className="absolute right-4 top-4 text-white/80 hover:text-white transition-colors">
-                      <X className="h-5 w-5" />
-                    </DialogClose>
-                    <Trophy className="h-10 w-10 mb-3" />
-                    <h3 className="text-2xl font-bold">
-                      {t("about.distinctions.title")}
-                    </h3>
-                    <p className="text-white/80 mt-1">
-                      {t(
-                        "about.distinctions.subtitle",
-                        "Nos réalisations et reconnaissances"
-                      )}
-                    </p>
-                  </div>
-
-                  {/* Dialog content */}
-                  <div className="p-6">
-                    <ul className="space-y-4">
-                      <AwardItem index={0} />
-                      <AwardItem index={1} />
-                      <AwardItem index={2} />
-                      <AwardItem index={3} />
-                    </ul>
-
-                    <div className="mt-8 flex justify-center">
-                      <DialogClose asChild>
-                        <Button variant="outline" className="rounded-full px-6">
-                          {t("about.close", "Fermer")}
-                        </Button>
+              {/* Dialog for "Learn More" and New Button */}
+              <div>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="default"
+                      className="rounded-full px-8 group hover:shadow-lg transition-all duration-300"
+                    >
+                      {t("about.learnMore")}
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-2xl p-0 overflow-hidden">
+                    <VisuallyHidden>
+                      <DialogTitle>{t("about.distinctions.title")}</DialogTitle>
+                    </VisuallyHidden>
+                    {/* Dialog header with gradient background */}
+                    <div className="bg-gradient-to-r from-primary to-purple-600 p-6 text-white relative">
+                      <DialogClose className="absolute right-4 top-4 text-white/80 hover:text-white transition-colors">
+                        <X className="h-5 w-5" />
                       </DialogClose>
+                      <Trophy className="h-10 w-10 mb-3" />
+                      <h3 className="text-2xl font-bold">
+                        {t("about.distinctions.title")}
+                      </h3>
+                      <p className="text-white/80 mt-1">
+                        {t(
+                          "about.distinctions.subtitle",
+                          "Nos réalisations et reconnaissances"
+                        )}
+                      </p>
                     </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
+                    {/* Dialog content */}
+                    <div className="p-6">
+                      <ul className="space-y-4">
+                        <AwardItem index={0} />
+                        <AwardItem index={1} />
+                        <AwardItem index={2} />
+                        <AwardItem index={3} />
+                      </ul>
+                      <div className="mt-8 flex justify-center">
+                        <DialogClose asChild>
+                          <Button
+                            variant="outline"
+                            className="rounded-full px-6"
+                          >
+                            {t("about.close", "Fermer")}
+                          </Button>
+                        </DialogClose>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
+                {/* New Button to Redirect to About Page */}
+                <div className="mt-4">
+                  <Link href="/pages/about">
+                    <Button
+                      variant="ghost"
+                      className="rounded-full px-6 text-primary hover:text-primary/80"
+                    >
+                      {t("about.fullStory", "Read Full Story")}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
         </div>
