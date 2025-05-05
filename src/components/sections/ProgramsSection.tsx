@@ -1,10 +1,9 @@
-// components/sections/ProgramsSection.tsx
 "use client";
 
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useLanguage } from "@/utils/LanguageProvider"; // Verify path
-import { Button } from "@/components/ui/button"; // Ensure Button is imported
+import { useLanguage } from "@/utils/LanguageProvider";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import {
   BookOpen,
@@ -20,9 +19,9 @@ import {
   ChevronRight,
   LucideIcon,
 } from "lucide-react";
-import use3DCardEffect from "../hooks/use3DCardEffect"; // Verify path
-import { cn } from "@/lib/utils"; // Verify path
-import { slugify } from "@/utils/slugify"; // Verify path
+import use3DCardEffect from "../hooks/use3DCardEffect";
+import { cn } from "@/lib/utils";
+import { slugify } from "@/utils/slugify";
 
 // --- Local Interfaces ---
 interface TranslatedProgram {
@@ -86,7 +85,7 @@ export default function ProgramsSection({
   }, []);
 
   // --- Data Fetching ---
-  const getTranslatedPrograms = (): TranslatedProgram[] => {
+  const getTranslatedPrograms = useCallback((): TranslatedProgram[] => {
     try {
       const items = t("programs.items", { returnObjects: true }) as unknown;
       if (Array.isArray(items)) {
@@ -113,9 +112,12 @@ export default function ProgramsSection({
       console.error("Error parsing programs:", error);
       return [];
     }
-  };
+  }, [t]);
 
-  const allProgramsData = useMemo(() => getTranslatedPrograms(), [t]);
+  const allProgramsData = useMemo(
+    () => getTranslatedPrograms(),
+    [getTranslatedPrograms]
+  );
 
   const programsToDisplay = useMemo(() => {
     return isPreview
@@ -185,7 +187,6 @@ export default function ProgramsSection({
 
     return (
       <div
-        // Removed the outer group class, as the button has its own group/button now
         className="relative bg-card border border-border/30 hover:border-primary/30 rounded-2xl p-5 md:p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full flex flex-col"
         onMouseMove={(e) => handleCardMove(e, cardIndex)}
         onMouseLeave={() => handleCardLeave(cardIndex)}
@@ -196,10 +197,8 @@ export default function ProgramsSection({
           transformStyle: "preserve-3d",
         }}
       >
-        {/* Effects */}
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-purple-600/10 opacity-0 hover:opacity-10 transition-opacity duration-300 -z-10" />
 
-        {/* Content */}
         <div className="flex-grow">
           <div className="flex items-center mb-4">
             <div
@@ -208,7 +207,6 @@ export default function ProgramsSection({
                 "flex items-center justify-center rounded-lg",
                 "bg-gradient-to-br",
                 cardColors[originalIndex % cardColors.length],
-                // Removed group-hover effects here, apply directly if needed or rely on parent div hover state
                 "transform transition-transform duration-300 shadow-md"
               )}
             >
@@ -227,36 +225,24 @@ export default function ProgramsSection({
               {programData.title}
             </h3>
           </div>
-          <p
-            className={cn(
-              "text-muted-foreground text-sm md:text-base leading-relaxed mb-4"
-            )}
-          >
+          <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
             {programData.description}
           </p>
         </div>
 
-        {/* Button - Using asChild (Modern Approach) */}
         <div className="mt-auto pt-4">
-          {" "}
-          {/* Pushes button to bottom */}
-          <Link
-            href={currentProgramState?.url || "#"}
-            passHref // Good practice, ensures href is passed down
-            asChild={true} // **Crucial**: Use asChild, remove legacyBehavior
-          >
-            {/* NO <a> tag here */}
+          <Link href={currentProgramState?.url || "#"} passHref>
             <Button
               variant="outline"
               size={isMounted && isMobile ? "sm" : "default"}
-              className="w-full gap-2 group/button" // Button acts as the link target
+              className="w-full gap-2 group/button"
             >
               <BookOpen className="h-4 w-4" />
               {t("programs.learnMore")}
               <ArrowRight
                 className={cn(
                   "h-4 w-4",
-                  "ml-1 transition-transform duration-300 group-hover/button:translate-x-1", // Target button's group
+                  "ml-1 transition-transform duration-300 group-hover/button:translate-x-1",
                   direction === "rtl" &&
                     "rotate-180 mr-1 ml-0 group-hover/button:-translate-x-1"
                 )}
@@ -268,13 +254,11 @@ export default function ProgramsSection({
     );
   };
 
-  // --- Main Return ---
   return (
     <section
       id="programs"
       className="py-16 md:py-20 px-4 md:px-8 bg-background relative overflow-hidden"
     >
-      {/* Decorative elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[100px] animate-float opacity-20" />
         <div
@@ -288,7 +272,6 @@ export default function ProgramsSection({
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
         <div className="text-center mb-10 md:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4">
             <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
@@ -300,26 +283,22 @@ export default function ProgramsSection({
           </p>
         </div>
 
-        {/* Programs Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {programsToDisplay.map((programData, index) => {
-            const programStateForThisCard = typedProgramsState[index];
             return (
               <ProgramCard
                 key={`${programData.title}-${index}`}
                 programData={programData}
-                programStateFromHook={programStateForThisCard}
+                programStateFromHook={typedProgramsState[index]}
                 cardIndex={index}
               />
             );
           })}
         </div>
 
-        {/* "View All" Button - Using asChild (Modern Approach) */}
         {isPreview && allProgramsData.length > maxPreviewItems && (
           <div className="mt-12 text-center">
-            <Link href="/pages/programs" passHref asChild={true}>
-              {/* NO <a> tag here */}
+            <Link href="/pages/programs" passHref>
               <Button
                 variant="default"
                 size="lg"
