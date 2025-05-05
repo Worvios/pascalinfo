@@ -61,44 +61,231 @@
   "programs": {
     "title": "Nos Programmes",
     "subtitle": "D'Excellence",
-    "certified": "Programme Certifié",
-    "learnMore": "En Savoir Plus",
+    "certified": "Programme Certifié", 
+    "learnMore": "En Savoir Plus", 
     "showMore": "Afficher plus de programmes",
     "showLess": "Afficher moins de programmes",
     "items": [
       {
         "title": "Diplôme Bac+2 en Développement Informatique",
-        "description": "Formation complète en programmation et développement logiciel"
+        "description": "Formation complète en programmation et développement logiciel.",
+        "targetAudience": "Bacheliers scientifiques/techniques, passionnés d'informatique, professionnels en reconversion.",
+        "prerequisites": [
+          "Baccalauréat ou équivalent.",
+          "Bon niveau en logique et mathématiques.",
+          "Forte motivation pour l'informatique."
+        ],
+        "learningObjectives": [
+          "Maîtriser l'algorithmique et les structures de données.",
+          "Développer des applications web et logicielles.",
+          "Concevoir et gérer des bases de données.",
+          "Comprendre les architectures systèmes et réseaux.",
+          "Travailler en équipe et gérer des projets."
+        ],
+        "curriculumHighlights": [
+          "Algorithmique & Programmation (Java, Python, C#)",
+          "Développement Web Frontend (HTML, CSS, JS, React/Angular)",
+          "Développement Web Backend (Node.js, PHP/Symfony, Java/Spring)",
+          "Bases de Données (SQL, NoSQL)",
+          "Systèmes d'Exploitation & Réseaux",
+          "Gestion de Projet & Méthodes Agiles",
+          "Anglais Technique"
+        ],
+        "teachingMethods": "Cours théoriques interactifs, travaux pratiques intensifs, projets individuels et de groupe, études de cas, stage en entreprise.",
+        "assessmentMethods": "Contrôle continu, examens semestriels, projets, soutenance de stage/projet de fin d'études.",
+        "careerProspects": [
+          "Développeur Web (Full-Stack, Frontend, Backend)",
+          "Développeur Logiciel",
+          "Analyste Programmeur",
+          "Technicien Support Applicatif",
+          "Gestionnaire de Bases de Données Junior"
+        ],
+        "furtherStudies": "Licence Professionnelle (L3), Écoles d'ingénieurs (admissions parallèles).",
+        "certification": "Diplôme de Technicien Spécialisé en Développement Informatique, accrédité par l'État.",
+        "duration": "2 ans (4 semestres), incluant un stage obligatoire."
       },
       {
         "title": "Diplôme Bac+2 en Gestion d'Entreprise",
-        "description": "Acquérir les compétences essentielles pour gérer et développer une entreprise"
+        "description": "Acquérir les compétences essentielles pour gérer et développer une entreprise.",
+        "targetAudience": "Bacheliers toutes séries, employés souhaitant évoluer vers des postes de gestion.",
+        "prerequisites": [
+          "Baccalauréat ou équivalent.",
+          "Intérêt pour l'économie et la gestion.",
+          "Bonnes capacités de communication et d'analyse."
+        ],
+        "learningObjectives": [
+          "Comprendre les principes de la comptabilité et de la finance.",
+          "Maîtriser les techniques de marketing et de vente.",
+          "Appliquer les bases du droit des affaires.",
+          "Gérer les aspects administratifs et des ressources humaines.",
+          "Utiliser les outils informatiques de gestion."
+        ],
+        "curriculumHighlights": [
+          "Comptabilité Générale et Analytique",
+          "Marketing Fondamental et Opérationnel",
+          "Droit Commercial et Social",
+          "Gestion des Ressources Humaines",
+          "Fiscalité de l'Entreprise",
+          "Informatique de Gestion (Excel, logiciels ERP/CRM)",
+          "Communication Professionnelle"
+        ],
+        "teachingMethods": "Cours, études de cas, simulations d'entreprise, travaux de groupe, stage pratique.",
+        "assessmentMethods": "Contrôle continu, examens écrits et oraux, projet de fin d'études, évaluation du stage.",
+        "careerProspects": [
+          "Assistant(e) de Gestion PME/PMI",
+          "Assistant(e) Comptable",
+          "Chargé(e) de Clientèle",
+          "Assistant(e) Marketing",
+          "Assistant(e) Ressources Humaines"
+        ],
+        "furtherStudies": "Licence en Gestion, Économie, Écoles de Commerce (admissions parallèles).",
+        "certification": "Diplôme de Technicien Spécialisé en Gestion d'Entreprise, accrédité par l'État.",
+        "duration": "2 ans (4 semestres), incluant un stage obligatoire."
       },
       {
         "title": "Cours de Soutien",
-        "description": "Accompagnement personnalisé pour les étudiants de tous niveaux"
+        "description": "Accompagnement personnalisé pour les étudiants de tous niveaux.",
+        "targetAudience": "Élèves du primaire, collège, lycée et étudiants du supérieur.",
+        "subjectsOffered": [ 
+          "Mathématiques",
+          "Physique-Chimie",
+          "Sciences de la Vie et de la Terre (SVT)",
+          "Français",
+          "Anglais",
+          "Arabe",
+          "Matières spécifiques (selon la demande)"
+        ],
+        "teachingMethods": "Suivi individuel ou en petits groupes, révision des cours, aide aux devoirs, préparation aux examens, méthodologie d'apprentissage.",
+        "duration": "Séances ponctuelles ou suivi régulier tout au long de l'année scolaire/universitaire.",
+        "levels": "Primaire, Collège, Lycée, Supérieur (selon les matières)."
       },
       {
         "title": "Cours de Langues",
-        "description": "Apprenez les langues étrangères avec des méthodes modernes et efficaces"
+        "description": "Apprenez les langues étrangères avec des méthodes modernes et efficaces.",
+        "targetAudience": "Étudiants, professionnels, particuliers souhaitant apprendre ou perfectionner une langue.",
+        "languagesOffered": [
+          "Français (FLE - Français Langue Étrangère)",
+          "Anglais (Général, Professionnel, Préparation Tests)",
+          "Espagnol",
+          "Allemand",
+          "Arabe (pour non-natifs)"
+        ],
+        "levels": "Tous niveaux (A1 à C2 selon le CECRL), cours adaptés (débutant, intermédiaire, avancé).",
+        "teachingMethods": "Approche communicative, immersion, jeux de rôles, supports multimédias, petits groupes pour favoriser l'interaction.",
+        "certification": "Préparation aux certifications internationales (DELF/DALF, TCF, TOEFL, IELTS, DELE, Goethe-Zertifikat).",
+        "duration": "Modules de durée variable (trimestriels, semestriels, intensifs)."
       },
       {
         "title": "Formation Continue Professionnelle",
-        "description": "Perfectionnez vos compétences ou réorientez votre carrière"
+        "description": "Perfectionnez vos compétences ou réorientez votre carrière.",
+        "targetAudience": "Salariés, demandeurs d'emploi, entreprises souhaitant former leur personnel.",
+        "areasOffered": [ 
+          "Informatique & Bureautique (Excel avancé, MS Project, etc.)",
+          "Développement Web & Digital",
+          "Management & Leadership",
+          "Marketing Digital & Vente",
+          "Langues Professionnelles",
+          "Comptabilité & Finance"
+        ],
+        "learningObjectives": [
+          "Acquérir de nouvelles compétences techniques ou managériales.",
+          "Se mettre à jour sur les évolutions de son secteur.",
+          "Faciliter une reconversion professionnelle.",
+          "Obtenir une certification reconnue."
+        ],
+        "teachingMethods": "Formations courtes et ciblées, ateliers pratiques, séminaires, possibilité de formations sur mesure pour les entreprises (intra/inter).",
+        "duration": "Variable selon le module (quelques jours à plusieurs semaines)."
       },
       {
         "title": "Traduction",
-        "description": "Services de traduction professionnelle en plusieurs langues"
+        "description": "Services de traduction professionnelle en plusieurs langues.",
+        "targetAudience": "Entreprises, administrations, particuliers.",
+        "languagesOffered": [ 
+          "Arabe <> Français",
+          "Arabe <> Anglais",
+          "Français <> Anglais",
+          "Espagnol (vers/depuis Français/Arabe/Anglais)",
+          "Autres langues sur demande"
+        ],
+        "documentTypes": [ 
+          "Documents juridiques et administratifs",
+          "Contenus web et marketing",
+          "Documents techniques et scientifiques",
+          "Correspondance commerciale",
+          "Traduction assermentée (si applicable)"
+        ],
+        "servicesOffered": [ 
+          "Traduction simple",
+          "Traduction assermentée",
+          "Relecture et correction",
+          "Interprétation (sur demande)"
+        ]
       },
       {
         "title": "Inscription Enseignement Supérieur",
-        "description": "Assistance pour les inscriptions au Maroc et à l'étranger"
+        "description": "Assistance pour les inscriptions au Maroc et à l'étranger.",
+        "targetAudience": "Lycéens et étudiants souhaitant poursuivre leurs études supérieures.",
+        "servicesOffered": [ 
+          "Conseil en orientation",
+          "Aide à la sélection des établissements et programmes",
+          "Préparation des dossiers de candidature (Maroc, France, Canada, USA, etc.)",
+          "Assistance pour les démarches de visa étudiant",
+          "Préparation aux entretiens"
+        ],
+        "destinations": [ 
+          "Maroc (Universités, Grandes Écoles)",
+          "France (Campus France, Parcoursup, Écoles privées)",
+          "Canada",
+          "États-Unis",
+          "Autres pays (selon expertise)"
+        ]
       },
       {
         "title": "Salles VIP et Équipées",
-        "description": "Espaces modernes avec vidéoprojecteurs pour une expérience d'apprentissage optimale"
+        "description": "Espaces modernes avec vidéoprojecteurs pour une expérience d'apprentissage optimale.",
+        "targetAudience": "Formateurs indépendants, entreprises, associations, organismes.",
+        "features": [ 
+          "Salles climatisées de différentes capacités",
+          "Vidéoprojecteur haute définition",
+          "Tableau blanc interactif ou classique",
+          "Connexion Internet Wi-Fi haut débit",
+          "Mobilier confortable et modulable",
+          "Espace accueil et pause-café (sur demande)"
+        ],
+        "useCases": [ 
+          "Formations et séminaires",
+          "Réunions d'entreprise",
+          "Présentations et conférences",
+          "Examens et concours",
+          "Événements professionnels"
+        ],
+        "capacity": "Salles pouvant accueillir de 10 à 50 personnes (selon la salle)." 
       }
-    ]
+    ],
+    "details": {
+      "title": "Informations Clés du Programme", 
+      "targetAudience": "Public Cible",
+      "prerequisites": "Prérequis",
+      "learningObjectives": "Objectifs Pédagogiques",
+      "curriculumHighlights": "Points Clés du Cursus", 
+      "teachingMethods": "Méthodes Pédagogiques",
+      "assessmentMethods": "Modalités d'Évaluation",
+      "careerProspects": "Débouchés Professionnels",
+      "furtherStudies": "Poursuite d'Études",
+      "certification": "Certification / Diplôme",
+      "duration": "Durée",
+      "languagesOffered": "Langues Proposées", 
+      "levels": "Niveaux", 
+      "subjectsOffered": "Matières Proposées", 
+      "areasOffered": "Domaines de Formation", 
+      "documentTypes": "Types de Documents Traduits", 
+      "servicesOffered": "Services Proposés", 
+      "destinations": "Pays de Destination", 
+      "features": "Caractéristiques des Salles", 
+      "useCases": "Utilisations Possibles", 
+      "capacity": "Capacité", 
+      "comingSoon": "Informations détaillées pour ce programme seront bientôt disponibles." 
+    }
   },
   "testimonials": {
     "title": "Témoignages",
@@ -192,7 +379,7 @@
     "contact": {
       "phone": {
         "title": "Téléphone",
-        "number": "+212 522 123 456",
+        "number": "+212 522 123 456", 
         "hours": "Lun-Ven: 9h-18h"
       },
       "email": {
@@ -203,7 +390,7 @@
       "social": {
         "title": "Nos réseaux sociaux",
         "platforms": [
-          { "name": "Facebook", "url": "https://facebook.com/pascalinfo" },
+          { "name": "Facebook", "url": "https://facebook.com/pascalinfo" }, 
           { "name": "Instagram", "url": "https://instagram.com/pascalinfo" },
           {
             "name": "LinkedIn",
@@ -254,10 +441,10 @@
     "contact": {
       "phone": "+212 5234-87877",
       "email": "contact@pascalinfo.ma",
-      "hours": "Lun-Ven: 9h - 21h",
+      "hours": "Lun-Sam: 9h - 21h", 
       "mobile": "+212 660-360938",
       "address": "APPT 26 ET 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
-      "emergency": "24/7 Emergency Support"
+      "emergency": "24/7 Emergency Support" 
     },
     "copyright": "© 2025 Pascal Info. Tous droits réservés.",
     "developed": "Développé par"

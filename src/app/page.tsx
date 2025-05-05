@@ -30,7 +30,7 @@ export default function SchoolShowcase() {
       <HeroSection />
       <VideoSection />
       <AboutSection />
-      <ProgramsSection />
+      <ProgramsSection isPreview={true} maxPreviewItems={3} />
       <TestimonialsSection />
       <WhyChooseUsSection />
       <ContactSection />

@@ -1,40 +1,41 @@
+// components/sections/ProgramsSection.tsx
 "use client";
 
 import React, { useMemo, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useLanguage } from "@/utils/LanguageProvider";
-import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/utils/LanguageProvider"; // Verify path
+import { Button } from "@/components/ui/button"; // Ensure Button is imported
+import Link from "next/link";
 import {
   BookOpen,
   ArrowRight,
   Code,
-  ChefHat,
-  Globe,
-  GraduationCap,
-  HeartHandshake,
-  Microscope,
-  Trophy,
-  ChevronDown,
-  ChevronUp,
+  Briefcase,
+  HelpCircle,
+  Languages,
+  Award,
+  BookText,
+  School,
+  Projector,
+  ChevronRight,
+  LucideIcon,
 } from "lucide-react";
-import use3DCardEffect from "../hooks/use3DCardEffect";
-import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import use3DCardEffect from "../hooks/use3DCardEffect"; // Verify path
+import { cn } from "@/lib/utils"; // Verify path
+import { slugify } from "@/utils/slugify"; // Verify path
 
-// Define interfaces based on the JSON structure
+// --- Local Interfaces ---
 interface TranslatedProgram {
   title: string;
   description: string;
 }
 
-// Define interface for translation item object
 interface TranslationItem {
   title?: string;
   description?: string;
   [key: string]: unknown;
 }
 
-// Define the Program interface with all necessary properties
 interface Program {
   icon: LucideIcon;
   title: string;
@@ -42,230 +43,214 @@ interface Program {
   rotateX: number;
   rotateY: number;
   url: string;
+  originalIndex: number;
 }
 
-// Define colors for cards
+// --- Card Colors ---
 const cardColors = [
   "from-blue-500 to-indigo-600",
-  "from-amber-500 to-orange-600",
-  "from-emerald-500 to-teal-600",
-  "from-purple-500 to-fuchsia-600",
-  "from-rose-500 to-pink-600",
-  "from-cyan-500 to-blue-600",
   "from-green-500 to-emerald-600",
+  "from-amber-500 to-orange-600",
+  "from-purple-500 to-fuchsia-600",
+  "from-sky-500 to-cyan-600",
+  "from-rose-500 to-pink-600",
+  "from-lime-500 to-green-600",
   "from-violet-500 to-purple-600",
 ];
 
-export default function ProgramsSection() {
+// --- Component Props ---
+interface ProgramsSectionProps {
+  isPreview?: boolean;
+  maxPreviewItems?: number;
+}
+
+export default function ProgramsSection({
+  isPreview = false,
+  maxPreviewItems = 3,
+}: ProgramsSectionProps) {
   const { t } = useTranslation();
   const { direction } = useLanguage();
-  const [expandedView, setExpandedView] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Check for mobile view after component mounts to avoid hydration issues
   useEffect(() => {
     setIsMounted(true);
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
-
     checkMobile();
     window.addEventListener("resize", checkMobile);
-
     return () => {
       window.removeEventListener("resize", checkMobile);
     };
   }, []);
 
-  // Function to safely get translated programs
-  const getTranslatedPrograms = () => {
+  // --- Data Fetching ---
+  const getTranslatedPrograms = (): TranslatedProgram[] => {
     try {
       const items = t("programs.items", { returnObjects: true }) as unknown;
-
       if (Array.isArray(items)) {
-        return items.map((item) => {
-          if (typeof item === "object" && item !== null) {
-            const typedItem = item as TranslationItem;
-            return {
-              title: typeof typedItem.title === "string" ? typedItem.title : "",
-              description:
-                typeof typedItem.description === "string"
-                  ? typedItem.description
-                  : "",
-            } as TranslatedProgram;
-          }
-          return { title: String(item), description: "" } as TranslatedProgram;
-        });
+        return items
+          .map((item) => {
+            if (typeof item === "object" && item !== null) {
+              const typedItem = item as TranslationItem;
+              return {
+                title: typeof typedItem.title === "string" ? typedItem.title : "",
+                description: typeof typedItem.description === "string" ? typedItem.description : "",
+              };
+            }
+            return { title: String(item), description: "" };
+          })
+          .filter((p) => p.title);
       }
-      return [] as TranslatedProgram[];
+      console.warn("programs.items translation is not an array or is missing.");
+      return [];
     } catch (error) {
       console.error("Error parsing programs:", error);
-      return [] as TranslatedProgram[];
+      return [];
     }
   };
 
-  // Get all programs data from translations
-  const allPrograms = getTranslatedPrograms();
+  const allProgramsData = useMemo(() => getTranslatedPrograms(), [t]);
 
-  // Map icons to program indices - memoized to prevent recreation on every render
+  const programsToDisplay = useMemo(() => {
+    return isPreview
+      ? allProgramsData.slice(0, maxPreviewItems)
+      : allProgramsData;
+  }, [isPreview, allProgramsData, maxPreviewItems]);
+
+  // --- Icons ---
   const programIcons = useMemo(
-    () =>
-      [
-        Code,
-        ChefHat,
-        BookOpen,
-        Globe,
-        GraduationCap,
-        HeartHandshake,
-        Microscope,
-        Trophy,
-      ] as LucideIcon[],
+    () => [
+        Code, Briefcase, HelpCircle, Languages, Award, BookText, School, Projector
+    ] as LucideIcon[],
     []
   );
 
-  // Initialize programs with icons and translated content
-  const initialPrograms = useMemo(
-    () =>
-      allPrograms.map((program, index) => ({
-        icon: programIcons[index % programIcons.length],
-        title: program.title,
-        text: program.description,
-        rotateX: 0,
-        rotateY: 0,
-        url: `#program-${index}`, // Placeholder URL
-      })) as Program[],
-    [allPrograms, programIcons]
+  // --- Prepare data for the 3D Effect Hook ---
+  const initialProgramsForHook = useMemo(
+    (): Program[] =>
+      programsToDisplay.map((programData, displayIndex) => {
+        const originalIndex = allProgramsData.findIndex(p => p.title === programData.title);
+        const indexToUse = originalIndex !== -1 ? originalIndex : displayIndex;
+
+        return {
+          icon: programIcons[indexToUse % programIcons.length],
+          title: programData.title,
+          text: programData.description,
+          rotateX: 0,
+          rotateY: 0,
+          url: `/pages/programs/${slugify(programData.title)}`,
+          originalIndex: indexToUse,
+        };
+      }),
+    [programsToDisplay, allProgramsData, programIcons]
   );
 
-  // Use the custom 3D card effect hook
-  const { programs, handleCardMove, handleCardLeave } =
-    use3DCardEffect(initialPrograms);
+  // --- Use the 3D Card Effect Hook ---
+  const { programs: programsState, handleCardMove, handleCardLeave } =
+    use3DCardEffect(initialProgramsForHook);
 
-  // For mobile: Show only first 4 by default, all if expanded
-  const visiblePrograms =
-    isMounted && isMobile && !expandedView
-      ? allPrograms.slice(0, 4)
-      : allPrograms;
+  const typedProgramsState = programsState as Program[];
 
-  // Program Card component
+  // --- Reusable ProgramCard Component ---
   const ProgramCard = ({
-    program,
-    index,
+    programData,
+    programStateFromHook,
+    cardIndex,
   }: {
-    program: TranslatedProgram;
-    index: number;
-  }) => (
-    <div
-      className="group relative bg-background border border-border/30 hover:border-primary/20 rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-      onMouseMove={(e) => handleCardMove(e, index)}
-      onMouseLeave={() => handleCardLeave(index)}
-      style={{
-        transform: `perspective(1000px) rotateX(${programs[index]?.rotateX}deg) rotateY(${programs[index]?.rotateY}deg)`,
-        transformStyle: "preserve-3d",
-      }}
-    >
-      {/* Glass overlay effect on hover */}
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    programData: TranslatedProgram;
+    programStateFromHook: Program | undefined;
+    cardIndex: number;
+  }) => {
+    const currentProgramState = programStateFromHook;
+    const originalIndex = currentProgramState?.originalIndex ?? cardIndex;
 
-      {/* Card shine effect on hover */}
+    return (
       <div
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 overflow-hidden pointer-events-none"
+        // Removed the outer group class, as the button has its own group/button now
+        className="relative bg-card border border-border/30 hover:border-primary/30 rounded-2xl p-5 md:p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full flex flex-col"
+        onMouseMove={(e) => handleCardMove(e, cardIndex)}
+        onMouseLeave={() => handleCardLeave(cardIndex)}
         style={{
-          background:
-            "linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.3) 50%, transparent 75%)",
-          backgroundSize: "200% 200%",
-          animation: "shineEffect 2s infinite",
+          transform: `perspective(1000px) rotateX(${currentProgramState?.rotateX ?? 0}deg) rotateY(${currentProgramState?.rotateY ?? 0}deg)`,
+          transformStyle: "preserve-3d",
         }}
-      />
-
-      {/* Content layout changes based on screen size */}
-      <div
-        className={
-          isMounted && isMobile
-            ? "flex items-center"
-            : "flex flex-col items-center"
-        }
       >
-        {/* Program icon */}
-        <div
-          className={cn(
-            isMounted && isMobile
-              ? "w-14 h-14 mr-4 flex-shrink-0"
-              : "w-16 h-16 mb-6",
-            "flex items-center justify-center rounded-xl",
-            "bg-gradient-to-br",
-            cardColors[index % cardColors.length],
-            "transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3",
-            "shadow-lg"
-          )}
-        >
-          {programs[index]?.icon &&
-            React.createElement(programs[index].icon as LucideIcon, {
-              className:
-                isMounted && isMobile
-                  ? "h-6 w-6 text-white"
-                  : "h-8 w-8 text-white",
-            })}
+        {/* Effects */}
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-purple-600/10 opacity-0 hover:opacity-10 transition-opacity duration-300 -z-10" />
+
+        {/* Content */}
+        <div className="flex-grow">
+          <div className="flex items-center mb-4">
+              <div
+                  className={cn(
+                  "w-12 h-12 md:w-14 md:h-14 mr-4 flex-shrink-0",
+                  "flex items-center justify-center rounded-lg",
+                  "bg-gradient-to-br",
+                  cardColors[originalIndex % cardColors.length],
+                   // Removed group-hover effects here, apply directly if needed or rely on parent div hover state
+                  "transform transition-transform duration-300 shadow-md"
+                  )}
+              >
+                  {currentProgramState?.icon &&
+                  React.createElement(currentProgramState.icon, {
+                      className: "h-6 w-6 md:h-7 md:h-7 text-white",
+                  })}
+              </div>
+              <h3
+                  className={cn(
+                  "font-semibold text-lg md:text-xl",
+                  "bg-gradient-to-r bg-clip-text text-transparent",
+                  cardColors[originalIndex % cardColors.length]
+                  )}
+                >
+                  {programData.title}
+              </h3>
+          </div>
+          <p className={cn("text-muted-foreground text-sm md:text-base leading-relaxed mb-4")}>
+            {programData.description}
+          </p>
         </div>
 
-        {/* Program title */}
-        <h3
-          className={cn(
-            "font-bold",
-            isMounted && isMobile
-              ? "text-lg text-left"
-              : "text-xl text-center mb-4 mt-4",
-            "bg-gradient-to-r bg-clip-text text-transparent",
-            cardColors[index % cardColors.length]
-          )}
-        >
-          {program.title}
-        </h3>
+        {/* Button - Using asChild (Modern Approach) */}
+        <div className="mt-auto pt-4"> {/* Pushes button to bottom */}
+          <Link
+              href={currentProgramState?.url || "#"}
+              passHref // Good practice, ensures href is passed down
+              asChild   // **Crucial**: Use asChild, remove legacyBehavior
+          >
+            {/* NO <a> tag here */}
+            <Button
+                variant="outline"
+                size={isMounted && isMobile ? "sm" : "default"}
+                className="w-full gap-2 group/button" // Button acts as the link target
+            >
+                <BookOpen className="h-4 w-4" />
+                {t("programs.learnMore")}
+                <ArrowRight
+                    className={cn(
+                    "h-4 w-4",
+                    "ml-1 transition-transform duration-300 group-hover/button:translate-x-1", // Target button's group
+                    direction === "rtl" && "rotate-180 mr-1 ml-0 group-hover/button:-translate-x-1"
+                    )}
+                />
+            </Button>
+          </Link>
+        </div>
       </div>
+    );
+  };
 
-      {/* Program description */}
-      <p
-        className={cn(
-          "text-muted-foreground my-4",
-          isMounted && isMobile ? "text-sm leading-relaxed" : "text-center"
-        )}
-      >
-        {program.description}
-      </p>
 
-      {/* Button with placeholder URL */}
-      <Button
-        variant="outline"
-        size={isMounted && isMobile ? "sm" : "default"}
-        className={cn(
-          "w-full rounded-xl gap-2 border-dashed",
-          "hover:bg-primary/5 hover:border-primary/30 transition-all duration-300",
-          "shadow-sm hover:shadow",
-          isMounted && isMobile && "text-xs"
-        )}
-      >
-        <BookOpen className={isMounted && isMobile ? "h-3 w-3" : "h-4 w-4"} />
-        {t("programs.learnMore")}
-        <ArrowRight
-          className={cn(
-            isMounted && isMobile ? "h-3 w-3" : "h-4 w-4",
-            "ml-1 transition-transform duration-300 group-hover:translate-x-1",
-            direction === "rtl" &&
-              "rotate-180 mr-1 ml-0 group-hover:-translate-x-1"
-          )}
-        />
-      </Button>
-    </div>
-  );
-
+  // --- Main Return ---
   return (
     <section
       id="programs"
       className="py-16 md:py-20 px-4 md:px-8 bg-background relative overflow-hidden"
     >
-      {/* Enhanced background decorative elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[100px] animate-float opacity-20" />
         <div
           className="absolute bottom-20 right-10 w-80 h-80 bg-amber-500/20 rounded-full blur-[120px] animate-float opacity-20"
@@ -277,9 +262,10 @@ export default function ProgramsSection() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section Header */}
         <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 md:mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4">
             <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
               {t("programs.title")}
             </span>
@@ -289,69 +275,32 @@ export default function ProgramsSection() {
           </p>
         </div>
 
-        {/* Client-side only: render different layouts based on screen size after mounting */}
-        {!isMounted ? (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {allPrograms.map((program, index) => (
-              <ProgramCard key={index} program={program} index={index} />
-            ))}
+        {/* Programs Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {programsToDisplay.map((programData, index) => {
+            const programStateForThisCard = typedProgramsState[index];
+            return (
+              <ProgramCard
+                key={`${programData.title}-${index}`}
+                programData={programData}
+                programStateFromHook={programStateForThisCard}
+                cardIndex={index}
+              />
+            );
+          })}
+        </div>
+
+        {/* "View All" Button - Using asChild (Modern Approach) */}
+        {isPreview && allProgramsData.length > maxPreviewItems && (
+          <div className="mt-12 text-center">
+            <Link href="/pages/programs" passHref aschild='true'>
+                {/* NO <a> tag here */}
+                <Button variant="default" size="lg" className="rounded-full group">
+                  {t("programs.viewAll", "Voir tous les programmes")}
+                  <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+            </Link>
           </div>
-        ) : isMobile ? (
-          <>
-            <div className="grid grid-cols-1 gap-4">
-              {visiblePrograms.map((program, index) => (
-                <ProgramCard key={index} program={program} index={index} />
-              ))}
-            </div>
-
-            {allPrograms.length > 4 && (
-              <Button
-                variant="ghost"
-                onClick={() => setExpandedView(!expandedView)}
-                className="mt-6 mx-auto flex items-center gap-2 text-primary"
-              >
-                {expandedView ? (
-                  <>
-                    <span>{t("programs.showLess")}</span>
-                    <ChevronUp className="h-4 w-4" />
-                  </>
-                ) : (
-                  <>
-                    <span>{t("programs.showMore")}</span>
-                    <ChevronDown className="h-4 w-4" />
-                  </>
-                )}
-              </Button>
-            )}
-          </>
-        ) : (
-          <>
-            <div className="grid grid-cols-3 gap-6 md:gap-8 mb-8">
-              {allPrograms.slice(0, 3).map((program, index) => (
-                <ProgramCard key={index} program={program} index={index} />
-              ))}
-            </div>
-
-            <div className="grid grid-cols-3 gap-6 md:gap-8 mb-8">
-              {allPrograms.slice(3, 6).map((program, index) => (
-                <ProgramCard
-                  key={index + 3}
-                  program={program}
-                  index={index + 3}
-                />
-              ))}
-            </div>
-
-            <div className="grid grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto">
-              {allPrograms.slice(6, 8).map((program, index) => (
-                <ProgramCard
-                  key={index + 6}
-                  program={program}
-                  index={index + 6}
-                />
-              ))}
-            </div>
-          </>
         )}
       </div>
     </section>

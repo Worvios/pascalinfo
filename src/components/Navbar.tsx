@@ -124,7 +124,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
     () => [
       { name: t("navigation.home"), href: "/#home" },
       { name: t("navigation.about"), href: "/#about" },
-      { name: t("navigation.programs"), href: "/#programs" },
+      { name: t("navigation.programs"), href: "/pages/programs" },
       { name: t("navigation.contact"), href: "/#contact" },
     ],
     [t]
@@ -186,7 +186,9 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
             <ul className="flex items-center gap-1">
               {navLinks.map((link) => {
                 const sectionId = link.href.split("#")[1];
-                const isActive = pathname === "/" && activeSection === sectionId;
+                const isActive =
+  (pathname === "/" && activeSection === sectionId) ||
+  (pathname === link.href && link.href.startsWith("/pages/"));
                 return (
                   <li key={link.name}>
                     <Link
