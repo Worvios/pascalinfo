@@ -30,7 +30,8 @@ import {
   CheckSquare,
   Globe
 } from "lucide-react";
-import { cn } from "@/lib/utils"; // Ensure this path is correct
+//import { cn } from "@/lib/utils"; 
+// Ensure this path is correct
 import { SEO } from "@/components/SEO"; // Ensure this path is correct
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
