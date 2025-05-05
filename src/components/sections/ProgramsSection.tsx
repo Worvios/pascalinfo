@@ -95,8 +95,12 @@ export default function ProgramsSection({
             if (typeof item === "object" && item !== null) {
               const typedItem = item as TranslationItem;
               return {
-                title: typeof typedItem.title === "string" ? typedItem.title : "",
-                description: typeof typedItem.description === "string" ? typedItem.description : "",
+                title:
+                  typeof typedItem.title === "string" ? typedItem.title : "",
+                description:
+                  typeof typedItem.description === "string"
+                    ? typedItem.description
+                    : "",
               };
             }
             return { title: String(item), description: "" };
@@ -121,9 +125,17 @@ export default function ProgramsSection({
 
   // --- Icons ---
   const programIcons = useMemo(
-    () => [
-        Code, Briefcase, HelpCircle, Languages, Award, BookText, School, Projector
-    ] as LucideIcon[],
+    () =>
+      [
+        Code,
+        Briefcase,
+        HelpCircle,
+        Languages,
+        Award,
+        BookText,
+        School,
+        Projector,
+      ] as LucideIcon[],
     []
   );
 
@@ -131,7 +143,9 @@ export default function ProgramsSection({
   const initialProgramsForHook = useMemo(
     (): Program[] =>
       programsToDisplay.map((programData, displayIndex) => {
-        const originalIndex = allProgramsData.findIndex(p => p.title === programData.title);
+        const originalIndex = allProgramsData.findIndex(
+          (p) => p.title === programData.title
+        );
         const indexToUse = originalIndex !== -1 ? originalIndex : displayIndex;
 
         return {
@@ -148,8 +162,11 @@ export default function ProgramsSection({
   );
 
   // --- Use the 3D Card Effect Hook ---
-  const { programs: programsState, handleCardMove, handleCardLeave } =
-    use3DCardEffect(initialProgramsForHook);
+  const {
+    programs: programsState,
+    handleCardMove,
+    handleCardLeave,
+  } = use3DCardEffect(initialProgramsForHook);
 
   const typedProgramsState = programsState as Program[];
 
@@ -173,7 +190,9 @@ export default function ProgramsSection({
         onMouseMove={(e) => handleCardMove(e, cardIndex)}
         onMouseLeave={() => handleCardLeave(cardIndex)}
         style={{
-          transform: `perspective(1000px) rotateX(${currentProgramState?.rotateX ?? 0}deg) rotateY(${currentProgramState?.rotateY ?? 0}deg)`,
+          transform: `perspective(1000px) rotateX(${
+            currentProgramState?.rotateX ?? 0
+          }deg) rotateY(${currentProgramState?.rotateY ?? 0}deg)`,
           transformStyle: "preserve-3d",
         }}
       >
@@ -183,65 +202,71 @@ export default function ProgramsSection({
         {/* Content */}
         <div className="flex-grow">
           <div className="flex items-center mb-4">
-              <div
-                  className={cn(
-                  "w-12 h-12 md:w-14 md:h-14 mr-4 flex-shrink-0",
-                  "flex items-center justify-center rounded-lg",
-                  "bg-gradient-to-br",
-                  cardColors[originalIndex % cardColors.length],
-                   // Removed group-hover effects here, apply directly if needed or rely on parent div hover state
-                  "transform transition-transform duration-300 shadow-md"
-                  )}
-              >
-                  {currentProgramState?.icon &&
-                  React.createElement(currentProgramState.icon, {
-                      className: "h-6 w-6 md:h-7 md:h-7 text-white",
-                  })}
-              </div>
-              <h3
-                  className={cn(
-                  "font-semibold text-lg md:text-xl",
-                  "bg-gradient-to-r bg-clip-text text-transparent",
-                  cardColors[originalIndex % cardColors.length]
-                  )}
-                >
-                  {programData.title}
-              </h3>
+            <div
+              className={cn(
+                "w-12 h-12 md:w-14 md:h-14 mr-4 flex-shrink-0",
+                "flex items-center justify-center rounded-lg",
+                "bg-gradient-to-br",
+                cardColors[originalIndex % cardColors.length],
+                // Removed group-hover effects here, apply directly if needed or rely on parent div hover state
+                "transform transition-transform duration-300 shadow-md"
+              )}
+            >
+              {currentProgramState?.icon &&
+                React.createElement(currentProgramState.icon, {
+                  className: "h-6 w-6 md:h-7 md:h-7 text-white",
+                })}
+            </div>
+            <h3
+              className={cn(
+                "font-semibold text-lg md:text-xl",
+                "bg-gradient-to-r bg-clip-text text-transparent",
+                cardColors[originalIndex % cardColors.length]
+              )}
+            >
+              {programData.title}
+            </h3>
           </div>
-          <p className={cn("text-muted-foreground text-sm md:text-base leading-relaxed mb-4")}>
+          <p
+            className={cn(
+              "text-muted-foreground text-sm md:text-base leading-relaxed mb-4"
+            )}
+          >
             {programData.description}
           </p>
         </div>
 
         {/* Button - Using asChild (Modern Approach) */}
-        <div className="mt-auto pt-4"> {/* Pushes button to bottom */}
+        <div className="mt-auto pt-4">
+          {" "}
+          {/* Pushes button to bottom */}
           <Link
-              href={currentProgramState?.url || "#"}
-              passHref // Good practice, ensures href is passed down
-              asChild   // **Crucial**: Use asChild, remove legacyBehavior
+            href={currentProgramState?.url || "#"}
+            passHref // Good practice, ensures href is passed down
+            asChild={true} // **Crucial**: Use asChild, remove legacyBehavior
           >
             {/* NO <a> tag here */}
             <Button
-                variant="outline"
-                size={isMounted && isMobile ? "sm" : "default"}
-                className="w-full gap-2 group/button" // Button acts as the link target
+              variant="outline"
+              size={isMounted && isMobile ? "sm" : "default"}
+              className="w-full gap-2 group/button" // Button acts as the link target
             >
-                <BookOpen className="h-4 w-4" />
-                {t("programs.learnMore")}
-                <ArrowRight
-                    className={cn(
-                    "h-4 w-4",
-                    "ml-1 transition-transform duration-300 group-hover/button:translate-x-1", // Target button's group
-                    direction === "rtl" && "rotate-180 mr-1 ml-0 group-hover/button:-translate-x-1"
-                    )}
-                />
+              <BookOpen className="h-4 w-4" />
+              {t("programs.learnMore")}
+              <ArrowRight
+                className={cn(
+                  "h-4 w-4",
+                  "ml-1 transition-transform duration-300 group-hover/button:translate-x-1", // Target button's group
+                  direction === "rtl" &&
+                    "rotate-180 mr-1 ml-0 group-hover/button:-translate-x-1"
+                )}
+              />
             </Button>
           </Link>
         </div>
       </div>
     );
   };
-
 
   // --- Main Return ---
   return (
@@ -293,12 +318,16 @@ export default function ProgramsSection({
         {/* "View All" Button - Using asChild (Modern Approach) */}
         {isPreview && allProgramsData.length > maxPreviewItems && (
           <div className="mt-12 text-center">
-            <Link href="/pages/programs" passHref aschild='true'>
-                {/* NO <a> tag here */}
-                <Button variant="default" size="lg" className="rounded-full group">
-                  {t("programs.viewAll", "Voir tous les programmes")}
-                  <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
+            <Link href="/pages/programs" passHref asChild={true}>
+              {/* NO <a> tag here */}
+              <Button
+                variant="default"
+                size="lg"
+                className="rounded-full group"
+              >
+                {t("programs.viewAll", "Voir tous les programmes")}
+                <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
             </Link>
           </div>
         )}
