@@ -1,11 +1,15 @@
-// app/pages/programs/[slug]/page.tsx
+// app/pages/programs/[id]-[slug]/page.tsx
 "use client"; // This component needs to be a Client Component due to hooks like useTranslation and useParams
 
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { notFound, useParams } from "next/navigation";
-import { slugify } from "@/utils/slugify"; // Ensure this path is correct
+import Link from "next/link";
+// --- Assuming slugify is still needed if you construct links elsewhere, but not for finding the program here ---
+// import { slugify } from "@/utils/slugify";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SEO } from "@/components/SEO"; // Ensure this path is correct
 import {
   ArrowRight,
   BookOpen,
@@ -28,16 +32,13 @@ import {
   School,
   Projector,
   CheckSquare,
-  Globe
+  Globe,
 } from "lucide-react";
-//import { cn } from "@/lib/utils"; 
-// Ensure this path is correct
-import { SEO } from "@/components/SEO"; // Ensure this path is correct
-import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { cn } from "@/lib/utils"; // Ensure cn is imported if used for styling within DetailSection/List
 
-// --- Interface reflecting the detailed JSON structure ---
+// --- Interface reflecting the detailed JSON structure with ID ---
 interface ProgramData {
+  id: number; // Unique, language-independent identifier
   title: string;
   description: string;
   targetAudience?: string;
@@ -72,6 +73,7 @@ const DetailSection = ({
   icon?: LucideIcon;
   children: React.ReactNode;
 }) => {
+  // Filter out null/undefined children, e.g., if DetailList returns null
   const content = React.Children.toArray(children).filter(Boolean);
   if (content.length === 0) {
     return null;
@@ -82,8 +84,9 @@ const DetailSection = ({
         {Icon && <Icon className="h-5 w-5 flex-shrink-0" />}
         {title}
       </h3>
+      {/* Ensure content renders correctly, especially if it's just text */}
       <div className="text-muted-foreground leading-relaxed space-y-2 pl-7">
-        {children}
+        {content}
       </div>
     </div>
   );
@@ -92,7 +95,7 @@ const DetailSection = ({
 // --- Helper Component for Rendering Lists ---
 const DetailList = ({ items }: { items?: string[] }) => {
   if (!items || items.length === 0) {
-    return null;
+    return null; // Return null if no items to render
   }
   return (
     <ul className="list-disc space-y-1 ml-4">
@@ -106,28 +109,38 @@ const DetailList = ({ items }: { items?: string[] }) => {
 // --- Main Page Component ---
 export default function ProgramPage() {
   const { t } = useTranslation();
-  const params = useParams<{ slug: string }>();
-  const slug = params?.slug;
+  // Get both 'id' and 'slug' from the URL parameters
+  const params = useParams<{ id: string; slug: string }>();
+  // Parse the ID to a number for lookup
+  const id = params?.id ? parseInt(params.id, 10) : null;
 
+  // Fetch all program data based on the current language
   const programsData: ProgramData[] = React.useMemo(() => {
     try {
+      // Ensure your translation files return an array for "programs.items"
       const items = t("programs.items", { returnObjects: true });
-      return Array.isArray(items) ? (items as ProgramData[]) : [];
+      // Add type checking to ensure it's an array and has the required 'id' field
+      return Array.isArray(items)
+        ? items.filter((item): item is ProgramData => typeof item === 'object' && item !== null && typeof item.id === 'number')
+        : [];
     } catch (error) {
       console.error("Error fetching or parsing program translations:", error);
       return [];
     }
   }, [t]);
 
+  // Find the specific program using the language-independent ID
   const program = React.useMemo(() => {
-    if (!slug) return undefined;
-    return programsData.find((p) => p.title && slugify(p.title) === slug);
-  }, [programsData, slug]);
+    if (!id || isNaN(id)) return undefined; // Ensure id is a valid number
+    return programsData.find((p) => p.id === id);
+  }, [programsData, id]);
 
-  if (!slug || !program) {
+  // If ID is invalid or program not found for that ID, show 404
+  if (!id || !program) {
     notFound();
   }
 
+  // Check if there is any detailed information to display
   const hasDetailedInfo =
     program.targetAudience ||
     program.prerequisites?.length ||
@@ -150,13 +163,14 @@ export default function ProgramPage() {
     program.useCases?.length ||
     program.capacity;
 
+  // Mapping for rendering detail sections dynamically
   const detailSectionsMap = [
     { key: "targetAudience", icon: Users, translationKey: "targetAudience" },
     { key: "prerequisites", icon: BookMarked, translationKey: "prerequisites", isList: true },
     { key: "learningObjectives", icon: Target, translationKey: "learningObjectives", isList: true },
     { key: "curriculumHighlights", icon: ListChecks, translationKey: "curriculumHighlights", isList: true },
-    { key: "subjectsOffered", icon: HelpCircle, translationKey: "subjectsOffered", isList: true },
-    { key: "areasOffered", icon: Award, translationKey: "areasOffered", isList: true },
+    { key: "subjectsOffered", icon: HelpCircle, translationKey: "subjectsOffered", isList: true }, // Assuming these are also in ProgramData interface
+    { key: "areasOffered", icon: Award, translationKey: "areasOffered", isList: true },           // Assuming these are also in ProgramData interface
     { key: "teachingMethods", icon: Presentation, translationKey: "teachingMethods" },
     { key: "assessmentMethods", icon: BarChart3, translationKey: "assessmentMethods" },
     { key: "careerProspects", icon: Briefcase, translationKey: "careerProspects", isList: true },
@@ -165,16 +179,17 @@ export default function ProgramPage() {
     { key: "certification", icon: CheckCircle, translationKey: "certification" },
     { key: "languagesOffered", icon: Languages, translationKey: "languagesOffered", isList: true },
     { key: "levels", icon: BarChartHorizontal, translationKey: "levels" },
-    { key: "documentTypes", icon: BookText, translationKey: "documentTypes", isList: true },
-    { key: "servicesOffered", icon: School, translationKey: "servicesOffered", isList: true },
-    { key: "destinations", icon: Globe, translationKey: "destinations", isList: true },
-    { key: "features", icon: Projector, translationKey: "features", isList: true },
-    { key: "useCases", icon: CheckSquare, translationKey: "useCases", isList: true },
-    { key: "capacity", icon: Users, translationKey: "capacity" },
+    { key: "documentTypes", icon: BookText, translationKey: "documentTypes", isList: true },     // Assuming these are also in ProgramData interface
+    { key: "servicesOffered", icon: School, translationKey: "servicesOffered", isList: true },     // Assuming these are also in ProgramData interface
+    { key: "destinations", icon: Globe, translationKey: "destinations", isList: true },         // Assuming these are also in ProgramData interface
+    { key: "features", icon: Projector, translationKey: "features", isList: true },           // Assuming these are also in ProgramData interface
+    { key: "useCases", icon: CheckSquare, translationKey: "useCases", isList: true },           // Assuming these are also in ProgramData interface
+    { key: "capacity", icon: Users, translationKey: "capacity" },                               // Assuming this is also in ProgramData interface
   ];
 
   return (
     <div className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-background via-background to-muted/10 relative">
+      {/* SEO Component using the found program's details */}
       <SEO title={`${program.title} - Pascal Info`} description={program.description} />
 
       <div className="max-w-4xl mx-auto">
@@ -184,10 +199,12 @@ export default function ProgramPage() {
             {t("navigation.home")}
           </Link>
           <span className="mx-2">&gt;</span>
+          {/* Link to the main programs list page */}
           <Link href="/pages/programs" className="hover:underline">
             {t("navigation.programs")}
           </Link>
           <span className="mx-2">&gt;</span>
+          {/* Display the current program's title (updates with language) */}
           <span>{program.title}</span>
         </div>
 
@@ -212,22 +229,29 @@ export default function ProgramPage() {
             {hasDetailedInfo ? (
               <>
                 {detailSectionsMap.map((section) => {
+                  // Get the data for the current section from the program object
                   const data = program[section.key as keyof ProgramData];
+
+                  // Skip rendering if data is missing or if it's an empty array for list types
                   if (!data || (section.isList && Array.isArray(data) && data.length === 0)) {
                     return null;
                   }
+
                   return (
                     <DetailSection
                       key={section.key}
+                      // Get translated title for the section
                       title={t(`programs.details.${section.translationKey}`, section.translationKey.replace(/([A-Z])/g, " $1").replace(/^./, (str) => str.toUpperCase()))}
                       icon={section.icon}
                     >
+                      {/* Render as a list or paragraph based on the flag */}
                       {section.isList ? <DetailList items={data as string[]} /> : <p>{data as string}</p>}
                     </DetailSection>
                   );
                 })}
               </>
             ) : (
+              // Fallback message if no detailed info is available
               <p className="text-muted-foreground italic text-center py-4">
                 {t("programs.details.comingSoon", "Informations détaillées pour ce programme seront bientôt disponibles.")}
               </p>
@@ -248,6 +272,7 @@ export default function ProgramPage() {
             </Button>
           </Link>
           <div>
+            {/* Link back to the main programs list page */}
             <Link href="/pages/programs" className="text-primary hover:underline">
               {t("programs.backToPrograms", "Retour aux Programmes")}
             </Link>

@@ -3,7 +3,9 @@
     "home": "Accueil",
     "about": "À Propos",
     "programs": "Programmes",
-    "contact": "Contact"
+    "contact": "Contact",
+    "language": "Langue"
+    
   },
   "hero": {
     "title": "Façonnez Votre Avenir Professionnel",
@@ -35,6 +37,7 @@
   },
   "about": {
     "title": "À Propos de Pascal Info",
+    "fullStory": "Notre Histoire",
     "description": "Fondé en 1996, Pascal Info est devenu un centre d'excellence en formation professionnelle au Maroc. Notre approche complète combine expertise technique et développement personnel pour préparer nos étudiants aux défis du marché du travail moderne.",
     "stats": {
       "experience": "Années d'Expérience",
@@ -56,7 +59,11 @@
     "years": "ans",
     "established": "d'expérience",
     "tagline": "Centre de Formation d'Excellence",
-    "close": "Fermer"
+    "close": "Fermer",
+    "pageTitle": "À Propos de Nous",
+    "pageSubtitle":"Notre histoire et mission",
+    "achievements":"Nos réalisations"
+    
   },
   "programs": {
     "title": "Nos Programmes",
@@ -67,6 +74,7 @@
     "showLess": "Afficher moins de programmes",
     "items": [
       {
+        "id": 1,
         "title": "Diplôme Bac+2 en Développement Informatique",
         "description": "Formation complète en programmation et développement logiciel.",
         "targetAudience": "Bacheliers scientifiques/techniques, passionnés d'informatique, professionnels en reconversion.",
@@ -105,6 +113,7 @@
         "duration": "2 ans (4 semestres), incluant un stage obligatoire."
       },
       {
+        "id": 2,
         "title": "Diplôme Bac+2 en Gestion d'Entreprise",
         "description": "Acquérir les compétences essentielles pour gérer et développer une entreprise.",
         "targetAudience": "Bacheliers toutes séries, employés souhaitant évoluer vers des postes de gestion.",
@@ -143,6 +152,7 @@
         "duration": "2 ans (4 semestres), incluant un stage obligatoire."
       },
       {
+        "id": 3,
         "title": "Cours de Soutien",
         "description": "Accompagnement personnalisé pour les étudiants de tous niveaux.",
         "targetAudience": "Élèves du primaire, collège, lycée et étudiants du supérieur.",
@@ -160,6 +170,7 @@
         "levels": "Primaire, Collège, Lycée, Supérieur (selon les matières)."
       },
       {
+        "id": 4,
         "title": "Cours de Langues",
         "description": "Apprenez les langues étrangères avec des méthodes modernes et efficaces.",
         "targetAudience": "Étudiants, professionnels, particuliers souhaitant apprendre ou perfectionner une langue.",
@@ -176,6 +187,7 @@
         "duration": "Modules de durée variable (trimestriels, semestriels, intensifs)."
       },
       {
+        "id": 5,
         "title": "Formation Continue Professionnelle",
         "description": "Perfectionnez vos compétences ou réorientez votre carrière.",
         "targetAudience": "Salariés, demandeurs d'emploi, entreprises souhaitant former leur personnel.",
@@ -197,6 +209,7 @@
         "duration": "Variable selon le module (quelques jours à plusieurs semaines)."
       },
       {
+        "id": 6,
         "title": "Traduction",
         "description": "Services de traduction professionnelle en plusieurs langues.",
         "targetAudience": "Entreprises, administrations, particuliers.",
@@ -222,6 +235,7 @@
         ]
       },
       {
+        "id": 7,
         "title": "Inscription Enseignement Supérieur",
         "description": "Assistance pour les inscriptions au Maroc et à l'étranger.",
         "targetAudience": "Lycéens et étudiants souhaitant poursuivre leurs études supérieures.",
@@ -241,6 +255,7 @@
         ]
       },
       {
+        "id": 8,
         "title": "Salles VIP et Équipées",
         "description": "Espaces modernes avec vidéoprojecteurs pour une expérience d'apprentissage optimale.",
         "targetAudience": "Formateurs indépendants, entreprises, associations, organismes.",
@@ -289,11 +304,16 @@
   },
   "testimonials": {
     "title": "Témoignages",
+    "subtitle": "Ce que disent nos diplômés",
     "quote": "Grâce à Pascal Info, j'ai pu acquérir des compétences pratiques qui m'ont permis de trouver rapidement un emploi dans mon domaine.",
     "graduate": "Diplômé 2023"
   },
   "whyChooseUs": {
     "title": "Pourquoi Choisir Pascal Info ?",
+    "tagline": "Nos Avantages",
+    "learnMore":"En Savoir Plus",
+    "ctaButton": "Plannifier une visite",
+    "ctaDescription":"Voyez par vous-même ce qui fait la renommée de Pascal Info",
     "items": [
       {
         "title": "Formateurs Experts",
@@ -311,6 +331,28 @@
         "title": "Résultats Prouvés",
         "description": "Excellent taux de placement professionnel pour nos diplômés"
       }
+    ],
+    "benefits": [
+      [ 
+        "Apprentissage direct auprès de professionnels actifs et reconnus.",
+        "Méthodes pédagogiques interactives axées sur les compétences pratiques.",
+        "Accès à un réseau d'experts pour des insights et opportunités uniques."
+      ],
+      [ 
+        "Manipulation des technologies et logiciels de pointe utilisés en entreprise.",
+        "Environnement d'étude high-tech favorisant l'innovation et la créativité.",
+        "Préparation concrète aux réalités du terrain grâce à des outils performants."
+      ],
+      [ 
+        "Coaching individuel pour maximiser votre potentiel et atteindre vos objectifs.",
+        "Un parcours adapté à votre rythme, avec un soutien constant.",
+        "Aide à la construction de votre projet professionnel unique et ambitieux."
+      ],
+      [ 
+        "Intégration rapide et réussie dans le monde professionnel post-formation.",
+        "Un portefeuille de compétences solide et valorisé par les recruteurs.",
+        "Rejoignez une communauté d'anciens élèves performants et influents."
+      ]
     ]
   },
   "contact": {
@@ -320,6 +362,7 @@
     "address": "APPT 26 ET 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
     "hours": "Lun-Sam: 9h - 21h",
     "email": "contact@pascalinfo.ma",
+    "connect_description":"Retrouvez nos coordonnées ci-dessous et suivez-nous en ligne.",
     "social": {
       "follow": "Suivez-nous",
       "connect": "Connectez-vous",
@@ -379,8 +422,8 @@
     "contact": {
       "phone": {
         "title": "Téléphone",
-        "number": "+212 522 123 456", 
-        "hours": "Lun-Ven: 9h-18h"
+        "number": "+212 5234-87877", 
+        "hours": "Lun-Ven: 9h-21h"
       },
       "email": {
         "title": "Email",
@@ -390,8 +433,8 @@
       "social": {
         "title": "Nos réseaux sociaux",
         "platforms": [
-          { "name": "Facebook", "url": "https://facebook.com/pascalinfo" }, 
-          { "name": "Instagram", "url": "https://instagram.com/pascalinfo" },
+          { "name": "Facebook", "url": "https://facebook.com/centrepascalinfo" }, 
+          { "name": "Instagram", "url": "https://instagram.com/institutpascalinfo" },
           {
             "name": "LinkedIn",
             "url": "https://linkedin.com/company/pascalinfo"
@@ -402,6 +445,7 @@
     "footer": "© {{year}} Pascal Info - Centre de Formation Professionnelle"
   },
   "footer": {
+    "social":"Suivez-nous !",
     "toast": {
       "copy": "Copié dans le presse-papiers"
     },
@@ -433,16 +477,19 @@
       ]
     },
     "newsletter": {
-      "title": "Restez Informé",
-      "description": "Recevez nos dernières actualités et offres exclusives",
-      "button": "S'abonner",
-      "placeholder": "Votre email professionnel"
+      "title": "Restez informé",
+      "description": "Inscrivez-vous à notre newsletter pour recevoir nos dernières actualités, offres et promotions.",
+      "privacy": "Nous respectons votre vie privée. Vous pouvez vous désinscrire à tout moment.",
+      "emailAriaLabel": "Adresse email",
+      "emailPlaceholder": "Votre adresse email",
+      "subscribeButton": "S'abonner"
     },
     "contact": {
+      "title": "Contactez-nous",
       "phone": "+212 5234-87877",
       "email": "contact@pascalinfo.ma",
       "hours": "Lun-Sam: 9h - 21h", 
-      "mobile": "+212 660-360938",
+      "mobile": "+212 6603-60938",
       "address": "APPT 26 ET 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
       "emergency": "24/7 Emergency Support" 
     },

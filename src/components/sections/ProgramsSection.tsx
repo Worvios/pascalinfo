@@ -240,13 +240,18 @@ export default function ProgramsSection({
               <BookOpen className="h-4 w-4" />
               {t("programs.learnMore")}
               <ArrowRight
-                className={cn(
-                  "h-4 w-4",
-                  "ml-1 transition-transform duration-300 group-hover/button:translate-x-1",
-                  direction === "rtl" &&
-                    "rotate-180 mr-1 ml-0 group-hover/button:-translate-x-1"
-                )}
-              />
+        className={cn(
+          "h-4 w-4", // Size
+          // Margin: ml-2 in LTR, mr-2 in RTL
+          direction === "rtl" ? "mr-2" : "ml-2",
+          // Rotation: 180deg in RTL
+          direction === "rtl" && "rotate-180",
+          // Hover Translate: +x in LTR, -x in RTL
+          direction === "rtl" ? "group-hover:-translate-x-1" : "group-hover:translate-x-1",
+          // Transition
+          "transition-transform duration-300"
+        )}
+      />
             </Button>
           </Link>
         </div>

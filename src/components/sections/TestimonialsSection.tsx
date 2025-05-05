@@ -62,7 +62,6 @@ export default function TestimonialsSection() {
 
   useEffect(() => {
     if (prevIndex === activeIndex) return;
-
     setPrevIndex(activeIndex);
   }, [activeIndex, prevIndex, testimonials.length]);
 
@@ -191,7 +190,12 @@ export default function TestimonialsSection() {
                               {testimonial.name.charAt(0)}
                             </AvatarFallback>
                           </Avatar>
-                          <QuoteIcon className="h-10 w-10 text-primary/20 animate-pulse-slow" />
+                          <QuoteIcon
+                            className={cn(
+                              "h-10 w-10 text-primary/20 animate-pulse-slow",
+                              isRtl && "transform scale-x-[-1]" // Flip in RTL
+                            )}
+                          />
                         </div>
 
                         <div className="flex gap-1.5 mb-6" dir="ltr">
@@ -200,11 +204,11 @@ export default function TestimonialsSection() {
 
                         <p className="text-lg italic mb-6 leading-relaxed relative text-foreground/90 font-medium">
                           <span className="text-primary/60 text-3xl absolute -left-3 -top-3">
-                            “
+                            {isRtl ? "”" : "“"} {/* Adjust quote direction */}
                           </span>
                           {t("testimonials.quote")}
                           <span className="text-primary/60 text-3xl absolute -bottom-6 right-0">
-                            ”
+                            {isRtl ? "“" : "”"} {/* Adjust quote direction */}
                           </span>
                         </p>
                       </div>

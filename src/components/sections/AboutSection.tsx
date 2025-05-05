@@ -27,7 +27,8 @@ import { motion } from "framer-motion";
 import Link from "next/link"; // Import Link for navigation
 
 export default function AboutSection() {
-  const { t } = useTranslation();
+  const { t,i18n  } = useTranslation();
+  const direction = i18n.dir();
 
   // Animation variants for statistics
   const statVariants = {
@@ -247,8 +248,19 @@ export default function AboutSection() {
                       className="rounded-full px-8 group hover:shadow-lg transition-all duration-300"
                     >
                       {t("about.learnMore")}
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-                    </Button>
+                      <ArrowRight
+        className={cn(
+          "h-4 w-4", // Size
+          // Margin: ml-2 in LTR, mr-2 in RTL
+          direction === "rtl" ? "mr-2" : "ml-2",
+          // Rotation: 180deg in RTL
+          direction === "rtl" && "rotate-180",
+          // Hover Translate: +x in LTR, -x in RTL
+          direction === "rtl" ? "group-hover:-translate-x-1" : "group-hover:translate-x-1",
+          // Transition
+          "transition-transform duration-300"
+        )}
+      />                    </Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-2xl p-0 overflow-hidden">
                     <VisuallyHidden>
@@ -300,7 +312,13 @@ export default function AboutSection() {
                       className="rounded-full px-6 text-primary hover:text-primary/80"
                     >
                       {t("about.fullStory", "Read Full Story")}
-                      <ArrowRight className="ml-2 h-4 w-4" />
+                      <ArrowRight
+  className={cn(
+    "h-4 w-4", // Base size styles
+    direction === "rtl" ? "mr-2" : "ml-2", // Spacing based on direction
+    direction === "rtl" && "rotate-180" // Rotate if RTL
+  )}
+/>
                     </Button>
                   </Link>
                 </div>

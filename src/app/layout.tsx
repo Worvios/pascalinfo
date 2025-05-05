@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import { LanguageProvider } from "@/utils/LanguageProvider";
 import WelcomeAssistant from "@/components/WelcomeAssistant";
 import AppLayout from "@/components/AppLayout"; // Import the new component
+import { WindArrowDown } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,20 +19,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://pascalinfo.com"),
   title: "Centre Pascal Info",
   description: "Centre de formation informatique au Maroc",
   openGraph: {
     title: "Centre Pascal Info",
     description: "Centre de formation informatique au Maroc",
-    url: "https://pascal-info.ma",
+    url: "https://pascalinfo.com",
     siteName: "Centre Pascal Info",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-      },
-    ],
+    images: "/og-image.jpg",
     locale: "fr_FR",
     type: "website",
   },

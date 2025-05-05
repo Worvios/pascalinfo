@@ -56,7 +56,10 @@ const featureAccents = [
 ];
 
 export default function WhyChooseUsSection() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation(); // Get i18n instance
+  const direction = i18n.dir(); // Get current direction ('ltr' or 'rtl')
+  const isRtl = direction === "rtl"; // Boolean flag for RTL
+
   const [isMounted, setIsMounted] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -87,50 +90,49 @@ export default function WhyChooseUsSection() {
   // Function to safely get translated items
   const getFeatures = (): FeatureItem[] => {
     try {
-      const features = t("whyChooseUs.items", { returnObjects: true });
+      // Ensure 'returnObjects' is handled correctly or default appropriately
+      const features = t("whyChooseUs.items", { returnObjects: true, defaultValue: [] });
 
       if (Array.isArray(features)) {
-        return features.map((item) => {
-          if (typeof item === "object" && item !== null) {
+        return features.map((item): FeatureItem => {
+          if (typeof item === "object" && item !== null && 'title' in item && 'description' in item) {
             return {
-              title:
-                typeof (item as Record<string, unknown>).title === "string"
-                  ? ((item as Record<string, unknown>).title as string)
-                  : "",
-              description:
-                typeof (item as Record<string, unknown>).description ===
-                "string"
-                  ? ((item as Record<string, unknown>).description as string)
-                  : "",
+              title: String(item.title),
+              description: String(item.description),
             };
           }
-          return { title: String(item), description: "" };
+          // Provide a fallback structure if item is not the expected object
+          console.warn("Unexpected feature item format:", item);
+          return { title: t('whyChooseUs.defaultTitle', 'Feature'), description: t('whyChooseUs.defaultDescription', 'Description missing.') };
         });
       }
-      return [];
+      console.warn("Features translation did not return an array:", features);
+      return []; // Return empty array if not an array
     } catch (error) {
       console.error("Error parsing features:", error);
-      return [];
+      return []; // Return empty array on error
     }
   };
 
   // Keys for the feature icons - ensure they exist in the featureIcons object
   const iconKeys = ["experts", "equipment", "support", "results"];
 
-  // Simple server-side render
+  // Basic server-side render (or loading state)
   if (!isMounted) {
+    // Keep this simple, no complex RTL logic needed here as it's temporary
     return (
       <section className="py-20 px-4 md:px-8 bg-background">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            {t("whyChooseUs.title")}
+            {t("whyChooseUs.title", "Why Choose Us?")} {/* Add fallback */}
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {getFeatures().map((item: FeatureItem, index: number) => (
-              <div key={index} className="bg-muted/10 border rounded-xl p-6">
+            {Array.from({ length: 4 }).map((_, index) => ( // Use placeholder length
+              <div key={index} className="bg-muted/10 border rounded-xl p-6 animate-pulse">
                 <div className="mb-4 h-8 w-8 bg-primary/20 rounded-full"></div>
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
+                <div className="h-6 bg-muted rounded w-3/4 mb-2"></div>
+                <div className="h-4 bg-muted rounded w-full"></div>
+                <div className="h-4 bg-muted rounded w-5/6 mt-1"></div>
               </div>
             ))}
           </div>
@@ -140,6 +142,19 @@ export default function WhyChooseUsSection() {
   }
 
   const features = getFeatures();
+
+  // Handle case where features might be empty after mount
+   if (features.length === 0) {
+     // Optional: Render a message or different loading state
+     return (
+        <section className="py-20 px-4 md:px-8 bg-background">
+           <div className="max-w-7xl mx-auto text-center">
+             <p>{t("whyChooseUs.loadingError", "Could not load features.")}</p>
+           </div>
+        </section>
+     );
+   }
+
 
   return (
     <section className="py-24 px-4 md:px-8 bg-muted/5 relative overflow-hidden">
@@ -159,7 +174,10 @@ export default function WhyChooseUsSection() {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-            <Trophy className="w-4 h-4 mr-2" />
+            <Trophy className={cn(
+                "w-4 h-4",
+                isRtl ? "ml-2" : "mr-2" // RTL: Adjust margin
+             )} />
             {t("whyChooseUs.tagline", "Nos Avantages")}
           </div>
 
@@ -187,12 +205,14 @@ export default function WhyChooseUsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
+          // Add dir attribute for correct text alignment within grid items if needed
+          // dir={direction} // Usually inherited, but can be explicit
         >
           {features.map((item: FeatureItem, index: number) => {
             const IconComponent =
               featureIcons[
                 iconKeys[index % iconKeys.length] as keyof typeof featureIcons
-              ];
+              ] || Lightbulb; // Fallback icon
             const gradientClass =
               featureGradients[index % featureGradients.length];
             const accentClass = featureAccents[index % featureAccents.length];
@@ -205,12 +225,13 @@ export default function WhyChooseUsSection() {
                   "relative group rounded-xl p-8 md:p-10 transition-all duration-300 overflow-hidden",
                   "border border-border/50 hover:border-primary/50",
                   "bg-background hover:shadow-xl",
-                  "flex flex-col h-full"
+                  "flex flex-col h-full",
+                  "text-start" // Explicitly set text alignment for card content
                 )}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                {/* Background gradient that shows on hover */}
+                {/* Background gradient */}
                 <div
                   className={cn(
                     "absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 bg-gradient-to-br",
@@ -220,7 +241,7 @@ export default function WhyChooseUsSection() {
 
                 {/* Card content */}
                 <div className="z-10 flex-1 flex flex-col">
-                  {/* Icon container with animation */}
+                  {/* Icon container */}
                   <div
                     className={cn(
                       "mb-6 relative",
@@ -235,19 +256,28 @@ export default function WhyChooseUsSection() {
                         "h-7 w-7",
                         accentClass,
                         hoveredIndex === index ? "animate-bounce-subtle" : ""
+                        // Add flip here if needed for a specific icon:
+                        // isRtl && IconComponent === SomeDirectionalIcon && "transform scale-x-[-1]"
                       )}
                     />
-
-                    {/* Decorative dots */}
-                    <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-primary/40" />
-                    <div className="absolute -bottom-1 -left-1 w-1.5 h-1.5 rounded-full bg-primary/30" />
+                    {/* Decorative dots - RTL adjusted */}
+                    <div className={cn(
+                        "absolute -top-1 w-2 h-2 rounded-full bg-primary/40",
+                        isRtl ? "-left-1" : "-right-1"
+                    )} />
+                    <div className={cn(
+                        "absolute -bottom-1 w-1.5 h-1.5 rounded-full bg-primary/30",
+                        isRtl ? "-right-1" : "-left-1"
+                    )} />
                   </div>
 
                   {/* Content */}
                   <h3
                     className={cn(
                       "text-xl font-bold mb-3 group-hover:translate-x-1 transition-transform",
-                      accentClass
+                      accentClass,
+                      // RTL: Adjust hover translation
+                      isRtl && "group-hover:-translate-x-1"
                     )}
                   >
                     {item.title}
@@ -266,14 +296,16 @@ export default function WhyChooseUsSection() {
                       >
                         <CheckCircle
                           className={cn(
-                            "h-4 w-4 mr-2 flex-shrink-0",
-                            accentClass
+                            "h-4 w-4 flex-shrink-0",
+                            accentClass,
+                            isRtl ? "ml-2" : "mr-2", // RTL: Adjust margin
+                            isRtl && "transform scale-x-[-1]" // RTL: Flip checkmark
                           )}
                         />
                         <span>
                           {t(
                             `whyChooseUs.benefits.${index}.${i}`,
-                            `Avantage ${i + 1} de ${item.title}`
+                            `Benefit ${i + 1} for ${item.title}` // Generic fallback
                           )}
                         </span>
                       </li>
@@ -284,13 +316,22 @@ export default function WhyChooseUsSection() {
                   <div className="mt-auto pt-4 border-t border-border/50">
                     <Button
                       variant="ghost"
+                      // Ensure button content aligns start in both LTR/RTL
                       className={cn(
-                        "p-0 h-auto font-medium group/button",
+                        "p-0 h-auto font-medium group/button flex items-center justify-start", // Use justify-start
                         accentClass
                       )}
+                      // Add dir attribute if needed, though flex usually handles it
+                      // dir={direction}
                     >
-                      {t("whyChooseUs.learnMore", "En savoir plus")}
-                      <ArrowRight className="h-4 w-4 ml-1 group-hover/button:translate-x-1 transition-transform" />
+                      <span>{t("whyChooseUs.learnMore", "Learn More")}</span>
+                      <ArrowRight className={cn(
+                          "h-4 w-4",
+                          isRtl ? "mr-1" : "ml-1", // RTL: Adjust margin
+                          isRtl ? "rotate-180" : "", // RTL: Rotate arrow
+                          isRtl ? "group-hover/button:-translate-x-1" : "group-hover/button:translate-x-1", // RTL: Adjust hover animation
+                          "transition-transform"
+                       )} />
                     </Button>
                   </div>
                 </div>
@@ -307,16 +348,16 @@ export default function WhyChooseUsSection() {
         >
           <Button
             size="lg"
-            className="rounded-full px-8 py-6 shadow-lg shadow-primary/10 
-              bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary 
+            className="rounded-full px-8 py-6 shadow-lg shadow-primary/10
+              bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary
               transition-all duration-300 hover:shadow-xl hover:shadow-primary/20"
           >
-            {t("whyChooseUs.ctaButton", "Planifier une Visite")}
+            {t("whyChooseUs.ctaButton", "Schedule a Visit")}
           </Button>
           <p className="text-sm text-muted-foreground mt-4">
             {t(
               "whyChooseUs.ctaDescription",
-              "Découvrez par vous-même ce qui fait la réputation de Pascal Info"
+              "See for yourself what makes Pascal Info renowned"
             )}
           </p>
         </AnimatedSection>
