@@ -3,19 +3,31 @@
     "home": "Startseite",
     "about": "Über uns",
     "programs": "Programme",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "language": "Sprache"
   },
   "hero": {
     "title": "Gestalten Sie Ihre berufliche Zukunft",
-    "subtitle": "Exzellenzzentrum für Ausbildungs- und Bildungsdienstleistungen in Marokko",
+    "subtitle": "Exzellenzzentrum für Ausbildung und Bildungsdienstleistungen in Marokko",
     "cta": "Entdecken Sie unsere Programme"
   },
   "video": {
-    "title": "Ein immersives",
-    "subtitle": "Bildungserlebnis",
-    "description": "Entdecken Sie unseren Campus durch eine fesselnde virtuelle Tour. Erkunden Sie unsere modernen Einrichtungen, Hightech-Labore und anregende Lernumgebung.",
+    "tag": "Virtuelle Erfahrung",
+    "highQuality": "Hohe Qualität",
+    "featureDescriptions": [
+      "Moderne Klassenzimmer, ausgestattet mit den neuesten Bildungstechnologien.",
+      "Unsere spezialisierten Labore ermöglichen eine praxisnahe und professionelle Ausbildung.",
+      "Kollaborative Räume, die Teamarbeit und Kreativität fördern.",
+      "Unsere digitale Bibliothek bietet Zugang zu Tausenden von Ressourcen und Dokumenten."
+    ],
+    "shareButton": "Teilen",
+    "shareCopied": "Link kopiert!",
+    "playInstructions": "Klicken Sie, um Ihre interaktive virtuelle Tour zu starten",
+    "title": "Eine Erfahrung",
+    "subtitle": "Immersive Bildung",
+    "description": "Entdecken Sie unseren Campus durch eine fesselnde virtuelle Tour. Erkunden Sie unsere modernen Einrichtungen, Hightech-Labore und unsere anregende Lernumgebung.",
     "features": [
-      "Smarte Klassenzimmer",
+      "Intelligente Klassenzimmer",
       "Spezialisierte Labore",
       "Kollaborative Räume",
       "Digitale Bibliothek"
@@ -24,132 +36,459 @@
   },
   "about": {
     "title": "Über Pascal Info",
-    "description": "Seit 1996 hat sich Pascal Info zu einem Exzellenzzentrum für berufliche Ausbildung in Marokko entwickelt. Unser umfassender Ansatz kombiniert technische Expertise und persönliche Entwicklung, um unsere Studierenden auf die Herausforderungen des modernen Arbeitsmarktes vorzubereiten.",
+    "fullStory": "Unsere Geschichte",
+    "description": "Gegründet im Jahr 1996, hat sich Pascal Info zu einem Exzellenzzentrum für berufliche Ausbildung in Marokko entwickelt. Unser ganzheitlicher Ansatz kombiniert technisches Fachwissen und persönliche Entwicklung, um unsere Studierenden auf die Herausforderungen des modernen Arbeitsmarktes vorzubereiten.",
     "stats": {
       "experience": "Jahre Erfahrung",
-      "services": "Bildungsdienstleistungen"
+      "services": "Bildungsdienstleistungen",
+      "students": "Ausgebildete Studierende",
+      "satisfaction": "Kundenzufriedenheit"
     },
     "learnMore": "Mehr erfahren",
     "distinctions": {
       "title": "Unsere Auszeichnungen",
+      "subtitle": "Unsere Erfolge und Anerkennungen",
       "items": [
         "Partnerschaften mit führenden Unternehmen in Marokko",
-        "Moderne Einrichtungen und modernste Ausstattung",
+        "Moderne Einrichtungen und hochmoderne Ausstattung",
         "Lehrpersonal bestehend aus erfahrenen Fachleuten",
         "Außergewöhnliche Erfolgsquote unter unseren Absolventen"
       ]
-    }
+    },
+    "years": "Jahre",
+    "established": "Erfahrung",
+    "tagline": "Exzellenzzentrum für Ausbildung",
+    "close": "Schließen",
+    "pageTitle": "Über uns",
+    "pageSubtitle": "Unsere Geschichte und Mission",
+    "achievements": "Unsere Erfolge"
   },
   "programs": {
     "title": "Unsere Programme",
     "subtitle": "Der Exzellenz",
     "certified": "Zertifiziertes Programm",
     "learnMore": "Mehr erfahren",
+    "showMore": "Mehr Programme anzeigen",
+    "showLess": "Weniger Programme anzeigen",
+    "viewAll": "Alle Programme anzeigen",
+    "backToPrograms": "Zurück zu den Programmen",
     "items": [
       {
-        "title": "Bac+2 Diplom in Informatik",
-        "description": "Umfassende Ausbildung in Programmierung und Softwareentwicklung"
+        "id": 1,
+        "title": "Bac+2-Diplom in Informatikentwicklung",
+        "description": "Umfassende Ausbildung in Programmierung und Softwareentwicklung.",
+        "targetAudience": "Abiturienten mit Schwerpunkt Wissenschaft/Technik, Informatikbegeisterte, Umschüler.",
+        "prerequisites": [
+          "Abitur oder gleichwertig.",
+          "Gute Kenntnisse in Logik und Mathematik.",
+          "Starke Motivation für Informatik."
+        ],
+        "learningObjectives": [
+          "Beherrschen von Algorithmen und Datenstrukturen.",
+          "Entwickeln von Web- und Softwareanwendungen.",
+          "Entwerfen und Verwalten von Datenbanken.",
+          "Verstehen von System- und Netzwerkarchitekturen.",
+          "Arbeiten im Team und Managen von Projekten."
+        ],
+        "curriculumHighlights": [
+          "Algorithmen & Programmierung (Java, Python, C#)",
+          "Webentwicklung Frontend (HTML, CSS, JS, React/Angular)",
+          "Webentwicklung Backend (Node.js, PHP/Symfony, Java/Spring)",
+          "Datenbanken (SQL, NoSQL)",
+          "Betriebssysteme & Netzwerke",
+          "Projektmanagement & Agile Methoden",
+          "Technisches Englisch"
+        ],
+        "teachingMethods": "Interaktive theoretische Kurse, intensive praktische Arbeiten, Einzel- und Gruppenprojekte, Fallstudien, Praktikum in Unternehmen.",
+        "assessmentMethods": "Laufende Kontrolle, Semesterprüfungen, Projekte, Verteidigung des Praktikums/Abschlussprojekts.",
+        "careerProspects": [
+          "Webentwickler (Full-Stack, Frontend, Backend)",
+          "Softwareentwickler",
+          "Analystenprogrammierer",
+          "Anwendungssupporttechniker",
+          "Junior-Datenbankmanager"
+        ],
+        "furtherStudies": "Berufslizentiat (L3), Ingenieurschulen (Parallelaufnahmen).",
+        "certification": "Diplom als spezialisierter Techniker in Informatikentwicklung, staatlich anerkannt.",
+        "duration": "2 Jahre (4 Semester), inklusive einem Pflichtpraktikum."
       },
       {
-        "title": "Bac+2 Diplom in Unternehmensführung",
-        "description": "Erwerben Sie wesentliche Fähigkeiten zur Führung und Entwicklung eines Unternehmens"
+        "id": 2,
+        "title": "Bac+2-Diplom in Unternehmensmanagement",
+        "description": "Erlernen der wesentlichen Fähigkeiten zur Führung und Entwicklung eines Unternehmens.",
+        "targetAudience": "Abiturienten aller Fachrichtungen, Angestellte, die in Managementpositionen aufsteigen möchten.",
+        "prerequisites": [
+          "Abitur oder gleichwertig.",
+          "Interesse an Wirtschaft und Management.",
+          "Gute Kommunikations- und Analysefähigkeiten."
+        ],
+        "learningObjectives": [
+          "Verstehen der Grundlagen von Buchhaltung und Finanzen.",
+          "Beherrschen von Marketing- und Verkaufstechniken.",
+          "Anwenden der Grundlagen des Wirtschaftsrechts.",
+          "Verwalten administrativer und personalbezogener Aspekte.",
+          "Nutzung von Management-IT-Tools."
+        ],
+        "curriculumHighlights": [
+          "Allgemeine und analytische Buchhaltung",
+          "Grundlegendes und operatives Marketing",
+          "Handels- und Arbeitsrecht",
+          "Personalmanagement",
+          "Unternehmensbesteuerung",
+          "Management-IT (Excel, ERP/CRM-Software)",
+          "Professionelle Kommunikation"
+        ],
+        "teachingMethods": "Kurse, Fallstudien, Unternehmenssimulationen, Gruppenarbeiten, praktisches Praktikum.",
+        "assessmentMethods": "Laufende Kontrolle, schriftliche und mündliche Prüfungen, Abschlussprojekt, Praktikumsbewertung.",
+        "careerProspects": [
+          "Managementassistent KMU",
+          "Buchhaltungsassistent",
+          "Kundenbetreuer",
+          "Marketingassistent",
+          "Personalassistent"
+        ],
+        "furtherStudies": "Lizentiat in Management, Wirtschaft, Handelsschulen (Parallelaufnahmen).",
+        "certification": "Diplom als spezialisierter Techniker in Unternehmensmanagement, staatlich anerkannt.",
+        "duration": "2 Jahre (4 Semester), inklusive einem Pflichtpraktikum."
       },
       {
-        "title": "Nachhilfekurse",
-        "description": "Individuelle Betreuung für Studierende aller Niveaus"
+        "id": 3,
+        "title": "Nachhilfeunterricht",
+        "description": "Personalisierte Begleitung für Schüler aller Stufen.",
+        "targetAudience": "Schüler der Grundschule, Mittelschule, Gymnasium und Hochschulstudenten.",
+        "subjectsOffered": [
+          "Mathematik",
+          "Physik-Chemie",
+          "Biologie und Erdwissenschaften",
+          "Französisch",
+          "Englisch",
+          "Arabisch",
+          "Spezifische Fächer (auf Anfrage)"
+        ],
+        "teachingMethods": "Einzel- oder Kleingruppenbetreuung, Kurswiederholung, Hausaufgabenhilfe, Prüfungsvorbereitung, Lernmethodik.",
+        "duration": "Einzelne Sitzungen oder regelmäßige Betreuung während des Schul-/Hochschuljahres.",
+        "levels": "Grundschule, Mittelschule, Gymnasium, Hochschule (je nach Fach)."
       },
       {
+        "id": 4,
         "title": "Sprachkurse",
-        "description": "Lernen Sie Fremdsprachen mit modernen und effektiven Methoden"
+        "description": "Lernen Sie Fremdsprachen mit modernen und effektiven Methoden.",
+        "targetAudience": "Studenten, Fachleute, Einzelpersonen, die eine Sprache lernen oder verbessern möchten.",
+        "languagesOffered": [
+          "Französisch (FLE - Französisch als Fremdsprache)",
+          "Englisch (Allgemein, Beruflich, Testvorbereitung)",
+          "Spanisch",
+          "Deutsch",
+          "Arabisch (für Nicht-Muttersprachler)"
+        ],
+        "levels": "Alle Niveaus (A1 bis C2 nach GER), angepasste Kurse (Anfänger, Mittelstufe, Fortgeschrittene).",
+        "teachingMethods": "Kommunikativer Ansatz, Immersion, Rollenspiele, Multimedia-Unterstützung, Kleingruppen zur Förderung der Interaktion.",
+        "certification": "Vorbereitung auf internationale Zertifizierungen (DELF/DALF, TCF, TOEFL, IELTS, DELE, Goethe-Zertifikat).",
+        "duration": "Module mit variabler Dauer (quartalsweise, semesterweise, intensiv)."
       },
       {
+        "id": 5,
         "title": "Berufliche Weiterbildung",
-        "description": "Perfektionieren Sie Ihre Fähigkeiten oder ändern Sie Ihre Karriererichtung"
+        "description": "Verbessern Sie Ihre Fähigkeiten oder ändern Sie Ihre Karriere.",
+        "targetAudience": "Angestellte, Arbeitssuchende, Unternehmen, die ihr Personal schulen möchten.",
+        "areasOffered": [
+          "Informatik & Bürosoftware (Fortgeschrittenes Excel, MS Project, etc.)",
+          "Web- & Digitalentwicklung",
+          "Management & Führung",
+          "Digitales Marketing & Vertrieb",
+          "Berufssprachen",
+          "Buchhaltung & Finanzen"
+        ],
+        "learningObjectives": [
+          "Neue technische oder Managementfähigkeiten erwerben.",
+          "Sich über Entwicklungen in ihrem Sektor auf dem Laufenden halten.",
+          "Eine berufliche Umorientierung erleichtern.",
+          "Eine anerkannte Zertifizierung erhalten."
+        ],
+        "teachingMethods": "Kurze und zielgerichtete Schulungen, praktische Workshops, Seminare, maßgeschneiderte Schulungen für Unternehmen (intra/inter).",
+        "duration": "Variabel je nach Modul (von einigen Tagen bis zu mehreren Wochen)."
       },
       {
+        "id": 6,
         "title": "Übersetzung",
-        "description": "Professionelle Übersetzungsdienstleistungen in mehreren Sprachen"
+        "description": "Professionelle Übersetzungsdienste in mehreren Sprachen.",
+        "targetAudience": "Unternehmen, Verwaltungen, Privatpersonen.",
+        "languagesOffered": [
+          "Arabisch <> Französisch",
+          "Arabisch <> Englisch",
+          "Französisch <> Englisch",
+          "Spanisch (zu/von Französisch/Arabisch/Englisch)",
+          "Andere Sprachen auf Anfrage"
+        ],
+        "documentTypes": [
+          "Juristische und administrative Dokumente",
+          "Web- und Marketinginhalte",
+          "Technische und wissenschaftliche Dokumente",
+          "Geschäftskorrespondenz",
+          "Beglaubigte Übersetzung (falls zutreffend)"
+        ],
+        "servicesOffered": [
+          "Einfache Übersetzung",
+          "Beglaubigte Übersetzung",
+          "Lektorat und Korrektur",
+          "Dolmetschen (auf Anfrage)"
+        ]
       },
       {
-        "title": "Immatrikulation im Hochschulbereich",
-        "description": "Unterstützung bei der Immatrikulation in Marokko und im Ausland"
+        "id": 7,
+        "title": "Einschreibung in die Hochschulbildung",
+        "description": "Unterstützung bei der Einschreibung in Marokko und im Ausland.",
+        "targetAudience": "Gymnasiasten und Studenten, die ihr Hochschulstudium fortsetzen möchten.",
+        "servicesOffered": [
+          "Beratung zur Orientierung",
+          "Hilfe bei der Auswahl von Einrichtungen und Programmen",
+          "Vorbereitung von Bewerbungsunterlagen (Marokko, Frankreich, Kanada, USA, etc.)",
+          "Unterstützung bei den Verfahren für Studentenvisa",
+          "Vorbereitung auf Vorstellungsgespräche"
+        ],
+        "destinations": [
+          "Marokko (Universitäten, Grandes Écoles)",
+          "Frankreich (Campus France, Parcoursup, Privatschulen)",
+          "Kanada",
+          "Vereinigte Staaten",
+          "Andere Länder (je nach Expertise)"
+        ]
       },
       {
-        "title": "VIP und ausgestattete Räume",
-        "description": "Moderne Räume mit Videoprojektoren für ein optimales Lernerlebnis"
+        "id": 8,
+        "title": "VIP- und ausgestattete Räume",
+        "description": "Moderne Räume mit Videoprojektoren für ein optimales Lernerlebnis.",
+        "targetAudience": "Unabhängige Trainer, Unternehmen, Verbände, Organisationen.",
+        "features": [
+          "Klimatisierte Räume mit unterschiedlichen Kapazitäten",
+          "Hochauflösender Videoprojektor",
+          "Interaktives oder klassisches Whiteboard",
+          "Highspeed-WLAN-Internetverbindung",
+          "Bequeme und modulare Möbel",
+          "Empfangsbereich und Kaffeepause (auf Anfrage)"
+        ],
+        "useCases": [
+          "Schulungen und Seminare",
+          "Unternehmensmeetings",
+          "Präsentationen und Konferenzen",
+          "Prüfungen und Wettbewerbe",
+          "Berufliche Veranstaltungen"
+        ],
+        "capacity": "Räume für 10 bis 50 Personen (je nach Raum)."
       }
-    ]
+    ],
+    "details": {
+      "title": "Schlüsselinformationen zum Programm",
+      "targetAudience": "Zielgruppe",
+      "prerequisites": "Voraussetzungen",
+      "learningObjectives": "Lernziele",
+      "curriculumHighlights": "Schlüsselaspekte des Lehrplans",
+      "teachingMethods": "Lehrmethoden",
+      "assessmentMethods": "Bewertungsmethoden",
+      "careerProspects": "Berufsaussichten",
+      "furtherStudies": "Weiterführende Studien",
+      "certification": "Zertifizierung / Diplom",
+      "duration": "Dauer",
+      "languagesOffered": "Angebotene Sprachen",
+      "levels": "Niveaus",
+      "subjectsOffered": "Angebotene Fächer",
+      "areasOffered": "Ausbildungsbereiche",
+      "documentTypes": "Übersetzte Dokumenttypen",
+      "servicesOffered": "Angebotene Dienstleistungen",
+      "destinations": "Zielländer",
+      "features": "Merkmale der Räume",
+      "useCases": "Mögliche Verwendungen",
+      "capacity": "Kapazität",
+      "comingSoon": "Detaillierte Informationen zu diesem Programm werden bald verfügbar sein."
+    }
   },
   "testimonials": {
     "title": "Erfahrungsberichte",
-    "quote": "Dank Pascal Info konnte ich praktische Fähigkeiten erwerben, die mir ermöglichten, schnell einen Job in meinem Bereich zu finden.",
+    "subtitle": "Was unsere Absolventen sagen",
+    "quote": "Dank Pascal Info konnte ich praktische Fähigkeiten erwerben, die es mir ermöglichten, schnell einen Job in meinem Bereich zu finden.",
     "graduate": "Absolvent 2023"
   },
   "whyChooseUs": {
     "title": "Warum Pascal Info wählen?",
+    "tagline": "Unsere Vorteile",
+    "learnMore": "Mehr erfahren",
+    "ctaButton": "Besuch planen",
+    "ctaDescription": "Sehen Sie selbst, was Pascal Info berühmt macht",
     "items": [
       {
-        "title": "Experten-Trainer",
+        "title": "Expertenlehrer",
         "description": "Erfahrene Fachleute und qualifizierte Pädagogen"
       },
       {
         "title": "Moderne Ausstattung",
-        "description": "Computerräume und aktuelle Bildungsressourcen"
+        "description": "Aktuelle Computerräume und Lehrmittel"
       },
       {
-        "title": "Individuelle Betreuung",
-        "description": "Einzelbetreuung für den Erfolg jedes Studierenden"
+        "title": "Persönliche Begleitung",
+        "description": "Individuelle Betreuung für den Erfolg jedes Studierenden"
       },
       {
         "title": "Bewährte Ergebnisse",
-        "description": "Ausgezeichnete berufliche Vermittlungsquoten für unsere Absolventen"
+        "description": "Hervorragende berufliche Vermittlungsrate für unsere Absolventen"
       }
+    ],
+    "benefits": [
+      [
+        "Direktes Lernen von aktiven und anerkannten Fachleuten.",
+        "Interaktive Lehrmethoden, die auf praktische Fähigkeiten ausgerichtet sind.",
+        "Zugang zu einem Netzwerk von Experten für einzigartige Einblicke und Chancen."
+      ],
+      [
+        "Umgang mit Spitzentechnologien und Software, die in Unternehmen verwendet werden.",
+        "Hightech-Lernumgebung, die Innovation und Kreativität fördert.",
+        "Konkrete Vorbereitung auf die Realitäten des Arbeitsplatzes durch leistungsstarke Tools."
+      ],
+      [
+        "Individuelles Coaching, um Ihr Potenzial zu maximieren und Ihre Ziele zu erreichen.",
+        "Ein an Ihr Tempo angepasster Weg mit ständiger Unterstützung.",
+        "Hilfe beim Aufbau Ihres einzigartigen und ambitionierten beruflichen Projekts."
+      ],
+      [
+        "Schnelle und erfolgreiche Integration in die Berufswelt nach der Ausbildung.",
+        "Ein solides Kompetenzportfolio, das von Personalvermittlern geschätzt wird.",
+        "Werden Sie Teil einer Gemeinschaft erfolgreicher und einflussreicher Alumni."
+      ]
     ]
   },
   "contact": {
     "title": "Besuchen Sie unser Zentrum",
-    "connect": "Kontaktieren Sie uns",
-    "description": "Treten Sie unserer dynamischen Gemeinschaft bei und bleiben Sie über die neuesten Nachrichten, besondere Veranstaltungen und Ausbildungsmöglichkeiten informiert.",
+    "connect": "Verbinden Sie sich mit uns",
+    "description": "Treten Sie unserer dynamischen Gemeinschaft bei und bleiben Sie über die neuesten Nachrichten, besondere Ereignisse und Ausbildungsmöglichkeiten informiert.",
     "address": "APPT 26 UND 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
-    "hours": "Mo-Sa: 9-21 Uhr",
+    "hours": "Mo-Sa: 9h - 21h",
     "email": "contact@pascalinfo.ma",
+    "connect_description": "Finden Sie unten unsere Kontaktdaten und folgen Sie uns online.",
     "social": {
       "follow": "Folgen Sie uns",
       "connect": "Verbinden",
-      "explore": "Entdecken"
+      "explore": "Erkunden"
     },
     "cta": {
-      "title": "🚀 Vereinbaren Sie eine geführte Tour durch unsere professionellen Einrichtungen!",
-      "button": "Besuch vereinbaren"
+      "title": "🚀 Planen Sie eine geführte Tour durch unsere professionellen Einrichtungen!",
+      "button": "Besuch planen"
     }
   },
+  "assistant": {
+    "aria": {
+      "open": "Hilfeassistenten öffnen",
+      "close": "Assistenten schließen"
+    },
+    "button": "Wie können wir Ihnen helfen?",
+    "title": "Pascal Info",
+    "tabs": {
+      "welcome": "Willkommen",
+      "help": "Hilfe",
+      "contact": "Kontakt"
+    },
+    "welcome": {
+      "avatar": {
+        "alt": "Direktor"
+      },
+      "heading": "Willkommen bei Pascal Info",
+      "subheading": "Berufsbildungszentrum",
+      "description": "Wir freuen uns, Sie auf unserer Website begrüßen zu dürfen. Unser Ausbildungszentrum bietet Programme an, die auf die Bedürfnisse von Fachleuten und Unternehmen zugeschnitten sind.",
+      "courses": {
+        "title": "Entdecken Sie unsere Schulungen:",
+        "items": [
+          { "name": "Webentwicklung" },
+          { "name": "Digitaler Handel" },
+          { "name": "Fremdsprachen" },
+          { "name": "Management" }
+        ]
+      },
+      "viewAllCourses": "Alle unsere Schulungen anzeigen"
+    },
+    "help": {
+      "faq": {
+        "title": "Häufig gestellte Fragen",
+        "items": [
+          "Wie melde ich mich für eine Schulung an?",
+          "Welche Zahlungsmethoden werden akzeptiert?",
+          "Wie erhalte ich eine Finanzierung für meine Schulung?",
+          "Was sind die Voraussetzungen für fortgeschrittene Kurse?"
+        ]
+      },
+      "support": {
+        "title": "Benötigen Sie weitere Hilfe?",
+        "description": "Unser Team steht Ihnen zur Verfügung, um alle Ihre Fragen zu beantworten.",
+        "button": "Support kontaktieren"
+      }
+    },
+    "contact": {
+      "phone": {
+        "title": "Telefon",
+        "number": "+212 5234-87877",
+        "hours": "Mo-Fr: 9h-21h"
+      },
+      "email": {
+        "title": "E-Mail",
+        "address": "contact@pascalinfo.ma",
+        "response": "Wir antworten innerhalb von 24 Stunden"
+      },
+      "social": {
+        "title": "Unsere sozialen Netzwerke",
+        "platforms": [
+          { "name": "Facebook", "url": "https://facebook.com/centrepascalinfo" },
+          { "name": "Instagram", "url": "https://instagram.com/institutpascalinfo" },
+          { "name": "LinkedIn", "url": "https://linkedin.com/company/pascalinfo" }
+        ]
+      }
+    },
+    "footer": "© {{year}} Pascal Info - Berufsbildungszentrum"
+  },
   "footer": {
+    "social": "Folgen Sie uns!",
+    "toast": {
+      "copy": "In die Zwischenablage kopiert"
+    },
+    "aria": {
+      "phone": "Telefon-Symbol",
+      "email": "E-Mail-Symbol",
+      "address": "Adress-Symbol",
+      "hours": "Uhr-Symbol"
+    },
     "description": "Ihr Tor zur beruflichen Exzellenz seit 1996.",
     "accredited": "Akkreditiert von",
     "accreditations": "Akkreditierungen und Partnerschaften",
     "quickLinks": {
       "title": "Ausbildung",
       "items": [
-        "Informatik",
-        "Unternehmensführung",
+        "Informatikentwicklung",
+        "Unternehmensmanagement",
         "Sprachkurse",
         "Weiterbildung"
       ]
     },
     "resources": {
       "title": "Ressourcen",
-      "items": ["Datenschutzrichtlinie", "Nutzungsbedingungen", "FAQ", "Bildungsblog"]
+      "items": [
+        "Datenschutzrichtlinie",
+        "Nutzungsbedingungen",
+        "FAQ",
+        "Bildungsblog"
+      ]
     },
     "newsletter": {
       "title": "Bleiben Sie informiert",
-      "description": "Erhalten Sie unsere neuesten Nachrichten und exklusive Angebote",
-      "button": "Abonnieren",
-      "placeholder": "Ihre berufliche E-Mail"
+      "description": "Abonnieren Sie unseren Newsletter, um unsere neuesten Nachrichten, Angebote und Aktionen zu erhalten.",
+      "privacy": "Wir respektieren Ihre Privatsphäre. Sie können sich jederzeit abmelden.",
+      "emailAriaLabel": "E-Mail-Adresse",
+      "emailPlaceholder": "Ihre E-Mail-Adresse",
+      "subscribeButton": "Abonnieren"
     },
     "contact": {
-      "phone": "+212 5XX XXX XXX",
+      "title": "Kontaktieren Sie uns",
+      "phone": "+212 5234-87877",
       "email": "contact@pascalinfo.ma",
-      "hours": "Mo-Fr: 8-21 Uhr"
+      "hours": "Mo-Sa: 9h - 21h",
+      "mobile": "+212 6603-60938",
+      "address": "APPT 26 UND 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
+      "emergency": "24/7 Notfallunterstützung"
     },
     "copyright": "© 2025 Pascal Info. Alle Rechte vorbehalten.",
     "developed": "Entwickelt von"
@@ -168,14 +507,14 @@
   },
   "floatingContactButton": {
     "title": "Kontaktieren Sie uns",
-    "description": "Unser Team steht Ihnen für alle Fragen oder Unterstützung zur Verfügung.",
-    "button": "Kontakt aufnehmen"
+    "description": "Unser Team ist hier, um Ihnen bei all Ihren Fragen oder Supportbedürfnissen zu helfen.",
+    "button": "Kontaktieren Sie uns"
   },
   "appointment": {
-    "formTitle": "Terminformular",
-    "scheduleButton": "Besuch vereinbaren",
-    "title": "Besuch vereinbaren",
-    "description": "Wählen Sie ein Datum und eine Uhrzeit für Ihren Besuch in unserem Zentrum",
+    "formTitle": "Terminvereinbarungsformular",
+    "scheduleButton": "Besuch planen",
+    "title": "Besuch planen",
+    "description": "Wählen Sie Datum und Uhrzeit, um unser Zentrum zu besuchen",
     "accessForm": "Zum Formular"
   }
 }

@@ -3,7 +3,8 @@
     "home": "Home",
     "about": "About",
     "programs": "Programs",
-    "contact": "Contact"
+    "contact": "Contact",
+    "language": "Language"
   },
   "hero": {
     "title": "Shape Your Professional Future",
@@ -11,108 +12,357 @@
     "cta": "Discover Our Programs"
   },
   "video": {
+    "tag": "Virtual Experience",
+    "highQuality": "High Quality",
+    "featureDescriptions": [
+      "Modern classrooms equipped with the latest educational technologies.",
+      "Our specialized laboratories enable practical and professional training.",
+      "Collaborative spaces designed to encourage teamwork and creativity.",
+      "Our digital library offers access to thousands of resources and documents."
+    ],
+    "shareButton": "Share",
+    "shareCopied": "Link copied!",
+    "playInstructions": "Click to start your interactive virtual tour",
     "title": "An Immersive",
     "subtitle": "Educational Experience",
-    "description": "Discover our campus through an engaging virtual tour. Explore our modern facilities, high-tech laboratories, and stimulating learning environment.",
+    "description": "Discover our campus through a captivating virtual tour. Explore our modern facilities, high-tech laboratories, and stimulating learning environment.",
     "features": [
       "Smart classrooms",
       "Specialized laboratories",
       "Collaborative spaces",
       "Digital library"
     ],
-    "playButton": "Start Tour"
+    "playButton": "Start the Tour"
   },
   "about": {
     "title": "About Pascal Info",
-    "description": "Established in 1996, Pascal Info has become a center of excellence in professional training in Morocco. Our comprehensive approach combines technical expertise and personal development to prepare our students for the challenges of the modern job market.",
+    "fullStory": "Our Story",
+    "description": "Founded in 1996, Pascal Info has become a center of excellence in professional training in Morocco. Our comprehensive approach combines technical expertise and personal development to prepare our students for the challenges of the modern job market.",
     "stats": {
       "experience": "Years of Experience",
-      "services": "Educational Services"
+      "services": "Educational Services",
+      "students": "Students Trained",
+      "satisfaction": "Client Satisfaction"
     },
     "learnMore": "Learn More",
     "distinctions": {
       "title": "Our Distinctions",
+      "subtitle": "Our achievements and recognitions",
       "items": [
         "Partnerships with leading companies in Morocco",
         "Modern facilities and cutting-edge equipment",
-        "Teaching staff composed of experienced professionals",
+        "Faculty composed of experienced professionals",
         "Exceptional success rate among our graduates"
       ]
-    }
+    },
+    "years": "years",
+    "established": "of experience",
+    "tagline": "Center of Excellence in Training",
+    "close": "Close",
+    "pageTitle": "About Us",
+    "pageSubtitle": "Our history and mission",
+    "achievements": "Our achievements"
   },
   "programs": {
     "title": "Our Programs",
     "subtitle": "Of Excellence",
     "certified": "Certified Program",
     "learnMore": "Learn More",
+    "showMore": "Show more programs",
+    "showLess": "Show fewer programs",
+    "viewAll":"View all programs",
+    "backToPrograms":"Back to programs",
     "items": [
       {
-        "title": "Bac+2 Diploma in Computer Development",
-        "description": "Complete training in programming and software development"
+        "id": 1,
+        "title": "2-Year Diploma in Software Development",
+        "description": "Comprehensive training in programming and software development.",
+        "targetAudience": "Science/technical high school graduates, computer enthusiasts, professionals seeking career change.",
+        "prerequisites": [
+          "High school diploma or equivalent.",
+          "Good level of logic and mathematics.",
+          "Strong motivation for computer science."
+        ],
+        "learningObjectives": [
+          "Master algorithms and data structures.",
+          "Develop web and software applications.",
+          "Design and manage databases.",
+          "Understand system and network architectures.",
+          "Work in teams and manage projects."
+        ],
+        "curriculumHighlights": [
+          "Algorithms & Programming (Java, Python, C#)",
+          "Frontend Web Development (HTML, CSS, JS, React/Angular)",
+          "Backend Web Development (Node.js, PHP/Symfony, Java/Spring)",
+          "Databases (SQL, NoSQL)",
+          "Operating Systems & Networks",
+          "Project Management & Agile Methods",
+          "Technical English"
+        ],
+        "teachingMethods": "Interactive theoretical courses, intensive practical work, individual and group projects, case studies, internship in a company.",
+        "assessmentMethods": "Continuous assessment, semester exams, projects, internship/final project defense.",
+        "careerProspects": [
+          "Web Developer (Full-Stack, Frontend, Backend)",
+          "Software Developer",
+          "Programmer Analyst",
+          "Application Support Technician",
+          "Junior Database Administrator"
+        ],
+        "furtherStudies": "Professional Bachelor's Degree (L3), Engineering Schools (parallel admissions).",
+        "certification": "Specialized Technician Diploma in Computer Development, accredited by the State.",
+        "duration": "2 years (4 semesters), including mandatory internship."
       },
       {
-        "title": "Bac+2 Diploma in Business Management",
-        "description": "Acquire essential skills to manage and develop a business"
+        "id": 2,
+        "title": "2-Year Diploma in Business Management",
+        "description": "Acquire essential skills to manage and develop a business.",
+        "targetAudience": "High school graduates from all streams, employees wishing to advance to management positions.",
+        "prerequisites": [
+          "High school diploma or equivalent.",
+          "Interest in economics and management.",
+          "Good communication and analytical skills."
+        ],
+        "learningObjectives": [
+          "Understand accounting and finance principles.",
+          "Master marketing and sales techniques.",
+          "Apply business law fundamentals.",
+          "Manage administrative and human resource aspects.",
+          "Use business management software tools."
+        ],
+        "curriculumHighlights": [
+          "General and Analytical Accounting",
+          "Fundamental and Operational Marketing",
+          "Commercial and Social Law",
+          "Human Resources Management",
+          "Business Taxation",
+          "Management Information Systems (Excel, ERP/CRM software)",
+          "Professional Communication"
+        ],
+        "teachingMethods": "Courses, case studies, business simulations, group work, practical internship.",
+        "assessmentMethods": "Continuous assessment, written and oral exams, final project, internship evaluation.",
+        "careerProspects": [
+          "SME/SMI Management Assistant",
+          "Accounting Assistant",
+          "Customer Relations Officer",
+          "Marketing Assistant",
+          "Human Resources Assistant"
+        ],
+        "furtherStudies": "Bachelor's in Management, Economics, Business Schools (parallel admissions).",
+        "certification": "Specialized Technician Diploma in Business Management, accredited by the State.",
+        "duration": "2 years (4 semesters), including mandatory internship."
       },
       {
-        "title": "Support Courses",
-        "description": "Personalized support for students of all levels"
+        "id": 3,
+        "title": "Academic Support Courses",
+        "description": "Personalized support for students of all levels.",
+        "targetAudience": "Primary school, middle school, high school, and university students.",
+        "subjectsOffered": [
+          "Mathematics",
+          "Physics-Chemistry",
+          "Life and Earth Sciences",
+          "French",
+          "English",
+          "Arabic",
+          "Specific subjects (upon request)"
+        ],
+        "teachingMethods": "Individual or small group tutoring, course review, homework help, exam preparation, learning methodology.",
+        "duration": "One-time sessions or regular follow-up throughout the academic year.",
+        "levels": "Primary, Middle School, High School, Higher Education (depending on subjects)."
       },
       {
+        "id": 4,
         "title": "Language Courses",
-        "description": "Learn foreign languages with modern and effective methods"
+        "description": "Learn foreign languages with modern and effective methods.",
+        "targetAudience": "Students, professionals, individuals wishing to learn or improve a language.",
+        "languagesOffered": [
+          "French (FFL - French as a Foreign Language)",
+          "English (General, Professional, Test Preparation)",
+          "Spanish",
+          "German",
+          "Arabic (for non-natives)"
+        ],
+        "levels": "All levels (A1 to C2 according to CEFR), adapted courses (beginner, intermediate, advanced).",
+        "teachingMethods": "Communicative approach, immersion, role plays, multimedia resources, small groups to encourage interaction.",
+        "certification": "Preparation for international certifications (DELF/DALF, TCF, TOEFL, IELTS, DELE, Goethe-Zertifikat).",
+        "duration": "Variable duration modules (quarterly, semester-based, intensive)."
       },
       {
+        "id": 5,
         "title": "Professional Continuing Education",
-        "description": "Perfect your skills or redirect your career"
+        "description": "Improve your skills or redirect your career.",
+        "targetAudience": "Employees, job seekers, companies wishing to train their staff.",
+        "areasOffered": [
+          "IT & Office Tools (Advanced Excel, MS Project, etc.)",
+          "Web & Digital Development",
+          "Management & Leadership",
+          "Digital Marketing & Sales",
+          "Professional Languages",
+          "Accounting & Finance"
+        ],
+        "learningObjectives": [
+          "Acquire new technical or managerial skills.",
+          "Stay updated on industry developments.",
+          "Facilitate professional retraining.",
+          "Obtain recognized certification."
+        ],
+        "teachingMethods": "Short and targeted training, practical workshops, seminars, possibility of customized training for companies (in-house/external).",
+        "duration": "Varies by module (several days to several weeks)."
       },
       {
-        "title": "Translation",
-        "description": "Professional translation services in multiple languages"
+        "id": 6,
+        "title": "Translation Services",
+        "description": "Professional translation services in multiple languages.",
+        "targetAudience": "Businesses, administrations, individuals.",
+        "languagesOffered": [
+          "Arabic <> French",
+          "Arabic <> English",
+          "French <> English",
+          "Spanish (to/from French/Arabic/English)",
+          "Other languages upon request"
+        ],
+        "documentTypes": [
+          "Legal and administrative documents",
+          "Web and marketing content",
+          "Technical and scientific documents",
+          "Business correspondence",
+          "Certified translation (if applicable)"
+        ],
+        "servicesOffered": [
+          "Standard translation",
+          "Certified translation",
+          "Proofreading and correction",
+          "Interpretation (upon request)"
+        ]
       },
       {
-        "title": "Higher Education Registration",
-        "description": "Assistance for registrations in Morocco and abroad"
+        "id": 7,
+        "title": "Higher Education Enrollment Support",
+        "description": "Assistance for enrollments in Morocco and abroad.",
+        "targetAudience": "High school students and graduates wishing to pursue higher education.",
+        "servicesOffered": [
+          "Career guidance counseling",
+          "Help selecting institutions and programs",
+          "Preparation of application files (Morocco, France, Canada, USA, etc.)",
+          "Assistance with student visa procedures",
+          "Interview preparation"
+        ],
+        "destinations": [
+          "Morocco (Universities, Grande Écoles)",
+          "France (Campus France, Parcoursup, Private schools)",
+          "Canada",
+          "United States",
+          "Other countries (based on expertise)"
+        ]
       },
       {
-        "title": "VIP and Equipped Rooms",
-        "description": "Modern spaces with video projectors for an optimal learning experience"
+        "id": 8,
+        "title": "VIP and Fully-Equipped Rooms",
+        "description": "Modern spaces with video projectors for an optimal learning experience.",
+        "targetAudience": "Independent trainers, companies, associations, organizations.",
+        "features": [
+          "Air-conditioned rooms of various capacities",
+          "High-definition video projector",
+          "Interactive or classic whiteboard",
+          "High-speed Wi-Fi Internet connection",
+          "Comfortable and modular furniture",
+          "Reception and coffee break area (upon request)"
+        ],
+        "useCases": [
+          "Training and seminars",
+          "Business meetings",
+          "Presentations and conferences",
+          "Exams and competitions",
+          "Professional events"
+        ],
+        "capacity": "Rooms accommodating from 10 to 50 people (depending on the room)."
       }
-    ]
+    ],
+    "details": {
+      "title": "Program Key Information",
+      "targetAudience": "Target Audience",
+      "prerequisites": "Prerequisites",
+      "learningObjectives": "Learning Objectives",
+      "curriculumHighlights": "Curriculum Highlights",
+      "teachingMethods": "Teaching Methods",
+      "assessmentMethods": "Assessment Methods",
+      "careerProspects": "Career Prospects",
+      "furtherStudies": "Further Studies",
+      "certification": "Certification / Diploma",
+      "duration": "Duration",
+      "languagesOffered": "Languages Offered",
+      "levels": "Levels",
+      "subjectsOffered": "Subjects Offered",
+      "areasOffered": "Training Areas",
+      "documentTypes": "Types of Documents Translated",
+      "servicesOffered": "Services Offered",
+      "destinations": "Destination Countries",
+      "features": "Room Features",
+      "useCases": "Possible Uses",
+      "capacity": "Capacity",
+      "comingSoon": "Detailed information for this program will be available soon."
+    }
   },
   "testimonials": {
     "title": "Testimonials",
-    "quote": "Thanks to Pascal Info, I was able to acquire practical skills that allowed me to quickly find a job in my field.",
-    "graduate": "Graduate 2023"
+    "subtitle": "What our graduates say",
+    "quote": "Thanks to Pascal Info, I was able to acquire practical skills that allowed me to quickly find employment in my field.",
+    "graduate": "2023 Graduate"
   },
   "whyChooseUs": {
     "title": "Why Choose Pascal Info?",
+    "tagline": "Our Advantages",
+    "learnMore": "Learn More",
+    "ctaButton": "Schedule a visit",
+    "ctaDescription": "See for yourself what makes Pascal Info renowned",
     "items": [
       {
-        "title": "Expert Trainers",
+        "title": "Expert Instructors",
         "description": "Experienced professionals and qualified educators"
       },
       {
         "title": "Modern Equipment",
-        "description": "Computer rooms and up-to-date educational resources"
+        "description": "Up-to-date computer rooms and educational resources"
       },
       {
         "title": "Personalized Support",
-        "description": "Individual follow-up for each student's success"
+        "description": "Individual monitoring for each student's success"
       },
       {
         "title": "Proven Results",
-        "description": "Excellent professional placement rates for our graduates"
+        "description": "Excellent professional placement rate for our graduates"
       }
+    ],
+    "benefits": [
+      [
+        "Direct learning from active and recognized professionals.",
+        "Interactive teaching methods focused on practical skills.",
+        "Access to a network of experts for unique insights and opportunities."
+      ],
+      [
+        "Hands-on experience with cutting-edge technologies and software used in businesses.",
+        "High-tech study environment fostering innovation and creativity.",
+        "Concrete preparation for real-world challenges through performance tools."
+      ],
+      [
+        "Individual coaching to maximize your potential and achieve your goals.",
+        "A path adapted to your pace, with constant support.",
+        "Help building your unique and ambitious professional project."
+      ],
+      [
+        "Quick and successful integration into the professional world post-training.",
+        "A solid skill portfolio valued by recruiters.",
+        "Join a community of successful and influential alumni."
+      ]
     ]
   },
   "contact": {
     "title": "Visit Our Center",
-    "connect": "Connect with Us",
+    "connect": "Connect With Us",
     "description": "Join our dynamic community and stay informed about the latest news, special events, and training opportunities.",
-    "address": "APPT 26 AND 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
+    "address": "APT 26 AND 28, ASSALAM BUILDING, ABDELKRIM EL KHATTABI BLVD, Beni Mellal 23000",
     "hours": "Mon-Sat: 9am - 9pm",
     "email": "contact@pascalinfo.ma",
+    "connect_description": "Find our contact information below and follow us online.",
     "social": {
       "follow": "Follow us",
       "connect": "Connect",
@@ -123,14 +373,95 @@
       "button": "Schedule a Visit"
     }
   },
+  "assistant": {
+    "aria": {
+      "open": "Open help assistant",
+      "close": "Close assistant"
+    },
+    "button": "How can we help you?",
+    "title": "Pascal Info",
+    "tabs": {
+      "welcome": "Welcome",
+      "help": "Help",
+      "contact": "Contact"
+    },
+    "welcome": {
+      "avatar": {
+        "alt": "Director"
+      },
+      "heading": "Welcome to Pascal Info",
+      "subheading": "Professional training center",
+      "description": "We are delighted to welcome you to our website. Our training center offers programs adapted to the needs of professionals and businesses.",
+      "courses": {
+        "title": "Discover our training programs:",
+        "items": [
+          { "name": "Web Development" },
+          { "name": "Digital Commerce" },
+          { "name": "Foreign Languages" },
+          { "name": "Management" }
+        ]
+      },
+      "viewAllCourses": "View all our programs"
+    },
+    "help": {
+      "faq": {
+        "title": "Frequently asked questions",
+        "items": [
+          "How to enroll in a program?",
+          "What payment methods are accepted?",
+          "How to get funding for my training?",
+          "What are the prerequisites for advanced courses?"
+        ]
+      },
+      "support": {
+        "title": "Need additional help?",
+        "description": "Our team is available to answer all your questions.",
+        "button": "Contact support"
+      }
+    },
+    "contact": {
+      "phone": {
+        "title": "Phone",
+        "number": "+212 5234-87877",
+        "hours": "Mon-Fri: 9am-9pm"
+      },
+      "email": {
+        "title": "Email",
+        "address": "contact@pascalinfo.ma",
+        "response": "We respond within 24 hours"
+      },
+      "social": {
+        "title": "Our social networks",
+        "platforms": [
+          { "name": "Facebook", "url": "https://facebook.com/centrepascalinfo" },
+          { "name": "Instagram", "url": "https://instagram.com/institutpascalinfo" },
+          {
+            "name": "LinkedIn",
+            "url": "https://linkedin.com/company/pascalinfo"
+          }
+        ]
+      }
+    },
+    "footer": "© {{year}} Pascal Info - Professional Training Center"
+  },
   "footer": {
+    "social": "Follow us!",
+    "toast": {
+      "copy": "Copied to clipboard"
+    },
+    "aria": {
+      "phone": "Phone icon",
+      "email": "Email icon",
+      "address": "Address icon",
+      "hours": "Clock icon"
+    },
     "description": "Your gateway to professional excellence since 1996.",
     "accredited": "Accredited by",
     "accreditations": "Accreditations and partnerships",
     "quickLinks": {
       "title": "Training",
       "items": [
-        "Computer Development",
+        "Software Development",
         "Business Management",
         "Language Courses",
         "Continuing Education"
@@ -138,18 +469,29 @@
     },
     "resources": {
       "title": "Resources",
-      "items": ["Privacy Policy", "Terms of Use", "FAQ", "Educational Blog"]
+      "items": [
+        "Privacy Policy",
+        "Terms of Use",
+        "FAQ",
+        "Educational Blog"
+      ]
     },
     "newsletter": {
-      "title": "Stay Informed",
-      "description": "Receive our latest news and exclusive offers",
-      "button": "Subscribe",
-      "placeholder": "Your professional email"
+      "title": "Stay informed",
+      "description": "Sign up for our newsletter to receive our latest news, offers, and promotions.",
+      "privacy": "We respect your privacy. You can unsubscribe at any time.",
+      "emailAriaLabel": "Email address",
+      "emailPlaceholder": "Your email address",
+      "subscribeButton": "Subscribe"
     },
     "contact": {
-      "phone": "+212 5XX XXX XXX",
+      "title": "Contact us",
+      "phone": "+212 5234-87877",
       "email": "contact@pascalinfo.ma",
-      "hours": "Mon-Fri: 8am - 9pm"
+      "hours": "Mon-Sat: 9am - 9pm",
+      "mobile": "+212 6603-60938",
+      "address": "APT 26 AND 28, ASSALAM BUILDING, ABDELKRIM EL KHATTABI BLVD, Beni Mellal 23000",
+      "emergency": "24/7 Emergency Support"
     },
     "copyright": "© 2025 Pascal Info. All rights reserved.",
     "developed": "Developed by"
@@ -157,7 +499,7 @@
   "forms": {
     "contact": {
       "title": "Contact Pascal Info",
-      "description": "Our team is at your disposal to answer all your questions",
+      "description": "Our team is available to answer all your questions",
       "name": "Your Name",
       "email": "Your Email",
       "message": "Your Message",
@@ -168,14 +510,14 @@
   },
   "floatingContactButton": {
     "title": "Contact Us",
-    "description": "Our team is here to assist you with any inquiries or support you may need.",
-    "button": "Get in Touch"
+    "description": "Our team is here to help you with all your questions or support needs.",
+    "button": "Contact Us"
   },
   "appointment": {
     "formTitle": "Appointment Form",
     "scheduleButton": "Schedule a Visit",
     "title": "Schedule a Visit",
     "description": "Choose a date and time to visit our center",
-    "accessForm": "Access the Form"
+    "accessForm": "Access Form"
   }
 }

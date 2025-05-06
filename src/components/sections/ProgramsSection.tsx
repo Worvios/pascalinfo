@@ -19,29 +19,32 @@ import {
   ChevronRight,
   LucideIcon,
 } from "lucide-react";
-import use3DCardEffect from "../hooks/use3DCardEffect";
-import { cn } from "@/lib/utils";
-import { slugify } from "@/utils/slugify";
+import use3DCardEffect from "../hooks/use3DCardEffect"; // Ensure this path is correct
+import { cn } from "@/lib/utils"; // Ensure this path is correct
+import { slugify } from "@/utils/slugify"; // Ensure this path is correct
 
-// --- Local Interfaces ---
+// --- Local Interfaces (Updated) ---
 interface TranslatedProgram {
+  id: number; // Added ID
   title: string;
   description: string;
 }
 
 interface TranslationItem {
+  id?: number; // Ensured ID is optional here for type safety during mapping
   title?: string;
   description?: string;
   [key: string]: unknown;
 }
 
-interface Program {
+interface Program { // For the 3D hook
+  id: number; // Added ID
   icon: LucideIcon;
   title: string;
   text: string;
   rotateX: number;
   rotateY: number;
-  url: string;
+  url: string; // This will be the new [id]-[slug] format
   originalIndex: number;
 }
 
@@ -84,27 +87,31 @@ export default function ProgramsSection({
     };
   }, []);
 
-  // --- Data Fetching ---
+  // --- Data Fetching (Updated to include ID) ---
   const getTranslatedPrograms = useCallback((): TranslatedProgram[] => {
     try {
       const items = t("programs.items", { returnObjects: true }) as unknown;
       if (Array.isArray(items)) {
         return items
-          .map((item) => {
-            if (typeof item === "object" && item !== null) {
-              const typedItem = item as TranslationItem;
+          .map((item): TranslatedProgram | null => {
+            if (
+              typeof item === "object" &&
+              item !== null &&
+              typeof (item as TranslationItem).id === "number" && // Check for ID
+              typeof (item as TranslationItem).title === "string" &&
+              typeof (item as TranslationItem).description === "string"
+            ) {
+              const typedItem = item as Required<TranslationItem>;
               return {
-                title:
-                  typeof typedItem.title === "string" ? typedItem.title : "",
-                description:
-                  typeof typedItem.description === "string"
-                    ? typedItem.description
-                    : "",
+                id: typedItem.id, // Assign ID
+                title: typedItem.title,
+                description: typedItem.description,
               };
             }
-            return { title: String(item), description: "" };
+            console.warn("Skipping invalid program item (missing id, title, or description):", item);
+            return null;
           })
-          .filter((p) => p.title);
+          .filter((p): p is TranslatedProgram => p !== null && p.title !== "");
       }
       console.warn("programs.items translation is not an array or is missing.");
       return [];
@@ -141,26 +148,30 @@ export default function ProgramsSection({
     []
   );
 
-  // --- Prepare data for the 3D Effect Hook ---
+  // --- Prepare data for the 3D Effect Hook (Updated URL structure) ---
   const initialProgramsForHook = useMemo(
     (): Program[] =>
       programsToDisplay.map((programData, displayIndex) => {
+        // Find the original index in the *full* list to maintain consistent icon/color
+        // Match by ID for robustness, as titles might not be unique across languages (if not careful)
         const originalIndex = allProgramsData.findIndex(
-          (p) => p.title === programData.title
+          (p) => p.id === programData.id
         );
         const indexToUse = originalIndex !== -1 ? originalIndex : displayIndex;
 
         return {
+          id: programData.id, // Pass ID
           icon: programIcons[indexToUse % programIcons.length],
           title: programData.title,
           text: programData.description,
           rotateX: 0,
           rotateY: 0,
-          url: `/pages/programs/${slugify(programData.title)}`,
+          // --- CONSTRUCT THE NEW URL FORMAT ---
+          url: `/pages/programs/${programData.id}-${slugify(programData.title)}`,
           originalIndex: indexToUse,
         };
       }),
-    [programsToDisplay, allProgramsData, programIcons]
+    [programsToDisplay, allProgramsData, programIcons] // slugify is a stable import, so not strictly needed in deps unless defined locally
   );
 
   // --- Use the 3D Card Effect Hook ---
@@ -172,18 +183,28 @@ export default function ProgramsSection({
 
   const typedProgramsState = programsState as Program[];
 
-  // --- Reusable ProgramCard Component ---
+  // --- Reusable ProgramCard Component (Updated Link href) ---
   const ProgramCard = ({
     programData,
     programStateFromHook,
     cardIndex,
   }: {
-    programData: TranslatedProgram;
-    programStateFromHook: Program | undefined;
+    programData: TranslatedProgram; // Now has .id
+    programStateFromHook: Program | undefined; // Now has .id and updated .url
     cardIndex: number;
   }) => {
     const currentProgramState = programStateFromHook;
     const originalIndex = currentProgramState?.originalIndex ?? cardIndex;
+    const urlToUse = currentProgramState?.url; // This URL should be in [id]-[slug] format
+
+    // DEBUG LOG: Check the URL being passed to the Link component
+    if (typeof window !== 'undefined') { // Only log in browser
+        console.log(`[ProgramCard] Rendering Link for program ID ${programData.id} ("${programData.title}"). URL: ${urlToUse}`);
+    }
+    if (!urlToUse && typeof window !== 'undefined') {
+        console.error(`[ProgramCard] URL is undefined for program ID ${programData.id} ("${programData.title}"). Fallbacking to '#'. Check data fetching and initialProgramsForHook.`);
+    }
+
 
     return (
       <div
@@ -231,7 +252,8 @@ export default function ProgramsSection({
         </div>
 
         <div className="mt-auto pt-4">
-          <Link href={currentProgramState?.url || "#"} passHref>
+          {/* Use the URL from programStateFromHook, with a fallback for safety */}
+          <Link href={urlToUse || "#"} passHref>
             <Button
               variant="outline"
               size={isMounted && isMobile ? "sm" : "default"}
@@ -240,18 +262,14 @@ export default function ProgramsSection({
               <BookOpen className="h-4 w-4" />
               {t("programs.learnMore")}
               <ArrowRight
-        className={cn(
-          "h-4 w-4", // Size
-          // Margin: ml-2 in LTR, mr-2 in RTL
-          direction === "rtl" ? "mr-2" : "ml-2",
-          // Rotation: 180deg in RTL
-          direction === "rtl" && "rotate-180",
-          // Hover Translate: +x in LTR, -x in RTL
-          direction === "rtl" ? "group-hover:-translate-x-1" : "group-hover:translate-x-1",
-          // Transition
-          "transition-transform duration-300"
-        )}
-      />
+                className={cn(
+                  "h-4 w-4",
+                  direction === "rtl" ? "mr-2" : "ml-2",
+                  direction === "rtl" && "rotate-180",
+                  direction === "rtl" ? "group-hover:-translate-x-1" : "group-hover:translate-x-1",
+                  "transition-transform duration-300"
+                )}
+              />
             </Button>
           </Link>
         </div>
@@ -259,11 +277,13 @@ export default function ProgramsSection({
     );
   };
 
+  // --- JSX Rendering ---
   return (
     <section
       id="programs"
       className="py-16 md:py-20 px-4 md:px-8 bg-background relative overflow-hidden"
     >
+      {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[100px] animate-float opacity-20" />
         <div
@@ -277,6 +297,7 @@ export default function ProgramsSection({
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
+        {/* Section Header */}
         <div className="text-center mb-10 md:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4">
             <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
@@ -288,21 +309,26 @@ export default function ProgramsSection({
           </p>
         </div>
 
+        {/* Program Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {programsToDisplay.map((programData, index) => {
+            const stateFromHook = typedProgramsState[index];
             return (
               <ProgramCard
-                key={`${programData.title}-${index}`}
+                // Use program ID and index for a more robust key if titles aren't guaranteed unique
+                key={`${programData.id}-${index}`}
                 programData={programData}
-                programStateFromHook={typedProgramsState[index]}
+                programStateFromHook={stateFromHook}
                 cardIndex={index}
               />
             );
           })}
         </div>
 
+        {/* "View All" Button */}
         {isPreview && allProgramsData.length > maxPreviewItems && (
           <div className="mt-12 text-center">
+            {/* This link should go to a page listing all programs, e.g., app/pages/programs/page.tsx */}
             <Link href="/pages/programs" passHref>
               <Button
                 variant="default"
@@ -310,7 +336,13 @@ export default function ProgramsSection({
                 className="rounded-full group"
               >
                 {t("programs.viewAll", "Voir tous les programmes")}
-                <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ChevronRight className={cn(
+                  "h-5 w-5", // Adjusted size slightly for consistency
+                  direction === "rtl" ? "mr-2" : "ml-2",
+                  direction === "rtl" && "rotate-180",
+                  direction === "rtl" ? "group-hover:-translate-x-1" : "group-hover:translate-x-1",
+                  "transition-transform duration-300"
+                )} />
               </Button>
             </Link>
           </div>

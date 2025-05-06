@@ -72,6 +72,8 @@
     "learnMore": "En Savoir Plus", 
     "showMore": "Afficher plus de programmes",
     "showLess": "Afficher moins de programmes",
+    "viewAll":"Voir tous les programmes",
+    "backToPrograms":"Retour aux programmes",
     "items": [
       {
         "id": 1,
