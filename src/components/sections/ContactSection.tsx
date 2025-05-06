@@ -87,13 +87,13 @@ export default function ContactSection() {
         <div className="grid lg:grid-cols-2 gap-8 items-stretch">
           {/* Map Section */}
           <Card className="relative h-[400px] lg:h-full min-h-[350px] rounded-[--radius-lg] overflow-hidden border border-border shadow-lg hover:shadow-xl transition-shadow duration-300">
-            {/* === IMPORTANT: REPLACE THIS ENTIRE iframe TAG with your Google Maps Embed Code === */}
+            {/* === IMPORTANT: YOUR GOOGLE MAPS EMBED SRC IS NOW ADDED BELOW === */}
             <iframe
-               src="https://maps.app.goo.gl/h5Mk59jh3MJm9E6A6" // <<<--- YOUR NEW URL
-               width="100%"
-               height="100%"
+               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d130738366.7210043!2d0!3d0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda387b4f96b285d%3A0xc07927fdc2e9d3c4!2sINSTITUT%20PASCAL%20INFO!5e0!3m2!1sfr!2sma!4v1746564695612!5m2!1sfr!2sma" // <<<--- YOUR GOOGLE MAPS EMBED URL
+               width="100%" // Consider using 600 from your embed if specific size needed
+               height="100%" // Consider using 450 from your embed if specific size needed
                style={{ border: 0 }} // Inline style for border:0 is common
-               allowFullScreen={true} // Use boolean true
+               allowFullScreen={true} // Use boolean true (allowfullscreen="" is also valid)
                loading="lazy"
                referrerPolicy="no-referrer-when-downgrade"
                className="w-full h-full absolute inset-0"
