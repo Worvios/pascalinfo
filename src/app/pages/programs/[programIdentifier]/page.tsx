@@ -68,12 +68,10 @@ const DetailList = ({ items }: { items?: string[] }) => {
 
 export default function ProgramPage() {
   const { t } = useTranslation();
-    const { direction } = useLanguage();
+  const { direction } = useLanguage();
   
-  // The parameter name 'programIdentifier' must match the folder name `[programIdentifier]`
   const params = useParams<{ programIdentifier: string }>();
 
-  // Log received params for debugging
   if (typeof window !== 'undefined') {
     console.log("[ProgramPage] Received params:", params);
   }
@@ -90,45 +88,75 @@ export default function ProgramPage() {
     }
   }, [t]);
 
-  let id: number | null = null;
+  // Memoize the program lookup and ID parsing.
+  // This hook returns an object containing the program and the parsed ID.
+  const memoizedProgramInfo = React.useMemo(() => {
+    // This variable is local to the useMemo callback.
+    let localParsedId: number | null = null;
 
-  const program = React.useMemo(() => {
     if (!params || typeof params.programIdentifier !== 'string' || !params.programIdentifier.includes('-')) {
-      return null;
+      if (typeof window !== 'undefined') { // Client-side logging for development
+        console.error("[ProgramPage] Invalid or missing programIdentifier format:", params?.programIdentifier);
+      }
+      return { program: null, parsedId: null };
     }
 
     const parts = params.programIdentifier.split('-');
     const idStr = parts[0];
-    id = parseInt(idStr, 10);
+    const numericId = parseInt(idStr, 10);
 
-    if (isNaN(id)) {
-      id = null;
-      return null;
+    if (isNaN(numericId)) {
+      if (typeof window !== 'undefined') { // Client-side logging for development
+        console.error(`[ProgramPage] Failed to parse ID from programIdentifier: '${params.programIdentifier}'. ID part: '${idStr}' was not a number.`);
+      }
+      return { program: null, parsedId: null }; // parsedId is null as numericId is NaN
     }
 
-    return programsData.find((p) => p.id === id);
-  }, [params, programsData]);
+    localParsedId = numericId; // localParsedId is now a valid number
+    const foundProgram = programsData.find((p) => p.id === localParsedId);
 
-  if (!params || typeof params.programIdentifier !== 'string' || !params.programIdentifier.includes('-')) {
-    console.error("[ProgramPage] Invalid or missing programIdentifier:", params?.programIdentifier);
-    notFound();
-    return null; // Essential to stop rendering if params are invalid
-  }
+    if (!foundProgram) {
+      // ID was parsed correctly, but no program matched this ID.
+      // Return the parsed ID for logging purposes outside this memo.
+      return { program: null, parsedId: localParsedId };
+    }
 
+    return { program: foundProgram, parsedId: localParsedId };
+  }, [params, programsData]); // Dependencies: params and programsData
+
+  const { program, parsedId } = memoizedProgramInfo;
+
+  // If the program is not found (for any reason: invalid params, parsing error, or ID not in data),
+  // call notFound() and stop rendering.
   if (!program) {
-    console.error("[ProgramPage] Program not found or invalid ID.");
-    notFound();
-    return null; // Essential
-  }
-
-  if (!program) {
-    // Log why notFound is being called for easier debugging
-    if (typeof window !== 'undefined') {
-        console.warn(`[ProgramPage] Program not found. Parsed ID: ${id}. Program object:`, program);
+    if (typeof window !== 'undefined') { // Client-side logging for development
+      let logMessage = `[ProgramPage] Program not found or could not be loaded. Identifier: '${params?.programIdentifier}'.`;
+      
+      if (params?.programIdentifier) {
+        if (!params.programIdentifier.includes('-')) {
+            logMessage += ` (Reason: Program identifier format is invalid - missing hyphen).`;
+        } else {
+            const idStr = params.programIdentifier.split('-')[0];
+            if (parsedId !== null) { // ID was numeric, but program with this ID was not found in the data
+                logMessage += ` (Reason: Program with parsed ID ${parsedId} not found in dataset).`;
+            } else if (isNaN(parseInt(idStr, 10))) { // The ID part of the identifier was not a number
+                logMessage += ` (Reason: The ID part '${idStr}' is not a valid number).`;
+            } else {
+                // This covers cases where parsedId is null but idStr might seem numeric,
+                // often due to earlier format checks (e.g. missing programIdentifier string)
+                logMessage += ` (Reason: Could not determine program from identifier).`;
+            }
+        }
+      } else {
+        logMessage += ` (Reason: Program identifier parameter is missing).`;
+      }
+      console.warn(logMessage, "Resolved program object:", program); // 'program' will be null here
     }
     notFound();
-    return null; // Essential
+    return null; // Essential to stop rendering if the program isn't found
   }
+
+  // If we reach here, 'program' is guaranteed to be a valid ProgramData object.
 
   const hasDetailedInfo =
     program.targetAudience || program.prerequisites?.length || program.learningObjectives?.length ||
@@ -140,10 +168,9 @@ export default function ProgramPage() {
     program.destinations?.length || program.features?.length || program.useCases?.length ||
     program.capacity;
 
-  const detailSectionsMap = [
+  const detailSectionsMap = React.useMemo(() => [ // Memoizing this array if it's complex or very large, though often not strictly necessary for const data
     { key: "targetAudience", icon: Users, translationKey: "targetAudience" },
     { key: "prerequisites", icon: BookMarked, translationKey: "prerequisites", isList: true },
-    // ... (rest of your detailSectionsMap remains the same)
     { key: "learningObjectives", icon: Target, translationKey: "learningObjectives", isList: true },
     { key: "curriculumHighlights", icon: ListChecks, translationKey: "curriculumHighlights", isList: true },
     { key: "subjectsOffered", icon: HelpCircle, translationKey: "subjectsOffered", isList: true },
@@ -162,7 +189,7 @@ export default function ProgramPage() {
     { key: "features", icon: Projector, translationKey: "features", isList: true },
     { key: "useCases", icon: CheckSquare, translationKey: "useCases", isList: true },
     { key: "capacity", icon: Users, translationKey: "capacity" },
-  ];
+  ], []);
 
   return (
     <div className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-background via-background to-muted/10 relative">
@@ -192,7 +219,7 @@ export default function ProgramPage() {
               <>
                 {detailSectionsMap.map((section) => {
                   const data = program[section.key as keyof ProgramData];
-                  if (!data || (section.isList && Array.isArray(data) && data.length === 0)) return null;
+                  if (!data || (Array.isArray(data) && data.length === 0)) return null;
                   return (
                     <DetailSection
                       key={section.key}
