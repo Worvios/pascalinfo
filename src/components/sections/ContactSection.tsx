@@ -89,7 +89,7 @@ export default function ContactSection() {
           <Card className="relative h-[400px] lg:h-full min-h-[350px] rounded-[--radius-lg] overflow-hidden border border-border shadow-lg hover:shadow-xl transition-shadow duration-300">
             {/* === IMPORTANT: REPLACE THIS ENTIRE iframe TAG with your Google Maps Embed Code === */}
             <iframe
-               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3308.870398995626!2d-6.848815684784878!3d33.9715907806278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda76b8f1f9b8f3f%3A0x5f5b1f8f9b8f1f3f!2sRabat%2C%20Morocco!5e0!3m2!1sen!2sus!4v1683291898080!5m2!1sen!2sus" // <<<--- REPLACE THIS SRC
+               src="https://www.google.com/maps/place/APPT+26+ET+28,+INSTITUT+PASCAL+INFO,+IMM+ASSALAM+BD+ABDELKRIM+EL+KHATTABI,+B%C3%A9ni+Mellal+23000/@32.3302993,-6.3602891,17z/data=!4m6!3m5!1s0xda387b4f96b285d:0xc07927fdc2e9d3c4!8m2!3d32.3302993!4d-6.3602891!16s%2Fg%2F11c5blyrmp?utm_campaign=ml-ardi&g_ep=Eg1tbF8yMDI1MDQyM18wIOC7DCoASAJQAQ%3D%3D" // <<<--- REPLACE THIS SRC
                width="100%"
                height="100%"
                style={{ border: 0 }} // Inline style for border:0 is common
