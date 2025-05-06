@@ -20,16 +20,16 @@ import { cn } from "@/lib/utils";
 export default function ContactSection() {
   const { t, i18n } = useTranslation(); // Use i18n instance
   const direction = i18n.dir(); // Get direction from i18n
-  const isRtl = direction === "rtl";
+  // const isRtl = direction === "rtl"; // Removed as it's not used
 
   // Social Links - Defined name, icon, url. Styling applied via cn() below.
   // Added fallbacks to t()
-  const socialLinks = [
+  const socialLinks = React.useMemo(() => [ // Wrapped in useMemo as it depends on t
     {
       name: t("contact.social.facebook", "Facebook"),
       icon: Facebook,
       url: "https://facebook.com/centrepascalinfo",
-      iconColor: "text-[#1877F2] dark:text-[#4299E1]", // Facebook Blue (light/dark adjusted)
+      iconColor: "text-[#1877F2] dark:text-[#4299E1]",
       hoverBg: "hover:bg-[#1877F2]/10 dark:hover:bg-[#4299E1]/10",
       hoverBorder: "hover:border-[#1877F2]/30 dark:hover:border-[#4299E1]/30",
     },
@@ -37,7 +37,7 @@ export default function ContactSection() {
       name: t("contact.social.linkedin", "LinkedIn"),
       icon: Linkedin,
       url: "https://linkedin.com/company/pascal-info",
-      iconColor: "text-[#0A66C2] dark:text-[#38A1F3]", // LinkedIn Blue (light/dark adjusted)
+      iconColor: "text-[#0A66C2] dark:text-[#38A1F3]",
       hoverBg: "hover:bg-[#0A66C2]/10 dark:hover:bg-[#38A1F3]/10",
       hoverBorder: "hover:border-[#0A66C2]/30 dark:hover:border-[#38A1F3]/30",
     },
@@ -45,18 +45,18 @@ export default function ContactSection() {
       name: t("contact.social.instagram", "Instagram"),
       icon: Instagram,
       url: "https://instagram.com/centre_pascal_info",
-      // Using Instagram Pink/Purple - adjust if needed
-      iconColor: "text-[#E1306C] dark:text-[#F687B3]", // Instagram Pink (light/dark adjusted)
+      iconColor: "text-[#E1306C] dark:text-[#F687B3]",
       hoverBg: "hover:bg-[#E1306C]/10 dark:hover:bg-[#F687B3]/10",
       hoverBorder: "hover:border-[#E1306C]/30 dark:hover:border-[#F687B3]/30",
     },
-  ];
+  ], [t]);
+
   // Contact Info - Using more standard icons & added fallbacks
-  const contactInfo = [
+  const contactInfo = React.useMemo(() => [ // Wrapped in useMemo as it depends on t
     { icon: MapPin, text: t("contact.address", "123 Pascal Street, Rabat, Morocco") },
     { icon: Clock, text: t("contact.hours", "Mon - Fri: 9:00 AM - 6:00 PM") },
     { icon: Mail, text: t("contact.email", "contact@pascalinfo.com") },
-  ];
+  ], [t]);
 
   return (
     <section
@@ -147,43 +147,43 @@ export default function ContactSection() {
                 )}
               >
                  {socialLinks.map((social) => (
-    <a
-      key={social.name}
-      href={social.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group" // Group class for hover effects on children
-      aria-label={social.name}
-    >
-      <Button
-        variant="ghost" // Use ghost as a base
-        size="sm"
-        className={cn(
-          "rounded-full px-4 py-1.5 h-9", // Sizing and shape
-          "border border-border bg-transparent", // Base border and background
-          "flex items-center gap-2 text-sm", // Flex layout and text size
-          "transition-all duration-300 ease-out", // Smooth transitions
-          "text-muted-foreground", // Base text color (readable)
-          // Hover Effects:
-          "group-hover:scale-[1.03] group-hover:shadow-md", // Scale and shadow on hover
-          "group-hover:text-foreground", // Text color changes on hover for contrast
-          social.hoverBg, // Apply the brand-specific hover background
-          social.hoverBorder // Apply the brand-specific hover border
-          // dir="rtl" on parent handles flex item order
-        )}
-      >
-        {/* Apply the specific brand color to the icon */}
-        <social.icon
-          className={cn(
-            "h-4 w-4 shrink-0 transition-colors", // Base icon styles
-            social.iconColor // Apply the brand-specific icon color
-          )}
-          aria-hidden="true"
-        />
-        {/* Text remains theme-aware for readability */}
-        <span>{social.name}</span>
-      </Button>
-    </a>
+                  <a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group" // Group class for hover effects on children
+                    aria-label={social.name}
+                  >
+                    <Button
+                      variant="ghost" // Use ghost as a base
+                      size="sm"
+                      className={cn(
+                        "rounded-full px-4 py-1.5 h-9", // Sizing and shape
+                        "border border-border bg-transparent", // Base border and background
+                        "flex items-center gap-2 text-sm", // Flex layout and text size
+                        "transition-all duration-300 ease-out", // Smooth transitions
+                        "text-muted-foreground", // Base text color (readable)
+                        // Hover Effects:
+                        "group-hover:scale-[1.03] group-hover:shadow-md", // Scale and shadow on hover
+                        "group-hover:text-foreground", // Text color changes on hover for contrast
+                        social.hoverBg, // Apply the brand-specific hover background
+                        social.hoverBorder // Apply the brand-specific hover border
+                        // dir="rtl" on parent handles flex item order
+                      )}
+                    >
+                      {/* Apply the specific brand color to the icon */}
+                      <social.icon
+                        className={cn(
+                          "h-4 w-4 shrink-0 transition-colors", // Base icon styles
+                          social.iconColor // Apply the brand-specific icon color
+                        )}
+                        aria-hidden="true"
+                      />
+                      {/* Text remains theme-aware for readability */}
+                      <span>{social.name}</span>
+                    </Button>
+                  </a>
                 ))}
               </div>
 
@@ -222,10 +222,10 @@ export default function ContactSection() {
 
         /* Ensure shadow definitions are consistent */
         .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.07); }
-        .hover\:shadow-xl:hover { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08); }
+        .hover\\:shadow-xl:hover { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08); }
         /* Dark mode shadows might need adjustment if default isn't visible */
         .dark .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.15); }
-        .dark .hover\:shadow-xl:hover { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2); }
+        .dark .hover\\:shadow-xl:hover { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2); }
       `}</style>
     </section>
   );
