@@ -4,6 +4,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Trophy, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export default function AboutPage() {
   const { t } = useTranslation();
@@ -74,11 +75,12 @@ export default function AboutPage() {
               {t("about.description")}
             </p>
           </div>
-          <div>
-            <img
+            <Image
               src="/logo-pascal.png"
               alt="Centre Pascal Info"
               className="rounded-2xl shadow-2xl w-full h-auto"
+              width={500} // Adjust width as needed
+              height={500} // Adjust height as needed
             />
           </div>
         </div>
@@ -142,6 +144,5 @@ export default function AboutPage() {
           </ul>
         </div>
       </div>
-    </div>
   );
 }

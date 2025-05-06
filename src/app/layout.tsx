@@ -6,7 +6,6 @@ import { Toaster } from "sonner";
 import { LanguageProvider } from "@/utils/LanguageProvider";
 import WelcomeAssistant from "@/components/WelcomeAssistant";
 import AppLayout from "@/components/AppLayout"; // Import the new component
-import { WindArrowDown } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

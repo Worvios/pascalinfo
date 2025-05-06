@@ -78,24 +78,6 @@ export default function ProgramPage() {
     console.log("[ProgramPage] Received params:", params);
   }
 
-  if (!params || typeof params.programIdentifier !== 'string' || !params.programIdentifier.includes('-')) {
-    console.error("[ProgramPage] Invalid or missing programIdentifier:", params?.programIdentifier);
-    notFound();
-    return null; // Essential to stop rendering if params are invalid
-  }
-
-  const parts = params.programIdentifier.split('-');
-  const idStr = parts[0];
-  // const slugFromParam = parts.slice(1).join('-'); // The rest is the slug, useful for canonical links or checks
-
-  const id = parseInt(idStr, 10);
-
-  if (isNaN(id)) {
-    console.error("[ProgramPage] Failed to parse ID from programIdentifier:", idStr);
-    notFound();
-    return null; // Essential
-  }
-
   const programsData: ProgramData[] = React.useMemo(() => {
     try {
       const items = t("programs.items", { returnObjects: true });
@@ -108,9 +90,36 @@ export default function ProgramPage() {
     }
   }, [t]);
 
+  let id: number | null = null;
+
   const program = React.useMemo(() => {
+    if (!params || typeof params.programIdentifier !== 'string' || !params.programIdentifier.includes('-')) {
+      return null;
+    }
+
+    const parts = params.programIdentifier.split('-');
+    const idStr = parts[0];
+    id = parseInt(idStr, 10);
+
+    if (isNaN(id)) {
+      id = null;
+      return null;
+    }
+
     return programsData.find((p) => p.id === id);
-  }, [programsData, id]);
+  }, [params, programsData]);
+
+  if (!params || typeof params.programIdentifier !== 'string' || !params.programIdentifier.includes('-')) {
+    console.error("[ProgramPage] Invalid or missing programIdentifier:", params?.programIdentifier);
+    notFound();
+    return null; // Essential to stop rendering if params are invalid
+  }
+
+  if (!program) {
+    console.error("[ProgramPage] Program not found or invalid ID.");
+    notFound();
+    return null; // Essential
+  }
 
   if (!program) {
     // Log why notFound is being called for easier debugging
