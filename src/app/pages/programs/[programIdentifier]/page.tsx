@@ -67,9 +67,9 @@ const DetailList = ({ items }: { items?: string[] }) => {
 };
 
 export default function ProgramPage() {
+  // Hooks must be called at the top level
   const { t } = useTranslation();
   const { direction } = useLanguage();
-  
   const params = useParams<{ programIdentifier: string }>();
 
   if (typeof window !== 'undefined') {
@@ -88,14 +88,11 @@ export default function ProgramPage() {
     }
   }, [t]);
 
-  // Memoize the program lookup and ID parsing.
-  // This hook returns an object containing the program and the parsed ID.
   const memoizedProgramInfo = React.useMemo(() => {
-    // This variable is local to the useMemo callback.
     let localParsedId: number | null = null;
 
     if (!params || typeof params.programIdentifier !== 'string' || !params.programIdentifier.includes('-')) {
-      if (typeof window !== 'undefined') { // Client-side logging for development
+      if (typeof window !== 'undefined') {
         console.error("[ProgramPage] Invalid or missing programIdentifier format:", params?.programIdentifier);
       }
       return { program: null, parsedId: null };
@@ -106,69 +103,27 @@ export default function ProgramPage() {
     const numericId = parseInt(idStr, 10);
 
     if (isNaN(numericId)) {
-      if (typeof window !== 'undefined') { // Client-side logging for development
+      if (typeof window !== 'undefined') {
         console.error(`[ProgramPage] Failed to parse ID from programIdentifier: '${params.programIdentifier}'. ID part: '${idStr}' was not a number.`);
       }
-      return { program: null, parsedId: null }; // parsedId is null as numericId is NaN
+      return { program: null, parsedId: null };
     }
 
-    localParsedId = numericId; // localParsedId is now a valid number
+    localParsedId = numericId;
     const foundProgram = programsData.find((p) => p.id === localParsedId);
 
     if (!foundProgram) {
-      // ID was parsed correctly, but no program matched this ID.
-      // Return the parsed ID for logging purposes outside this memo.
       return { program: null, parsedId: localParsedId };
     }
 
     return { program: foundProgram, parsedId: localParsedId };
-  }, [params, programsData]); // Dependencies: params and programsData
+  }, [params, programsData]);
 
   const { program, parsedId } = memoizedProgramInfo;
 
-  // If the program is not found (for any reason: invalid params, parsing error, or ID not in data),
-  // call notFound() and stop rendering.
-  if (!program) {
-    if (typeof window !== 'undefined') { // Client-side logging for development
-      let logMessage = `[ProgramPage] Program not found or could not be loaded. Identifier: '${params?.programIdentifier}'.`;
-      
-      if (params?.programIdentifier) {
-        if (!params.programIdentifier.includes('-')) {
-            logMessage += ` (Reason: Program identifier format is invalid - missing hyphen).`;
-        } else {
-            const idStr = params.programIdentifier.split('-')[0];
-            if (parsedId !== null) { // ID was numeric, but program with this ID was not found in the data
-                logMessage += ` (Reason: Program with parsed ID ${parsedId} not found in dataset).`;
-            } else if (isNaN(parseInt(idStr, 10))) { // The ID part of the identifier was not a number
-                logMessage += ` (Reason: The ID part '${idStr}' is not a valid number).`;
-            } else {
-                // This covers cases where parsedId is null but idStr might seem numeric,
-                // often due to earlier format checks (e.g. missing programIdentifier string)
-                logMessage += ` (Reason: Could not determine program from identifier).`;
-            }
-        }
-      } else {
-        logMessage += ` (Reason: Program identifier parameter is missing).`;
-      }
-      console.warn(logMessage, "Resolved program object:", program); // 'program' will be null here
-    }
-    notFound();
-    return null; // Essential to stop rendering if the program isn't found
-  }
-
-  // If we reach here, 'program' is guaranteed to be a valid ProgramData object.
-
-  const hasDetailedInfo =
-    program.targetAudience || program.prerequisites?.length || program.learningObjectives?.length ||
-    program.curriculumHighlights?.length || program.teachingMethods || program.assessmentMethods ||
-    program.careerProspects?.length || program.furtherStudies || program.certification ||
-    program.duration || program.languagesOffered?.length || program.levels ||
-    program.subjectsOffered?.length || program.areasOffered?.length ||
-    program.documentTypes?.length || program.servicesOffered?.length ||
-    program.destinations?.length || program.features?.length || program.useCases?.length ||
-    program.capacity;
-
-  const detailSectionsMap = React.useMemo(() => [ // Memoizing this array if it's complex or very large, though often not strictly necessary for const data
+  // Moved detailSectionsMap definition here, before any conditional returns.
+  // This hook doesn't depend on `program` directly, so it's safe to define earlier.
+  const detailSectionsMap = React.useMemo(() => [
     { key: "targetAudience", icon: Users, translationKey: "targetAudience" },
     { key: "prerequisites", icon: BookMarked, translationKey: "prerequisites", isList: true },
     { key: "learningObjectives", icon: Target, translationKey: "learningObjectives", isList: true },
@@ -190,6 +145,44 @@ export default function ProgramPage() {
     { key: "useCases", icon: CheckSquare, translationKey: "useCases", isList: true },
     { key: "capacity", icon: Users, translationKey: "capacity" },
   ], []);
+
+
+  if (!program) {
+    if (typeof window !== 'undefined') {
+      let logMessage = `[ProgramPage] Program not found or could not be loaded. Identifier: '${params?.programIdentifier}'.`;
+      
+      if (params?.programIdentifier) {
+        if (!params.programIdentifier.includes('-')) {
+            logMessage += ` (Reason: Program identifier format is invalid - missing hyphen).`;
+        } else {
+            const idStr = params.programIdentifier.split('-')[0];
+            if (parsedId !== null) {
+                logMessage += ` (Reason: Program with parsed ID ${parsedId} not found in dataset).`;
+            } else if (isNaN(parseInt(idStr, 10))) {
+                logMessage += ` (Reason: The ID part '${idStr}' is not a valid number).`;
+            } else {
+                logMessage += ` (Reason: Could not determine program from identifier).`;
+            }
+        }
+      } else {
+        logMessage += ` (Reason: Program identifier parameter is missing).`;
+      }
+      console.warn(logMessage, "Resolved program object:", program);
+    }
+    notFound();
+    return null;
+  }
+
+  // Now that 'program' is confirmed to exist, we can calculate 'hasDetailedInfo'.
+  const hasDetailedInfo =
+    program.targetAudience || program.prerequisites?.length || program.learningObjectives?.length ||
+    program.curriculumHighlights?.length || program.teachingMethods || program.assessmentMethods ||
+    program.careerProspects?.length || program.furtherStudies || program.certification ||
+    program.duration || program.languagesOffered?.length || program.levels ||
+    program.subjectsOffered?.length || program.areasOffered?.length ||
+    program.documentTypes?.length || program.servicesOffered?.length ||
+    program.destinations?.length || program.features?.length || program.useCases?.length ||
+    program.capacity;
 
   return (
     <div className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-b from-background via-background to-muted/10 relative">
