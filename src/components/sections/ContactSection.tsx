@@ -89,7 +89,7 @@ export default function ContactSection() {
           <Card className="relative h-[400px] lg:h-full min-h-[350px] rounded-[--radius-lg] overflow-hidden border border-border shadow-lg hover:shadow-xl transition-shadow duration-300">
             {/* === IMPORTANT: REPLACE THIS ENTIRE iframe TAG with your Google Maps Embed Code === */}
             <iframe
-               src="https://www.google.com/maps/place/APPT+26+ET+28,+INSTITUT+PASCAL+INFO,+IMM+ASSALAM+BD+ABDELKRIM+EL+KHATTABI,+B%C3%A9ni+Mellal+23000/@32.3302993,-6.3602891,17z/data=!4m6!3m5!1s0xda387b4f96b285d:0xc07927fdc2e9d3c4!8m2!3d32.3302993!4d-6.3602891!16s%2Fg%2F11c5blyrmp?utm_campaign=ml-ardi&g_ep=Eg1tbF8yMDI1MDQyM18wIOC7DCoASAJQAQ%3D%3D" // <<<--- REPLACE THIS SRC
+               src="https://maps.app.goo.gl/h5Mk59jh3MJm9E6A6" // <<<--- YOUR NEW URL
                width="100%"
                height="100%"
                style={{ border: 0 }} // Inline style for border:0 is common
