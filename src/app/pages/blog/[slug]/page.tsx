@@ -7,7 +7,9 @@ import { notFound } from "next/navigation";
 import LikeButton from "@/components/LikeButton";
 import GiscusComments from "@/components/GiscusComments";
 import SvgDivider from "@/components/SvgDivider";
-import { BookOpen, Code, User, Star, Globe, MessageCircle } from "lucide-react";
+import { BookOpen, Code, User, Globe } from "lucide-react";
+
+type PortableTextSpan = { text: string };
 
 interface Author {
   name: string;
@@ -51,8 +53,14 @@ function getReadTime(blocks: PortableTextBlock[]) {
   // Roughly 200 words per minute
   const text = blocks
     .map((block) =>
-      typeof block.children !== "undefined"
-        ? block.children.map((child: any) => child.text).join(" ")
+      Array.isArray(block.children)
+        ? block.children
+            .map((child) =>
+              typeof child === "object" && child && "text" in child
+                ? (child as PortableTextSpan).text
+                : ""
+            )
+            .join(" ")
         : ""
     )
     .join(" ");
@@ -79,8 +87,14 @@ const categoryIcons: Record<string, React.ReactNode> = {
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params?: Promise<{ slug?: string | string[] }>;
+  searchParams?: Promise<unknown>;
 }) {
+  const resolvedParams = params ? await params : { slug: undefined };
+  const slug = Array.isArray(resolvedParams.slug)
+    ? resolvedParams.slug[0]
+    : resolvedParams.slug;
+
   const post: BlogPost | null = await client.fetch(
     `*[_type == "post" && slug.current == $slug][0]{
       _id,
@@ -92,7 +106,7 @@ export default async function BlogPostPage({
       body,
       date
     }`,
-    { slug: params.slug }
+    { slug }
   );
 
   if (!post) {
@@ -380,7 +394,7 @@ export default async function BlogPostPage({
                       })}
                     </span>
                     <span className="text-xs text-primary/80 mt-auto">
-                      Lire l'article →
+                      Lire l&apos;article →
                     </span>
                   </div>
                 </Link>
@@ -406,49 +420,4 @@ export default async function BlogPostPage({
       <BackToBlogLink />
     </div>
   );
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const post: BlogPost | null = await client.fetch(
-    `*[_type == "post" && slug.current == $slug][0]{
-      title,
-      body,
-      mainImage { asset->{url, alt}, alt }
-    }`,
-    { slug: params.slug }
-  );
-  if (!post) return { title: "Article introuvable" };
-  const plainText = Array.isArray(post.body)
-    ? post.body
-        .map((block: any) =>
-          typeof block.children !== "undefined"
-            ? block.children.map((child: any) => child.text).join(" ")
-            : ""
-        )
-        .join(" ")
-    : "";
-  const description =
-    plainText.slice(0, 150) + (plainText.length > 150 ? "..." : "");
-  const image = post.mainImage?.asset?.url;
-  return {
-    title: post.title,
-    description,
-    openGraph: {
-      title: post.title,
-      description,
-      images: image
-        ? [{ url: image, width: 800, height: 400, alt: post.title }]
-        : [],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description,
-      images: image ? [image] : [],
-    },
-  };
 }

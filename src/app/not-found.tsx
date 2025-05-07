@@ -1,44 +1,12 @@
-import Image from "next/image";
-import Link from "next/link";
-
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-primary/10 via-background/80 to-background/90 px-4">
-      <Image
-        src="/404_gif.gif"
-        alt="Page non trouvée"
-        width={360}
-        height={360}
-        className="mb-8"
-        priority
-      />
-      <h1 className="text-4xl font-extrabold text-primary mb-4 text-center">
-        Oups ! Cette page n'existe pas.
+    <div style={{ textAlign: "center", marginTop: "10vh" }}>
+      <h1 style={{ fontSize: "3rem", fontWeight: "bold" }}>
+        404 - Page Not Found
       </h1>
-      <p className="text-lg text-muted-foreground mb-8 text-center">
-        La page que vous cherchez est introuvable ou a été déplacée.
-        <br />
-        Retournez à l'accueil pour continuer votre visite.
+      <p style={{ fontSize: "1.25rem", color: "#888" }}>
+        Sorry, the page you are looking for does not exist.
       </p>
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-primary to-purple-600 text-white font-semibold shadow-lg hover:from-purple-600 hover:to-primary transition-all duration-300 text-lg group"
-      >
-        <svg
-          className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-        Retour à l'accueil
-      </Link>
     </div>
   );
 }

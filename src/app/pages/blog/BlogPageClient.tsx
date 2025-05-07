@@ -215,7 +215,7 @@ export default function BlogPageClient() {
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center text-lg text-muted-foreground py-12">
-            Aucun résultat pour "{search}".
+            Aucun résultat pour &quot;{search}&quot;.
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -20,6 +20,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { slugify } from "@/utils/slugify";
+import Image from "next/image";
 
 interface Course {
   name: string;
@@ -28,6 +29,12 @@ interface Course {
 interface SocialPlatform {
   name: string;
   url: string;
+}
+
+interface Program {
+  id: string;
+  title: string;
+  description: string;
 }
 
 type TranslatedItem =
@@ -69,8 +76,10 @@ const WelcomeAssistant = () => {
     return Array.isArray(translatedData) ? (translatedData as T[]) : [];
   };
 
-  const getTranslatedPrograms = () => {
-    const items = t("programs.items", { returnObjects: true }) as any[];
+  const getTranslatedPrograms = (): Program[] => {
+    const items = t("programs.items", {
+      returnObjects: true,
+    }) as Program[];
     return Array.isArray(items)
       ? items.filter(
           (item) => item && item.id && item.title && item.description
@@ -192,10 +201,13 @@ const WelcomeAssistant = () => {
                       className="object-cover w-full h-full rounded-full scale-110"
                     />
                     <AvatarFallback>
-                      <img
+                      <Image
                         src="/logo-pascal.png"
                         alt="Pascal Logo"
                         className="h-full w-full object-cover rounded-full scale-125"
+                        width={56}
+                        height={56}
+                        unoptimized
                       />
                     </AvatarFallback>
                   </Avatar>
@@ -236,7 +248,7 @@ const WelcomeAssistant = () => {
                   <div className="grid grid-cols-1 gap-2">
                     {getTranslatedPrograms()
                       .slice(0, 4)
-                      .map((program, i) => (
+                      .map((program) => (
                         <Link
                           key={program.id}
                           href={`/pages/programs/${program.id}-${slugify(

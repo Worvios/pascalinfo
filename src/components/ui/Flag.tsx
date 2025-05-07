@@ -1,6 +1,7 @@
 // components/ui/flag.tsx
 import React from "react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface FlagProps {
   code: string;
@@ -33,10 +34,13 @@ const Flag = ({ code, className, size = "md" }: FlagProps) => {
         className
       )}
     >
-      <img
+      <Image
         src={flagUrls[code.toLowerCase()]}
         alt={`${code} flag`}
         className="absolute inset-0 w-full h-full object-cover"
+        fill
+        sizes="(max-width: 40px) 100vw, 40px"
+        unoptimized
       />
     </div>
   );

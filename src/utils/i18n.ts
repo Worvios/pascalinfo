@@ -9,30 +9,16 @@ import itTranslations from "../locales/it.json";
 
 i18n.use(initReactI18next).init({
   resources: {
-    en: {
-      translation: enTranslations,
-    },
-    fr: {
-      translation: frTranslations,
-    },
-    ar: {
-      translation: arTranslations,
-    },
-    es: {
-      translation: esTranslations,
-    },
-    de: {
-      translation: deTranslations,
-    },
-    it: {
-      translation: itTranslations,
-    },
+    en: { translation: enTranslations },
+    fr: { translation: frTranslations },
+    ar: { translation: arTranslations },
+    es: { translation: esTranslations },
+    de: { translation: deTranslations },
+    it: { translation: itTranslations },
   },
   lng: "fr", // default language
   fallbackLng: "en",
-  interpolation: {
-    escapeValue: false,
-  },
+  interpolation: { escapeValue: false },
 });
 
 export default i18n;

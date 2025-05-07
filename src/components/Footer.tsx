@@ -316,7 +316,7 @@ export default function Footer() {
                   {t("footer.quickLinks.title")}
                 </h3>
                 <ul className="space-y-2.5">
-                  {quickLinksPrograms.map((program, i) => (
+                  {quickLinksPrograms.map((program) => (
                     <li key={program.id}>
                       <a
                         href={`/pages/programs/${program.id}-${slugify(
@@ -344,33 +344,32 @@ export default function Footer() {
                   {t("footer.resources.title")}
                 </h3>
                 <ul className="space-y-2.5">
-                  {getTranslatedArray("footer.resources.items").map(
-                    (link, i) => {
-                      let href = "#";
-                      if (link === "Politique de Confidentialité")
-                        href = "/pages/privacy-policy";
-                      else if (link === "Conditions d'Utilisation")
-                        href = "/pages/terms-of-use";
-                      else if (link === "FAQ") href = "/pages/faq";
-                      else if (link === "Blog Éducatif") href = "/pages/blog";
-                      return (
-                        <li key={i}>
-                          <a
-                            href={href}
-                            className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
-                          >
-                            {link}
-                            <ChevronRight
-                              className={cn(
-                                "h-3 w-3 text-primary/40 group-hover:text-primary transition-colors",
-                                direction === "rtl" && "transform rotate-180"
-                              )}
-                            />
-                          </a>
-                        </li>
-                      );
-                    }
-                  )}
+                  {getTranslatedArray("footer.resources.items").map((link) => {
+                    if (!link) return null;
+                    let href = "#";
+                    if (link === "Politique de Confidentialité")
+                      href = "/pages/privacy-policy";
+                    else if (link === "Conditions d'Utilisation")
+                      href = "/pages/terms-of-use";
+                    else if (link === "FAQ") href = "/pages/faq";
+                    else if (link === "Blog Éducatif") href = "/pages/blog";
+                    return (
+                      <li key={link}>
+                        <a
+                          href={href}
+                          className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
+                        >
+                          {link}
+                          <ChevronRight
+                            className={cn(
+                              "h-3 w-3 text-primary/40 group-hover:text-primary transition-colors",
+                              direction === "rtl" && "transform rotate-180"
+                            )}
+                          />
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </div>
@@ -495,7 +494,7 @@ export default function Footer() {
               </AccordionTrigger>
               <AccordionContent>
                 <ul className="space-y-2.5 py-2">
-                  {quickLinksPrograms.map((program, i) => (
+                  {quickLinksPrograms.map((program) => (
                     <li key={program.id}>
                       <a
                         href={`/pages/programs/${program.id}-${slugify(
@@ -529,33 +528,32 @@ export default function Footer() {
               </AccordionTrigger>
               <AccordionContent>
                 <ul className="space-y-2.5 py-2">
-                  {getTranslatedArray("footer.resources.items").map(
-                    (link, i) => {
-                      let href = "#";
-                      if (link === "Politique de Confidentialité")
-                        href = "/pages/privacy-policy";
-                      else if (link === "Conditions d'Utilisation")
-                        href = "/pages/terms-of-use";
-                      else if (link === "FAQ") href = "/pages/faq";
-                      else if (link === "Blog Éducatif") href = "/pages/blog";
-                      return (
-                        <li key={i}>
-                          <a
-                            href={href}
-                            className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 py-1"
-                          >
-                            {link}
-                            <ChevronRight
-                              className={cn(
-                                "h-3 w-3 text-primary/40",
-                                direction === "rtl" && "transform rotate-180"
-                              )}
-                            />
-                          </a>
-                        </li>
-                      );
-                    }
-                  )}
+                  {getTranslatedArray("footer.resources.items").map((link) => {
+                    if (!link) return null;
+                    let href = "#";
+                    if (link === "Politique de Confidentialité")
+                      href = "/pages/privacy-policy";
+                    else if (link === "Conditions d'Utilisation")
+                      href = "/pages/terms-of-use";
+                    else if (link === "FAQ") href = "/pages/faq";
+                    else if (link === "Blog Éducatif") href = "/pages/blog";
+                    return (
+                      <li key={link}>
+                        <a
+                          href={href}
+                          className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 py-1"
+                        >
+                          {link}
+                          <ChevronRight
+                            className={cn(
+                              "h-3 w-3 text-primary/40",
+                              direction === "rtl" && "transform rotate-180"
+                            )}
+                          />
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </AccordionContent>
             </AccordionItem>

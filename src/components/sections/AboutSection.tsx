@@ -130,6 +130,7 @@ export default function AboutSection() {
                     src="/logo-pascal.png"
                     alt="Centre Pascal Info"
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover z-0"
                   />
                   {/* Overlay gradient */}

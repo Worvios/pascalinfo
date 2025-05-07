@@ -70,8 +70,9 @@ export default function PrivacyPolicyPage() {
           </h1>
         </div>
         <p className="text-lg md:text-xl text-muted-foreground text-center max-w-2xl mx-auto font-medium">
-          "Votre confidentialit&eacute;, notre priorit&eacute; :
-          d&eacute;couvrez comment nous prot&eacute;geons vos donn&eacute;es."
+          &quot;Votre confidentialit&eacute;, notre priorit&eacute; :
+          d&eacute;couvrez comment nous prot&eacute;geons vos
+          donn&eacute;es.&quot;
         </p>
       </div>
       {/* Main Content Card */}

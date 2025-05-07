@@ -5,15 +5,21 @@ import { useLanguage } from "@/utils/LanguageProvider";
 
 type RTLImageProps = ImageProps & {
   rtlUnoptimized?: boolean;
+  alt?: string;
 };
 
-export function RTLImage({ rtlUnoptimized = true, ...props }: RTLImageProps) {
+export function RTLImage({
+  rtlUnoptimized = true,
+  alt = "",
+  ...props
+}: RTLImageProps) {
   const { direction } = useLanguage();
   const isRTL = direction === "rtl";
 
   return (
     <Image
       {...props}
+      alt={alt}
       unoptimized={isRTL && rtlUnoptimized}
       style={{
         ...props.style,

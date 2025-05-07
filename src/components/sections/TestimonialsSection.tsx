@@ -116,8 +116,8 @@ export default function TestimonialsSection() {
           ? "-20px"
           : "20px"
         : isRtl
-        ? "20px"
-        : "-20px";
+          ? "20px"
+          : "-20px";
       return `translateZ(-150px) scale(0.9) translateX(${translation}) translateY(10px)`;
     }
 
@@ -143,7 +143,7 @@ export default function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="perspective-[1400px]">
+        <div className="perspective-1400px">
           <Carousel
             className="w-full"
             opts={carouselOptions}
@@ -266,65 +266,6 @@ export default function TestimonialsSection() {
           </Carousel>
         </div>
       </div>
-
-      <style jsx global>{`
-        .perspective-[1400px] {
-          perspective: 1400px;
-          overflow: hidden;
-        }
-
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            opacity: 0.4;
-          }
-          50% {
-            opacity: 0.8;
-          }
-        }
-
-        @keyframes bg-slide {
-          0% {
-            background-position: 0 0;
-          }
-          100% {
-            background-position: 4rem 4rem;
-          }
-        }
-
-        @keyframes gradient-text {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 8s ease-in-out infinite;
-        }
-
-        .animate-bg-slide {
-          animation: bg-slide 20s linear infinite;
-        }
-
-        .animate-gradient-text {
-          background-size: 200% 200%;
-          animation: gradient-text 10s ease infinite;
-        }
-
-        .shadow-3xl {
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .will-change-transform {
-          will-change: transform, opacity, scale;
-        }
-      `}</style>
     </section>
   );
 }

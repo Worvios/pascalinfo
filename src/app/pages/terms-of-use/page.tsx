@@ -68,8 +68,8 @@ export default function TermsOfUsePage() {
           </h1>
         </div>
         <p className="text-lg md:text-xl text-muted-foreground text-center max-w-2xl mx-auto font-medium">
-          "Nos r&egrave;gles pour un espace &eacute;ducatif s&ucirc;r,
-          respectueux et collaboratif."
+          &quot;Nos r&egrave;gles pour un espace &eacute;ducatif s&ucirc;r,
+          respectueux et collaboratif.&quot;
         </p>
       </div>
       {/* Main Content Card */}

@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "node scripts/generate-sitemap-rss.ts"
+    "postbuild": "ts-node scripts/generate-sitemap-rss.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -76,6 +76,7 @@
     "eslint-config-next": "15.3.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

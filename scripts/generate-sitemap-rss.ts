@@ -1,6 +1,8 @@
 import { client } from "../src/lib/sanityClient";
-import fs from "fs/promises";
-import path from "path";
+// @ts-ignore
+const fs = require("fs/promises");
+// @ts-ignore
+const path = require("path");
 
 const SITE_URL = "https://pascalinfo.ma";
 
