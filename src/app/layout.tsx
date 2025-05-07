@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   description: "Centre de formation informatique au Maroc",
   openGraph: {
     title: "Centre Pascal Info",
-    description: "Centre de formation informatique au Maroc",
+    description: "Centre de formation professionnelle au Maroc",
     url: "https://pascalinfo.com",
     siteName: "Centre Pascal Info",
     images: "/og-image.jpg",
@@ -45,7 +45,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <LanguageProvider>
           <AppLayout>{children}</AppLayout>
           <Toaster position="top-center" />
