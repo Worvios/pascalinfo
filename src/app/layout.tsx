@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Centre Pascal Info",
-    description: "Centre de formation informatique au Maroc",
+    description: "Centre de formation professionnelle au Maroc",
     images: ["/og-image.jpg"],
   },
 };

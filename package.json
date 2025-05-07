@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "ts-node scripts/generate-sitemap-rss.ts",
+    "build:scripts": "tsc scripts/generate-sitemap-rss.ts --outDir scripts/dist",
+    "postbuild": "npm run build:scripts && node scripts/dist/generate-sitemap-rss.js",
     "deploy:sanity": "sanity deploy"
   },
   "dependencies": {
