@@ -10,7 +10,7 @@
     "start": "next start",
     "lint": "next lint",
     "build:scripts": "tsc --project tsconfig.scripts.json",
-    "postbuild": "npm run build:scripts && node scripts/dist/scripts/generate-sitemap-rss.js",
+    "postbuild": "ts-node scripts/generate-sitemap-rss.ts",
     "deploy:sanity": "sanity deploy"
   },
   "dependencies": {
