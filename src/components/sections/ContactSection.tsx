@@ -24,39 +24,50 @@ export default function ContactSection() {
 
   // Social Links - Defined name, icon, url. Styling applied via cn() below.
   // Added fallbacks to t()
-  const socialLinks = React.useMemo(() => [ // Wrapped in useMemo as it depends on t
-    {
-      name: t("contact.social.facebook", "Facebook"),
-      icon: Facebook,
-      url: "https://facebook.com/centrepascalinfo",
-      iconColor: "text-[#1877F2] dark:text-[#4299E1]",
-      hoverBg: "hover:bg-[#1877F2]/10 dark:hover:bg-[#4299E1]/10",
-      hoverBorder: "hover:border-[#1877F2]/30 dark:hover:border-[#4299E1]/30",
-    },
-    {
-      name: t("contact.social.linkedin", "LinkedIn"),
-      icon: Linkedin,
-      url: "https://linkedin.com/company/pascal-info",
-      iconColor: "text-[#0A66C2] dark:text-[#38A1F3]",
-      hoverBg: "hover:bg-[#0A66C2]/10 dark:hover:bg-[#38A1F3]/10",
-      hoverBorder: "hover:border-[#0A66C2]/30 dark:hover:border-[#38A1F3]/30",
-    },
-    {
-      name: t("contact.social.instagram", "Instagram"),
-      icon: Instagram,
-      url: "https://instagram.com/centre_pascal_info",
-      iconColor: "text-[#E1306C] dark:text-[#F687B3]",
-      hoverBg: "hover:bg-[#E1306C]/10 dark:hover:bg-[#F687B3]/10",
-      hoverBorder: "hover:border-[#E1306C]/30 dark:hover:border-[#F687B3]/30",
-    },
-  ], [t]);
+  const socialLinks = React.useMemo(
+    () => [
+      // Wrapped in useMemo as it depends on t
+      {
+        name: t("contact.social.facebook", "Facebook"),
+        icon: Facebook,
+        url: "https://facebook.com/centrepascalinfo",
+        iconColor: "text-[#1877F2] dark:text-[#4299E1]",
+        hoverBg: "hover:bg-[#1877F2]/10 dark:hover:bg-[#4299E1]/10",
+        hoverBorder: "hover:border-[#1877F2]/30 dark:hover:border-[#4299E1]/30",
+      },
+      {
+        name: t("contact.social.linkedin", "LinkedIn"),
+        icon: Linkedin,
+        url: "https://linkedin.com/company/pascal-info",
+        iconColor: "text-[#0A66C2] dark:text-[#38A1F3]",
+        hoverBg: "hover:bg-[#0A66C2]/10 dark:hover:bg-[#38A1F3]/10",
+        hoverBorder: "hover:border-[#0A66C2]/30 dark:hover:border-[#38A1F3]/30",
+      },
+      {
+        name: t("contact.social.instagram", "Instagram"),
+        icon: Instagram,
+        url: "https://instagram.com/centre_pascal_info",
+        iconColor: "text-[#E1306C] dark:text-[#F687B3]",
+        hoverBg: "hover:bg-[#E1306C]/10 dark:hover:bg-[#F687B3]/10",
+        hoverBorder: "hover:border-[#E1306C]/30 dark:hover:border-[#F687B3]/30",
+      },
+    ],
+    [t]
+  );
 
   // Contact Info - Using more standard icons & added fallbacks
-  const contactInfo = React.useMemo(() => [ // Wrapped in useMemo as it depends on t
-    { icon: MapPin, text: t("contact.address", "123 Pascal Street, Rabat, Morocco") },
-    { icon: Clock, text: t("contact.hours", "Mon - Fri: 9:00 AM - 6:00 PM") },
-    { icon: Mail, text: t("contact.email", "contact@pascalinfo.com") },
-  ], [t]);
+  const contactInfo = React.useMemo(
+    () => [
+      // Wrapped in useMemo as it depends on t
+      {
+        icon: MapPin,
+        text: t("contact.address", "123 Pascal Street, Rabat, Morocco"),
+      },
+      { icon: Clock, text: t("contact.hours", "Mon - Fri: 9:00 AM - 6:00 PM") },
+      { icon: Mail, text: t("contact.email", "contact@pascalinfo.com") },
+    ],
+    [t]
+  );
 
   return (
     <section
@@ -66,11 +77,17 @@ export default function ContactSection() {
       {/* Background Effects - Adjusted opacity/blur for subtlety */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,theme(colors.primary/8)_0%,transparent_50%)] opacity-50 animate-pulse-slow" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,theme(colors.primary/8)_0%,transparent_50%)] opacity-50 animate-pulse" style={{ animationDelay: '3s' }}/>
+        <div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,theme(colors.primary/8)_0%,transparent_50%)] opacity-50 animate-pulse"
+          style={{ animationDelay: "3s" }}
+        />
         <div className="absolute inset-0 bg-[linear-gradient(45deg,theme(colors.primary/5)_25%,transparent_25%,transparent_50%,theme(colors.primary/5)_50%,theme(colors.primary/5)_75%,transparent_75%,transparent)] bg-[size:6rem_6rem] opacity-10 animate-bg-slide" />
         {/* Floating Shapes - Using theme border color */}
         <div className="absolute top-1/4 left-1/4 w-16 h-16 rounded-full border-2 border-primary/20 animate-float-slow blur-[1px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-20 h-20 rounded-lg border-2 border-primary/20 animate-float blur-[1px]" style={{ animationDelay: '2s' }}/>
+        <div
+          className="absolute bottom-1/4 right-1/4 w-20 h-20 rounded-lg border-2 border-primary/20 animate-float blur-[1px]"
+          style={{ animationDelay: "2s" }}
+        />
       </div>
       <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/70 to-transparent animate-pulse" />
 
@@ -80,7 +97,10 @@ export default function ContactSection() {
             {t("contact.title", "Get In Touch")}
           </h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            {t("contact.description", "We're ready to answer your questions. Reach out or visit us!")}
+            {t(
+              "contact.description",
+              "We're ready to answer your questions. Reach out or visit us!"
+            )}
           </p>
         </div>
 
@@ -89,16 +109,16 @@ export default function ContactSection() {
           <Card className="relative h-[400px] lg:h-full min-h-[350px] rounded-[--radius-lg] overflow-hidden border border-border shadow-lg hover:shadow-xl transition-shadow duration-300">
             {/* === IMPORTANT: YOUR GOOGLE MAPS EMBED SRC IS NOW ADDED BELOW === */}
             <iframe
-               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d130738366.7210043!2d0!3d0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda387b4f96b285d%3A0xc07927fdc2e9d3c4!2sINSTITUT%20PASCAL%20INFO!5e0!3m2!1sfr!2sma!4v1746564695612!5m2!1sfr!2sma" // <<<--- YOUR GOOGLE MAPS EMBED URL
-               width="100%" // Consider using 600 from your embed if specific size needed
-               height="100%" // Consider using 450 from your embed if specific size needed
-               style={{ border: 0 }} // Inline style for border:0 is common
-               allowFullScreen={true} // Use boolean true (allowfullscreen="" is also valid)
-               loading="lazy"
-               referrerPolicy="no-referrer-when-downgrade"
-               className="w-full h-full absolute inset-0"
-               title={t("contact.map_title", "Pascal Info Location Map")}
-             />
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d354.3658800808294!2d-6.3605048663951305!3d32.330241185369076!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda387b4f96b285d%3A0xc07927fdc2e9d3c4!2sINSTITUT%20PASCAL%20INFO!5e0!3m2!1sfr!2sma!4v1746583339428!5m2!1sfr!2sma"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-full absolute inset-0"
+              title={t("contact.map_title", "Pascal Info Location Map")}
+            />
             {/* ================================================================================= */}
             <div className="absolute top-3 left-3 bg-background/80 backdrop-blur-sm text-foreground border border-border px-3 py-1 rounded-full shadow-md text-xs font-medium z-10">
               📍 {t("contact.map_label", "Our Location")}
@@ -108,7 +128,7 @@ export default function ContactSection() {
           {/* Info & Social Section */}
           <Card
             className={cn(
-              "bg-background/90 backdrop-blur-lg border border-border p-6 md:p-8 rounded-[--radius-lg] shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col",
+              "bg-background/90 backdrop-blur-lg border border-border p-6 md:p-8 rounded-[--radius-lg] shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
             )}
             dir={direction} // Set direction for RTL handling
           >
@@ -119,7 +139,10 @@ export default function ContactSection() {
                   {t("contact.connect", "Connect With Us")}
                 </h3>
                 <p className="mt-2 text-base text-muted-foreground leading-relaxed">
-                  {t("contact.connect_description", "Find our contact details below and follow us online.")}
+                  {t(
+                    "contact.connect_description",
+                    "Find our contact details below and follow us online."
+                  )}
                 </p>
               </div>
 
@@ -134,7 +157,9 @@ export default function ContactSection() {
                       className="h-5 w-5 text-primary/80 group-hover:text-primary transition-colors shrink-0"
                       aria-hidden="true"
                     />
-                    <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">{info.text}</span>
+                    <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                      {info.text}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -142,11 +167,11 @@ export default function ContactSection() {
               {/* Social Media Buttons */}
               <div
                 className={cn(
-                  "flex flex-wrap gap-3 pt-4 border-t border-border", // Added top border
+                  "flex flex-wrap gap-3 pt-4 border-t border-border" // Added top border
                   // Rely on dir="rtl" for justify content alignment if needed, usually flex-start/end aligns automatically
                 )}
               >
-                 {socialLinks.map((social) => (
+                {socialLinks.map((social) => (
                   <a
                     key={social.name}
                     href={social.url}
@@ -206,26 +231,100 @@ export default function ContactSection() {
       {/* Keep necessary keyframes, ensure no conflicts */}
       <style jsx global>{`
         /* Add keyframes if they aren't globally defined elsewhere */
-        @keyframes pulse-slow { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-        @keyframes bg-slide { 0% { background-position: 0 0; } 100% { background-position: 6rem 6rem; } }
-        @keyframes gradient-text { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        @keyframes float-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        @keyframes pulse-slow {
+          0%,
+          100% {
+            opacity: 0.6;
+          }
+          50% {
+            opacity: 1;
+          }
+        }
+        @keyframes pulse {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.7;
+          }
+        }
+        @keyframes bg-slide {
+          0% {
+            background-position: 0 0;
+          }
+          100% {
+            background-position: 6rem 6rem;
+          }
+        }
+        @keyframes gradient-text {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+        @keyframes float-slow {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-6px);
+          }
+        }
 
-        .animate-pulse-slow { animation: pulse-slow 7s ease-in-out infinite; }
-        .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-        .animate-bg-slide { animation: bg-slide 30s linear infinite; }
-        .animate-gradient-text { background-size: 200% 200%; animation: gradient-text 8s ease infinite; }
-        .animate-float { animation: float 9s ease-in-out infinite; }
-        .animate-float-slow { animation: float-slow 12s ease-in-out infinite; }
+        .animate-pulse-slow {
+          animation: pulse-slow 7s ease-in-out infinite;
+        }
+        .animate-pulse {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .animate-bg-slide {
+          animation: bg-slide 30s linear infinite;
+        }
+        .animate-gradient-text {
+          background-size: 200% 200%;
+          animation: gradient-text 8s ease infinite;
+        }
+        .animate-float {
+          animation: float 9s ease-in-out infinite;
+        }
+        .animate-float-slow {
+          animation: float-slow 12s ease-in-out infinite;
+        }
 
         /* Ensure shadow definitions are consistent */
-        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.07); }
-        .hover\\:shadow-xl:hover { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08); }
+        .shadow-lg {
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07),
+            0 4px 6px -4px rgba(0, 0, 0, 0.07);
+        }
+        .hover\\:shadow-xl:hover {
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08),
+            0 8px 10px -6px rgba(0, 0, 0, 0.08);
+        }
         /* Dark mode shadows might need adjustment if default isn't visible */
-        .dark .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -4px rgba(0, 0, 0, 0.15); }
-        .dark .hover\\:shadow-xl:hover { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2); }
+        .dark .shadow-lg {
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15),
+            0 4px 6px -4px rgba(0, 0, 0, 0.15);
+        }
+        .dark .hover\\:shadow-xl:hover {
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2),
+            0 8px 10px -6px rgba(0, 0, 0, 0.2);
+        }
       `}</style>
     </section>
   );

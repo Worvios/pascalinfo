@@ -45,6 +45,13 @@ import {
 } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { slugify } from "@/utils/slugify";
+
+interface ProgramItem {
+  id: number;
+  title: string;
+  [key: string]: unknown;
+}
 
 export default function Footer() {
   const { t, i18n } = useTranslation(); // Updated to include i18n
@@ -67,9 +74,21 @@ export default function Footer() {
   const getTranslatedArray = (key: string): string[] => {
     const translatedData = t(key, { returnObjects: true });
     return Array.isArray(translatedData)
-      ? translatedData.filter((item): item is string => typeof item === "string")
+      ? translatedData.filter(
+          (item): item is string => typeof item === "string"
+        )
       : [];
   };
+
+  // Fetch programs from translations for quick links
+  const getPrograms = () => {
+    const items = t("programs.items", { returnObjects: true }) as ProgramItem[];
+    return Array.isArray(items)
+      ? items.filter((item) => item && item.id && item.title)
+      : [];
+  };
+  const programs = getPrograms();
+  const quickLinksPrograms = programs.slice(0, 4);
 
   const contactInfo = [
     {
@@ -154,63 +173,63 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-16 pb-12">
         {/* Newsletter Section */}
         <div className="mb-16 p-6 md:p-8 rounded-xl bg-gradient-to-br from-primary/15 via-primary/8 to-transparent border border-primary/20 shadow-sm">
-  <div className="flex flex-col md:flex-row items-start justify-between gap-6">
-    <div className="max-w-md">
-      <h3 className="text-xl font-medium mb-2 flex items-center gap-2">
-        <Mail className="h-5 w-5 text-primary" />
-        {t("footer.newsletter.title")}
-      </h3>
-      {/* Note: This description is still hardcoded in French. Let's translate it too. */}
-      <p className="text-sm text-foreground/80 mb-2">
-        {t("footer.newsletter.description")}
-      </p>
-      <p className="text-xs text-muted-foreground/80 italic">
-        {t("footer.newsletter.privacy")}
-      </p>
-    </div>
-
-    <div className="w-full md:w-auto md:min-w-[340px] newsletter-container">
-      <form
-        action="https://app.convertkit.com/forms/7954953/subscriptions"
-        method="post"
-        data-sv-form="7954953"
-        data-uid="dc4673f8de"
-        data-format="inline"
-        data-version="5"
-        className="seva-form formkit-form newsletter-theme-aware"
-      >
-        <div data-style="clean">
-          <ul
-            className="formkit-alert formkit-alert-error"
-            data-element="errors"
-            data-group="alert"
-          ></ul>
-          <div
-            data-element="fields"
-            data-stacked="false"
-            className="seva-fields formkit-fields"
-          >
-            <div className="formkit-field">
-              <input
-                className="formkit-input theme-adaptive-input"
-                name="email_address"
-                aria-label={t("footer.newsletter.emailAriaLabel")}
-                placeholder={t("footer.newsletter.emailPlaceholder")}
-                required
-                type="email"
-              />
+          <div className="flex flex-col md:flex-row items-start justify-between gap-6">
+            <div className="max-w-md">
+              <h3 className="text-xl font-medium mb-2 flex items-center gap-2">
+                <Mail className="h-5 w-5 text-primary" />
+                {t("footer.newsletter.title")}
+              </h3>
+              {/* Note: This description is still hardcoded in French. Let's translate it too. */}
+              <p className="text-sm text-foreground/80 mb-2">
+                {t("footer.newsletter.description")}
+              </p>
+              <p className="text-xs text-muted-foreground/80 italic">
+                {t("footer.newsletter.privacy")}
+              </p>
             </div>
-            <button
-              data-element="submit"
-              className="formkit-submit theme-adaptive-button"
-            >
-              <div className="formkit-spinner">
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
-              <span>{t("footer.newsletter.subscribeButton")}</span>
-            </button>
+
+            <div className="w-full md:w-auto md:min-w-[340px] newsletter-container">
+              <form
+                action="https://app.convertkit.com/forms/7954953/subscriptions"
+                method="post"
+                data-sv-form="7954953"
+                data-uid="dc4673f8de"
+                data-format="inline"
+                data-version="5"
+                className="seva-form formkit-form newsletter-theme-aware"
+              >
+                <div data-style="clean">
+                  <ul
+                    className="formkit-alert formkit-alert-error"
+                    data-element="errors"
+                    data-group="alert"
+                  ></ul>
+                  <div
+                    data-element="fields"
+                    data-stacked="false"
+                    className="seva-fields formkit-fields"
+                  >
+                    <div className="formkit-field">
+                      <input
+                        className="formkit-input theme-adaptive-input"
+                        name="email_address"
+                        aria-label={t("footer.newsletter.emailAriaLabel")}
+                        placeholder={t("footer.newsletter.emailPlaceholder")}
+                        required
+                        type="email"
+                      />
+                    </div>
+                    <button
+                      data-element="submit"
+                      className="formkit-submit theme-adaptive-button"
+                    >
+                      <div className="formkit-spinner">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                      <span>{t("footer.newsletter.subscribeButton")}</span>
+                    </button>
                   </div>
                 </div>
               </form>
@@ -297,13 +316,15 @@ export default function Footer() {
                   {t("footer.quickLinks.title")}
                 </h3>
                 <ul className="space-y-2.5">
-                  {getTranslatedArray("footer.quickLinks.items").map((link, i) => (
-                    <li key={i}>
+                  {quickLinksPrograms.map((program, i) => (
+                    <li key={program.id}>
                       <a
-                        href="#"
+                        href={`/pages/programs/${program.id}-${slugify(
+                          program.title
+                        )}`}
                         className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
                       >
-                        {link}
+                        {program.title}
                         <ChevronRight
                           className={cn(
                             "h-3 w-3 text-primary/40 group-hover:text-primary transition-colors",
@@ -323,22 +344,33 @@ export default function Footer() {
                   {t("footer.resources.title")}
                 </h3>
                 <ul className="space-y-2.5">
-                  {getTranslatedArray("footer.resources.items").map((link, i) => (
-                    <li key={i}>
-                      <a
-                        href="#"
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
-                      >
-                        {link}
-                        <ChevronRight
-                          className={cn(
-                            "h-3 w-3 text-primary/40 group-hover:text-primary transition-colors",
-                            direction === "rtl" && "transform rotate-180"
-                          )}
-                        />
-                      </a>
-                    </li>
-                  ))}
+                  {getTranslatedArray("footer.resources.items").map(
+                    (link, i) => {
+                      let href = "#";
+                      if (link === "Politique de Confidentialité")
+                        href = "/pages/privacy-policy";
+                      else if (link === "Conditions d'Utilisation")
+                        href = "/pages/terms-of-use";
+                      else if (link === "FAQ") href = "/pages/faq";
+                      else if (link === "Blog Éducatif") href = "/pages/blog";
+                      return (
+                        <li key={i}>
+                          <a
+                            href={href}
+                            className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 group"
+                          >
+                            {link}
+                            <ChevronRight
+                              className={cn(
+                                "h-3 w-3 text-primary/40 group-hover:text-primary transition-colors",
+                                direction === "rtl" && "transform rotate-180"
+                              )}
+                            />
+                          </a>
+                        </li>
+                      );
+                    }
+                  )}
                 </ul>
               </div>
             </div>
@@ -360,7 +392,9 @@ export default function Footer() {
                     "hover:border-primary/30 hover:bg-primary/5 transition-colors",
                     !info.noCopy && "cursor-pointer"
                   )}
-                  onClick={() => !info.noCopy && handleCopy(info.value, info.id)}
+                  onClick={() =>
+                    !info.noCopy && handleCopy(info.value, info.id)
+                  }
                   role={!info.noCopy ? "button" : undefined}
                   tabIndex={!info.noCopy ? 0 : undefined}
                 >
@@ -368,8 +402,12 @@ export default function Footer() {
                     {info.icon}
                   </div>
                   <div className="flex flex-col flex-1 min-w-0">
-                    <span className="text-xs text-muted-foreground">{info.label}</span>
-                    <span className="text-sm font-medium truncate">{info.value}</span>
+                    <span className="text-xs text-muted-foreground">
+                      {info.label}
+                    </span>
+                    <span className="text-sm font-medium truncate">
+                      {info.value}
+                    </span>
                   </div>
                   {!info.noCopy && (
                     <div className="self-center">
@@ -386,7 +424,9 @@ export default function Footer() {
               {/* Emergency Contact */}
               <div
                 className="group sm:col-span-2 flex gap-3 p-3 rounded-lg border border-red-200 bg-red-50/50 dark:bg-red-950/10 dark:border-red-900/30 cursor-pointer hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors"
-                onClick={() => handleCopy(t("footer.contact.emergency"), "emergency")}
+                onClick={() =>
+                  handleCopy(t("footer.contact.emergency"), "emergency")
+                }
                 role="button"
                 tabIndex={0}
               >
@@ -411,7 +451,9 @@ export default function Footer() {
 
             {/* Accreditations */}
             <div className="mt-8">
-              <h4 className="text-sm font-medium mb-3">{t("footer.accredited")}</h4>
+              <h4 className="text-sm font-medium mb-3">
+                {t("footer.accredited")}
+              </h4>
               <div className="flex flex-wrap gap-3">
                 <div className="bg-background rounded-lg p-2 border border-muted flex items-center gap-2">
                   <Avatar className="h-7 w-7">
@@ -427,7 +469,10 @@ export default function Footer() {
                   </Avatar>
                   <span className="text-xs">Éducation Nationale</span>
                 </div>
-                <Badge variant="outline" className="bg-primary/5 border-primary/20 font-normal text-xs">
+                <Badge
+                  variant="outline"
+                  className="bg-primary/5 border-primary/20 font-normal text-xs"
+                >
                   Certifié OFPPT
                 </Badge>
               </div>
@@ -438,7 +483,10 @@ export default function Footer() {
         {/* Mobile Accordion */}
         <div className="md:hidden w-full space-y-4 mb-6">
           <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="quick-links" className="border-b border-muted/40">
+            <AccordionItem
+              value="quick-links"
+              className="border-b border-muted/40"
+            >
               <AccordionTrigger className="py-3 text-sm font-medium">
                 <div className="flex items-center gap-2">
                   <BookOpen className="h-4 w-4 text-primary" />
@@ -447,13 +495,15 @@ export default function Footer() {
               </AccordionTrigger>
               <AccordionContent>
                 <ul className="space-y-2.5 py-2">
-                  {getTranslatedArray("footer.quickLinks.items").map((link, i) => (
-                    <li key={i}>
+                  {quickLinksPrograms.map((program, i) => (
+                    <li key={program.id}>
                       <a
-                        href="#"
+                        href={`/pages/programs/${program.id}-${slugify(
+                          program.title
+                        )}`}
                         className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 py-1"
                       >
-                        {link}
+                        {program.title}
                         <ChevronRight
                           className={cn(
                             "h-3 w-3 text-primary/40",
@@ -467,7 +517,10 @@ export default function Footer() {
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="resources" className="border-b border-muted/40">
+            <AccordionItem
+              value="resources"
+              className="border-b border-muted/40"
+            >
               <AccordionTrigger className="py-3 text-sm font-medium">
                 <div className="flex items-center gap-2">
                   <FileText className="h-4 w-4 text-primary" />
@@ -476,22 +529,33 @@ export default function Footer() {
               </AccordionTrigger>
               <AccordionContent>
                 <ul className="space-y-2.5 py-2">
-                  {getTranslatedArray("footer.resources.items").map((link, i) => (
-                    <li key={i}>
-                      <a
-                        href="#"
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 py-1"
-                      >
-                        {link}
-                        <ChevronRight
-                          className={cn(
-                            "h-3 w-3 text-primary/40",
-                            direction === "rtl" && "transform rotate-180"
-                          )}
-                        />
-                      </a>
-                    </li>
-                  ))}
+                  {getTranslatedArray("footer.resources.items").map(
+                    (link, i) => {
+                      let href = "#";
+                      if (link === "Politique de Confidentialité")
+                        href = "/pages/privacy-policy";
+                      else if (link === "Conditions d'Utilisation")
+                        href = "/pages/terms-of-use";
+                      else if (link === "FAQ") href = "/pages/faq";
+                      else if (link === "Blog Éducatif") href = "/pages/blog";
+                      return (
+                        <li key={i}>
+                          <a
+                            href={href}
+                            className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2 py-1"
+                          >
+                            {link}
+                            <ChevronRight
+                              className={cn(
+                                "h-3 w-3 text-primary/40",
+                                direction === "rtl" && "transform rotate-180"
+                              )}
+                            />
+                          </a>
+                        </li>
+                      );
+                    }
+                  )}
                 </ul>
               </AccordionContent>
             </AccordionItem>
@@ -507,7 +571,9 @@ export default function Footer() {
             {t("footer.copyright").replace("2025", currentYear.toString())}
           </div>
           <div className="flex items-center gap-4 order-1 md:order-2">
-            <span className="text-sm text-muted-foreground">{t("footer.developed")}</span>
+            <span className="text-sm text-muted-foreground">
+              {t("footer.developed")}
+            </span>
             <a
               href="https://coderabbit.de"
               target="_blank"

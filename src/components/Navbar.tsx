@@ -123,7 +123,7 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
   const navLinks = useMemo(
     () => [
       { name: t("navigation.home"), href: "/#home" },
-      { name: t("navigation.about"), href: "/#about" },
+      { name: t("footer.resources.blog.title"), href: "/pages/blog" },
       { name: t("navigation.programs"), href: "/pages/programs" },
       { name: t("navigation.contact"), href: "/#contact" },
     ],
@@ -134,7 +134,9 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
   const handleLanguageChange = useCallback(
     (code: string) => {
       if (code === language) return;
-      const languageIndicators = document.querySelectorAll(`.language-${code.toLowerCase()}`);
+      const languageIndicators = document.querySelectorAll(
+        `.language-${code.toLowerCase()}`
+      );
       languageIndicators.forEach((el) => {
         el.classList.add("language-change-indicator");
         setTimeout(() => el.classList.remove("language-change-indicator"), 500);
@@ -187,8 +189,8 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
               {navLinks.map((link) => {
                 const sectionId = link.href.split("#")[1];
                 const isActive =
-  (pathname === "/" && activeSection === sectionId) ||
-  (pathname === link.href && link.href.startsWith("/pages/"));
+                  (pathname === "/" && activeSection === sectionId) ||
+                  (pathname === link.href && link.href.startsWith("/pages/"));
                 return (
                   <li key={link.name}>
                     <Link
@@ -253,7 +255,8 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <Flag
                   code={
-                    languageOptions.find((l) => l.code === language)?.flagCode || "fr"
+                    languageOptions.find((l) => l.code === language)
+                      ?.flagCode || "fr"
                   }
                   size="sm"
                   className={`language-${language.toLowerCase()} transition-transform duration-200`}
@@ -264,7 +267,10 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                 <ChevronDown className="h-3 w-3 text-muted-foreground transition-transform duration-300 group-data-[state=open]:rotate-180" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[240px] p-2 rounded-xl">
+            <DropdownMenuContent
+              align="end"
+              className="w-[240px] p-2 rounded-xl"
+            >
               <div className="flex items-center gap-2 px-3 py-2 mb-1 border-b border-muted/60">
                 <Globe className="h-4 w-4 text-primary/70" />
                 <span className="text-sm font-medium text-muted-foreground">
@@ -277,14 +283,17 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                     key={option.code}
                     className={cn(
                       "flex items-center gap-2 px-3 py-2.5 cursor-pointer rounded-lg hover:bg-muted transition-colors group",
-                      language === option.code && "bg-primary/10 hover:bg-primary/15"
+                      language === option.code &&
+                        "bg-primary/10 hover:bg-primary/15"
                     )}
                     onClick={() => handleLanguageChange(option.code)}
                   >
                     <div
                       className={cn(
                         "flex items-center justify-center transition-transform duration-300 group-hover:scale-110",
-                        language === option.code ? "ring-2 ring-primary/30 rounded-full" : ""
+                        language === option.code
+                          ? "ring-2 ring-primary/30 rounded-full"
+                          : ""
                       )}
                     >
                       <Flag
@@ -301,7 +310,9 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                       >
                         {option.code}
                       </span>
-                      <span className="text-xs text-muted-foreground">{option.label}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {option.label}
+                      </span>
                     </div>
                     {language === option.code && (
                       <span className="ml-auto">
@@ -334,13 +345,17 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                 <Sun
                   className={cn(
                     "absolute transition-all duration-300 ease-spring h-5 w-5",
-                    darkMode ? "rotate-0 opacity-100 scale-100" : "rotate-90 opacity-0 scale-0"
+                    darkMode
+                      ? "rotate-0 opacity-100 scale-100"
+                      : "rotate-90 opacity-0 scale-0"
                   )}
                 />
                 <Moon
                   className={cn(
                     "absolute transition-all duration-300 ease-spring h-5 w-5",
-                    !darkMode ? "rotate-0 opacity-100 scale-100" : "rotate-90 opacity-0 scale-0"
+                    !darkMode
+                      ? "rotate-0 opacity-100 scale-100"
+                      : "rotate-90 opacity-0 scale-0"
                   )}
                 />
               </div>
@@ -353,9 +368,16 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
           {/* Mobile Language Switcher Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full w-9 h-9 p-0 relative">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full w-9 h-9 p-0 relative"
+              >
                 <Flag
-                  code={languageOptions.find((l) => l.code === language)?.flagCode || "fr"}
+                  code={
+                    languageOptions.find((l) => l.code === language)
+                      ?.flagCode || "fr"
+                  }
                   size="sm"
                   className={`language-${language.toLowerCase()}`}
                 />
@@ -364,7 +386,9 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
             <DropdownMenuContent align="end" className="w-48 p-2">
               <div className="flex items-center gap-2 px-2 py-1.5 mb-1 border-b border-muted/60">
                 <Globe className="h-4 w-4 text-primary/70" />
-                <span className="text-xs font-medium">{t("navigation.language")}</span>
+                <span className="text-xs font-medium">
+                  {t("navigation.language")}
+                </span>
               </div>
               {languageOptions.map((option) => (
                 <DropdownMenuItem
@@ -401,7 +425,11 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
             )}
             onClick={copyPhoneNumber}
           >
-            {copied ? <Check className="h-4 w-4" /> : <Phone className="h-4 w-4" />}
+            {copied ? (
+              <Check className="h-4 w-4" />
+            ) : (
+              <Phone className="h-4 w-4" />
+            )}
           </Button>
 
           {/* Dark Mode Toggle (Mobile) */}
@@ -443,7 +471,9 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                     <span className="text-xl font-bold bg-gradient-to-r from-amber-400 to-yellow-600 bg-clip-text text-transparent">
                       Pascal Info
                     </span>
-                    <span className="text-xs text-muted-foreground">Centre de Formation</span>
+                    <span className="text-xs text-muted-foreground">
+                      Centre de Formation
+                    </span>
                   </div>
                 </div>
                 <SheetClose className="rounded-full h-8 w-8 flex items-center justify-center hover:bg-muted">
@@ -456,7 +486,8 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
                 <div className="space-y-1.5">
                   {navLinks.map((link, i) => {
                     const sectionId = link.href.split("#")[1];
-                    const isActive = pathname === "/" && activeSection === sectionId;
+                    const isActive =
+                      pathname === "/" && activeSection === sectionId;
                     return (
                       <SheetClose key={link.name} asChild>
                         <Link
@@ -480,7 +511,9 @@ export default function Navbar({ darkMode, toggleDark }: NavbarProps) {
 
                 {/* Call to Action */}
                 <div className="bg-primary/5 rounded-xl p-4 border border-primary/20">
-                  <p className="text-sm text-muted-foreground mb-3">{t("contact.cta.title")}</p>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {t("contact.cta.title")}
+                  </p>
                   <Button
                     className="w-full rounded-lg gap-2"
                     onClick={copyPhoneNumber}

@@ -1,3 +1,4 @@
+"use client";
 // Step 4a: Create this hook
 import { useEffect, useState, useRef, RefObject } from "react";
 

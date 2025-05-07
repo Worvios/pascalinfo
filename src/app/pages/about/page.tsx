@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Trophy, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import SvgDivider from "@/components/SvgDivider";
 
 export default function AboutPage() {
   const { t } = useTranslation();
@@ -56,9 +57,9 @@ export default function AboutPage() {
   );
 
   return (
-    <div className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-7xl mx-auto">
-        {/* Hero Section */}
+    <div className="relative min-h-screen bg-gradient-to-b from-amber-100 via-background/80 to-background/90 py-0 px-2 overflow-x-hidden">
+      {/* Hero/Intro Section */}
+      <div className="relative z-10 flex flex-col items-center justify-center pt-24 pb-10">
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-foreground">
             {t("about.pageTitle", "About Centre Pascal Info")}
@@ -68,23 +69,24 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* Description and Image */}
         <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
           <div>
             <p className="text-lg text-muted-foreground leading-relaxed">
               {t("about.description")}
             </p>
           </div>
-            <Image
-              src="/logo-pascal.png"
-              alt="Centre Pascal Info"
-              className="rounded-2xl shadow-2xl w-full h-auto"
-              width={500} // Adjust width as needed
-              height={500} // Adjust height as needed
-            />
-          </div>
+          <Image
+            src="/logo-pascal.png"
+            alt="Centre Pascal Info"
+            className="rounded-2xl shadow-2xl w-full h-auto"
+            width={500} // Adjust width as needed
+            height={500} // Adjust height as needed
+          />
         </div>
-
+      </div>
+      <SvgDivider direction="down" color="#f59e42" />
+      {/* Main Content Card */}
+      <main className="relative z-10 max-w-4xl mx-auto mb-16 p-6 md:p-10 bg-white/90 dark:bg-zinc-900/90 rounded-2xl shadow-2xl border border-primary/10">
         {/* Statistics */}
         <div className="mb-24">
           <h2 className="text-3xl font-bold text-center mb-12 text-foreground">
@@ -130,7 +132,6 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-
         {/* Distinctions */}
         <div>
           <h2 className="text-3xl font-bold text-center mb-12 text-foreground">
@@ -143,6 +144,33 @@ export default function AboutPage() {
             <AwardItem index={3} />
           </ul>
         </div>
-      </div>
+      </main>
+    </div>
   );
 }
+
+export const generateMetadata = () => ({
+  title: "À Propos de Pascal Info",
+  description:
+    "Fondé en 1996, Pascal Info est devenu un centre d'excellence en formation professionnelle au Maroc. Notre approche complète combine expertise technique et développement personnel pour préparer nos étudiants aux défis du marché du travail moderne.",
+  openGraph: {
+    title: "À Propos de Pascal Info",
+    description:
+      "Fondé en 1996, Pascal Info est devenu un centre d'excellence en formation professionnelle au Maroc.",
+    images: [
+      {
+        url: "/logo-pascal.png",
+        width: 500,
+        height: 500,
+        alt: "Centre Pascal Info Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "À Propos de Pascal Info",
+    description:
+      "Fondé en 1996, Pascal Info est devenu un centre d'excellence en formation professionnelle au Maroc.",
+    images: ["/logo-pascal.png"],
+  },
+});

@@ -10,7 +10,9 @@ export default function ProgramsPage() {
   const { t } = useTranslation();
   return (
     <>
-      <SEO title={t("programs.pageTitle", "Tous Nos Programmes - Pascal Info")} />
+      <SEO
+        title={t("programs.pageTitle", "Tous Nos Programmes - Pascal Info")}
+      />
       {/* Render ProgramsSection without isPreview prop to show all */}
       <ProgramsSection />
     </>

@@ -5,7 +5,6 @@
     "programs": "Programmes",
     "contact": "Contact",
     "language": "Langue"
-    
   },
   "hero": {
     "title": "Façonnez Votre Avenir Professionnel",
@@ -61,19 +60,18 @@
     "tagline": "Centre de Formation d'Excellence",
     "close": "Fermer",
     "pageTitle": "À Propos de Nous",
-    "pageSubtitle":"Notre histoire et mission",
-    "achievements":"Nos réalisations"
-    
+    "pageSubtitle": "Notre histoire et mission",
+    "achievements": "Nos réalisations"
   },
   "programs": {
     "title": "Nos Programmes",
     "subtitle": "D'Excellence",
-    "certified": "Programme Certifié", 
-    "learnMore": "En Savoir Plus", 
+    "certified": "Programme Certifié",
+    "learnMore": "En Savoir Plus",
     "showMore": "Afficher plus de programmes",
     "showLess": "Afficher moins de programmes",
-    "viewAll":"Voir tous les programmes",
-    "backToPrograms":"Retour aux programmes",
+    "viewAll": "Voir tous les programmes",
+    "backToPrograms": "Retour aux programmes",
     "items": [
       {
         "id": 1,
@@ -158,7 +156,7 @@
         "title": "Cours de Soutien",
         "description": "Accompagnement personnalisé pour les étudiants de tous niveaux.",
         "targetAudience": "Élèves du primaire, collège, lycée et étudiants du supérieur.",
-        "subjectsOffered": [ 
+        "subjectsOffered": [
           "Mathématiques",
           "Physique-Chimie",
           "Sciences de la Vie et de la Terre (SVT)",
@@ -193,7 +191,7 @@
         "title": "Formation Continue Professionnelle",
         "description": "Perfectionnez vos compétences ou réorientez votre carrière.",
         "targetAudience": "Salariés, demandeurs d'emploi, entreprises souhaitant former leur personnel.",
-        "areasOffered": [ 
+        "areasOffered": [
           "Informatique & Bureautique (Excel avancé, MS Project, etc.)",
           "Développement Web & Digital",
           "Management & Leadership",
@@ -215,21 +213,21 @@
         "title": "Traduction",
         "description": "Services de traduction professionnelle en plusieurs langues.",
         "targetAudience": "Entreprises, administrations, particuliers.",
-        "languagesOffered": [ 
+        "languagesOffered": [
           "Arabe <> Français",
           "Arabe <> Anglais",
           "Français <> Anglais",
           "Espagnol (vers/depuis Français/Arabe/Anglais)",
           "Autres langues sur demande"
         ],
-        "documentTypes": [ 
+        "documentTypes": [
           "Documents juridiques et administratifs",
           "Contenus web et marketing",
           "Documents techniques et scientifiques",
           "Correspondance commerciale",
           "Traduction assermentée (si applicable)"
         ],
-        "servicesOffered": [ 
+        "servicesOffered": [
           "Traduction simple",
           "Traduction assermentée",
           "Relecture et correction",
@@ -241,14 +239,14 @@
         "title": "Inscription Enseignement Supérieur",
         "description": "Assistance pour les inscriptions au Maroc et à l'étranger.",
         "targetAudience": "Lycéens et étudiants souhaitant poursuivre leurs études supérieures.",
-        "servicesOffered": [ 
+        "servicesOffered": [
           "Conseil en orientation",
           "Aide à la sélection des établissements et programmes",
           "Préparation des dossiers de candidature (Maroc, France, Canada, USA, etc.)",
           "Assistance pour les démarches de visa étudiant",
           "Préparation aux entretiens"
         ],
-        "destinations": [ 
+        "destinations": [
           "Maroc (Universités, Grandes Écoles)",
           "France (Campus France, Parcoursup, Écoles privées)",
           "Canada",
@@ -261,7 +259,7 @@
         "title": "Salles VIP et Équipées",
         "description": "Espaces modernes avec vidéoprojecteurs pour une expérience d'apprentissage optimale.",
         "targetAudience": "Formateurs indépendants, entreprises, associations, organismes.",
-        "features": [ 
+        "features": [
           "Salles climatisées de différentes capacités",
           "Vidéoprojecteur haute définition",
           "Tableau blanc interactif ou classique",
@@ -269,39 +267,39 @@
           "Mobilier confortable et modulable",
           "Espace accueil et pause-café (sur demande)"
         ],
-        "useCases": [ 
+        "useCases": [
           "Formations et séminaires",
           "Réunions d'entreprise",
           "Présentations et conférences",
           "Examens et concours",
           "Événements professionnels"
         ],
-        "capacity": "Salles pouvant accueillir de 10 à 50 personnes (selon la salle)." 
+        "capacity": "Salles pouvant accueillir de 10 à 50 personnes (selon la salle)."
       }
     ],
     "details": {
-      "title": "Informations Clés du Programme", 
+      "title": "Informations Clés du Programme",
       "targetAudience": "Public Cible",
       "prerequisites": "Prérequis",
       "learningObjectives": "Objectifs Pédagogiques",
-      "curriculumHighlights": "Points Clés du Cursus", 
+      "curriculumHighlights": "Points Clés du Cursus",
       "teachingMethods": "Méthodes Pédagogiques",
       "assessmentMethods": "Modalités d'Évaluation",
       "careerProspects": "Débouchés Professionnels",
       "furtherStudies": "Poursuite d'Études",
       "certification": "Certification / Diplôme",
       "duration": "Durée",
-      "languagesOffered": "Langues Proposées", 
-      "levels": "Niveaux", 
-      "subjectsOffered": "Matières Proposées", 
-      "areasOffered": "Domaines de Formation", 
-      "documentTypes": "Types de Documents Traduits", 
-      "servicesOffered": "Services Proposés", 
-      "destinations": "Pays de Destination", 
-      "features": "Caractéristiques des Salles", 
-      "useCases": "Utilisations Possibles", 
-      "capacity": "Capacité", 
-      "comingSoon": "Informations détaillées pour ce programme seront bientôt disponibles." 
+      "languagesOffered": "Langues Proposées",
+      "levels": "Niveaux",
+      "subjectsOffered": "Matières Proposées",
+      "areasOffered": "Domaines de Formation",
+      "documentTypes": "Types de Documents Traduits",
+      "servicesOffered": "Services Proposés",
+      "destinations": "Pays de Destination",
+      "features": "Caractéristiques des Salles",
+      "useCases": "Utilisations Possibles",
+      "capacity": "Capacité",
+      "comingSoon": "Informations détaillées pour ce programme seront bientôt disponibles."
     }
   },
   "testimonials": {
@@ -313,9 +311,9 @@
   "whyChooseUs": {
     "title": "Pourquoi Choisir Pascal Info ?",
     "tagline": "Nos Avantages",
-    "learnMore":"En Savoir Plus",
+    "learnMore": "En Savoir Plus",
     "ctaButton": "Plannifier une visite",
-    "ctaDescription":"Voyez par vous-même ce qui fait la renommée de Pascal Info",
+    "ctaDescription": "Voyez par vous-même ce qui fait la renommée de Pascal Info",
     "items": [
       {
         "title": "Formateurs Experts",
@@ -335,22 +333,22 @@
       }
     ],
     "benefits": [
-      [ 
+      [
         "Apprentissage direct auprès de professionnels actifs et reconnus.",
         "Méthodes pédagogiques interactives axées sur les compétences pratiques.",
         "Accès à un réseau d'experts pour des insights et opportunités uniques."
       ],
-      [ 
+      [
         "Manipulation des technologies et logiciels de pointe utilisés en entreprise.",
         "Environnement d'étude high-tech favorisant l'innovation et la créativité.",
         "Préparation concrète aux réalités du terrain grâce à des outils performants."
       ],
-      [ 
+      [
         "Coaching individuel pour maximiser votre potentiel et atteindre vos objectifs.",
         "Un parcours adapté à votre rythme, avec un soutien constant.",
         "Aide à la construction de votre projet professionnel unique et ambitieux."
       ],
-      [ 
+      [
         "Intégration rapide et réussie dans le monde professionnel post-formation.",
         "Un portefeuille de compétences solide et valorisé par les recruteurs.",
         "Rejoignez une communauté d'anciens élèves performants et influents."
@@ -364,7 +362,7 @@
     "address": "APPT 26 ET 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
     "hours": "Lun-Sam: 9h - 21h",
     "email": "contact@pascalinfo.ma",
-    "connect_description":"Retrouvez nos coordonnées ci-dessous et suivez-nous en ligne.",
+    "connect_description": "Retrouvez nos coordonnées ci-dessous et suivez-nous en ligne.",
     "social": {
       "follow": "Suivez-nous",
       "connect": "Connectez-vous",
@@ -397,10 +395,10 @@
       "courses": {
         "title": "Découvrez nos formations :",
         "items": [
-          { "name": "Développement Web" },
-          { "name": "Commerce Digital" },
+          { "name": "Développement Informatique" },
+          { "name": "Gestion d'Entreprise" },
           { "name": "Langues Étrangères" },
-          { "name": "Management" }
+          { "name": "Formation Continue" }
         ]
       },
       "viewAllCourses": "Voir toutes nos formations"
@@ -409,10 +407,22 @@
       "faq": {
         "title": "Questions fréquentes",
         "items": [
-          "Comment s'inscrire à une formation ?",
-          "Quelles sont les méthodes de paiement acceptées ?",
-          "Comment obtenir un financement pour ma formation ?",
-          "Quels sont les prérequis pour les cours avancés ?"
+          {
+            "question": "Comment s'inscrire à une formation ?",
+            "answer": "Rendez-vous sur notre page programmes, sélectionnez la formation de votre choix et cliquez sur 'S'inscrire'. Notre équipe vous contactera pour finaliser l'inscription."
+          },
+          {
+            "question": "Quelles sont les méthodes de paiement acceptées ?",
+            "answer": "Nous acceptons les virements bancaires, les paiements par carte via notre plateforme sécurisée, et les mandats postaux."
+          },
+          {
+            "question": "Quelle est la durée moyenne des formations ?",
+            "answer": "Les durées varient de 3 mois pour les formations intensives à 2 ans pour les diplômes certifiants. Consultez les détails sur chaque programme."
+          },
+          {
+            "question": "Quels sont les prérequis pour les cours avancés ?",
+            "answer": "Un niveau intermédiaire dans le domaine concerné est requis. Des tests d'évaluation sont disponibles pour déterminer votre niveau."
+          }
         ]
       },
       "support": {
@@ -424,7 +434,7 @@
     "contact": {
       "phone": {
         "title": "Téléphone",
-        "number": "+212 5234-87877", 
+        "number": "+212 5234-87877",
         "hours": "Lun-Ven: 9h-21h"
       },
       "email": {
@@ -435,8 +445,14 @@
       "social": {
         "title": "Nos réseaux sociaux",
         "platforms": [
-          { "name": "Facebook", "url": "https://facebook.com/centrepascalinfo" }, 
-          { "name": "Instagram", "url": "https://instagram.com/institutpascalinfo" },
+          {
+            "name": "Facebook",
+            "url": "https://facebook.com/centrepascalinfo"
+          },
+          {
+            "name": "Instagram",
+            "url": "https://instagram.com/institutpascalinfo"
+          },
           {
             "name": "LinkedIn",
             "url": "https://linkedin.com/company/pascalinfo"
@@ -447,7 +463,7 @@
     "footer": "© {{year}} Pascal Info - Centre de Formation Professionnelle"
   },
   "footer": {
-    "social":"Suivez-nous !",
+    "social": "Suivez-nous !",
     "toast": {
       "copy": "Copié dans le presse-papiers"
     },
@@ -476,7 +492,96 @@
         "Conditions d'Utilisation",
         "FAQ",
         "Blog Éducatif"
-      ]
+      ],
+      "privacyPolicy": {
+        "title": "Politique de Confidentialité",
+        "content": "<h2>Collecte des Informations</h2>\n<p>Nous recueillons des informations personnelles lors de l'inscription, de la demande d'information ou de l'utilisation de nos services éducatifs. Les données collectées incluent le nom, l'adresse e-mail, le numéro de téléphone, et parfois des informations scolaires.</p>\n<h2>Utilisation des Données</h2>\n<ul><li>Gestion des inscriptions et du suivi pédagogique</li><li>Communication d'informations importantes (emplois du temps, résultats, événements)</li><li>Amélioration de nos services éducatifs</li></ul>\n<h2>Protection des Données</h2>\n<p>Vos données sont stockées de manière sécurisée et ne sont jamais partagées avec des tiers sans votre consentement, sauf obligation légale ou administrative.</p>\n<h2>Droits des Utilisateurs</h2>\n<p>Conformément à la loi marocaine 09-08, vous disposez d'un droit d'accès, de rectification et d'opposition à vos données personnelles. Pour toute demande, contactez-nous à contact@pascalinfo.ma.</p>"
+      },
+      "termsOfUse": {
+        "title": "Conditions d'Utilisation",
+        "content": "<h2>Accès au Site</h2>\n<p>L'accès à ce site est réservé à un usage éducatif et informatif. Toute utilisation abusive ou frauduleuse est strictement interdite.</p>\n<h2>Propriété Intellectuelle</h2>\n<p>Tous les contenus (textes, images, documents) sont la propriété de Pascal Info ou de ses partenaires. Toute reproduction sans autorisation est interdite.</p>\n<h2>Obligations des Utilisateurs</h2>\n<ul><li>Respecter la charte de l'établissement et les règles de vie scolaire</li><li>Utiliser les ressources numériques de façon responsable</li><li>Ne pas porter atteinte à la sécurité ou à la confidentialité des autres utilisateurs</li></ul>\n<h2>Sanctions</h2>\n<p>Tout manquement aux présentes conditions peut entraîner des sanctions disciplinaires conformément au règlement intérieur de l'établissement.</p>\n<h2>Résolution des Litiges</h2>\n<p>En cas de litige, une médiation sera privilégiée avant toute action judiciaire. Les tribunaux marocains sont compétents en dernier ressort.</p>\n<h2>Modification des Conditions</h2>\n<p>Les présentes conditions peuvent être modifiées à tout moment pour s'adapter à la réglementation ou aux besoins de l'établissement. Les utilisateurs seront informés de toute modification importante.</p>"
+      },
+      "faq": {
+        "title": "Foire Aux Questions (FAQ)",
+        "subtitle": "Toutes les réponses à vos questions sur la vie scolaire, l'inscription et plus encore.",
+        "categories": [
+          {
+            "name": "Inscription",
+            "items": [
+              {
+                "question": "Comment s'inscrire ?",
+                "answer": "Remplissez le formulaire d'inscription en ligne ou rendez-vous à l'accueil de l'établissement. Notre équipe vous accompagnera dans toutes les étapes."
+              },
+              {
+                "question": "Quels sont les documents à fournir ?",
+                "answer": "Copie du dernier diplôme ou relevé de notes, pièce d'identité, photos d'identité, et dossier d'inscription dûment rempli."
+              },
+              {
+                "question": "Peut-on visiter l'établissement avant de s'inscrire ?",
+                "answer": "Oui, il est possible de planifier une visite guidée en contactant l'accueil. Nous serons ravis de vous faire découvrir nos locaux et notre équipe."
+              }
+            ]
+          },
+          {
+            "name": "Paiement & Aides",
+            "items": [
+              {
+                "question": "Comment puis-je payer les frais de scolarité ?",
+                "answer": "Les paiements peuvent être effectués par virement bancaire, en espèces à l'accueil, ou par chèque. Des facilités de paiement sont possibles sur demande."
+              },
+              {
+                "question": "Existe-t-il des bourses ou aides financières ?",
+                "answer": "Oui, nous proposons des facilités de paiement et, selon les cas, des réductions pour les familles nombreuses ou les étudiants méritants."
+              }
+            ]
+          },
+          {
+            "name": "Campus & Vie Scolaire",
+            "items": [
+              {
+                "question": "Quels sont les horaires des cours ?",
+                "answer": "Les cours se déroulent du lundi au samedi, de 9h à 21h selon le programme choisi. Un emploi du temps détaillé est remis à chaque étudiant."
+              },
+              {
+                "question": "Y a-t-il un service d'accompagnement ou de soutien scolaire ?",
+                "answer": "Oui, des séances de soutien et de tutorat sont organisées régulièrement pour aider les étudiants à surmonter leurs difficultés."
+              }
+            ]
+          },
+          {
+            "name": "E-learning",
+            "items": [
+              {
+                "question": "Comment accéder à la plateforme e-learning ?",
+                "answer": "Chaque étudiant reçoit un identifiant et un mot de passe lors de l'inscription. La plateforme est accessible 24h/24 pour suivre les cours, télécharger les supports et rendre les devoirs."
+              }
+            ]
+          },
+          {
+            "name": "Examens",
+            "items": [
+              {
+                "question": "Comment se déroulent les examens ?",
+                "answer": "Les examens sont organisés en présentiel à la fin de chaque module ou semestre. Des sessions de révision sont prévues avant chaque période d'examen."
+              }
+            ]
+          },
+          {
+            "name": "Contact & Administration",
+            "items": [
+              {
+                "question": "Comment contacter l'administration ou demander un rendez-vous ?",
+                "answer": "Vous pouvez nous joindre par téléphone, email, ou via le formulaire de contact sur notre site. Il est aussi possible de prendre rendez-vous directement à l'accueil."
+              }
+            ]
+          }
+        ]
+      },
+      "blog": {
+        "title": "Blog Éducatif",
+        "all": "Tous",
+        "content": "<h2>Derniers Articles</h2>\n<ul>\n<li><strong>Réussir son orientation après le bac</strong> : Conseils pour choisir la bonne filière et réussir son parcours universitaire.</li>\n<li><strong>Les compétences numériques essentielles</strong> : Pourquoi maîtriser l'informatique est indispensable aujourd'hui.</li>\n<li><strong>Vie scolaire au Maroc</strong> : Témoignages d'étudiants et astuces pour s'intégrer.</li>\n<li><strong>Actualités pédagogiques</strong> : Suivez les réformes et innovations dans l'enseignement marocain.</li>\n<li><strong>Comment préparer un entretien d'admission ?</strong> : Les étapes clés pour réussir son entretien dans une école supérieure.</li>\n<li><strong>Gestion du stress avant les examens</strong> : Techniques et conseils pour aborder les épreuves sereinement.</li>\n<li><strong>Utiliser les outils numériques pour apprendre</strong> : Applications et plateformes recommandées pour les étudiants marocains.</li>\n</ul>\n<h2>Conseils du Mois</h2>\n<ul>\n<li>Organisez votre emploi du temps pour équilibrer études et loisirs.</li>\n<li>Participez aux activités parascolaires pour développer vos compétences transversales.</li>\n<li>N'hésitez pas à demander de l'aide à vos enseignants ou à l'administration.</li>\n</ul>"
+      }
     },
     "newsletter": {
       "title": "Restez informé",
@@ -490,10 +595,10 @@
       "title": "Contactez-nous",
       "phone": "+212 5234-87877",
       "email": "contact@pascalinfo.ma",
-      "hours": "Lun-Sam: 9h - 21h", 
+      "hours": "Lun-Sam: 9h - 21h",
       "mobile": "+212 6603-60938",
       "address": "APPT 26 ET 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
-      "emergency": "24/7 Emergency Support" 
+      "emergency": "24/7 Emergency Support"
     },
     "copyright": "© 2025 Pascal Info. Tous droits réservés.",
     "developed": "Développé par"

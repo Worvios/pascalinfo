@@ -1,7 +1,8 @@
-// app/page.tsx
 "use client";
+// app/page.tsx
+// Server Component: no 'use client'
 
-import React, { useEffect } from "react";
+import React from "react";
 import HeroSection from "@/components/sections/HeroSection";
 import VideoSection from "@/components/sections/VideoSection";
 import AboutSection from "@/components/sections/AboutSection";
@@ -14,13 +15,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function SchoolShowcase() {
-  useEffect(() => {
-    document.body.style.cursor = "default";
-    return () => {
-      document.body.style.cursor = "default";
-    };
-  }, []);
-
   return (
     <>
       <SEO />

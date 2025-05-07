@@ -1,4 +1,6 @@
 // components/HeroSection.tsx
+
+"use client";
 import React, { useMemo, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
