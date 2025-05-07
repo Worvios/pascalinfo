@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://pascalinfo.com"),
   title: "Centre Pascal Info",
-  description: "Centre de formation informatique au Maroc",
+  description: "Centre de formation professionnelle au Maroc",
   openGraph: {
     title: "Centre Pascal Info",
     description: "Centre de formation professionnelle au Maroc",
