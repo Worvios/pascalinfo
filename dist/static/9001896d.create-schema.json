@@ -1,0 +1,1267 @@
+[
+  {
+    "of": [
+      {
+        "marks": {
+          "annotations": [
+            {
+              "fields": [
+                {
+                  "validation": [
+                    {
+                      "rules": [
+                        {
+                          "flag": "uri",
+                          "constraint": {
+                            "options": {
+                              "scheme": [
+                                "/^http$/",
+                                "/^https$/"
+                              ],
+                              "allowRelative": false,
+                              "relativeOnly": false,
+                              "allowCredentials": false
+                            }
+                          }
+                        }
+                      ],
+                      "level": "error"
+                    }
+                  ],
+                  "name": "href",
+                  "type": "url",
+                  "title": "URL"
+                },
+                {
+                  "initialValue": true,
+                  "name": "blank",
+                  "type": "boolean",
+                  "title": "Open in new tab"
+                }
+              ],
+              "name": "link",
+              "type": "object",
+              "title": "URL"
+            },
+            {
+              "fields": [
+                {
+                  "to": [
+                    {
+                      "type": "post"
+                    }
+                  ],
+                  "name": "reference",
+                  "type": "reference"
+                }
+              ],
+              "name": "internalLink",
+              "type": "object"
+            }
+          ],
+          "decorators": [
+            {
+              "value": "strong",
+              "title": "Strong"
+            },
+            {
+              "value": "em",
+              "title": "Emphasis"
+            },
+            {
+              "value": "underline",
+              "title": "Underline"
+            },
+            {
+              "value": "strike-through",
+              "title": "Strike"
+            },
+            {
+              "value": "highlight",
+              "title": "Highlight"
+            },
+            {
+              "value": "color",
+              "title": "Colored Text"
+            }
+          ]
+        },
+        "lists": [
+          {
+            "value": "bullet",
+            "title": "Bullet"
+          },
+          {
+            "value": "number",
+            "title": "Numbered"
+          },
+          {
+            "value": "checkList",
+            "title": "Check List"
+          }
+        ],
+        "styles": [
+          {
+            "value": "normal",
+            "title": "Normal"
+          },
+          {
+            "value": "h1",
+            "title": "H1"
+          },
+          {
+            "value": "h2",
+            "title": "H2"
+          },
+          {
+            "value": "h3",
+            "title": "H3"
+          },
+          {
+            "value": "h4",
+            "title": "H4"
+          },
+          {
+            "value": "blockquote",
+            "title": "Quote"
+          },
+          {
+            "value": "largeText",
+            "title": "Large Text"
+          },
+          {
+            "value": "highlightedText",
+            "title": "Highlighted Text"
+          },
+          {
+            "value": "stylishHeading",
+            "title": "Stylish Heading"
+          }
+        ],
+        "of": [],
+        "type": "block"
+      },
+      {
+        "options": {
+          "hotspot": true,
+          "storeOriginalFilename": true
+        },
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "description": "Important for SEO and accessibility",
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative Text"
+          },
+          {
+            "description": "Displayed below the image",
+            "name": "caption",
+            "type": "string"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Default",
+                  "value": "default"
+                },
+                {
+                  "title": "Full Width",
+                  "value": "fullWidth"
+                },
+                {
+                  "title": "Float Left",
+                  "value": "floatLeft"
+                },
+                {
+                  "title": "Float Right",
+                  "value": "floatRight"
+                },
+                {
+                  "title": "Rounded",
+                  "value": "rounded"
+                },
+                {
+                  "title": "Circle",
+                  "value": "circle"
+                },
+                {
+                  "title": "Polaroid",
+                  "value": "polaroid"
+                }
+              ],
+              "layout": "radio"
+            },
+            "initialValue": "default",
+            "name": "style",
+            "type": "string",
+            "title": "Image Style"
+          }
+        ],
+        "type": "image"
+      },
+      {
+        "fields": [
+          {
+            "name": "text",
+            "type": "text"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Info",
+                  "value": "info"
+                },
+                {
+                  "title": "Warning",
+                  "value": "warning"
+                },
+                {
+                  "title": "Success",
+                  "value": "success"
+                },
+                {
+                  "title": "Tip",
+                  "value": "tip"
+                },
+                {
+                  "title": "Note",
+                  "value": "note"
+                },
+                {
+                  "title": "Moroccan Style",
+                  "value": "moroccan"
+                }
+              ],
+              "layout": "radio"
+            },
+            "initialValue": "info",
+            "name": "style",
+            "type": "string"
+          }
+        ],
+        "type": "object",
+        "name": "callout",
+        "title": "Callout Box"
+      },
+      {
+        "fields": [
+          {
+            "name": "text",
+            "type": "text",
+            "title": "Quote Text"
+          },
+          {
+            "name": "author",
+            "type": "string"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Simple",
+                  "value": "simple"
+                },
+                {
+                  "title": "Elegant",
+                  "value": "elegant"
+                },
+                {
+                  "title": "Bold",
+                  "value": "bold"
+                },
+                {
+                  "title": "Moroccan",
+                  "value": "moroccan"
+                }
+              ],
+              "layout": "radio"
+            },
+            "initialValue": "simple",
+            "name": "style",
+            "type": "string"
+          }
+        ],
+        "type": "object",
+        "name": "quote",
+        "title": "Featured Quote"
+      },
+      {
+        "fields": [
+          {
+            "of": [
+              {
+                "fields": [
+                  {
+                    "of": [
+                      {
+                        "type": "text"
+                      }
+                    ],
+                    "name": "cells",
+                    "type": "array"
+                  }
+                ],
+                "type": "object",
+                "name": "row"
+              }
+            ],
+            "name": "rows",
+            "type": "array"
+          },
+          {
+            "initialValue": true,
+            "description": "Is the first row a header?",
+            "name": "hasHeaderRow",
+            "type": "boolean"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Simple",
+                  "value": "simple"
+                },
+                {
+                  "title": "Striped",
+                  "value": "striped"
+                },
+                {
+                  "title": "Bordered",
+                  "value": "bordered"
+                },
+                {
+                  "title": "Elegant",
+                  "value": "elegant"
+                },
+                {
+                  "title": "Moroccan",
+                  "value": "moroccan"
+                }
+              ],
+              "layout": "radio"
+            },
+            "initialValue": "simple",
+            "name": "style",
+            "type": "string",
+            "title": "Table Style"
+          }
+        ],
+        "type": "object",
+        "name": "table"
+      },
+      {
+        "fields": [
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Line",
+                  "value": "line"
+                },
+                {
+                  "title": "Dots",
+                  "value": "dots"
+                },
+                {
+                  "title": "Stars",
+                  "value": "stars"
+                },
+                {
+                  "title": "Moroccan Pattern",
+                  "value": "moroccan"
+                }
+              ],
+              "layout": "radio"
+            },
+            "initialValue": "line",
+            "name": "style",
+            "type": "string"
+          }
+        ],
+        "type": "object",
+        "name": "divider"
+      },
+      {
+        "fields": [
+          {
+            "name": "text",
+            "type": "string",
+            "title": "Button Text"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "url",
+            "type": "url",
+            "title": "URL"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Primary",
+                  "value": "primary"
+                },
+                {
+                  "title": "Secondary",
+                  "value": "secondary"
+                },
+                {
+                  "title": "Outline",
+                  "value": "outline"
+                },
+                {
+                  "title": "Moroccan",
+                  "value": "moroccan"
+                }
+              ],
+              "layout": "radio"
+            },
+            "initialValue": "primary",
+            "name": "style",
+            "type": "string",
+            "title": "Button Style"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Left",
+                  "value": "left"
+                },
+                {
+                  "title": "Center",
+                  "value": "center"
+                },
+                {
+                  "title": "Right",
+                  "value": "right"
+                }
+              ],
+              "layout": "radio"
+            },
+            "initialValue": "center",
+            "name": "align",
+            "type": "string",
+            "title": "Alignment"
+          }
+        ],
+        "type": "object",
+        "name": "button"
+      }
+    ],
+    "name": "blockContent",
+    "type": "array"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "📂 Name of the category",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "🔗 URL-friendly identifier",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "rows": 3,
+        "description": "📝 Brief description of this category",
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "description": "🎭 Emoji or icon name for this category",
+        "name": "icon",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Default",
+              "value": "default"
+            },
+            {
+              "title": "Blue",
+              "value": "blue"
+            },
+            {
+              "title": "Green",
+              "value": "green"
+            },
+            {
+              "title": "Red",
+              "value": "red"
+            },
+            {
+              "title": "Purple",
+              "value": "purple"
+            },
+            {
+              "title": "Orange",
+              "value": "orange"
+            },
+            {
+              "title": "Moroccan Blue",
+              "value": "moroccanBlue"
+            },
+            {
+              "title": "Moroccan Red",
+              "value": "moroccanRed"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "default",
+        "description": "🎨 Color associated with this category",
+        "name": "color",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "🖼️ Image representing this category",
+        "name": "image",
+        "type": "image",
+        "title": "Category Image"
+      },
+      {
+        "initialValue": false,
+        "description": "⭐ Show this category prominently on the site",
+        "name": "featured",
+        "type": "boolean",
+        "title": "Featured Category"
+      }
+    ],
+    "name": "category",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 5
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "✨ A catchy title for your blog post",
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "🔗 URL-friendly identifier (auto-generated from title)",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 200
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "📝 A brief summary displayed in previews (150-200 characters)",
+        "name": "excerpt",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "👤 Who wrote this post?",
+        "to": [
+          {
+            "type": "author"
+          }
+        ],
+        "name": "author",
+        "type": "reference"
+      },
+      {
+        "options": {
+          "hotspot": true,
+          "metadata": [
+            "palette",
+            "lqip",
+            "blurhash"
+          ]
+        },
+        "description": "🖼️ The featured image for this post",
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "description": "Important for SEO and accessibility",
+            "name": "alt",
+            "type": "string",
+            "title": "Alternative text"
+          },
+          {
+            "description": "Displayed below the image",
+            "name": "caption",
+            "type": "string"
+          }
+        ],
+        "name": "mainImage",
+        "type": "image"
+      },
+      {
+        "description": "📁 Categorize your post",
+        "of": [
+          {
+            "to": [
+              {
+                "type": "category"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to category"
+          }
+        ],
+        "name": "categories",
+        "type": "array"
+      },
+      {
+        "options": {
+          "layout": "tags"
+        },
+        "description": "🏷️ Add relevant tags for search and filtering",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "tags",
+        "type": "array"
+      },
+      {
+        "description": "📅 When should this post be published?",
+        "name": "publishedAt",
+        "type": "datetime",
+        "title": "Published at"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "min",
+                "constraint": 1
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "⏱️ Estimated reading time in minutes",
+        "name": "readingTime",
+        "type": "number"
+      },
+      {
+        "description": "📄 The main content of your post",
+        "name": "body",
+        "type": "blockContent"
+      },
+      {
+        "description": "📸 Add multiple images to create a gallery",
+        "of": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "alt",
+                "type": "string",
+                "title": "Alternative Text"
+              },
+              {
+                "name": "caption",
+                "type": "string"
+              }
+            ],
+            "type": "image"
+          }
+        ],
+        "name": "gallery",
+        "type": "array",
+        "title": "Image Gallery"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 60
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "🔍 Custom title for search engines (optional)",
+        "name": "seoTitle",
+        "type": "string",
+        "title": "SEO Title"
+      },
+      {
+        "rows": 2,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 160
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "🔍 Custom description for search engines",
+        "name": "seoDescription",
+        "type": "text",
+        "title": "SEO Description"
+      },
+      {
+        "description": "📱 Image displayed when shared on social media",
+        "name": "socialImage",
+        "type": "image",
+        "title": "Social Media Image"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Standard",
+              "value": "standard"
+            },
+            {
+              "title": "Wide",
+              "value": "wide"
+            },
+            {
+              "title": "Full Width",
+              "value": "fullWidth"
+            },
+            {
+              "title": "Magazine",
+              "value": "magazine"
+            },
+            {
+              "title": "Moroccan",
+              "value": "moroccan"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "standard",
+        "description": "🎨 Choose the layout style for this post",
+        "name": "layout",
+        "type": "string",
+        "title": "Layout Style"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Default",
+              "value": "default"
+            },
+            {
+              "title": "Blue",
+              "value": "blue"
+            },
+            {
+              "title": "Green",
+              "value": "green"
+            },
+            {
+              "title": "Red",
+              "value": "red"
+            },
+            {
+              "title": "Purple",
+              "value": "purple"
+            },
+            {
+              "title": "Orange",
+              "value": "orange"
+            },
+            {
+              "title": "Moroccan Blue",
+              "value": "moroccanBlue"
+            },
+            {
+              "title": "Moroccan Red",
+              "value": "moroccanRed"
+            }
+          ]
+        },
+        "initialValue": "default",
+        "description": "🎭 Color theme for this post",
+        "name": "accentColor",
+        "type": "string"
+      },
+      {
+        "initialValue": false,
+        "description": "⭐ Mark this as a featured post",
+        "name": "featured",
+        "type": "boolean",
+        "title": "Featured Post"
+      },
+      {
+        "initialValue": false,
+        "description": "🙈 Hide the title (useful for custom layouts)",
+        "name": "hideTitle",
+        "type": "boolean"
+      }
+    ],
+    "name": "post",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "👤 Full name of the author",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "name",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "🔗 URL-friendly identifier",
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "🖼️ Author profile image",
+        "name": "image",
+        "type": "image",
+        "title": "Profile Picture"
+      },
+      {
+        "description": "🎖️ Author&apos;s role or title",
+        "name": "role",
+        "type": "string"
+      },
+      {
+        "rows": 3,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 150
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "📝 Brief biography (150 chars max)",
+        "name": "shortBio",
+        "type": "text",
+        "title": "Short Biography"
+      },
+      {
+        "description": "✍️ Detailed author biography",
+        "of": [
+          {
+            "marks": {
+              "annotations": [
+                {
+                  "fields": [
+                    {
+                      "validation": [
+                        {
+                          "rules": [
+                            {
+                              "flag": "uri",
+                              "constraint": {
+                                "options": {
+                                  "scheme": [
+                                    "/^http$/",
+                                    "/^https$/"
+                                  ],
+                                  "allowRelative": false,
+                                  "relativeOnly": false,
+                                  "allowCredentials": false
+                                }
+                              }
+                            }
+                          ],
+                          "level": "error"
+                        }
+                      ],
+                      "name": "href",
+                      "type": "url",
+                      "title": "URL"
+                    }
+                  ],
+                  "name": "link",
+                  "type": "object",
+                  "title": "URL"
+                }
+              ],
+              "decorators": [
+                {
+                  "value": "strong",
+                  "title": "Strong"
+                },
+                {
+                  "value": "em",
+                  "title": "Emphasis"
+                }
+              ]
+            },
+            "lists": [
+              {
+                "value": "bullet",
+                "title": "Bullet"
+              }
+            ],
+            "styles": [
+              {
+                "value": "normal",
+                "title": "Normal"
+              },
+              {
+                "value": "h4",
+                "title": "H4"
+              }
+            ],
+            "of": [],
+            "type": "block"
+          }
+        ],
+        "name": "bio",
+        "type": "array",
+        "title": "Biography"
+      },
+      {
+        "description": "📧 Author&apos;s email address",
+        "name": "email",
+        "type": "string"
+      },
+      {
+        "description": "🌐 Author&apos;s social media profiles",
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "twitter",
+            "type": "url"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "instagram",
+            "type": "url"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "linkedin",
+            "type": "url",
+            "title": "LinkedIn"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "facebook",
+            "type": "url"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "website",
+            "type": "url"
+          }
+        ],
+        "name": "socialLinks",
+        "type": "object",
+        "title": "Social Media Links"
+      },
+      {
+        "initialValue": false,
+        "description": "⭐ Highlight this author on the site",
+        "name": "featured",
+        "type": "boolean",
+        "title": "Featured Author"
+      },
+      {
+        "options": {
+          "layout": "tags"
+        },
+        "description": "🏆 Author&apos;s areas of expertise",
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "specialty",
+        "type": "array"
+      },
+      {
+        "description": "📍 Author&apos;s location",
+        "name": "location",
+        "type": "string"
+      }
+    ],
+    "name": "author",
+    "type": "document"
+  }
+]
