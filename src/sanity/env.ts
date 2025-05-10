@@ -22,6 +22,7 @@ export const useCdn = process.env.NODE_ENV === 'production';
 // Helper function to ensure that a value is defined.
 // You might not need this if you provide direct fallbacks for projectId and dataset above.
 // However, it can be useful for other required environment variables.
+/*
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
     // Instead of throwing an error that crashes the studio build for these specific vars,
@@ -35,6 +36,7 @@ function assertValue<T>(v: T | undefined, errorMessage: string): T {
   }
   return v as T; // Type assertion might be needed if v could truly be undefined here
 }
+*/
 
 // Example of using assertValue for a variable that *must* be set and has no fallback
 // export const SOME_OTHER_CRITICAL_ENV_VAR = assertValue(
