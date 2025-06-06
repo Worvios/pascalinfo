@@ -17,7 +17,6 @@ import Script from "next/script";
 import {
   Smartphone,
   MapPin,
-  AlertCircle,
   Facebook,
   Linkedin,
   Instagram,
@@ -35,7 +34,6 @@ import {
   ArrowUp,
   Globe,
 } from "lucide-react";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import {
   Accordion,
@@ -44,7 +42,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
 import { slugify } from "@/utils/slugify";
 
 interface ProgramItem {
