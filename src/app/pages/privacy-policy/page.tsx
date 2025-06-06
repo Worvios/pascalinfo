@@ -89,10 +89,10 @@ export default function PrivacyPolicyPage() {
               Pour toute question relative &agrave; la confidentialit&eacute;,
               contactez-nous &agrave;{" "}
               <a
-                href="mailto:contact@pascalinfo.ma"
+                href="mailto:contact@pascalinfo.com"
                 className="underline hover:text-primary transition-colors"
               >
-                contact@pascalinfo.ma
+                contact@pascalinfo.com
               </a>
               .
             </div>

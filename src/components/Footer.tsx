@@ -421,7 +421,7 @@ export default function Footer() {
               ))}
 
               {/* Emergency Contact */}
-              <div
+              {/*<div
                 className="group sm:col-span-2 flex gap-3 p-3 rounded-lg border border-red-200 bg-red-50/50 dark:bg-red-950/10 dark:border-red-900/30 cursor-pointer hover:bg-red-50 dark:hover:bg-red-950/20 transition-colors"
                 onClick={() =>
                   handleCopy(t("footer.contact.emergency"), "emergency")
@@ -446,36 +446,40 @@ export default function Footer() {
                   )}
                 </div>
               </div>
-            </div>
+            </div>*/}
 
             {/* Accreditations */}
-            <div className="mt-8">
-              <h4 className="text-sm font-medium mb-3">
-                {t("footer.accredited")}
-              </h4>
-              <div className="flex flex-wrap gap-3">
-                <div className="bg-background rounded-lg p-2 border border-muted flex items-center gap-2">
-                  <Avatar className="h-7 w-7">
-                    <AvatarImage src="/certifications/iso.png" />
-                    <AvatarFallback>ISO</AvatarFallback>
-                  </Avatar>
-                  <span className="text-xs">ISO 9001:2015</span>
-                </div>
-                <div className="bg-background rounded-lg p-2 border border-muted flex items-center gap-2">
-                  <Avatar className="h-7 w-7">
-                    <AvatarImage src="/certifications/ministry.png" />
-                    <AvatarFallback>MEN</AvatarFallback>
-                  </Avatar>
-                  <span className="text-xs">Éducation Nationale</span>
-                </div>
-                <Badge
-                  variant="outline"
-                  className="bg-primary/5 border-primary/20 font-normal text-xs"
-                >
-                  Certifié OFPPT
-                </Badge>
-              </div>
-            </div>
+            
+           {/* 
+<div className="mt-8">
+  <h4 className="text-sm font-medium mb-3">
+    {t("footer.accredited")}
+  </h4>
+  <div className="flex flex-wrap gap-3">
+    <div className="bg-background rounded-lg p-2 border border-muted flex items-center gap-2">
+      <Avatar className="h-7 w-7">
+        <AvatarImage src="/certifications/iso.png" />
+        <AvatarFallback>ISO</AvatarFallback>
+      </Avatar>
+      <span className="text-xs">ISO 9001:2015</span>
+    </div>
+    <div className="bg-background rounded-lg p-2 border border-muted flex items-center gap-2">
+      <Avatar className="h-7 w-7">
+        <AvatarImage src="/certifications/ministry.png" />
+        <AvatarFallback>MEN</AvatarFallback>
+      </Avatar>
+      <span className="text-xs">Éducation Nationale</span>
+    </div>
+    <Badge
+      variant="outline"
+      className="bg-primary/5 border-primary/20 font-normal text-xs"
+    >
+      Certifié OFPPT
+    </Badge>
+  </div>*/}
+</div>
+
+
           </div>
         </div>
 

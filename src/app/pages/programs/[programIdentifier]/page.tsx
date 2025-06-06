@@ -34,6 +34,8 @@ import {
   Globe,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import ContactForm from "@/components/ContactForm";
 
 interface ProgramData {
   id: number;
@@ -388,26 +390,41 @@ export default function ProgramPage() {
           </CardContent>
         </Card>
         <div className="text-center space-y-4">
-          <Link href="/pages/contact" passHref>
-            <Button
-              size="lg"
-              className="rounded-full gap-2 group shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <BookOpen className="h-5 w-5" />
-              {t("contact.cta.button", "Planifier une Visite")}
-              <ArrowRight
-                className={cn(
-                  "h-4 w-4",
-                  direction === "rtl" ? "mr-2" : "ml-2",
-                  direction === "rtl" && "rotate-180",
-                  direction === "rtl"
-                    ? "group-hover:-translate-x-1"
-                    : "group-hover:translate-x-1",
-                  "transition-transform duration-300"
-                )}
-              />
-            </Button>
-          </Link>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button
+                size="lg"
+                className="rounded-full gap-2 group shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <BookOpen className="h-5 w-5" />
+                {t("contact.cta.button", "Planifier une Visite")}
+                <ArrowRight
+                  className={cn(
+                    "h-4 w-4",
+                    direction === "rtl" ? "mr-2" : "ml-2",
+                    direction === "rtl" && "rotate-180",
+                    direction === "rtl"
+                      ? "group-hover:-translate-x-1"
+                      : "group-hover:translate-x-1",
+                    "transition-transform duration-300"
+                  )}
+                />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl p-8">
+              <DialogTitle className="text-2xl font-bold text-center mb-2">
+                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  {t("floatingContactButton.button")}
+                </span>
+              </DialogTitle>
+              <div className="space-y-6">
+                <p className="text-muted-foreground text-center">
+                  {t("floatingContactButton.description")}
+                </p>
+                <ContactForm />
+              </div>
+            </DialogContent>
+          </Dialog>
           <div>
             <Link
               href="/pages/programs"

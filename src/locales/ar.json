@@ -361,7 +361,7 @@
     "description": "انضم إلى مجتمعنا الحي وابق على اطلاع بآخر الأخبار والفعاليات وفرص التكوين.",
     "address": "الشقة 26 و28، عمارة السلام، شارع عبد الكريم الخطابي، بني ملال 23000",
     "hours": "الإثنين-السبت: 9 صباحًا - 9 مساءً",
-    "email": "contact@pascalinfo.ma",
+    "email": "contact@pascalinfo.com",
     "connect_description":"ابق على تواصل معنا عبر القنوات التالية:",
     "social": {
       "follow": "تابعنا",
@@ -427,7 +427,7 @@
       },
       "email": {
         "title": "البريد الإلكتروني",
-        "address": "contact@pascalinfo.ma",
+        "address": "contact@pascalinfo.com",
         "response": "نجيب خلال 24 ساعة"
       },
       "social": {
@@ -484,7 +484,7 @@
     "contact": {
       "title": "اتصل بنا",
       "phone": "+212 5234-87877",
-      "email": "contact@pascalinfo.ma",
+      "email": "contact@pascalinfo.com",
       "hours": "الإثنين-السبت: 9 صباحًا - 9 مساءً", 
       "mobile": "+212 6603-60938",
       "address": "الشقة 26 و28، عمارة السلام، شارع عبد الكريم الخطابي، بني ملال 23000",

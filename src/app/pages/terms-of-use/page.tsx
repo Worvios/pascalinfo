@@ -86,10 +86,10 @@ export default function TermsOfUsePage() {
               Pour toute question juridique ou litige, contactez
               l&apos;administration &agrave;{" "}
               <a
-                href="mailto:contact@pascalinfo.ma"
+                href="mailto:contact@pascalinfo.com"
                 className="underline hover:text-primary transition-colors"
               >
-                contact@pascalinfo.ma
+                contact@pascalinfo.com
               </a>
               .
             </div>

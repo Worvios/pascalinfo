@@ -361,7 +361,7 @@
     "description": "Rejoignez notre communauté dynamique et restez informé des dernières actualités, événements spéciaux et opportunités de formation.",
     "address": "APPT 26 ET 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",
     "hours": "Lun-Sam: 9h - 21h",
-    "email": "contact@pascalinfo.ma",
+    "email": "contact@pascalinfo.com",
     "connect_description": "Retrouvez nos coordonnées ci-dessous et suivez-nous en ligne.",
     "social": {
       "follow": "Suivez-nous",
@@ -439,7 +439,7 @@
       },
       "email": {
         "title": "Email",
-        "address": "contact@pascalinfo.ma",
+        "address": "contact@pascalinfo.com",
         "response": "Nous répondons sous 24h"
       },
       "social": {
@@ -495,7 +495,7 @@
       ],
       "privacyPolicy": {
         "title": "Politique de Confidentialité",
-        "content": "<h2>Collecte des Informations</h2>\n<p>Nous recueillons des informations personnelles lors de l'inscription, de la demande d'information ou de l'utilisation de nos services éducatifs. Les données collectées incluent le nom, l'adresse e-mail, le numéro de téléphone, et parfois des informations scolaires.</p>\n<h2>Utilisation des Données</h2>\n<ul><li>Gestion des inscriptions et du suivi pédagogique</li><li>Communication d'informations importantes (emplois du temps, résultats, événements)</li><li>Amélioration de nos services éducatifs</li></ul>\n<h2>Protection des Données</h2>\n<p>Vos données sont stockées de manière sécurisée et ne sont jamais partagées avec des tiers sans votre consentement, sauf obligation légale ou administrative.</p>\n<h2>Droits des Utilisateurs</h2>\n<p>Conformément à la loi marocaine 09-08, vous disposez d'un droit d'accès, de rectification et d'opposition à vos données personnelles. Pour toute demande, contactez-nous à contact@pascalinfo.ma.</p>"
+        "content": "<h2>Collecte des Informations</h2>\n<p>Nous recueillons des informations personnelles lors de l'inscription, de la demande d'information ou de l'utilisation de nos services éducatifs. Les données collectées incluent le nom, l'adresse e-mail, le numéro de téléphone, et parfois des informations scolaires.</p>\n<h2>Utilisation des Données</h2>\n<ul><li>Gestion des inscriptions et du suivi pédagogique</li><li>Communication d'informations importantes (emplois du temps, résultats, événements)</li><li>Amélioration de nos services éducatifs</li></ul>\n<h2>Protection des Données</h2>\n<p>Vos données sont stockées de manière sécurisée et ne sont jamais partagées avec des tiers sans votre consentement, sauf obligation légale ou administrative.</p>\n<h2>Droits des Utilisateurs</h2>\n<p>Conformément à la loi marocaine 09-08, vous disposez d'un droit d'accès, de rectification et d'opposition à vos données personnelles. Pour toute demande, contactez-nous à contact@pascalinfo.com.</p>"
       },
       "termsOfUse": {
         "title": "Conditions d'Utilisation",
@@ -594,7 +594,7 @@
     "contact": {
       "title": "Contactez-nous",
       "phone": "+212 5234-87877",
-      "email": "contact@pascalinfo.ma",
+      "email": "contact@pascalinfo.com",
       "hours": "Lun-Sam: 9h - 21h",
       "mobile": "+212 6603-60938",
       "address": "APPT 26 ET 28, IMM ASSALAM BD ABDELKRIM EL KHATTABI, Béni Mellal 23000",

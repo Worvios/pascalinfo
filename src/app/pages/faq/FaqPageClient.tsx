@@ -147,10 +147,10 @@ export default function FaqPageClient() {
             <div className="text-green-800 dark:text-green-200 text-base">
               Contactez notre &eacute;quipe p&eacute;dagogique &agrave;{" "}
               <a
-                href="mailto:contact@pascalinfo.ma"
+                href="mailto:contact@pascalinfo.com"
                 className="underline hover:text-primary transition-colors"
               >
-                contact@pascalinfo.ma
+                contact@pascalinfo.com
               </a>{" "}
               ou rendez-vous &agrave; l&apos;accueil de
               l&apos;&eacute;tablissement.

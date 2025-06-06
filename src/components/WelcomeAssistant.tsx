@@ -21,6 +21,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { slugify } from "@/utils/slugify";
 import Image from "next/image";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import ContactForm from "@/components/ContactForm";
 
 interface Course {
   name: string;
@@ -389,13 +391,30 @@ const WelcomeAssistant = () => {
                   <p className="text-xs text-muted-foreground mb-3">
                     {t("assistant.help.support.description")}
                   </p>
-                  <Button
-                    variant="default"
-                    size="sm"
-                    className="w-full bg-primary hover:bg-primary/90"
-                  >
-                    {t("assistant.help.support.button")}
-                  </Button>
+                 <Dialog>
+  <DialogTrigger asChild>
+    <Button
+      variant="default"
+      size="sm"
+      className="w-full bg-primary hover:bg-primary/90"
+    >
+      {t("assistant.help.support.button")}
+    </Button>
+  </DialogTrigger>
+  <DialogContent className="max-w-2xl p-8">
+    <DialogTitle className="text-2xl font-bold text-center mb-2">
+      <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+        {t("floatingContactButton.button")}
+      </span>
+    </DialogTitle>
+    <div className="space-y-6">
+      <p className="text-muted-foreground text-center">
+        {t("floatingContactButton.description")}
+      </p>
+      <ContactForm />
+    </div>
+  </DialogContent>
+</Dialog>
                 </div>
               </TabsContent>
 

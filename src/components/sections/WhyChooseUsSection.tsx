@@ -20,6 +20,8 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import ContactForm from "@/components/ContactForm";
 
 // Define the feature item interface
 interface FeatureItem {
@@ -341,26 +343,43 @@ export default function WhyChooseUsSection() {
         </motion.div>
 
         {/* Call to action */}
-        <AnimatedSection
-          animation="fade-in"
-          delay={400}
-          className="text-center mt-16"
-        >
-          <Button
-            size="lg"
-            className="rounded-full px-8 py-6 shadow-lg shadow-primary/10
-              bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary
-              transition-all duration-300 hover:shadow-xl hover:shadow-primary/20"
-          >
-            {t("whyChooseUs.ctaButton", "Schedule a Visit")}
-          </Button>
-          <p className="text-sm text-muted-foreground mt-4">
-            {t(
-              "whyChooseUs.ctaDescription",
-              "See for yourself what makes Pascal Info renowned"
-            )}
-          </p>
-        </AnimatedSection>
+<AnimatedSection
+  animation="fade-in"
+  delay={400}
+  className="text-center mt-16"
+>
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button
+        size="lg"
+        className="rounded-full px-8 py-6 shadow-lg shadow-primary/10
+          bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary
+          transition-all duration-300 hover:shadow-xl hover:shadow-primary/20"
+      >
+        {t("whyChooseUs.ctaButton", "Schedule a Visit")}
+      </Button>
+    </DialogTrigger>
+    <DialogContent className="max-w-2xl p-8">
+      <DialogTitle className="text-2xl font-bold text-center mb-2">
+        <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          {t("floatingContactButton.button")}
+        </span>
+      </DialogTitle>
+      <div className="space-y-6">
+        <p className="text-muted-foreground text-center">
+          {t("floatingContactButton.description")}
+        </p>
+        <ContactForm />
+      </div>
+    </DialogContent>
+  </Dialog>
+  <p className="text-sm text-muted-foreground mt-4">
+    {t(
+      "whyChooseUs.ctaDescription",
+      "See for yourself what makes Pascal Info renowned"
+    )}
+  </p>
+</AnimatedSection>
       </div>
     </section>
   );
